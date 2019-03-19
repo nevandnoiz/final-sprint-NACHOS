@@ -4,7 +4,7 @@
     <div class="movie-container">
       <img :src="movie.img.poster">
       <div class="movie-details">
-        <h1>{{movie.details.title}}</h1>
+        <h1 >{{movie.details.title}}</h1>
         <h4>Release date: {{movie.details.release_date}}</h4>
         <p>{{movie.details.overview}}</p>
       </div>
@@ -14,8 +14,8 @@
 
 <script>
 export default {
-    props: ['movie'],
-}
+  props: ["movie"]
+};
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-<movie-container :movie="movie"></movie-container>
+<movie-container v-if="this.movie.details" :movie="movie"></movie-container>
 </template>
 
 <script>
