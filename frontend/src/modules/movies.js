@@ -14,12 +14,13 @@ export default {
   },
   actions: {
     async loadPopularMovies(context, payload) {
-      const movies = await MoviesService.getDetailsById()
+      const movies = await MoviesService.getPopular()
+      console.log(movies)
       context.commit({ type: 'setPopularMovies', movies:movies.results })
     },
     async getDetailsById(context, movieId) {
       const movieDetails = await MoviesService.getDetailsById(movieId)
       return movieDetails
-    }
+    },
   }
 }

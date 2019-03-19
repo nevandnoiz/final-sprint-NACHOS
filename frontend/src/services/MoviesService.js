@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
     getPopular,
-    getDetailsById
+    getDetailsById,
 }
 
 async function getDetailsById(id) {

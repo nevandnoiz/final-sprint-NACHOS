@@ -13,12 +13,10 @@ export default new Vuex.Store({
 
   },
   getters: {
-    imgURL(imgId){
-      return `http://image.tmdb.org/t/p/w185/${imgId}`
-    }
+
   },
   mutations: {
-
+    
   },
   actions: {
 

@@ -8,7 +8,7 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("loadPopularMovies");
+   this.$store.dispatch("loadPopularMovies");
   },
   components: {},
   computed: {
