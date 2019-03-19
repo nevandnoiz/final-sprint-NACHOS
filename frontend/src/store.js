@@ -12,6 +12,11 @@ export default new Vuex.Store({
   state: {
 
   },
+  getters: {
+    imgURL(imgId){
+      return `http://image.tmdb.org/t/p/w185/${imgId}`
+    }
+  },
   mutations: {
 
   },
