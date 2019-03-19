@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// Import modules here. ex:
-// import UserModule from './modules/user.js'
+import MoviesModule from './modules/movies.js'
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-  // Write your modules here
+    MoviesModule
   },
   state: {
 
