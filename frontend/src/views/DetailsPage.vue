@@ -27,12 +27,14 @@ export default {
   },
   async created() {
     //  const movieId = this.$route.params.movieId
-    const movieId = 480530;
-    const details = await this.$store.dispatch("getDetailsById", movieId);
+    const movieId = 299537;
+    const details = await this.$store.dispatch("getMovieDetails", movieId);
+    const imgs = await this.$store.dispatch("getMovieImages", movieId);
+    this.movie.img.poster = utility.imgURL(imgs.posters[0].file_path)
     this.movie.details = details;
-    this.movie.img.poster = utility.imgURL(
-      details.belongs_to_collection.poster_path
-    );
+    // this.movie.img.poster = utility.imgURL(
+    //   details.belongs_to_collection.poster_path
+    // );
   }
 };
 </script>
@@ -43,9 +45,12 @@ export default {
   padding: 0;
 }
 .movie-container {
-  margin: 10% auto;
-  max-width: 60%;
-  display: flex;
+    margin: 10% auto;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 60%;
+    background-color: lightslategray;
+    display: flex;
 }
 .movie-container > img {
   margin-right: 20px;
