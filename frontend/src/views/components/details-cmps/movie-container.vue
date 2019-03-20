@@ -4,9 +4,18 @@
     <div class="movie-container">
       <img :src="movie.img.poster">
       <div class="movie-details">
-        <h1 >{{movie.details.title}}</h1>
-        <h4>Release date: {{movie.details.release_date}}</h4>
-        <p>{{movie.details.overview}}</p>
+        <div class="details-text">
+          <h1>{{movie.details.title}}</h1>
+          <!-- <h4>Release date: {{movie.details.release_date}}</h4> -->
+          <p>{{movie.details.overview}}</p>
+        </div>
+
+        <div class="icons-container">
+          <a target="_blank" :href="`https://twitter.com/${movie.externalIds.twitter_id}`"><font-awesome-icon :icon="['fab', 'twitter']" class="icon alt"/></a>
+          <a target="_blank" :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"><font-awesome-icon :icon="['fab', 'facebook']" class="icon alt"/></a>
+          <a target="_blank" :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"><font-awesome-icon :icon="['fab', 'instagram']" class="icon alt"/></a>
+          <a target="_blank" :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"><font-awesome-icon :icon="['fab', 'imdb']" class="icon alt"/></a>          
+        </div>
       </div>
     </div>
   </div>
@@ -23,6 +32,10 @@ export default {
   margin: 0;
   padding: 0;
 }
+a {
+  color:inherit;
+  text-decoration: none;
+ }
 .movie-container {
   margin: 10% auto;
   border-radius: 5px;
@@ -31,11 +44,22 @@ export default {
   background-color: lightslategray;
   display: flex;
 }
+.icons-container > * {
+  font-size: 2rem;
+  margin: 0 0.5rem;
+}
+.icons-container > *:hover {
+  cursor: pointer;
+}
+.details-text > * {
+  margin: 5px 0;
+}
 .movie-container > img {
   margin-right: 20px;
 }
 .movie-details {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
 }
 .movie-details > p {

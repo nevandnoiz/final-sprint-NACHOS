@@ -25,6 +25,10 @@ export default {
     async getMovieImages(context, movieId) {
       const movieImages = await MoviesService.getMovieImages(movieId)
       return movieImages
+    },
+    async getMovieExternalIds(context, movieId) {
+      const movieExternalIds = await MoviesService.getMovieExternalIds(movieId)
+      return movieExternalIds
     }
   }
 }
