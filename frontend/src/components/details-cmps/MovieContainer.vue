@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <h1>Nachos details</h1>
+    <!-- <h1>Nachos details</h1> -->
     <div class="movie-container">
       <img :src="imgURL">
       <div class="movie-details">

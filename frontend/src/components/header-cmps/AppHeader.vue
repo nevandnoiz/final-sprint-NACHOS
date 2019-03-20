@@ -8,11 +8,16 @@
       <router-link v-if="user" to="/profile">Profile</router-link>
       <router-link v-else to="/login">login</router-link>
     </div>
+    <search-bar></search-bar>
   </header>
 </template>
 
 <script>
+import searchBar from '@/components/header-cmps/SearchBar.vue'
 export default {
+  components: {
+    searchBar
+  },
     props: ['user']
 };
 </script>
