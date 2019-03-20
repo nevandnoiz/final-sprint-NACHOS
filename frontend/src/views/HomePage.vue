@@ -1,23 +1,32 @@
 <template>
   <div class="home">
-    <h1>Nachos home</h1>
-    <search-bar></search-bar>
-    <!-- <div v-for="(movie, index) in popularMovies" :key="index">{{movie.title}}</div> -->
+    <pre>
+      <!-- {{activities}} -->
+      </pre>
+    <watch-next></watch-next>
   </div>
 </template>
 
 <script>
-import SearchBar from "../components/header-cmps/SearchBar.vue";
-export default {
+  import WatchNext from '@/components/home-cmps/WatchNext.vue';
+  export default {
+  data() {
+    return {
+      user: null,
+      // activities: null,
+    };
+  },
   created() {
-   this.$store.dispatch("loadPopularMovies");
+    this.$store.dispatch("loadPopularMovies");
+    this.$store.dispatch("loadActivities");
   },
-  components: {
-    SearchBar
-  },
+  components: {WatchNext},
   computed: {
     popularMovies() {
       return this.$store.getters.moviesToDisplay;
+    },
+    activities() {
+      return this.$store.getter.activities;
     }
   }
 };

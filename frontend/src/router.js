@@ -14,7 +14,7 @@ export default new Router({
       component: HomePage
     },
     {
-      path: '/browse',
+      path: '/browse/:section',
       name: 'browse',
       component: BrowsePage
     },
