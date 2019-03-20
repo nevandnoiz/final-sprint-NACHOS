@@ -11,10 +11,10 @@
         </div>
 
         <div class="icons-container">
-          <a target="_blank" :href="`https://twitter.com/${movie.externalIds.twitter_id}`"><font-awesome-icon :icon="['fab', 'twitter']" class="icon alt"/></a>
-          <a target="_blank" :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"><font-awesome-icon :icon="['fab', 'facebook']" class="icon alt"/></a>
-          <a target="_blank" :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"><font-awesome-icon :icon="['fab', 'instagram']" class="icon alt"/></a>
-          <a target="_blank" :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"><font-awesome-icon :icon="['fab', 'imdb']" class="icon alt"/></a>          
+          <a target="_blank" v-if="movie.externalIds.twitter_id" :href="`https://twitter.com/${movie.externalIds.twitter_id}`"><font-awesome-icon :icon="['fab', 'twitter']" class="icon alt"/></a>
+          <a target="_blank" v-if="movie.externalIds.facebook_id" :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"><font-awesome-icon :icon="['fab', 'facebook']" class="icon alt"/></a>
+          <a target="_blank" v-if="movie.externalIds.instagram_id" :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"><font-awesome-icon :icon="['fab', 'instagram']" class="icon alt"/></a>
+          <a target="_blank" v-if="movie.externalIds.imdb_id" :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"><font-awesome-icon :icon="['fab', 'imdb']" class="icon alt"/></a>          
         </div>
       </div>
     </div>

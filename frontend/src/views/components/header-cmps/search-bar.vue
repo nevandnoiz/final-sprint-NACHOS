@@ -27,13 +27,8 @@ export default {
       (_.debounce(this.initSearchMovies, 800))();
     },
     async initSearchMovies() {
-      console.log("searching");
-      var movies = await this.$store.dispatch(
-        "getMoviesByKeyword",
-        this.keyword
-      );
+      var movies = await this.$store.dispatch("getMoviesByKeyword",this.keyword);
       this.movies = movies;
-      console.log(this.movies);
     }
   }
 };
