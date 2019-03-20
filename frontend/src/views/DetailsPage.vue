@@ -24,10 +24,6 @@ export default {
     async getMovieDetails() {
       const movieId = this.$route.params.movieId;
       const details = await this.$store.dispatch("getMovieDetails", movieId);
-      await console.log(this.$store.dispatch(
-        "getMovieImages",
-        movieId
-      ));
       const externalIds = await this.$store.dispatch(
         "getMovieExternalIds",
         movieId

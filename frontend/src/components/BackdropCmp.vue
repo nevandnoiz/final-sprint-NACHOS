@@ -1,12 +1,17 @@
 <template>
   <div class="backdrop-container">
-    <button @click="next">Next</button>
-    <div class="backdrop-carousel-item" v-for="(movie, index) in topFive" :key="index">
+    <!-- <button @click="next">Next</button> -->
+    <div v-for="(movie, index) in topFive" :key="index">
       <transition name="slide">
-        <div v-if="currImgIdx === index" style="position: absolute">
-          <img :src="imgURL(movie.backdrop_path)">
-        </div>
+        <div
+          class="backdrop-carousel-img"
+          v-if="currImgIdx === index"
+          :style="{'background-image':'url(\''+imgURL(movie.backdrop_path)+'\')'}"
+        ></div>
       </transition>
+    </div>
+    <div class="backdrop-num-btns">
+      <button @click="currImgIdx=index" v-for="(movie, index) in topFive" :key="index"></button>
     </div>
   </div>
 </template>
@@ -19,7 +24,7 @@ export default {
   components: {},
   data() {
     return {
-      currImgIdx: 0,
+      currImgIdx: 0
     };
   },
   methods: {
@@ -36,12 +41,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-img {
-  height: 480px;
+.backdrop-container {
+  grid-area: 1/1/1/1;
+  height: 375px;
+}
+.backdrop-carousel-img {
+  height: 375px;
   width: 100vw;
-  display: inline-block;
-  object-fit: cover;
-  object-position: center top;
+  position: absolute;
+  background-size: cover;
+  background-position: center 20%;
+  z-index: -1;
+}
+.backdrop-num-btns {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2px;
+  width:200px;
+  position:absolute;
+  left:10%;
+  bottom:40%;
+  button {
+    height: 20px;
+    color: white;
+    background:none;
+    border-radius:50%;
+  }
 }
 .slide-enter-active,
 .slide-leave-active {
