@@ -5,7 +5,9 @@ export default {
     popularMovies: []
   },
   getters: {
-    moviesToDisplay: state => state.popularMovies
+    moviesToDisplay(state) {
+      return state.popularMovies
+    },
   },
   mutations: {
     setPopularMovies(state, { movies }) {
@@ -15,7 +17,7 @@ export default {
   actions: {
     async loadPopularMovies(context, payload) {
       const movies = await MoviesService.getPopularMovies()
-      console.log(movies)
+      // console.log(movies)
       context.commit({ type: 'setPopularMovies', movies: movies.results })
     },
     async getMovieDetails(context, movieId) {
@@ -33,6 +35,6 @@ export default {
     async getMoviesByKeyword(context, keyword) {
       const movies = await MoviesService.getMoviesByKeyword(keyword)
       return movies
-    }
+    },
   }
 }

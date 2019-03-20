@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import UtilityService from "@/services/UtilityService.js"
+import UtilityService from '@/services/UtilityService.js';
+
 export default {
   props: ["movie"],
   computed: {
