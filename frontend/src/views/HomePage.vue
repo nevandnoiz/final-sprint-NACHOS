@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import searchBar from "./components/header-cmps/search-bar.vue";
+import SearchBar from "../components/header-cmps/SearchBar.vue";
 export default {
   created() {
    this.$store.dispatch("loadPopularMovies");
   },
   components: {
-    searchBar
+    SearchBar
   },
   computed: {
     popularMovies() {

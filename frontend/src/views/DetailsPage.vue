@@ -6,14 +6,15 @@
 </template>
 
 <script>
-import movieContainer from "./components/details-cmps/movie-container.vue";
-const utility = require("../services/UtilityService.js");
+import MovieContainer from "../components/details-cmps/MovieContainer.vue";
+import UtilityService from "../services/UtilityService.js";
+
 export default {
   data() {
     return {
       movie: {
         details: null,
-        externalIds: null,
+        externalIds: null
       }
     };
   },
@@ -22,15 +23,23 @@ export default {
   },
   methods: {
     async getMovieDetails() {
-      const movieId = this.$route.params.movieId
+      const movieId = this.$route.params.movieId;
       const details = await this.$store.dispatch("getMovieDetails", movieId);
-      const externalIds = await this.$store.dispatch("getMovieExternalIds", movieId);
-      this.movie.externalIds = externalIds
+      const externalIds = await this.$store.dispatch(
+        "getMovieExternalIds",
+        movieId
+      );
+      this.movie.externalIds = externalIds;
       this.movie.details = details;
     }
   },
   components: {
-    movieContainer
+    MovieContainer
+  },
+  watch: {
+    "$route.params.movieId": function() {
+      this.getMovieDetails();
+    }
   }
 };
 </script>
