@@ -33,7 +33,7 @@ export default {
       return this.$store.getters.moviesToDisplay;
     },
     topFiveMovies() {
-      let topFive = this.popularMovies.splice(0, 5);
+      let topFive = this.popularMovies.slice(0, 5);
       return topFive;
     }
   }

@@ -1,15 +1,12 @@
 <template>
   <div class="backdrop-container">
-    <button @click="next" class="btn btn-primary mb-3">Next</button>
-
-    <div class="backdrop-carousel">
-      <template v-for="(movie, index) in topFive">
-        <transition name="fade">
-            <div v-if="current === index">
+    <button @click="next">Next</button>
+    <div class="backdrop-carousel-item" v-for="(movie, index) in topFive" :key="index">
+      <transition name="slide">
+        <div v-if="currImgIdx === index" style="position: absolute">
           <img :src="imgURL(movie.backdrop_path)">
-            </div>
-        </transition>
-      </template>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -22,8 +19,7 @@ export default {
   components: {},
   data() {
     return {
-      // currImgIdx: 0,
-      current: 0
+      currImgIdx: 0,
     };
   },
   methods: {
@@ -31,7 +27,7 @@ export default {
       return UtilityService.imgURL(posterPath, 1280);
     },
     next() {
-      this.current = (this.current + 1) % 5;
+      this.currImgIdx = (this.currImgIdx + 1) % 5;
     }
   },
   computed: {},
@@ -40,28 +36,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.backdrop-container {
-  overflow: hidden;
-}
-.backdrop-carousel {
-  display: flex;
-}
 img {
-//   display: inline-block;
-  width: 100vw;
   height: 480px;
+  width: 100vw;
+  display: inline-block;
   object-fit: cover;
   object-position: center top;
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 500ms;
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 1s ease;
 }
-.fade-enter {
+.slide-enter,
+.slide-enter {
   transform: translateX(100%);
 }
-.fade-leave-to {
+.slide-leave-to {
   transform: translateX(-100%);
 }
 </style>
