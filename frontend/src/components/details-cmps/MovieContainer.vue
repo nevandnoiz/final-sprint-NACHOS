@@ -27,7 +27,7 @@ export default {
   props: ["movie"],
   computed: {
     imgURL() {
-      return utility.imgURL(this.movie.details.poster_path)
+      return UtilityService.imgURL(this.movie.details.poster_path)
     }
   },
 };
