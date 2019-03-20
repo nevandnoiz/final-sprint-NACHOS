@@ -6,25 +6,28 @@ export default {
     activities: null,
   },
   getters: {
-    activities: (state) => {
-      console.log(state.activities)
-      return state.activities
-    }
+    activities: state => state.activities,
+    currUser: state => state.currUser
   },
   mutations: {
     setCurrUser(state, { user }) {
       state.currUser = user
     },
     setActivities(state, { activities }) {
-      // console.log(activities);
       state.activities = activities
     },
-
+    setUser(state, { user }) {
+      state.currUser = user
+    },
   },
   actions: {
     async loadActivities(context, payload) {
       const activities = await UserServies.getActivities()
       context.commit({ type: 'setActivities', activities })
+    },
+    async loadUser(context, payload) {
+      const user = await UserServies.getUser()
+      context.commit({ type: 'setUser', user })
     },
   }
 }

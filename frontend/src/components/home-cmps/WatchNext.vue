@@ -1,12 +1,18 @@
 <template>
   <section class="watch-next">
-      
+      <pre>
+          {{watchNext}}
+      </pre>
   </section>
 </template>
 
 
 <script>
-export default {};
+export default {
+    props: {
+        watchNext: Array
+    }
+};
 </script>
 
 <style lang="scss" scoped>
