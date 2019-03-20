@@ -2,7 +2,7 @@
   <div class="details">
     <h1>Nachos details</h1>
     <div class="movie-container">
-      <img :src="movie.img.poster">
+      <img :src="imgURL">
       <div class="movie-details">
         <div class="details-text">
           <h1>{{movie.details.title}}</h1>
@@ -22,8 +22,14 @@
 </template>
 
 <script>
+const utility = require("../../../services/UtilityService.js");
 export default {
-  props: ["movie"]
+  props: ["movie"],
+  computed: {
+    imgURL() {
+      return utility.imgURL(this.movie.details.poster_path)
+    }
+  },
 };
 </script>
 

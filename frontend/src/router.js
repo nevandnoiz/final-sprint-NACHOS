@@ -19,7 +19,7 @@ export default new Router({
       component: BrowsePage
     },
     {
-      path: '/details',
+      path: '/details/:movieId',
       name: 'details',
       component: DetailsPage
     },

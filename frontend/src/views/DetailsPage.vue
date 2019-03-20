@@ -13,30 +13,20 @@ export default {
     return {
       movie: {
         details: null,
-        img: {
-          poster: null
-        },
         externalIds: null,
       }
     };
   },
   async created() {
-    this.testInit();
-    //  const movieId = this.$route.params.movieId
+    this.getMovieDetails();
   },
   methods: {
-    async testInit() {
-      const movieId = 299537;
+    async getMovieDetails() {
+      const movieId = this.$route.params.movieId
       const details = await this.$store.dispatch("getMovieDetails", movieId);
-      const imgs = await this.$store.dispatch("getMovieImages", movieId);
       const externalIds = await this.$store.dispatch("getMovieExternalIds", movieId);
-      // TO DO - TRY TO GET IMGS URLS FROM THE DETAILS INSTEAD OF REQUESTING ANOTHER API
-      this.movie.img.poster = utility.imgURL(imgs.posters[0].file_path);
       this.movie.externalIds = externalIds
       this.movie.details = details;
-      console.log(externalIds)
-      console.log(details);
-      console.log(imgs);
     }
   },
   components: {
