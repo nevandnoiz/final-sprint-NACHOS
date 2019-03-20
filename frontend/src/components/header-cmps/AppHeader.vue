@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <img src="@/imgs/Nachos-icon.svg" alt="App-Logo">
+      <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
       <router-link to="/browse/movies">Movies</router-link>
       <router-link to="/browse/TvShows">Tv Shows</router-link>
       <router-link to="/browse/Actors">Actors</router-link>
@@ -17,6 +17,11 @@ import searchBar from '@/components/header-cmps/SearchBar.vue'
 export default {
   components: {
     searchBar
+  },
+  methods:{
+pushToHome(){
+  this.$router.push('/')
+}
   },
     props: ['user']
 };
@@ -35,6 +40,7 @@ header {
     margin-right: 10px;
     img {
       height: 100px;
+      cursor: pointer;
     }
     a {
       color: white;
