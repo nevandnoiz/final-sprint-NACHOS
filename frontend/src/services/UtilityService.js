@@ -7,7 +7,7 @@ function imgURL(posterPath,size){
     return `http://image.tmdb.org/t/p/w${size}${posterPath}`
   }
 
-  function LightenDarkenColor(col,amt) {
+function LightenDarkenColor(col,amt) {
     var num = parseInt(col,16);
     var r = (num >> 16) + amt;
     var b = ((num >> 8) & 0x00FF) + amt;
