@@ -1,9 +1,12 @@
 <template>
   <div
     @click="pushToDetails(movie.id)"
-    class="browse-item"
+    class="item-preview"
     :style="{'background-image':'url(\''+img+'\')'}"
-  ></div>
+    @mouseenter="toggleIsHovered"
+    @mouseleave="toggleIsHovered"
+    :class="{'hover-buttons': isHovered}"
+  >></div>
 </template>
 
 <script>
@@ -14,7 +17,8 @@ export default {
   components: {},
   data() {
     return {
-      img: null
+      img: null,
+      isHovered: false
     };
   },
   methods: {
@@ -23,6 +27,10 @@ export default {
     },
     pushToDetails(movieId) {
       this.$router.push(`/details/${movieId}`);
+    },
+    toggleIsHovered() {
+      if (this.currList === "deleted") return;
+      this.isHovered = !this.isHovered;
     }
   },
   computed: {},
@@ -33,10 +41,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.browse-item {
+.item-preview {
   width: 200px;
   height: 300px;
   background-size: cover;
   cursor: pointer;
+}
+.hover-buttons{
+  border:10px solid gray;
 }
 </style>

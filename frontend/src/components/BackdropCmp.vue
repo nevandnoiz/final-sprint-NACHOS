@@ -1,5 +1,5 @@
 <template>
-  <div class="backdrop-container">
+  <div class="backdrop-container" @click="pushToDetails(topFive[currImgIdx].id)">
     <!-- <button @click="next">Next</button> -->
     <div v-for="(movie, index) in topFive" :key="index">
       <transition name="slide">
@@ -13,7 +13,7 @@
       </transition>
     </div>
     <div class="backdrop-num-btns">
-      <button @click="currImgIdx=index" v-for="(movie, index) in topFive" :key="index"></button>
+      <button @click.stop="currImgIdx=index" v-for="(movie, index) in topFive" :key="index"></button>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       currImgIdx: 0,
-      nextImgTimeout: null
+      nextImgIntrvl: null
     };
   },
   methods: {
@@ -37,14 +37,18 @@ export default {
     },
     nextImg() {
       this.currImgIdx = (this.currImgIdx + 1) % 5;
+    },
+    pushToDetails(movieId) {
+      console.log("sdf");
+      this.$router.push(`/details/${movieId}`);
     }
   },
   computed: {},
   created() {
-    this.nextImgTimeout = setTimeout(this.nextImg, 10000);
+    this.nextImgIntrvl = setInterval(this.nextImg, 10000);
   },
   destroyed() {
-    clearTimeout(nextImgTimeout);
+    clearInterval(this.nextImgIntrvl);
   }
 };
 </script>
@@ -52,27 +56,29 @@ export default {
 <style lang="scss" scoped>
 .backdrop-container {
   grid-area: 1/1/1/1;
-  height: 375px;
-}
-.backdrop-carousel-img {
-  height: 375px;
-  width: 100vw;
-  position: absolute;
-  background-size: cover;
-  overflow: hidden;
-  background-position: center 20%;
-  z-index: -1;
-  h1 {
-    font-family: Verdana, Geneva, sans-serif;
-    font-weight: bold;
-    color: rgb(255, 238, 238);
-    font-size: 46px;
-    position: relative;
-    top: 46%;
-    left: 8%;
-    text-shadow: 0 0 3px black;
+  // height: 375px;
+  cursor: pointer;
+  .backdrop-carousel-img {
+    height: 375px;
+    width: 100vw;
+    position: absolute;
+    background-size: cover;
+    overflow: hidden;
+    background-position: center 20%;
+    z-index: -1;
+    h1 {
+      font-family: Verdana, Geneva, sans-serif;
+      font-weight: bold;
+      color: rgb(255, 238, 238);
+      font-size: 46px;
+      position: relative;
+      top: 46%;
+      left: 8%;
+      text-shadow: 0 0 3px black;
+    }
   }
 }
+
 .backdrop-num-btns {
   display: flex;
   justify-content: space-evenly;
