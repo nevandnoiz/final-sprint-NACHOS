@@ -46,6 +46,10 @@ export default {
     async getMovieCredits(context, id) {
       const movieCredits = await MoviesService.getMovieCredits(id)
       return movieCredits
+    },
+    async getMovieVideos(context, id) {
+      const movieVideos = await MoviesService.getMovieVideos(id)
+      return movieVideos
     }
   }
 }
