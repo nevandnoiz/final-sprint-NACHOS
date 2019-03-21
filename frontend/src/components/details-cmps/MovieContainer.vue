@@ -9,7 +9,7 @@
     </div>
 
     <!-- <h1>Nachos details</h1> -->
-    <div v-if="!isTrailer" class="detalis-sections">
+    <div v-if="!isTrailer" class="detalis-sections" :style="bckColor">
       <div class="movie-container">
         <img class="movie-poster-img" ref="moviePoster" :src="imgURL">
         <div class="movie-details">
@@ -58,20 +58,27 @@
 </template>
 <script>
 import UtilityService from "@/services/UtilityService.js";
+const sightengine = require("sightengine")("1163479865","rQZS3hEBvZSJ9Nqbc5qu");
+
 // import colorThief from 'colorthief'
 // const color = new ColorThief()
-var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
+// var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
 export default {
   created() {
-   console.log(sightengine)
-   sightengine.check(['properties']).set_url('https://d3m9459r9kwism.cloudfront.net/img/examples/example7.jpg').then(function(result) {
-  // The API response (result)
-}).catch(function(err) {
-  // Handle error
-});
-},
+    sightengine.check(["properties"]).set_url(this.imgURL)
+      .then(function(result) {
+        // console.log(result);
+        return result.colors.dominant.hex
+        // console.log(this.dominatedColor)
+      }).then(res=>this.dominantColor = res)
+      .catch(function(err) {
+        // Handle error
+      });
+      console.log(this.dominantColor)
+  },
   data() {
     return {
+      dominantColor: null,
       isTrailer: false
     };
   },
@@ -83,6 +90,12 @@ export default {
     }
   },
   computed: {
+    bckColor() {
+        return {
+            // in the case of redComp, greenComp and blueComp are a vue prop or data
+            backgroundColor : this.dominantColor
+        };
+    },
     imgURL() {
       return UtilityService.imgURL(this.movie.details.poster_path, 300);
     }
@@ -111,7 +124,7 @@ iframe {
   border-radius: 3px;
   padding: 40px;
   max-width: 60%;
-  background-color: lightslategray;
+  /* background-color: lightslategray; */
   display: flex;
 }
 
@@ -136,7 +149,7 @@ iframe {
   cursor: pointer;
 }
 .details {
-  background-color: lightslategray;
+  /* background-color: lightslategray; */
 }
 .details-text > * {
   margin: 5px 0;
@@ -166,6 +179,6 @@ iframe {
   -ms-flex-pack: center;
   justify-content: center;
   padding: 50px;
-  background-color: lightgray;
+  /* background-color: lightgray; */
 }
 </style>
