@@ -81,11 +81,11 @@ export default {
     };
   },
   destroyed() {
-    this.$store.commit("setSelectedMovie", null);
+    this.$store.commit("setSelectedItem", null);
   },
   methods: {
     async getMovieDetails() {
-      let details = this.$store.getters.selectedMovie;
+      let details = this.$store.getters.selectedItem;
       const movieId = this.$route.params.movieId;
       if (details) console.log("movie details IS on storage doesnt get from API");
       if (!details) {

@@ -3,23 +3,16 @@ import TvService from '../services/TvService';
 export default {
   state: {
     popularTv: '',
-    selectedTv: null
   },
   getters: {
     tvShowsToDisplay(state) {
       return state.popularTv
     },
-    selectedTv(state) {
-      return state.selectedTv
-    }
   },
   mutations: {
     setPopularTv(state, { tv }) {
       state.popularTv = tv
     },
-    setSelectedTv(state, tv) {
-      state.selectedTv = tv
-    }
   },
   actions: {
     async loadPopularTvShows(context, payload) {
