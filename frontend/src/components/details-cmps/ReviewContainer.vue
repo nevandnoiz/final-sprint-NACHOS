@@ -1,6 +1,6 @@
 <template>
   <div class="review-container">
-    <img src="https://via.placeholder.com/150.jpg">
+    <img src="https://via.placeholder.com/500.jpg">
     <div class="review-text">
       <section>
         <h1>A Review by {{review.author}}</h1>

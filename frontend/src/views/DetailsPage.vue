@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="movie.details">
     <movie-container v-if="this.movie.details" :movie="movie"></movie-container>
     <nav-bar></nav-bar>
     <review-container v-for="(review, index) in movie.reviews.results" :key="index" :review="review"></review-container>

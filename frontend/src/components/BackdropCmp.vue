@@ -8,7 +8,7 @@
           v-if="currIdx === index"
           :style="{'background-image':'url(\''+imgURL(movie.backdrop_path)+'\')'}"
         >
-          <h1>{{movie.title}}</h1>
+          <h1>{{movie.title || movie.name}}</h1>
         </div>
       </transition>
     </div>

@@ -6,7 +6,7 @@ export default {
     selectedTv: null
   },
   getters: {
-    showsToDisplay(state) {
+    tvShowsToDisplay(state) {
       return state.popularTv
     },
     selectedTv(state) {
@@ -22,9 +22,8 @@ export default {
     }
   },
   actions: {
-    async loadPopularTv(context, payload) {
+    async loadPopularTvShows(context, payload) {
       const tv = await TvService.getPopularShows()
-      console.log('kaka')
       context.commit({ type: 'setPopularTv', tv: tv.results })
     },
     async getTvDetails(context, tvId) {

@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from './views/HomePage.vue'
-import BrowsePage from './views/BrowsePage.vue'
+import BrowseMovies from './views/BrowseMovies.vue'
+import BrowseTvShows from './views/BrowseTvShows.vue'
 import DetailsPage from './views/DetailsPage.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
   routes: [
     {
       path: '/',
@@ -14,9 +18,14 @@ export default new Router({
       component: HomePage
     },
     {
-      path: '/browse/:section',
-      name: 'browse',
-      component: BrowsePage
+      path: '/movies',
+      name: 'movies',
+      component: BrowseMovies
+    },
+    {
+      path: '/tv',
+      name: 'tv',
+      component: BrowseTvShows
     },
     {
       path: '/details/:movieId',
