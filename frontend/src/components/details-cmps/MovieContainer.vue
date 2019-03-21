@@ -2,7 +2,7 @@
   <div class="details">
    
     <div v-if="isTrailer">
-        <youtube class="youtube-container" :video-id="this.movie.videos.results[0].key">YOUTUBE</youtube>
+        <youtube class="youtube-container" :video-id="this.movie.videos.results[0].key" player-vars="{ autoplay: 1 }"></youtube>
     </div>
 
     <!-- <h1>Nachos details</h1> -->
@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-   <button @click="onTrailer">Trailer</button>
+   <button v-if="isTrailer" @click="onTrailer">Trailer</button>
     </div>
 </template>
 <script>
@@ -59,7 +59,7 @@ import UtilityService from "@/services/UtilityService.js";
 export default {
   data() {
     return {
-      isTrailer: true
+      isTrailer: false
     }
   },
   props: ["movie"],
