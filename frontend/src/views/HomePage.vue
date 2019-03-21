@@ -2,6 +2,10 @@
   <div class="home">
     <watch-next :watchNextList="watchNextList"></watch-next>
     <!-- <feed :activities="activities"></feed> -->
+    <pre>
+      <!-- <a class="twitter-timeline" href="https://twitter.com/spiderman?ref_src=twsrc%5Etfw">Tweet</a> -->
+      <!-- {{activities}} -->
+      </pre>
   </div>
 </template>
 

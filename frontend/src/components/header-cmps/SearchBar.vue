@@ -65,6 +65,9 @@ export default {
   margin: 0;
   padding: 0;
 }
+a {
+  cursor: pointer;
+}
 ul {
   border: 1px solid black;
 }
