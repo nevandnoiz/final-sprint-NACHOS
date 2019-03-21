@@ -1,14 +1,26 @@
 import axios from 'axios'
 
 export default {
-    getActivities
+    getActivities,
+    getUser
 }
 
 const users = []
-const activities = [{
-    user: 'bobo',
-    type: 'rate'
-}]
+const activities = [
+    {
+        _id: 'abc321321',
+        byUser: {
+            Name: {
+                firstName: 'tal',
+                lastName: 'wiener'
+            }, _id: 'abc123'
+        },
+        item_id: 166428,
+        itemTitle: "How to Train Your Dragon: The Hidden World",
+        Type: 'rate',
+        value: 5,
+    }
+]
 
 
 function getActivities() {
@@ -19,15 +31,15 @@ function getActivities() {
 function getUser() {
     return {
         _id: 'abc123',
-        Password: '123123',
-        Name: {
+        password: '123123',
+        name: {
             firstName: 'tal',
             lastName: 'wiener'
         },
-        Mail: null,
-        Img: null,
-        Following: null,
-        Lists: [
+        mail: null,
+        img: null,
+        following: null,
+        lists: [
             {
                 name: 'favorites',
                 items: null

@@ -28,6 +28,7 @@ export default {
     async loadUser(context, payload) {
       const user = await UserServies.getUser()
       context.commit({ type: 'setUser', user })
+      return user
     },
   }
 }

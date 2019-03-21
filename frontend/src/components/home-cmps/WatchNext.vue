@@ -1,25 +1,24 @@
 <template>
   <section class="watch-next">
-      <pre>
-          {{watchNext}}
-      </pre>
+    <pre>{{watchNextList.items}}</pre>
   </section>
 </template>
 
 
 <script>
 export default {
-    props: {
-        watchNext: Array
-    }
+  props: {
+    watchNextList: Object
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .watch-next {
-    width: 90%;
-    height: 200px;
-    background-color: red;
-    margin: 0 auto;
+  display: flexwa
+  width: 90%;
+  height: 200px;
+  background-color: lightblue;
+  margin: 0 auto;
 }
 </style>

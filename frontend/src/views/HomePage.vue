@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <watch-next :watchNext="watchNext"></watch-next>
-    <feed :activities="activities"></feed>
+    <watch-next :watchNextList="watchNextList"></watch-next>
+    <!-- <feed :activities="activities"></feed> -->
   </div>
 </template>
 
@@ -10,18 +10,19 @@ import WatchNext from "@/components/home-cmps/WatchNext.vue";
 import feed from "@/components/home-cmps/Feed.vue";
 
 export default {
-   components: {
+  components: {
     WatchNext,
     feed
   },
   data() {
     return {
-      user: null
+      // user: null
     };
   },
   created() {
-    this.$store.dispatch("loadPopularMovies");
+    // this.$store.dispatch("loadPopularMovies");
     this.$store.dispatch("loadActivities");
+    this.$store.dispatch("loadUser");
   },
   computed: {
     popularMovies() {
@@ -29,6 +30,17 @@ export default {
     },
     activities() {
       return this.$store.getters.activities;
+    },
+    user() {
+      return this.$store.getters.currUser;
+    },
+    watchNextList() {
+      const currUser = this.$store.getters.currUser;
+      if (currUser) {
+        const lists = currUser.lists.find(list => list.name === "watchList");
+        return lists
+        
+      }
     }
   }
 };
