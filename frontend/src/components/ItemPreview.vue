@@ -26,6 +26,7 @@ export default {
       return UtilityService.imgURL(this.movie.poster_path, 300);
     },
     pushToDetails(movieId) {
+      this.$store.commit('setSelectedMovie', this.movie)
       this.$router.push(`/details/${movieId}`);
     },
     toggleIsHovered() {

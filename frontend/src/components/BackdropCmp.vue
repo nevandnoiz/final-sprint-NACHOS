@@ -1,11 +1,11 @@
 <template>
-  <div class="backdrop-container" @click="pushToDetails(topFive[currImgIdx].id)">
+  <div class="backdrop-container" @click="pushToDetails(topFive[currIdx])">
     <!-- <button @click="next">Next</button> -->
     <div v-for="(movie, index) in topFive" :key="index">
       <transition name="slide">
         <div
           class="backdrop-carousel-img"
-          v-if="currImgIdx === index"
+          v-if="currIdx === index"
           :style="{'background-image':'url(\''+imgURL(movie.backdrop_path)+'\')'}"
         >
           <h1>{{movie.title}}</h1>
@@ -13,7 +13,7 @@
       </transition>
     </div>
     <div class="backdrop-num-btns">
-      <button @click.stop="currImgIdx=index" v-for="(movie, index) in topFive" :key="index"></button>
+      <button @click.stop="currIdx=index" v-for="(movie, index) in topFive" :key="index"></button>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   components: {},
   data() {
     return {
-      currImgIdx: 0,
+      currIdx: 0,
       nextImgIntrvl: null
     };
   },
@@ -36,11 +36,12 @@ export default {
       return UtilityService.imgURL(posterPath, 1280);
     },
     nextImg() {
-      this.currImgIdx = (this.currImgIdx + 1) % 5;
+      this.currIdx = (this.currIdx + 1) % 5;
     },
-    pushToDetails(movieId) {
-      console.log("sdf");
-      this.$router.push(`/details/${movieId}`);
+    pushToDetails(movie) {
+      this.$store.commit('setSelectedMovie', movie)
+      console.log(movie.id)
+      this.$router.push(`/details/${movie.id}`);
     }
   },
   computed: {},
