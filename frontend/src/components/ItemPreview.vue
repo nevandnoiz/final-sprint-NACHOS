@@ -21,7 +21,7 @@
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
-  props: ["item"],
+  props: ["item", "click"],
   components: {},
   data() {
     return {
@@ -35,6 +35,7 @@ export default {
       return UtilityService.imgURL(this.item.poster_path, 300);
     },
     pushToDetails(itemId) {
+       if (!this.click) return;
       this.$store.commit("setSelectedMovie", this.item);
       this.$router.push(`/details/${itemId}`);
     },
