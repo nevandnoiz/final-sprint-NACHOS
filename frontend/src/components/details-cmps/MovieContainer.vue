@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="details" v-if="dominantColor">
     <div v-if="isTrailer">
       <youtube
         class="youtube-container"
@@ -9,7 +9,10 @@
     </div>
 
     <!-- <h1>Nachos details</h1> -->
-    <div v-if="!isTrailer" class="detalis-sections" :style="bckColor">
+    <div v-if="!isTrailer && dominantColor" class="detalis-sections" :style="bckImage">
+      <div class="row" :style="bckColor">
+
+
       <div class="movie-container">
         <img class="movie-poster-img" ref="moviePoster" :src="imgURL">
         <div class="movie-details">
@@ -55,6 +58,10 @@
     </div>
     <button v-if="isTrailer" @click="onTrailer">Trailer</button>
   </div>
+
+
+
+      </div>
 </template>
 <script>
 import UtilityService from "@/services/UtilityService.js";
@@ -74,7 +81,8 @@ export default {
       .catch(function(err) {
         // Handle error
       });
-      console.log(this.dominantColor)
+      
+    
   },
   data() {
     return {
@@ -90,10 +98,15 @@ export default {
     }
   },
   computed: {
+    bckImage(){
+      return {
+         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.movie.details.backdrop_path})`
+      }
+    },
     bckColor() {
         return {
             // in the case of redComp, greenComp and blueComp are a vue prop or data
-            backgroundColor : this.dominantColor
+            background : this.dominantColor+'B3'
         };
     },
     imgURL() {
@@ -104,10 +117,24 @@ export default {
 </script>
 
 <style scoped>
+.detalis-sections {
+background-repeat: no-repeat;
+    background-size: 100%;
+    height: 580px;
+}
+.row{
+    /* overflow: hidden; */
+    height: 100% !important;
+    /* width: 100vw; */
+    z-index: 2;
+    position: inherit;
+}
+
 button {
   position: relative;
 }
 * {
+  color: black;
   margin: 0;
   padding: 0;
 }
@@ -120,7 +147,7 @@ iframe {
   height: 80vw;
 }
 .movie-container {
-  margin: 50px auto 0 auto;
+  margin: 0 auto;
   border-radius: 3px;
   padding: 40px;
   max-width: 60%;
@@ -152,7 +179,14 @@ iframe {
   /* background-color: lightslategray; */
 }
 .details-text > * {
+  
   margin: 5px 0;
+}
+.details-text>p {
+font-size: 1.4rem;
+}
+.details-text>h1 {
+font-size: 2rem;
 }
 .movie-container > img {
   margin-right: 20px;
