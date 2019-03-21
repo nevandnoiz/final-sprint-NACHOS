@@ -2,7 +2,7 @@ import MoviesService from '../services/MoviesService';
 
 export default {
   state: {
-    popularMovies: [],
+    popularMovies: '',
     selectedMovie: null
   },
   getters: {

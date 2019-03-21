@@ -1,7 +1,6 @@
 <template>
   <section>
     <movie-container v-if="this.movie.details" :movie="movie"></movie-container>
-    <!-- <i class="fab fa-facebook"></i> -->
   </section>
 </template>
 
