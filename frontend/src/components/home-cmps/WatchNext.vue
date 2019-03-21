@@ -3,7 +3,7 @@
     <h3>watch next</h3>
     <div class="items-preview" v-if="watchNextList">
       <div class="item" v-for="item in watchNextList.items" :key="item.id">
-        <item-preview class="watch-next-item" :movie="item"/>
+        <item-preview class="watch-next-item" :item="item"/>
         <p>{{item.title}}</p>
       </div>
     </div>

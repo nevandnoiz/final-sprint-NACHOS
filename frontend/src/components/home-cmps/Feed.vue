@@ -1,6 +1,6 @@
 <template>
   <section class="feed">
-      <select-defualt/>
+      <!-- <select-defualt/> -->
   </section>
 </template>
 

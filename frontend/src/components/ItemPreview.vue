@@ -35,7 +35,7 @@ export default {
       return UtilityService.imgURL(this.item.poster_path, 300);
     },
     pushToDetails(itemId) {
-       if (!this.click) return;
+      //  if (!this.click) return;
       this.$store.commit("setSelectedMovie", this.item);
       this.$router.push(`/details/${itemId}`);
     },
