@@ -6,7 +6,9 @@
     @mouseenter="toggleIsHovered"
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered}"
-  >></div>
+  >
+  <button v-if="isHovered"></button>
+  </div>
 </template>
 
 <script>
@@ -48,6 +50,6 @@ export default {
   cursor: pointer;
 }
 .hover-buttons{
-  border:10px solid gray;
+  box-shadow: inset 0 0 10px #000000;
 }
 </style>
