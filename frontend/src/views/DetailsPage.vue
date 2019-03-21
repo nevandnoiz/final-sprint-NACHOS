@@ -90,7 +90,7 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    async getDomColor(){
+    async getDominantColor(url){
         var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
         console.log(domColor)
         var hex = domColor.colors.dominant.hex + ''
@@ -115,7 +115,7 @@ export default {
       this.movie.externalIds = externalIds;
       this.movie.details = details;
       console.log(this.movie.credits);
-      this.getDomColor()
+      this.getDominantColor()
     }
   },
   components: {
