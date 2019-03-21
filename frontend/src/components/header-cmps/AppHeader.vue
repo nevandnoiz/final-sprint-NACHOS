@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="container">
+    <div class="header-container">
       <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
      <router-link to="/movies">Movies</router-link>
       <router-link to="/tv">Tv Shows</router-link>
@@ -32,12 +32,11 @@ export default {
 header {
   height: 60px;
   background-color: rgb(45, 45, 45);
-  .container {
+  .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding:0 20px;
     img {
       height: 60px;
       cursor: pointer;

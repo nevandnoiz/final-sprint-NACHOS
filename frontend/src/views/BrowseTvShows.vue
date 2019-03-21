@@ -1,6 +1,6 @@
 <template>
   <div class="browse">
-    <backdrop-cmp :topFive="topFiveItems"></backdrop-cmp>
+    <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
     <div class="grid-container">
       <item-preview v-for="(tvShow, index) in popularItems" :key="index" :item="tvShow"></item-preview>
     </div>
