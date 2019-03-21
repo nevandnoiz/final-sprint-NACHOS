@@ -1,6 +1,12 @@
 <template>
   <div class="details">
+   
+    <div v-if="isTrailer">
+        <youtube class="youtube-container" :video-id="this.movie.videos.results[0].key">YOUTUBE</youtube>
+    </div>
+
     <!-- <h1>Nachos details</h1> -->
+    <div v-if="!isTrailer" class="detalis-sections">
     <div class="movie-container">
       <img :src="imgURL">
       <div class="movie-details">
@@ -11,6 +17,7 @@
           <p>{{movie.details.overview}}</p>
         </div>
         <div class="icons-container">
+          <i @click="onTrailer" class="far fa-play-circle"></i>
           <a
             target="_blank"
             v-if="movie.externalIds.twitter_id"
@@ -43,12 +50,25 @@
       </div>
     </div>
   </div>
+   <button @click="onTrailer">Trailer</button>
+    </div>
 </template>
 <script>
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
+  data() {
+    return {
+      isTrailer: true
+    }
+  },
   props: ["movie"],
+  methods: {
+    onTrailer() {
+      console.log('on trailer click')
+      this.isTrailer = !this.isTrailer
+    }
+  },
   computed: {
     imgURL() {
       return UtilityService.imgURL(this.movie.details.poster_path, 185);
@@ -58,6 +78,9 @@ export default {
 </script>
 
 <style scoped>
+button {
+  position: relative;
+}
 * {
   margin: 0;
   padding: 0;
@@ -73,7 +96,7 @@ iframe {
 .movie-container {
   margin: 50px auto 0 auto;
   border-radius: 5px;
-  padding: 40px;
+  padding: 70px;
   max-width: 60%;
   background-color: lightslategray;
   display: flex;
@@ -101,5 +124,21 @@ iframe {
 }
 .movie-details > p {
   margin-top: 20px;
+}
+
+.youtube-container {
+  /* position: fixed; */
+  right: 0;
+  left: 0;
+  top: 10vw; 
+   margin: 50px auto 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 50px;
+  background-color:lightgray;
 }
 </style>

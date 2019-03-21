@@ -7,6 +7,7 @@ export default {
     getMovieExternalIds,
     getMoviesByKeyword,
     getMovieCredits,
+    getMovieVideos,
 }
 
 async function getPopularMovies(page = 1) {
@@ -45,4 +46,10 @@ async function getMovieCredits(id) {
     const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=fd807ad0f521ce282a03431f7288592d`)
     const movieCredits = res.data
     return movieCredits
+}
+
+async function getMovieVideos(id) {
+    const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
+    const movieVideos = res.data
+    return movieVideos
 }
