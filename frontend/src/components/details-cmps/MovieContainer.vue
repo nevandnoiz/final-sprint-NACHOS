@@ -6,30 +6,54 @@
       <div class="movie-details">
         <div class="details-text">
           <h1>{{movie.details.title}}</h1>
-           <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
+          <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
           <!-- <h4>Release date: {{movie.details.release_date}}</h4> -->
           <p>{{movie.details.overview}}</p>
         </div>
         <div class="icons-container">
-          <a target="_blank" v-if="movie.externalIds.twitter_id" :href="`https://twitter.com/${movie.externalIds.twitter_id}`"><i class="fab fa-twitter"></i></a>
-          <a target="_blank" v-if="movie.externalIds.facebook_id" :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"><i class="fab fa-facebook"></i></a>
-          <a target="_blank" v-if="movie.externalIds.instagram_id" :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"><i class="fab fa-instagram"></i></a>
-          <a target="_blank" v-if="movie.externalIds.imdb_id" :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"><i class="fab fa-imdb"></i></a>          
+          <a
+            target="_blank"
+            v-if="movie.externalIds.twitter_id"
+            :href="`https://twitter.com/${movie.externalIds.twitter_id}`"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            target="_blank"
+            v-if="movie.externalIds.facebook_id"
+            :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"
+          >
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a
+            target="_blank"
+            v-if="movie.externalIds.instagram_id"
+            :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            target="_blank"
+            v-if="movie.externalIds.imdb_id"
+            :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"
+          >
+            <i class="fab fa-imdb"></i>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import UtilityService from '@/services/UtilityService.js';
+import UtilityService from "@/services/UtilityService.js";
 
 export default {
   props: ["movie"],
   computed: {
     imgURL() {
-      return UtilityService.imgURL(this.movie.details.poster_path,185)
+      return UtilityService.imgURL(this.movie.details.poster_path, 185);
     }
-  },
+  }
 };
 </script>
 
@@ -39,17 +63,17 @@ export default {
   padding: 0;
 }
 a {
-  color:inherit;
+  color: inherit;
   text-decoration: none;
- }
- iframe {
+}
+iframe {
   width: 80vw;
   height: 80vw;
- }
+}
 .movie-container {
-  margin: 10% auto;
+  margin: 50px auto 0 auto;
   border-radius: 5px;
-  padding: 20px;
+  padding: 40px;
   max-width: 60%;
   background-color: lightslategray;
   display: flex;
@@ -60,6 +84,9 @@ a {
 }
 .icons-container > *:hover {
   cursor: pointer;
+}
+.details {
+  background-color: lightslategray;
 }
 .details-text > * {
   margin: 5px 0;
