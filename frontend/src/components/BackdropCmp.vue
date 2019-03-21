@@ -52,10 +52,10 @@ export default {
 <style lang="scss" scoped>
 .backdrop-container {
   grid-area: 1/1/1/1;
-  height: 375px;
+  height: 600px;
 }
 .backdrop-carousel-img {
-  height: 375px;
+  height: 600px;
   width: 100vw;
   position: absolute;
   background-size: cover;
