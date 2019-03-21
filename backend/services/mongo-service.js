@@ -6,7 +6,7 @@ function connectToMongo() {
  
     // Enter mongoDB URL and set the dbName const accordingly. ex:
     // const url = 'mongodb+srv://nevandnoiz:hbUERCws7CvFcbZA@cluster0-dtmsh.mongodb.net/test?retryWrites=true';
-    // const dbName = 'TOY_DB';  
+    // const dbName = 'NACHOS_DB';  
     
     const client = new MongoClient(url, { useNewUrlParser: true });
 

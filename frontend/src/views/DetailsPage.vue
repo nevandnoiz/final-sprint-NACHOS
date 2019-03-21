@@ -7,7 +7,6 @@
 
 <script>
 import MovieContainer from "../components/details-cmps/MovieContainer.vue";
-import UtilityService from "../services/UtilityService.js";
 
 export default {
   data() {

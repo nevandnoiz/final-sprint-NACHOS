@@ -1,20 +1,20 @@
 <template>
   <div class="details">
-    <h1>Nachos details</h1>
+    <!-- <h1>Nachos details</h1> -->
     <div class="movie-container">
       <img :src="imgURL">
       <div class="movie-details">
         <div class="details-text">
           <h1>{{movie.details.title}}</h1>
+           <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
           <!-- <h4>Release date: {{movie.details.release_date}}</h4> -->
           <p>{{movie.details.overview}}</p>
         </div>
-
         <div class="icons-container">
-          <a target="_blank" v-if="movie.externalIds.twitter_id" :href="`https://twitter.com/${movie.externalIds.twitter_id}`"><font-awesome-icon :icon="['fab', 'twitter']" class="icon alt"/></a>
-          <a target="_blank" v-if="movie.externalIds.facebook_id" :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"><font-awesome-icon :icon="['fab', 'facebook']" class="icon alt"/></a>
-          <a target="_blank" v-if="movie.externalIds.instagram_id" :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"><font-awesome-icon :icon="['fab', 'instagram']" class="icon alt"/></a>
-          <a target="_blank" v-if="movie.externalIds.imdb_id" :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"><font-awesome-icon :icon="['fab', 'imdb']" class="icon alt"/></a>          
+          <a target="_blank" v-if="movie.externalIds.twitter_id" :href="`https://twitter.com/${movie.externalIds.twitter_id}`"><i class="fab fa-twitter"></i></a>
+          <a target="_blank" v-if="movie.externalIds.facebook_id" :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"><i class="fab fa-facebook"></i></a>
+          <a target="_blank" v-if="movie.externalIds.instagram_id" :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"><i class="fab fa-instagram"></i></a>
+          <a target="_blank" v-if="movie.externalIds.imdb_id" :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"><i class="fab fa-imdb"></i></a>          
         </div>
       </div>
     </div>
@@ -22,12 +22,13 @@
 </template>
 
 <script>
-import UtilityService from "@/services/UtilityService.js"
+import UtilityService from '@/services/UtilityService.js';
+
 export default {
   props: ["movie"],
   computed: {
     imgURL() {
-      return UtilityService.imgURL(this.movie.details.poster_path)
+      return UtilityService.imgURL(this.movie.details.poster_path,185)
     }
   },
 };
@@ -41,6 +42,10 @@ export default {
 a {
   color:inherit;
   text-decoration: none;
+ }
+ iframe {
+  width: 80vw;
+  height: 80vw;
  }
 .movie-container {
   margin: 10% auto;
