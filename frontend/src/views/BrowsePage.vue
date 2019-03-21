@@ -49,7 +49,7 @@ export default {
 .grid-container{
   padding: 20px;
   display:grid;
-  grid-gap:4px;
+  grid-gap:20px;
   grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
   justify-items: center;
   grid-area:2/1/2/1

@@ -7,7 +7,9 @@
           class="backdrop-carousel-img"
           v-if="currImgIdx === index"
           :style="{'background-image':'url(\''+imgURL(movie.backdrop_path)+'\')'}"
-        ></div>
+        >
+          <h1>{{movie.title}}</h1>
+        </div>
       </transition>
     </div>
     <div class="backdrop-num-btns">
@@ -18,25 +20,32 @@
 
 <script>
 import UtilityService from "@/services/UtilityService.js";
+import { clearTimeout } from "timers";
 
 export default {
   props: ["topFive"],
   components: {},
   data() {
     return {
-      currImgIdx: 0
+      currImgIdx: 0,
+      nextImgTimeout: null
     };
   },
   methods: {
     imgURL(posterPath) {
       return UtilityService.imgURL(posterPath, 1280);
     },
-    next() {
+    nextImg() {
       this.currImgIdx = (this.currImgIdx + 1) % 5;
     }
   },
   computed: {},
-  created() {}
+  created() {
+    this.nextImgTimeout = setTimeout(this.nextImg, 10000);
+  },
+  destroyed() {
+    clearTimeout(nextImgTimeout);
+  }
 };
 </script>
 
@@ -50,22 +59,36 @@ export default {
   width: 100vw;
   position: absolute;
   background-size: cover;
+  overflow: hidden;
   background-position: center 20%;
   z-index: -1;
+  h1 {
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    color: rgb(255, 238, 238);
+    font-size: 46px;
+    position: relative;
+    top: 46%;
+    left: 8%;
+    text-shadow: 0 0 3px black;
+  }
 }
 .backdrop-num-btns {
   display: flex;
   justify-content: space-evenly;
   padding: 2px;
-  width:200px;
-  position:absolute;
-  left:10%;
-  bottom:40%;
+  width: 200px;
+  position: absolute;
+  left: 10%;
+  bottom: 40%;
   button {
+    cursor: pointer;
     height: 20px;
     color: white;
-    background:none;
-    border-radius:50%;
+    background: none;
+    border-radius: 50%;
+    border: 2px solid rgb(170, 170, 170);
+    box-shadow: 0 0 1px black;
   }
 }
 .slide-enter-active,
