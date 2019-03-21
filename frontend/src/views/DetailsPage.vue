@@ -13,7 +13,8 @@ export default {
     return {
       movie: {
         details: null,
-        externalIds: null
+        credits: null,
+        externalIds: null,
       }
     };
   },
@@ -24,12 +25,12 @@ export default {
     async getMovieDetails() {
       const movieId = this.$route.params.movieId;
       const details = await this.$store.dispatch("getMovieDetails", movieId);
-      const externalIds = await this.$store.dispatch(
-        "getMovieExternalIds",
-        movieId
-      );
+      const externalIds = await this.$store.dispatch("getMovieExternalIds",movieId);
+      const movieCredits = await this.$store.dispatch("getMovieCredits", movieId)
+      this.movie.credits = movieCredits
       this.movie.externalIds = externalIds;
       this.movie.details = details;
+      console.log(this.movie.credits)
     }
   },
   components: {
