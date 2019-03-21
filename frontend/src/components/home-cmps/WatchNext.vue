@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss" scoped>
 .watch-next {
-  display: flexwa
+  display: flex;
   width: 90%;
   height: 200px;
   background-color: lightblue;
