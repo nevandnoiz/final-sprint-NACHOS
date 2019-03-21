@@ -6,14 +6,14 @@
     @mouseenter="toggleIsHovered"
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered}"
-  >></div>
+  ></div>
 </template>
 
 <script>
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
-  props: ["movie"],
+  props: ["movie", "click"],
   components: {},
   data() {
     return {
@@ -26,6 +26,7 @@ export default {
       return UtilityService.imgURL(this.movie.poster_path, 300);
     },
     pushToDetails(movieId) {
+      if (!this.click) return;
       this.$router.push(`/details/${movieId}`);
     },
     toggleIsHovered() {
@@ -47,7 +48,7 @@ export default {
   background-size: cover;
   cursor: pointer;
 }
-.hover-buttons{
-  border:10px solid gray;
+.hover-buttons {
+  border: 10px solid gray;
 }
 </style>

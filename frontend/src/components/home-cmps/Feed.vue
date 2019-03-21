@@ -1,17 +1,18 @@
 <template>
   <section class="feed">
-      <pre>
-          {{activities}}
-      </pre>
+      <select-defualt/>
   </section>
 </template>
 
 
 <script>
+
+import selectDefualt from '@/components/home-cmps/selectDefualt'
 export default {
     props: {
         activities: Array
-    }
+    },
+    components: {selectDefualt}
 };
 </script>
 
