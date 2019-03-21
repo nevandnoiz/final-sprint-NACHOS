@@ -57,10 +57,9 @@ export default {
 <style lang="scss" scoped>
 .backdrop-container {
   grid-area: 1/1/1/1;
-  // height: 375px;
   cursor: pointer;
   .backdrop-carousel-img {
-    height: 375px;
+    height: 475px;
     width: 100vw;
     position: absolute;
     background-size: cover;
@@ -73,7 +72,7 @@ export default {
       color: rgb(255, 238, 238);
       font-size: 46px;
       position: relative;
-      top: 46%;
+      top: 70%;
       left: 8%;
       text-shadow: 0 0 3px black;
     }
@@ -87,7 +86,7 @@ export default {
   width: 200px;
   position: absolute;
   left: 10%;
-  bottom: 40%;
+  bottom: 30%;
   button {
     cursor: pointer;
     height: 20px;
