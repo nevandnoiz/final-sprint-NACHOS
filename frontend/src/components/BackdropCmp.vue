@@ -35,18 +35,16 @@ export default {
       this.currImgIdx = (this.currImgIdx + 1) % 5;
     }
   },
-  computed: {},
-  created() {}
 };
 </script>
 
 <style lang="scss" scoped>
 .backdrop-container {
   grid-area: 1/1/1/1;
-  height: 375px;
+  height: 600px;
 }
 .backdrop-carousel-img {
-  height: 375px;
+  height: 600px;
   width: 100vw;
   position: absolute;
   background-size: cover;
@@ -60,7 +58,7 @@ export default {
   width:200px;
   position:absolute;
   left:10%;
-  bottom:40%;
+  bottom:10%;
   button {
     height: 20px;
     color: white;

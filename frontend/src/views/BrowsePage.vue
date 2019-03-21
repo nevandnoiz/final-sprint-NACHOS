@@ -42,9 +42,9 @@ export default {
 
 <style lang="scss" scoped>
 .browse {
-  display:grid;
-  grid-template: 400px 1fr/1fr;
-  padding:20px 0;
+  // display:grid;
+  // grid-template: 400px 1fr/1fr;
+  // padding:20px 0;
 }
 .grid-container{
   padding: 20px;

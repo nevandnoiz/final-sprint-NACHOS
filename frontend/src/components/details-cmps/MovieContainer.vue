@@ -20,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import UtilityService from '@/services/UtilityService.js';
 
