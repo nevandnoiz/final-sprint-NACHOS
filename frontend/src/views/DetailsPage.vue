@@ -1,6 +1,6 @@
 <template>
-  <section v-if="movie.details">
-    <movie-container v-if="this.movie.details" :movie="movie"></movie-container>
+  <section v-if="movie.details && dominantColor">
+    <movie-container v-if="this.movie.details" :movie="movie" :dominantColor="dominantColor"></movie-container>
     <nav-bar></nav-bar>
     <review-container
       v-for="(review, index) in movie.reviews.results"
@@ -18,9 +18,12 @@ import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
+const sightengine = require("sightengine")("1163479865","rQZS3hEBvZSJ9Nqbc5qu");
+
 export default {
   data() {
     return {
+      dominantColor: null,
       movie: {
         details: null,
         videos: null,
@@ -30,9 +33,10 @@ export default {
       }
     };
   },
-  async created() {
-    console.log(this.movie)
+ 
+  async created() {   
     this.getMovieDetails();
+    
     this.movie.reviews = {
       id: 297761,
       page: 1,
@@ -84,6 +88,12 @@ export default {
     this.$store.commit("setSelectedMovie", null);
   },
   methods: {
+    async getDomColor(){
+        var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w300${this.movie.details.backdrop_path}`)
+        console.log(domColor)
+        var hex = domColor.colors.other[1].hex
+        this.dominantColor = hex
+    },
     async getMovieDetails() {
       let details = this.$store.getters.selectedMovie;
       const movieId = this.$route.params.movieId;
@@ -101,6 +111,7 @@ export default {
       this.movie.externalIds = externalIds;
       this.movie.details = details;
       console.log(this.movie.credits);
+      this.getDomColor()
     }
   },
   components: {
@@ -113,11 +124,11 @@ export default {
     "$route.params.movieId": function() {
       console.log("route movie id");
       this.getMovieDetails();
-    }
+    },
+
   }
 };
 </script>
 
 <style scoped>
-
 </style>

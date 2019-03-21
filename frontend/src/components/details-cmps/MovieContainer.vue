@@ -1,5 +1,5 @@
 <template>
-  <div class="details" v-if="dominantColor">
+  <div class="details">
     <div v-if="isTrailer">
       <youtube
         class="youtube-container"
@@ -9,7 +9,7 @@
     </div>
 
     <!-- <h1>Nachos details</h1> -->
-    <div v-if="!isTrailer && dominantColor" class="detalis-sections" :style="bckImage">
+    <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
       <div class="row" :style="bckColor">
 
 
@@ -65,32 +65,22 @@
 </template>
 <script>
 import UtilityService from "@/services/UtilityService.js";
-const sightengine = require("sightengine")("1163479865","rQZS3hEBvZSJ9Nqbc5qu");
 
 // import colorThief from 'colorthief'
 // const color = new ColorThief()
 // var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
 export default {
   created() {
-    sightengine.check(["properties"]).set_url(this.imgURL)
-      .then(function(result) {
-        // console.log(result);
-        return result.colors.dominant.hex
-        // console.log(this.dominatedColor)
-      }).then(res=>this.dominantColor = res)
-      .catch(function(err) {
-        // Handle error
-      });
+    console.log(this.dominantColor)
       
     
   },
   data() {
     return {
-      dominantColor: null,
       isTrailer: false
     };
   },
-  props: ["movie"],
+  props: ["movie","dominantColor"],
   methods: {
     onTrailer() {
       console.log("on trailer click");
@@ -142,6 +132,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+i{
+  color: white
+}
 iframe {
   width: 80vw;
   height: 80vw;
@@ -157,7 +150,7 @@ iframe {
 
 .movie-poster-img {
   border-radius: 5px;
-
+  width: 300px;
   /* SHADOWS */
   -webkit-box-shadow: 0px 0px 12px #000000;
   -moz-box-shadow: 0px 0px 12px #000000;
@@ -184,9 +177,11 @@ iframe {
 }
 .details-text>p {
 font-size: 1.4rem;
+color: white
 }
 .details-text>h1 {
 font-size: 2rem;
+color: white
 }
 .movie-container > img {
   margin-right: 20px;
