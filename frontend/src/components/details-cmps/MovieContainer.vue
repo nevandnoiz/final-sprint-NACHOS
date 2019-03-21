@@ -1,77 +1,90 @@
 <template>
   <div class="details">
-   
     <div v-if="isTrailer">
-        <youtube class="youtube-container" :video-id="this.movie.videos.results[0].key" player-vars="{ autoplay: 1 }"></youtube>
+      <youtube
+        class="youtube-container"
+        :video-id="this.movie.videos.results[0].key"
+        player-vars="{ autoplay: 1 }"
+      ></youtube>
     </div>
 
     <!-- <h1>Nachos details</h1> -->
     <div v-if="!isTrailer" class="detalis-sections">
-    <div class="movie-container">
-      <img :src="imgURL">
-      <div class="movie-details">
-        <div class="details-text">
-          <h1>{{movie.details.title}}</h1>
-          <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
-          <!-- <h4>Release date: {{movie.details.release_date}}</h4> -->
-          <p>{{movie.details.overview}}</p>
-        </div>
-        <div class="icons-container">
-          <i @click="onTrailer" class="far fa-play-circle"></i>
-          <a
-            target="_blank"
-            v-if="movie.externalIds.twitter_id"
-            :href="`https://twitter.com/${movie.externalIds.twitter_id}`"
-          >
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a
-            target="_blank"
-            v-if="movie.externalIds.facebook_id"
-            :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"
-          >
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a
-            target="_blank"
-            v-if="movie.externalIds.instagram_id"
-            :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"
-          >
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a
-            target="_blank"
-            v-if="movie.externalIds.imdb_id"
-            :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"
-          >
-            <i class="fab fa-imdb"></i>
-          </a>
+      <div class="movie-container">
+        <img class="movie-poster-img" ref="moviePoster" :src="imgURL">
+        <div class="movie-details">
+          <div class="details-text">
+            <h1>{{movie.details.title}}</h1>
+            <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
+            <!-- <h4>Release date: {{movie.details.release_date}}</h4> -->
+            <p>{{movie.details.overview}}</p>
+          </div>
+          <div class="icons-container">
+            <i @click="onTrailer" class="far fa-play-circle"></i>
+            <a
+              target="_blank"
+              v-if="movie.externalIds.twitter_id"
+              :href="`https://twitter.com/${movie.externalIds.twitter_id}`"
+            >
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              target="_blank"
+              v-if="movie.externalIds.facebook_id"
+              :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"
+            >
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a
+              target="_blank"
+              v-if="movie.externalIds.instagram_id"
+              :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              target="_blank"
+              v-if="movie.externalIds.imdb_id"
+              :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"
+            >
+              <i class="fab fa-imdb"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
+    <button v-if="isTrailer" @click="onTrailer">Trailer</button>
   </div>
-   <button v-if="isTrailer" @click="onTrailer">Trailer</button>
-    </div>
 </template>
 <script>
 import UtilityService from "@/services/UtilityService.js";
-
+// import colorThief from 'colorthief'
+// const color = new ColorThief()
+var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
 export default {
+  created() {
+   console.log(sightengine)
+   sightengine.check(['properties']).set_url('https://d3m9459r9kwism.cloudfront.net/img/examples/example7.jpg').then(function(result) {
+  // The API response (result)
+}).catch(function(err) {
+  // Handle error
+});
+},
   data() {
     return {
       isTrailer: false
-    }
+    };
   },
   props: ["movie"],
   methods: {
     onTrailer() {
-      console.log('on trailer click')
-      this.isTrailer = !this.isTrailer
+      console.log("on trailer click");
+      this.isTrailer = !this.isTrailer;
     }
   },
   computed: {
     imgURL() {
-      return UtilityService.imgURL(this.movie.details.poster_path, 500);
+      return UtilityService.imgURL(this.movie.details.poster_path, 300);
     }
   }
 };
@@ -95,11 +108,25 @@ iframe {
 }
 .movie-container {
   margin: 50px auto 0 auto;
-  border-radius: 5px;
-  padding: 70px;
+  border-radius: 3px;
+  padding: 40px;
   max-width: 60%;
   background-color: lightslategray;
   display: flex;
+}
+
+.movie-poster-img {
+  border-radius: 5px;
+
+  /* SHADOWS */
+  -webkit-box-shadow: 0px 0px 12px #000000;
+  -moz-box-shadow: 0px 0px 12px #000000;
+  box-shadow: 0px 0px 12px #000000;
+  background-color: #dddddd;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 12pt;
+  color: #888888;
+  text-align: center;
 }
 .icons-container > * {
   font-size: 2rem;
@@ -130,8 +157,8 @@ iframe {
   /* position: fixed; */
   right: 0;
   left: 0;
-  top: 10vw; 
-   margin: 50px auto 0 auto;
+  top: 10vw;
+  margin: 50px auto 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -139,6 +166,6 @@ iframe {
   -ms-flex-pack: center;
   justify-content: center;
   padding: 50px;
-  background-color:lightgray;
+  background-color: lightgray;
 }
 </style>

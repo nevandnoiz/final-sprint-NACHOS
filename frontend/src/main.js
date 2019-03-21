@@ -7,6 +7,7 @@ import store from './store'
 import './registerServiceWorker'
 
 Vue.use(Element)
+// Vue.use(fac)
 Vue.use(VueYouTubeEmbed)
 Vue.config.productionTip = false;
 
