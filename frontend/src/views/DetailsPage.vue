@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import UtilityService from '@/services/UtilityService.js'
 import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
@@ -35,6 +36,7 @@ export default {
   },
  
   async created() {   
+    console.log(UtilityService)
     this.getMovieDetails();
     
     this.movie.reviews = {
@@ -91,7 +93,9 @@ export default {
     async getDomColor(){
         var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
         console.log(domColor)
-        var hex = domColor.colors.dominant.hex
+        var hex = domColor.colors.dominant.hex + ''
+        // Check if color background is light and convert it to darker
+        if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
         this.dominantColor = hex
     },
     async getMovieDetails() {
@@ -125,7 +129,6 @@ export default {
       console.log("route movie id");
       this.getMovieDetails();
     },
-
   }
 };
 </script>
