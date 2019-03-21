@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <pre>
+      <!-- <a class="twitter-timeline" href="https://twitter.com/spiderman?ref_src=twsrc%5Etfw">Tweet</a> -->
       <!-- {{activities}} -->
       </pre>
-    <watch-next></watch-next>
+    <!-- <watch-next></watch-next> -->
   </div>
 </template>
 
