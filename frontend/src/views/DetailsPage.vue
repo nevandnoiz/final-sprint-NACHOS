@@ -89,9 +89,9 @@ export default {
   },
   methods: {
     async getDomColor(){
-        var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w300${this.movie.details.backdrop_path}`)
+        var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
         console.log(domColor)
-        var hex = domColor.colors.other[1].hex
+        var hex = domColor.colors.dominant.hex
         this.dominantColor = hex
     },
     async getMovieDetails() {
