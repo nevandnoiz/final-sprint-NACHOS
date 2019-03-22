@@ -13,7 +13,7 @@ function LightenDarkenColor(col,amt) {
     var b = ((num >> 8) & 0x00FF) + amt;
     var g = (num & 0x0000FF) + amt;
     var newColor = g | (b << 8) | (r << 16);
-    return newColor.toString(16);
+    return newColor.toString(16).replace(/-/gm, '5');
 }
 
 function lightOrDark(color) {

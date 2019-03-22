@@ -7,8 +7,9 @@ import store from './store'
 import './registerServiceWorker'
 // add jquery globaly
 
-window.$ = window.jQuery = require('jquery');
-window.domcolor = 'yes'
+// TODO Get it out from globaly
+window.domcolor = null
+
 Vue.use(Element)
 // Vue.use(fac)
 Vue.use(VueYouTubeEmbed)

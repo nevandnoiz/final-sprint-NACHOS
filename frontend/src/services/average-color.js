@@ -37,7 +37,6 @@ function getDomColor(imgUrl) {
     hexStr = JSON.parse(JSON.stringify(hexStr))
     // console.log(hexStr)
      domcolor = hexStr
-     console.log(domcolor)
     return hexStr;
   };
 }

@@ -1,5 +1,5 @@
 <template>
-  <section v-if="movie.details">
+  <section v-if="movie.details && this.dominantColor">
     <movie-container v-if="this.movie.details" :movie="movie" :dominantColor="dominantColor"></movie-container>
     <nav-bar></nav-bar>
     <div class="reviews-container">
@@ -22,7 +22,7 @@ import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import clr from "@/services/average-color.js";
+import clr from '@/services/average-color.js'
 
 const sightengine = require("sightengine")(
   "1163479865",
@@ -44,12 +44,12 @@ export default {
   },
 
   async created() {
+   
     // console.log($)
     console.log(UtilityService);
     this.getMovieDetails();
-    setTimeout(() => {
-      this.setDominantColor()
-    }, 4000);
+    
+
     this.movie.reviews = {
       id: 297761,
       page: 1,
@@ -103,12 +103,18 @@ export default {
   },
   methods: {
     setDominantColor() {
-      var PATH = this.movie.details.poster_path
-      clr.domColor(`http://image.tmdb.org/t/p/w92${PATH}`)
+      console.log('yes')
+      var hex = domcolor;
+      console.log('hex is:', domcolor)
       // Check if color background is light and convert it to darker
-      if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
+      // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
       this.dominantColor = domcolor;
-      console.log('domCOLOR IS:',this.dominantColor)
+      console.log('final ')
+      console.log('final:', this.dominantColor)
+    },
+    getDominantColor() {
+              console.log('go!!')
+     clr.domColor(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
     },
     async getMovieDetails() {
       let details = this.$store.getters.selectedItem;
@@ -140,7 +146,11 @@ export default {
       this.movie.details = details;
       console.log(this.movie.credits);
 
-      // this.getDominantColor();
+      this.getDominantColor();
+      setTimeout(() => {
+        this.setDominantColor()
+      }, 500);
+      
     }
   },
   components: {
@@ -150,6 +160,9 @@ export default {
     NavBar
   },
   watch: {
+    domcolor: function() {
+      console.log('DOM HAS WATCHED AND CHANGED')
+    },
     "$route.params.movieId": function() {
       console.log("route movie id");
       this.getMovieDetails();
@@ -160,6 +173,6 @@ export default {
 
 <style scoped>
 .reviews-container {
-  display: block;
+  display: block
 }
 </style>
