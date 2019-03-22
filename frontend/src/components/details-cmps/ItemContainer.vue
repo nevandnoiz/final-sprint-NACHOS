@@ -3,7 +3,7 @@
     <div v-if="isTrailer">
       <youtube
         class="youtube-container"
-        :video-id="this.movie.videos.results[0].key"
+        :video-id="this.item.videos.results[0].key"
         player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
@@ -13,42 +13,42 @@
       <div class="row" :style="bckColor">
 
 
-      <div class="movie-container">
-        <img class="movie-poster-img" ref="moviePoster" :src="imgURL">
-        <div class="movie-details">
+      <div class="item-container">
+        <img class="item-poster-img" ref="itemPoster" :src="imgURL">
+        <div class="item-details">
           <div class="details-text">
-            <h1>{{movie.details.title}}</h1>
+            <h1>{{item.details.title || item.details.name}}</h1>
             <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
-            <!-- <h4>Release date: {{movie.details.release_date}}</h4> -->
-            <p>{{movie.details.overview}}</p>
+            <!-- <h4>Release date: {{item.details.release_date}}</h4> -->
+            <p>{{item.details.overview}}</p>
           </div>
           <div class="icons-container">
             <i @click="onTrailer" class="far fa-play-circle"></i>
             <a
               target="_blank"
-              v-if="movie.externalIds.twitter_id"
-              :href="`https://twitter.com/${movie.externalIds.twitter_id}`"
+              v-if="item.externalIds.twitter_id"
+              :href="`https://twitter.com/${item.externalIds.twitter_id}`"
             >
               <i class="fab fa-twitter"></i>
             </a>
             <a
               target="_blank"
-              v-if="movie.externalIds.facebook_id"
-              :href="`https://www.facebook.com/${movie.externalIds.facebook_id}`"
+              v-if="item.externalIds.facebook_id"
+              :href="`https://www.facebook.com/${item.externalIds.facebook_id}`"
             >
               <i class="fab fa-facebook"></i>
             </a>
             <a
               target="_blank"
-              v-if="movie.externalIds.instagram_id"
-              :href="`https://www.instagram.com/${movie.externalIds.instagram_id}`"
+              v-if="item.externalIds.instagram_id"
+              :href="`https://www.instagram.com/${item.externalIds.instagram_id}`"
             >
               <i class="fab fa-instagram"></i>
             </a>
             <a
               target="_blank"
-              v-if="movie.externalIds.imdb_id"
-              :href="`https://www.imdb.com/title/${movie.externalIds.imdb_id}`"
+              v-if="item.externalIds.imdb_id"
+              :href="`https://www.imdb.com/title/${item.externalIds.imdb_id}`"
             >
               <i class="fab fa-imdb"></i>
             </a>
@@ -80,7 +80,7 @@ export default {
       isTrailer: false
     };
   },
-  props: ["movie","dominantColor"],
+  props: ["item","dominantColor"],
   methods: {
     onTrailer() {
       console.log("on trailer click");
@@ -90,7 +90,7 @@ export default {
   computed: {
     bckImage(){
       return {
-         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.movie.details.backdrop_path})`
+         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.item.details.backdrop_path})`
       }
     },
     bckColor() {
@@ -100,7 +100,7 @@ export default {
         };
     },
     imgURL() {
-      return UtilityService.imgURL(this.movie.details.poster_path, 300);
+      return UtilityService.imgURL(this.item.details.poster_path, 300);
     }
   }
 };
@@ -139,7 +139,7 @@ iframe {
   width: 80vw;
   height: 80vw;
 }
-.movie-container {
+.item-container {
   margin: 0 auto;
   border-radius: 3px;
   padding: 40px;
@@ -148,7 +148,7 @@ iframe {
   display: flex;
 }
 
-.movie-poster-img {
+.item-poster-img {
   border-radius: 5px;
   width: 300px;
   /* SHADOWS */
@@ -183,15 +183,15 @@ color: white
 font-size: 2rem;
 color: white
 }
-.movie-container > img {
+.item-container > img {
   margin-right: 20px;
 }
-.movie-details {
+.item-details {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
-.movie-details > p {
+.item-details > p {
   margin-top: 20px;
 }
 

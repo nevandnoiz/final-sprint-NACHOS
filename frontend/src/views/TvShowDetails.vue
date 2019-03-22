@@ -1,9 +1,10 @@
 <template>
-  <section v-if="movie.details && dominantColor">
-    <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
+  <section v-if="tvShow.details && dominantColor">
+    <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <nav-bar></nav-bar>
+    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
     <review-container
-      v-for="(review, index) in movie.reviews.results"
+      v-for="(review, index) in tvShow.reviews.results"
       :key="index"
       :review="review"
     ></review-container>
@@ -14,18 +15,23 @@
 </template>
 
 <script>
-import UtilityService from '@/services/UtilityService.js'
+import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
+import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-const sightengine = require("sightengine")("1163479865","rQZS3hEBvZSJ9Nqbc5qu");
+const sightengine = require("sightengine")(
+  "1163479865",
+  "rQZS3hEBvZSJ9Nqbc5qu"
+);
 
 export default {
   data() {
     return {
       dominantColor: null,
-      movie: {
+      tvShow: {
+        seasons: null,
         details: null,
         videos: null,
         credits: null,
@@ -34,12 +40,12 @@ export default {
       }
     };
   },
- 
-  async created() {   
-    console.log(UtilityService)
-    this.getMovieDetails();
-    
-    this.movie.reviews = {
+
+  async created() {
+    console.log(UtilityService);
+    this.getTvShowDetails();
+
+    this.tvShow.reviews = {
       id: 297761,
       page: 1,
       results: [
@@ -90,47 +96,69 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    async getDominantColor(url){
-        var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
-        console.log(domColor)
-        var hex = domColor.colors.dominant.hex + ''
-        // Check if color background is light and convert it to darker
-        if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
-        this.dominantColor = hex
+    async getDominantColor(url) {
+      var domColor = await sightengine
+        .check(["properties"])
+        .set_url(
+          `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
+        );
+        this.dominantColor = "#d39f4c";
+      // var hex = domColor.colors.dominant.hex + "";
+      // // Check if color background is light and convert it to darker
+      // if (UtilityService.lightOrDark(hex) === "light")
+      //   hex = `#${UtilityService.LightenDarkenColor(
+      //     hex.replace(/#/gm, ""),
+      //     -60
+      //   )}`;
+      // this.dominantColor = hex;
     },
-    async getMovieDetails() {
-      let details = this.$store.getters.selectedItem;
-      const movieId = this.$route.params.movieId;
-      if (details) console.log("movie details IS on storage doesnt get from API");
-      if (!details) {
-        console.log("movie details not in sotrage GETTING FROM API");
-        details = await this.$store.dispatch("getMovieDetails", movieId);
-      }
-      const externalIds = await this.$store.dispatch("getMovieExternalIds",movieId);
-      const movieCredits = await this.$store.dispatch("getMovieCredits",movieId);
-      const movieVideos = await this.$store.dispatch("getMovieVideos", movieId)
-      const tvShowTest = await this.$store.dispatch("getTvShowWatchLinksByKeyword", 'prison break')
-      console.log(tvShowTest)
-      console.log('movie videos are:', movieVideos)
-      this.movie.videos = movieVideos
-      this.movie.credits = movieCredits;
-      this.movie.externalIds = externalIds;
-      this.movie.details = details;
-      console.log(this.movie.credits);
-      this.getDominantColor()
+    async getTvShowDetails() {
+      const tvShowId = this.$route.params.tvShowId;
+      let details = await this.$store.dispatch("getTvShowDetails", tvShowId);
+      // if (details) console.log("tvShow details IS on storage doesnt get from API");
+      // if (!details) {
+      //   console.log("tvShow details not in sotrage GETTING FROM API");
+      //   details = await this.$store.dispatch("getTvShowDetails", tvShowId);
+      // }
+      const externalIds = await this.$store.dispatch(
+        "getTvShowExternalIds",
+        tvShowId
+      );
+      const tvShowCredits = await this.$store.dispatch(
+        "getTvShowCredits",
+        tvShowId
+      );
+      const tvShowVideos = await this.$store.dispatch(
+        "getTvShowVideos",
+        tvShowId
+      );
+      const tvShowTest = await this.$store.dispatch(
+        "getTvShowWatchLinksByKeyword",
+        "prison break"
+      );
+      console.log(tvShowTest);
+      console.log("tvShow videos are:", tvShowVideos);
+      this.tvShow.seasons = details.seasons;
+      this.tvShow.videos = tvShowVideos;
+      this.tvShow.credits = tvShowCredits;
+      this.tvShow.externalIds = externalIds;
+      this.tvShow.details = details;
+      console.log(this.tvShow.credits);
+      this.getDominantColor();
     }
   },
   components: {
     ItemContainer,
+    SeasonsList,
     ReviewContainer,
     ReviewForm,
     NavBar
   },
   watch: {
-    "$route.params.movieId": function() {
-      console.log("route movie id");
-      this.getMovieDetails();
-    },
+    "$route.params.tvShowId": function() {
+      console.log("route tvShow id");
+      this.getTvShowDetails();
+    }
   }
 };
 </script>
