@@ -22,7 +22,7 @@ import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import clr from '@/services/average-color.js'
+import clr from "@/services/average-color.js";
 
 const sightengine = require("sightengine")(
   "1163479865",
@@ -44,12 +44,12 @@ export default {
   },
 
   async created() {
-   
     // console.log($)
     console.log(UtilityService);
     this.getMovieDetails();
-    
-
+    setTimeout(() => {
+      this.setDominantColor()
+    }, 4000);
     this.movie.reviews = {
       id: 297761,
       page: 1,
@@ -103,29 +103,12 @@ export default {
   },
   methods: {
     setDominantColor() {
-      console.log('yes')
-      var hex = domcolor;
-      console.log('hex is:', domcolor)
+      var PATH = this.movie.details.poster_path
+      clr.domColor(`http://image.tmdb.org/t/p/w92${PATH}`)
       // Check if color background is light and convert it to darker
-      if (UtilityService.lightOrDark(domcolor) === "light")
-        domcolor = `#${UtilityService.LightenDarkenColor(
-          hex.replace(/#/gm, ""),
-          -60
-        )}`;
+      if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
       this.dominantColor = domcolor;
-      console.log('final ')
-      console.log('final:', this.dominantColor)
-    },
-    getDominantColor() {
-      // var domColor = await sightengine
-      //   .check(["properties"])
-      //   .set_url(
-      //     `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
-      //   );
-      // console.log(domColor);
-              // console.log(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
-              console.log('go!!')
-     clr.domColor(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
+      console.log('domCOLOR IS:',this.dominantColor)
     },
     async getMovieDetails() {
       let details = this.$store.getters.selectedItem;
@@ -157,11 +140,7 @@ export default {
       this.movie.details = details;
       console.log(this.movie.credits);
 
-      this.getDominantColor();
-      setTimeout(() => {
-        this.setDominantColor()
-      }, 2000);
-      
+      // this.getDominantColor();
     }
   },
   components: {
@@ -181,6 +160,6 @@ export default {
 
 <style scoped>
 .reviews-container {
-  display: block
+  display: block;
 }
 </style>
