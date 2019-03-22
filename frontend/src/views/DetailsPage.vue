@@ -24,11 +24,6 @@ import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import clr from '@/services/average-color.js'
 
-const sightengine = require("sightengine")(
-  "1163479865",
-  "rQZS3hEBvZSJ9Nqbc5qu"
-);
-
 export default {
   data() {
     return {
@@ -103,14 +98,9 @@ export default {
   },
   methods: {
     setDominantColor() {
-      console.log('yes')
-      var hex = domcolor;
-      console.log('hex is:', domcolor)
       // Check if color background is light and convert it to darker
       // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
       this.dominantColor = domcolor;
-      console.log('final ')
-      console.log('final:', this.dominantColor)
     },
     getDominantColor() {
               console.log('go!!')
