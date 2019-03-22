@@ -7,7 +7,7 @@ export default {
     getTvExternalIds,
     getTvByKeyword,
     getTvCredits,
-    getTvShowsWatchLinksByKEYWORD
+    getTvShowsWatchLinksByKeyword
 }
 
 async function getPopularShows(page = 1) {
@@ -48,7 +48,7 @@ async function getTvCredits(id) {
     return tvCredits
 }
 
-async function getTvShowsWatchLinksByKEYWORD(keyword, region) {
+async function getTvShowsWatchLinksByKeyword(keyword, region) {
     keyword = keyword.replace(/\s/gm, '+')
     region ? region = '&country=' + region : region = ''
     const URL = `https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=${keyword}${region}`

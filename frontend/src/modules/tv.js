@@ -39,8 +39,8 @@ export default {
       const tvCredits = await TvService.getTvCredits(id)
       return tvCredits
     },
-    async getTvShowsWatchLinksByKEYWORD(context, keyword) {
-      const links = await TvService.getTvShowsWatchLinksByKEYWORD(keyword)
+    async getTvShowsWatchLinksByKeyword(context, keyword) {
+      const links = await TvService.getTvShowsWatchLinksByKeyword(keyword)
       return links
     }
   }
