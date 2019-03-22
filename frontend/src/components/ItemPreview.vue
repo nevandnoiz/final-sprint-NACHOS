@@ -27,7 +27,8 @@ export default {
     return {
       img: null,
       isHovered: false,
-      isChecked: false
+      isChecked: false,
+      itemTypeRoute: null
     };
   },
   methods: {
@@ -36,7 +37,7 @@ export default {
     },
     pushToDetails(itemId) {
       this.$store.commit("setSelectedItem", this.item);
-      this.$router.push(`/details/${itemId}`);
+      this.$router.push(`${this.itemTypeRoute}/details/${itemId}`);
     },
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
@@ -47,6 +48,7 @@ export default {
   },
   computed: {},
   created() {
+    this.itemTypeRoute=this.$route.path
     this.img = this.imgURL();
   }
 };
@@ -78,7 +80,7 @@ export default {
       transition: 0.25s;
     }
     .checked {
-      background-color: rgb(0, 179, 0);
+      background-color: rgb(1, 221, 1);
     }
     a {
       color: inherit; /* blue colors for links too */

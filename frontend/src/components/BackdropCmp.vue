@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       currIdx: 0,
-      nextImgIntrvl: null
+      nextImgIntrvl: null,
+      itemTypeRoute: null
     };
   },
   methods: {
@@ -47,11 +48,12 @@ export default {
     },
     pushToDetails(item) {
       this.$store.commit("setSelectedItem", item);
-      this.$router.push(`/details/${item.id}`);
+      this.$router.push(`${this.itemTypeRoute}/details/${item.id}`);
     }
   },
   computed: {},
   created() {
+    this.itemTypeRoute = this.$route.path;
     this.nextImgIntrvl = setInterval(this.nextImg, 10000);
   },
   destroyed() {

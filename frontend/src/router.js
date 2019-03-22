@@ -4,6 +4,7 @@ import HomePage from './views/HomePage.vue'
 import BrowseMovies from './views/BrowseMovies.vue'
 import BrowseTvShows from './views/BrowseTvShows.vue'
 import DetailsPage from './views/DetailsPage.vue'
+import TvShowDetails from './views/TvShowDetails.vue'
 
 Vue.use(Router)
 
@@ -28,9 +29,14 @@ export default new Router({
       component: BrowseTvShows
     },
     {
-      path: '/details/:movieId',
-      name: 'details',
+      path: '/movies/details/:movieId',
+      name: 'movieDetails',
       component: DetailsPage
+    },
+    {
+      path: '/tv/details/:tvShowId',
+      name: 'tvShowDetails',
+      component: TvShowDetails
     },
   ]
 })
