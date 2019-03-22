@@ -1,5 +1,6 @@
 <template>
   <div class="details">
+    
     <div v-if="isTrailer">
       <youtube
         class="youtube-container"
@@ -23,6 +24,7 @@
             <p>{{movie.details.overview}}</p>
           </div>
           <div class="icons-container">
+          <media-icons-bar></media-icons-bar>
             <i @click="onTrailer" class="far fa-play-circle"></i>
             <a
               target="_blank"
@@ -65,11 +67,14 @@
 </template>
 <script>
 import UtilityService from "@/services/UtilityService.js";
-
+import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue"
 // import colorThief from 'colorthief'
 // const color = new ColorThief()
 // var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
 export default {
+  components: {
+    MediaIconsBar
+  },
   created() {
     console.log(this.dominantColor)
       
