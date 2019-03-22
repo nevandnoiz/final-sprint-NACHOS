@@ -2,11 +2,13 @@
   <section v-if="movie.details && dominantColor">
     <movie-container v-if="this.movie.details" :movie="movie" :dominantColor="dominantColor"></movie-container>
     <nav-bar></nav-bar>
-    <review-container
-      v-for="(review, index) in movie.reviews.results"
-      :key="index"
-      :review="review"
-    ></review-container>
+    <div class="reviews-container">
+      <review-container
+        v-for="(review, index) in movie.reviews.results"
+        :key="index"
+        :review="review"
+      ></review-container>
+    </div>
     <review-form></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
@@ -14,12 +16,15 @@
 </template>
 
 <script>
-import UtilityService from '@/services/UtilityService.js'
+import UtilityService from "@/services/UtilityService.js";
 import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-const sightengine = require("sightengine")("1163479865","rQZS3hEBvZSJ9Nqbc5qu");
+const sightengine = require("sightengine")(
+  "1163479865",
+  "rQZS3hEBvZSJ9Nqbc5qu"
+);
 
 export default {
   data() {
@@ -34,11 +39,11 @@ export default {
       }
     };
   },
- 
-  async created() {   
-    console.log(UtilityService)
+
+  async created() {
+    console.log(UtilityService);
     this.getMovieDetails();
-    
+
     this.movie.reviews = {
       id: 297761,
       page: 1,
@@ -90,34 +95,52 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    async getDominantColor(url){
-        var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
-        console.log(domColor)
-        var hex = domColor.colors.dominant.hex + ''
-        // Check if color background is light and convert it to darker
-        if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
-        this.dominantColor = hex
+    async getDominantColor(url) {
+      var domColor = await sightengine
+        .check(["properties"])
+        .set_url(
+          `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
+        );
+      console.log(domColor);
+      var hex = domColor.colors.dominant.hex + "";
+      // Check if color background is light and convert it to darker
+      if (UtilityService.lightOrDark(hex) === "light")
+        hex = `#${UtilityService.LightenDarkenColor(
+          hex.replace(/#/gm, ""),
+          -60
+        )}`;
+      this.dominantColor = hex;
     },
     async getMovieDetails() {
       let details = this.$store.getters.selectedItem;
       const movieId = this.$route.params.movieId;
-      if (details) console.log("movie details IS on storage doesnt get from API");
+      if (details)
+        console.log("movie details IS on storage doesnt get from API");
       if (!details) {
         console.log("movie details not in sotrage GETTING FROM API");
         details = await this.$store.dispatch("getMovieDetails", movieId);
       }
-      const externalIds = await this.$store.dispatch("getMovieExternalIds",movieId);
-      const movieCredits = await this.$store.dispatch("getMovieCredits",movieId);
-      const movieVideos = await this.$store.dispatch("getMovieVideos", movieId)
-      const tvShowTest = await this.$store.dispatch("getTvShowsWatchLinksByKeyword", 'prison break')
-      console.log(tvShowTest)
-      console.log('movie videos are:', movieVideos)
-      this.movie.videos = movieVideos
+      const externalIds = await this.$store.dispatch(
+        "getMovieExternalIds",
+        movieId
+      );
+      const movieCredits = await this.$store.dispatch(
+        "getMovieCredits",
+        movieId
+      );
+      const movieVideos = await this.$store.dispatch("getMovieVideos", movieId);
+      const tvShowTest = await this.$store.dispatch(
+        "getTvShowsWatchLinksByKeyword",
+        "prison break"
+      );
+      console.log(tvShowTest);
+      console.log("movie videos are:", movieVideos);
+      this.movie.videos = movieVideos;
       this.movie.credits = movieCredits;
       this.movie.externalIds = externalIds;
       this.movie.details = details;
       console.log(this.movie.credits);
-      this.getDominantColor()
+      this.getDominantColor();
     }
   },
   components: {
@@ -130,10 +153,13 @@ export default {
     "$route.params.movieId": function() {
       console.log("route movie id");
       this.getMovieDetails();
-    },
+    }
   }
 };
 </script>
 
 <style scoped>
+.reviews-container {
+  display: block
+}
 </style>
