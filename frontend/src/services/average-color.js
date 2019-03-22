@@ -33,23 +33,12 @@ function getDomColor(imgUrl) {
 
   img.onload = function() {
     var rgb = getAverageColor(img);
-    // var hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-    // var rgbStr = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
     var hexStr = '#' + ('0'+rgb.r.toString(16)).slice(-2) + ('0'+rgb.g.toString(16)).slice(-2) + ('0'+rgb.b.toString(16)).slice(-2);
-    // var hslStr = 'hsl(' + Math.round(hsl.h * 360) + ', ' + Math.round(hsl.s * 100) + '%, ' + Math.round(hsl.l * 100) + '%)';
-
-    // var box = element.querySelector('.box');
-    // box.style.backgroundColor = rgbStr;
-    console.log(hexStr)
+    hexStr = JSON.parse(JSON.stringify(hexStr))
+    // console.log(hexStr)
      domcolor = hexStr
-    return hexStr
-    // return hexStr
-    element.querySelector('.rgb').textContent = rgbStr;
-    element.querySelector('.hex').textContent = hexStr;
-    element.querySelector('.hsl').textContent = hslStr;
+    return hexStr;
   };
-
-  document.getElementById('images').appendChild(element);
 }
 
 function getAverageColor(img) {
@@ -100,23 +89,23 @@ function rgbToHsl(r, g, b) {
   return { h: h, s: s, l: l };
 }
 
-function handleImages(files) {
-  document.getElementById('images').innerHTML = '';
+// function handleImages(files) {
+//   document.getElementById('images').innerHTML = '';
 
-  for (var i = 0; i < files.length; i++) {
-    getDomColor(files[i]);
-  }
-}
+//   for (var i = 0; i < files.length; i++) {
+//     getDomColor(files[i]);
+//   }
+// }
 
-document.ondragover = function(event) {
-  event.preventDefault();
-  event.dataTransfer.dropEffect = 'copy';
-};
+// document.ondragover = function(event) {
+//   event.preventDefault();
+//   event.dataTransfer.dropEffect = 'copy';
+// };
 
-document.ondrop = function(event) {
-  event.preventDefault();
-  handleImages(event.dataTransfer.files);
-};
+// document.ondrop = function(event) {
+//   event.preventDefault();
+//   handleImages(event.dataTransfer.files);
+// };
 
 // (function() {
 //   var upload = document.getElementById('upload');

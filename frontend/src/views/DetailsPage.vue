@@ -48,9 +48,6 @@ export default {
     // console.log($)
     console.log(UtilityService);
     this.getMovieDetails();
-    setTimeout(() => {
-      this.setDominantColor()
-    }, 4000);
     
 
     this.movie.reviews = {
@@ -101,12 +98,14 @@ export default {
     };
   },
   destroyed() {
+    domcolor = null;
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
     setDominantColor() {
       console.log('yes')
       var hex = domcolor;
+      console.log('hex is:', domcolor)
       // Check if color background is light and convert it to darker
       if (UtilityService.lightOrDark(domcolor) === "light")
         domcolor = `#${UtilityService.LightenDarkenColor(
@@ -159,6 +158,9 @@ export default {
       console.log(this.movie.credits);
 
       this.getDominantColor();
+      setTimeout(() => {
+        this.setDominantColor()
+      }, 2000);
       
     }
   },
