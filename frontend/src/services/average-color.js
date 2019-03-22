@@ -1,8 +1,3 @@
-// const URLl = 'https://images1-ynet-prod.azureedge.net/PicServer5/2019/03/22/9138369/9138345099084640360no.jpg'
-// console.log(getDomColor(URLl))
-// console.log(getAverageColor(URLl))
-// console.log(addImage(URLl))
-// let res = null;
 export default {
   domColor
 }
@@ -88,34 +83,3 @@ function rgbToHsl(r, g, b) {
 
   return { h: h, s: s, l: l };
 }
-
-// function handleImages(files) {
-//   document.getElementById('images').innerHTML = '';
-
-//   for (var i = 0; i < files.length; i++) {
-//     getDomColor(files[i]);
-//   }
-// }
-
-// document.ondragover = function(event) {
-//   event.preventDefault();
-//   event.dataTransfer.dropEffect = 'copy';
-// };
-
-// document.ondrop = function(event) {
-//   event.preventDefault();
-//   handleImages(event.dataTransfer.files);
-// };
-
-// (function() {
-//   var upload = document.getElementById('upload');
-//   var target = document.getElementById('target');
-
-//   upload.onchange = function() {
-//     handleImages(this.files);
-//   };
-
-//   target.onclick = function() {
-//     upload.click();
-//   };
-// })();
