@@ -21,10 +21,8 @@ import NavBar from "../components/details-cmps/NavBar.vue";
 import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-const sightengine = require("sightengine")(
-  "1163479865",
-  "rQZS3hEBvZSJ9Nqbc5qu"
-);
+import clr from '@/services/average-color.js'
+
 
 export default {
   data() {
@@ -42,9 +40,10 @@ export default {
   },
 
   async created() {
+    
     console.log(UtilityService);
     this.getTvShowDetails();
-
+console.log('tvshowdetalis',this.tvShow.details)
     this.tvShow.reviews = {
       id: 297761,
       page: 1,
@@ -96,13 +95,14 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
+          setDominantColor() {
+             // Check if color background is light and convert it to darker
+            // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
+           this.dominantColor = domcolor;
+                              },
     async getDominantColor(url) {
-      var domColor = await sightengine
-        .check(["properties"])
-        .set_url(
-          `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
-        );
-        this.dominantColor = "#d39f4c";
+                console.log('go!!')
+     clr.domColor(`http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`)
       // var hex = domColor.colors.dominant.hex + "";
       // // Check if color background is light and convert it to darker
       // if (UtilityService.lightOrDark(hex) === "light")
@@ -143,8 +143,12 @@ export default {
       this.tvShow.credits = tvShowCredits;
       this.tvShow.externalIds = externalIds;
       this.tvShow.details = details;
+      console.log('this tv show',this.tvShow)
       console.log(this.tvShow.credits);
       this.getDominantColor();
+         setTimeout(() => {
+        this.setDominantColor()
+      }, 500);
     }
   },
   components: {

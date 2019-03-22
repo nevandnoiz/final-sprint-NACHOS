@@ -22,6 +22,7 @@ async function getPopularShows(page = 1) {
 async function getTvShowDetails(id) {
     const res = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
     const tv = res.data
+    console.log('tv detalis from service:', tv)
     return tv
 }
 
