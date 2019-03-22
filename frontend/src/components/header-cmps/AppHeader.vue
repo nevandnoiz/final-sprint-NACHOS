@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import searchBar from "@/components/header-cmps/SearchBar.vue";
+import searchBar from "@/components/header-cmps/SearchBar1.vue";
 export default {
   components: {
     searchBar

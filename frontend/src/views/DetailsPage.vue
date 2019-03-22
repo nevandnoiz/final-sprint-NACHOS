@@ -92,11 +92,12 @@ export default {
   methods: {
     async getDominantColor(url){
         var domColor = await sightengine.check(["properties"]).set_url(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
-        console.log(domColor)
-        var hex = domColor.colors.dominant.hex + ''
-        // Check if color background is light and convert it to darker
-        if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
-        this.dominantColor = hex
+              this.dominantColor = "#d39f4c";
+        // console.log(domColor)
+        // var hex = domColor.colors.dominant.hex + ''
+        // // Check if color background is light and convert it to darker
+        // if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
+        // this.dominantColor = hex
     },
     async getMovieDetails() {
       let details = this.$store.getters.selectedItem;
