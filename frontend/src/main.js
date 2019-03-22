@@ -5,7 +5,9 @@ import VueYouTubeEmbed from 'vue-youtube-embed'
 import router from './router'
 import store from './store' 
 import './registerServiceWorker'
+// add jquery globaly
 
+window.$ = window.jQuery = require('jquery');
 Vue.use(Element)
 // Vue.use(fac)
 Vue.use(VueYouTubeEmbed)

@@ -1,5 +1,5 @@
 <template>
-  <section v-if="movie.details && dominantColor">
+  <section v-if="movie.details">
     <movie-container v-if="this.movie.details" :movie="movie" :dominantColor="dominantColor"></movie-container>
     <nav-bar></nav-bar>
     <div class="reviews-container">
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+// import 'https://cdnjs.cloudflare.com/ajax/libs/jquery.adaptive-backgrounds/1.0.3/jquery.adaptive-backgrounds.min.js'
 import UtilityService from "@/services/UtilityService.js";
 import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
@@ -41,8 +42,10 @@ export default {
   },
 
   async created() {
+    console.log($)
     console.log(UtilityService);
     this.getMovieDetails();
+    
 
     this.movie.reviews = {
       id: 297761,
