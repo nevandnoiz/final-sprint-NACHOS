@@ -109,6 +109,8 @@ export default {
       const externalIds = await this.$store.dispatch("getMovieExternalIds",movieId);
       const movieCredits = await this.$store.dispatch("getMovieCredits",movieId);
       const movieVideos = await this.$store.dispatch("getMovieVideos", movieId)
+      // const tvShowTest = await this.$store.dispatch("getTvShowsWatchLinksByKEYWORD", 'prison break')
+      // console.log(tvShowTest)
       console.log('movie videos are:', movieVideos)
       this.movie.videos = movieVideos
       this.movie.credits = movieCredits;
