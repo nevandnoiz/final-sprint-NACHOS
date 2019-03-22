@@ -1,9 +1,16 @@
-const URLl = 'https://images1-ynet-prod.azureedge.net/PicServer5/2019/03/22/9138369/9138345099084640360no.jpg'
-console.log(addImage(URLl))
+// const URLl = 'https://images1-ynet-prod.azureedge.net/PicServer5/2019/03/22/9138369/9138345099084640360no.jpg'
+// console.log(getDomColor(URLl))
 // console.log(getAverageColor(URLl))
 // console.log(addImage(URLl))
-let res = null;
-function addImage(imgUrl) {
+// let res = null;
+export default {
+  domColor
+}
+function domColor(imgUrl) {
+  getDomColor(imgUrl)
+  
+}
+function getDomColor(imgUrl) {
   var element = document.createElement('div');
   element.className = 'row';
   element.innerHTML =
@@ -33,8 +40,8 @@ function addImage(imgUrl) {
 
     // var box = element.querySelector('.box');
     // box.style.backgroundColor = rgbStr;
-    // console.log(hexStr)
-     res = hexStr
+    console.log(hexStr)
+     domcolor = hexStr
     return hexStr
     // return hexStr
     element.querySelector('.rgb').textContent = rgbStr;
@@ -97,7 +104,7 @@ function handleImages(files) {
   document.getElementById('images').innerHTML = '';
 
   for (var i = 0; i < files.length; i++) {
-    addImage(files[i]);
+    getDomColor(files[i]);
   }
 }
 
@@ -111,15 +118,15 @@ document.ondrop = function(event) {
   handleImages(event.dataTransfer.files);
 };
 
-(function() {
-  var upload = document.getElementById('upload');
-  var target = document.getElementById('target');
+// (function() {
+//   var upload = document.getElementById('upload');
+//   var target = document.getElementById('target');
 
-  upload.onchange = function() {
-    handleImages(this.files);
-  };
+//   upload.onchange = function() {
+//     handleImages(this.files);
+//   };
 
-  target.onclick = function() {
-    upload.click();
-  };
-})();
+//   target.onclick = function() {
+//     upload.click();
+//   };
+// })();

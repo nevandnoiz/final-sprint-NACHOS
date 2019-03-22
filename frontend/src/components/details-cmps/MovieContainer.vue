@@ -60,8 +60,10 @@
   </div>
 </template>
 <script>
+import '@/services/average-color.js'
 import UtilityService from "@/services/UtilityService.js";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
+// import clr from '@/services/average-color.js'
 // import colorThief from 'colorthief'
 // const color = new ColorThief()
 // var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
@@ -70,9 +72,8 @@ export default {
     MediaIconsBar
   },
   created() {
-    const gm = require("gm")
-    var test = new gm()
-    console.log(test)
+
+    // const gm = require("gm")
     // const FastAverageColor = require("fast-average-color");
     // console.log(FastAverageColor)
     // const fac = new FastAverageColor();
@@ -116,7 +117,7 @@ export default {
 
 <style scoped>
 .detalis-sections {
-  filter: sepia() saturate(10000%) hue-rotate(30deg);
+  /* filter: sepia() saturate(10000%) hue-rotate(30deg); */
   background-repeat: no-repeat;
   background-size: 100%;
   height: 580px;

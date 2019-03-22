@@ -22,6 +22,8 @@ import MovieContainer from "../components/details-cmps/MovieContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
+import clr from '@/services/average-color.js'
+
 const sightengine = require("sightengine")(
   "1163479865",
   "rQZS3hEBvZSJ9Nqbc5qu"
@@ -42,9 +44,13 @@ export default {
   },
 
   async created() {
-    console.log($)
+   
+    // console.log($)
     console.log(UtilityService);
     this.getMovieDetails();
+    setTimeout(() => {
+      this.setDominantColor()
+    }, 4000);
     
 
     this.movie.reviews = {
@@ -98,21 +104,29 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    async getDominantColor(url) {
-      var domColor = await sightengine
-        .check(["properties"])
-        .set_url(
-          `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
-        );
-      console.log(domColor);
-      var hex = domColor.colors.dominant.hex + "";
+    setDominantColor() {
+      console.log('yes')
+      var hex = domcolor;
       // Check if color background is light and convert it to darker
-      if (UtilityService.lightOrDark(hex) === "light")
-        hex = `#${UtilityService.LightenDarkenColor(
+      if (UtilityService.lightOrDark(domcolor) === "light")
+        domcolor = `#${UtilityService.LightenDarkenColor(
           hex.replace(/#/gm, ""),
           -60
         )}`;
-      this.dominantColor = hex;
+      this.dominantColor = domcolor;
+      console.log('final ')
+      console.log('final:', this.dominantColor)
+    },
+    getDominantColor() {
+      // var domColor = await sightengine
+      //   .check(["properties"])
+      //   .set_url(
+      //     `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
+      //   );
+      // console.log(domColor);
+              // console.log(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
+              console.log('go!!')
+     clr.domColor(`http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`)
     },
     async getMovieDetails() {
       let details = this.$store.getters.selectedItem;
@@ -143,7 +157,9 @@ export default {
       this.movie.externalIds = externalIds;
       this.movie.details = details;
       console.log(this.movie.credits);
+
       this.getDominantColor();
+      
     }
   },
   components: {

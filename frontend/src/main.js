@@ -8,6 +8,7 @@ import './registerServiceWorker'
 // add jquery globaly
 
 window.$ = window.jQuery = require('jquery');
+window.domcolor = 'yes'
 Vue.use(Element)
 // Vue.use(fac)
 Vue.use(VueYouTubeEmbed)
