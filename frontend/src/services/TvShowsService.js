@@ -72,15 +72,15 @@ async function getTvShowVideos(id) {
 }
 async function getSeasonDetails(id,seasonNum) {
     const res = await axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNum}?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
-    const seasonDetails = res.data
-//     let result = res.data
-//     let episodes=result.episodes.map(episode=>
-//     (({ air_date, episode_number, id, name, overview, season_number, show_id, still_path,vote_average }) =>
-//             ({ air_date, episode_number, id, name, overview, season_number, show_id, still_path,vote_average }))(episode)
-// )
-// let seasonDetails=(({ air_date, id, name, overview, poster_path,season_number }) =>
-//             ({ air_date, id, name, overview, poster_path,season_number}))(result)
-//     seasonDetails.episodes=episodes
+    // const seasonDetails = res.data
+    let result = res.data
+    let episodes=result.episodes.map(episode=>
+    (({ air_date, episode_number, id, name, overview, season_number, show_id, still_path,vote_average }) =>
+            ({ air_date, episode_number, id, name, overview, season_number, show_id, still_path,vote_average }))(episode)
+)
+let seasonDetails=(({ air_date, id, name, overview, poster_path,season_number }) =>
+            ({ air_date, id, name, overview, poster_path,season_number}))(result)
+    seasonDetails.episodes=episodes
     return seasonDetails
 }
 
