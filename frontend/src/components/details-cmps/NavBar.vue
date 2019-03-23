@@ -90,7 +90,7 @@ export default {};
     justify-content: space-between !important;
 }
 .main-navbar-container {
-    margin-bottom: 120px
+    /* margin-bottom: 120px */
 }
 </style>
 

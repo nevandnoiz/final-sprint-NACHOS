@@ -1,15 +1,15 @@
 <template>
   <section v-if="movie.details && dominantColor">
     <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
-    <nav-bar></nav-bar>
-    <div class="reviews-container">
+    
+    <!-- <div class="reviews-container">
       <review-container
         v-for="(review, index) in movie.reviews.results"
         :key="index"
         :review="review"
       ></review-container>
     </div>
-    <review-form></review-form>
+    <review-form></review-form> -->
 
     <!-- <i class="fab fa-facebook"></i> -->
   </section>
@@ -100,6 +100,7 @@ export default {
       // Check if color background is light and convert it to darker
       // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
       this.dominantColor = domcolor;
+      document.querySelectorAll('body')[0].style.background =  `-webkit-linear-gradient(top, ${UtilityService.hexToRgb(domcolor,0.1)}, rgba(255,255,255, 1))`
     },
     getDominantColor() {
               console.log('go!!')
@@ -152,6 +153,7 @@ export default {
 </script>
 
 <style scoped>
+
 .reviews-container {
   display: block
 }
