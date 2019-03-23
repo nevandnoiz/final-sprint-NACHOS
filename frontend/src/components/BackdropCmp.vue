@@ -82,7 +82,7 @@ export default {
       position: relative;
       top: 70%;
       left: 3%;
-      text-shadow: 0 0 3px black;
+      text-shadow: 3px 3px 6px black;
     }
   }
 }
@@ -94,7 +94,7 @@ export default {
   width: 500px;
   position: absolute;
   left: 2%;
-  bottom: 26.5%;
+  bottom: 26.8%;
   .backdrop-num-btn {
     height: 36px;
     button {

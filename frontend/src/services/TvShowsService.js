@@ -72,7 +72,7 @@ async function getTvShowVideos(id) {
 }
 async function getSeasonDetails(id,seasonNum) {
     const res = await axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNum}?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
-    const tvVideos = res.data
-    return tvVideos
+    const seasonDetails = res.data
+    return seasonDetails
 }
 
