@@ -49,7 +49,7 @@ export default {
       this.currPreviewIdx = idx;
     },
     imgURL(posterPath) {
-      return UtilityService.imgURL(posterPath, 500);
+      return UtilityService.imgURL(posterPath, 780);
     }
   }
 };

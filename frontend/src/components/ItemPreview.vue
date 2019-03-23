@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     imgURL() {
-      return UtilityService.imgURL(this.item.poster_path, 300);
+      return UtilityService.imgURL(this.item.poster_path, 500);
     },
     pushToDetails(itemId) {
       this.$store.commit("setSelectedItem", this.item);

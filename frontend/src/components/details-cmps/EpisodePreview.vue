@@ -1,6 +1,6 @@
 <template>
   <div class="episode-item" :style="{'background-image':'url(\''+imgURL(episode.still_path)+'\')'}">
-    <h3>{{episode.name}}</h3>
+    <h3>Episode {{episode.episode_number}} : {{episode.name}}</h3>
     <i class="fas fa-check" :class="{'checked': isChecked}" @click="isChecked=!isChecked"></i>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   created() {},
   methods: {
     imgURL(stillPath) {
-      return UtilityService.imgURL(stillPath, 500);
+      return UtilityService.imgURL(stillPath, 780);
     }
   }
 };

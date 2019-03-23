@@ -14,7 +14,7 @@ export default {
 }
 
 async function getPopularShows(page = 1) {
-    const res = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
+    const res = await axios.get(`https://api.themoviedb.org/3/trending/tv/day?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
     const popular = res.data
     return popular
 }
