@@ -100,7 +100,7 @@ export default {
       // Check if color background is light and convert it to darker
       // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
       this.dominantColor = domcolor;
-      document.querySelectorAll('body')[0].style.background =  `-webkit-linear-gradient(top, ${UtilityService.hexToRgb(domcolor,0.1)}, rgba(255,255,255, 1))`
+      // document.querySelectorAll('body')[0].style.background =  `-webkit-linear-gradient(top, ${UtilityService.hexToRgb(domcolor,0.1)}, rgba(255,255,255, 1))`
     },
     getDominantColor() {
               console.log('go!!')

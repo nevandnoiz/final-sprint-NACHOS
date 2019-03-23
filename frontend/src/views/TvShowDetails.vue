@@ -1,14 +1,13 @@
 <template>
   <section v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-    <nav-bar></nav-bar>
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
-    <review-container
+    <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
+    <!-- <review-container
       v-for="(review, index) in tvShow.reviews.results"
       :key="index"
       :review="review"
-    ></review-container>
-    <review-form></review-form>
+    ></review-container> -->
+    <!-- <review-form></review-form> -->
 
     <!-- <i class="fab fa-facebook"></i> -->
   </section>
