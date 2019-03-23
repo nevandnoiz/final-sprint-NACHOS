@@ -39,56 +39,26 @@ export default {
   },
 
   async created() {
-    
-    console.log(UtilityService);
-    this.getTvShowDetails();
-console.log('tvshowdetalis',this.tvShow.details)
-    this.tvShow.reviews = {
-      id: 297761,
-      page: 1,
-      results: [
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        }
-      ]
-    };
+    const tvShowId = this.$route.params.tvShowId;
+    let details = await this.$store.dispatch("getTvShowDetails", tvShowId);
+    this.tvShow.details = details;
+    this.tvShow.seasons = details.seasons;
+    const externalIds = await this.$store.dispatch(
+      "getTvShowExternalIds",
+      tvShowId
+    );
+    this.tvShow.externalIds = externalIds;
+    const tvShowCredits = await this.$store.dispatch(
+      "getTvShowCredits",
+      tvShowId
+    );
+    this.tvShow.credits = tvShowCredits;
+    const tvShowVideos = await this.$store.dispatch(
+      "getTvShowVideos",
+      tvShowId
+    );
+    this.setReviews();
+    this.getDominantColor();
   },
   destroyed() {
     this.$store.commit("setSelectedItem", null);
@@ -110,6 +80,54 @@ console.log('tvshowdetalis',this.tvShow.details)
       //     -60
       //   )}`;
       // this.dominantColor = hex;
+    },
+    setReviews() {
+      this.tvShow.reviews = {
+        id: 297761,
+        page: 1,
+        results: [
+          {
+            id: "57a814dc9251415cfb00309a",
+            author: "NeoBrowser",
+            score: "8",
+            content:
+              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
+            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
+          },
+          {
+            id: "57a814dc9251415cfb00309a",
+            author: "NeoBrowser",
+            score: "8",
+            content:
+              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
+            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
+          },
+          {
+            id: "57a814dc9251415cfb00309a",
+            author: "NeoBrowser",
+            score: "8",
+            content:
+              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
+            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
+          },
+          {
+            id: "57a814dc9251415cfb00309a",
+            author: "NeoBrowser",
+            score: "8",
+            content:
+              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
+            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
+          },
+          {
+            id: "57a814dc9251415cfb00309a",
+            author: "NeoBrowser",
+            score: "8",
+            content:
+              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
+            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
+          }
+        ]
+      };
     },
     async getTvShowDetails() {
       const tvShowId = this.$route.params.tvShowId;

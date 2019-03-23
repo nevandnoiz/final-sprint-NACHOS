@@ -1,8 +1,8 @@
 <template>
   <div class="seasons-container" v-if="seasonsDeatails">
     <template v-for="(season,index) in seasonsDeatails">
-      <div class="season-title">
-        <h3 @click="selectSeason(index)" :key="index">{{season.name}}</h3>
+      <div class="season-title" @click="selectSeason(index)" :key="index">
+        <h3>{{season.name}}</h3>
       </div>
       <transition name="fade" :key="index">
         <episodes-preview v-if="index===currPreviewIdx" :episodes="season.episodes"></episodes-preview>
@@ -48,9 +48,14 @@ export default {
 
 <style lang="scss" scoped>
 .seasons-container {
-  border: 2px solid gray;
+  border: 1px solid gray;
+  border-radius:10px;
+  padding: 3px;
+  margin: 0 200px;
+  text-align:center;
   .season-title {
-    border: 2px solid gray;
+    height: 46px;
+  border: 1px solid gray;
     background-color: white;
   }
 }
