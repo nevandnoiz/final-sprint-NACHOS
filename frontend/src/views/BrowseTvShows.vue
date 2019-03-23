@@ -69,4 +69,10 @@ export default {
   justify-items: center;
   grid-area: 2/1/2/1;
 }
+@media only screen and (max-width: 850px) {
+
+
+
+  
+}
 </style>

@@ -157,4 +157,12 @@ export default {
 .reviews-container {
   display: block
 }
+
+
+@media only screen and (max-width: 850px) {
+
+
+
+  
+}
 </style>

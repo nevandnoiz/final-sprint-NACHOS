@@ -21,25 +21,23 @@ export default {
     ItemPreview
   },
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
     posterImgURL(posterPath) {
       return UtilityService.imgURL(posterPath, 300);
     },
     loadItems() {
-        let movies = this.$store.getters.moviesToDisplay;
+      let movies = this.$store.getters.moviesToDisplay;
       if (!movies) {
-        console.log('Loaded from api')
+        console.log("Loaded from api");
         this.$store.dispatch(`loadPopularMovies`);
-      } else console.log('Loaded from store')
+      } else console.log("Loaded from store");
     }
   },
   computed: {
     popularItems() {
-        return this.$store.getters.moviesToDisplay;
+      return this.$store.getters.moviesToDisplay;
     },
     topFiveItems() {
       let topFiveItems = this.popularItems.slice(0, 5);
@@ -67,5 +65,21 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
   grid-area: 2/1/2/1;
+}
+
+@media only screen and (max-width: 850px) {
+  .browse {
+    display: grid;
+    grid-template: 500px 1fr/1fr;
+    padding: 20px 0;
+  }
+  .grid-container {
+    padding: 20px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
+    grid-area: 2/1/2/1;
+  }
 }
 </style>

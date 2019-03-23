@@ -58,6 +58,7 @@ export default {
       tvShowId
     );
     this.setReviews();
+    this.getTvShowDetails();
     this.getDominantColor();
   },
   destroyed() {
@@ -67,7 +68,9 @@ export default {
           setDominantColor() {
              // Check if color background is light and convert it to darker
             // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
+           console.log('this tv shows detalis dom color:', this.dominantColor)
            this.dominantColor = domcolor;
+           
                               },
     async getDominantColor(url) {
                 console.log('go!!')
@@ -185,4 +188,12 @@ export default {
 </script>
 
 <style scoped>
+
+
+@media only screen and (max-width: 850px) {
+
+
+
+  
+}
 </style>

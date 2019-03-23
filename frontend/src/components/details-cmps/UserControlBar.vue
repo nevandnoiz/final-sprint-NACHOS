@@ -2,8 +2,8 @@
     <section>
         <div class="control-bar">
             <i class="far fa-play-circle"></i>
-            <i class="fas fa-bookmark"></i>
             <i class="fas fa-list-ul"></i>
+            <i class="fas fa-bookmark"></i>
             <i class="fas fa-heart"></i>
             <i class="fas fa-star"></i>
         </div>
@@ -34,5 +34,15 @@ i {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+}
+
+
+
+
+@media only screen and (max-width: 850px) {
+
+
+
+  
 }
 </style>

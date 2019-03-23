@@ -38,4 +38,24 @@ button {
   height: 30px;
   margin: 15px 0;
 }
+
+
+
+@media only screen and (max-width: 850px) {
+
+
+.review-form-container {
+    margin: 120px auto;
+    width: 60%;
+    border-radius: 10px;
+    background-color: lightgray;
+    padding: 25px;
+}
+button {
+  height: 30px;
+  margin: 15px 0;
+}
+
+  
+}
 </style>
