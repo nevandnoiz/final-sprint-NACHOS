@@ -1,6 +1,6 @@
 <template>
   <section>
-    <netflix-slide-season v-if="this.season" :season="this.season"></netflix-slide-season>
+    <netflix-slide-season v-if="season" :season="season"></netflix-slide-season>
   </section>
 </template>
 
@@ -9,22 +9,20 @@ import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue
 import { eventBus } from "@/main.js";
 export default {
   async created() {
-    eventBus.$on("onSeasonClick",index => {
-      this.season = null;
-      this.season = this.seasons[index]});
-    let seasonsDeatails = [];
+    eventBus.$on("onSeasonClick",index=>this.onEmit(index));
+    let seasonsDetails = [];
     for (let season of this.seasons) {
       let details = await this.$store.dispatch({
         type: "getSeasonDetails",
         id: this.tvShowId,
         seasonNum: season.season_number
       });
-      if (details.name !== "Specials") seasonsDeatails.push(details);
+      if (details.name !== "Specials") seasonsDetails.push(details);
     }
+    this._seasonDetalis = seasonsDetails;
+ this.season = this._seasonDetalis[0]
 
-    this.seasons = seasonsDeatails;
-    this.season = this.seasons[0]
-        console.log('do we have season?', this.seasons, seasonsDeatails)
+console.log('do we have season?', this.seasons, seasonsDetails)
   },
   components: {
     NetflixSlideSeason
@@ -32,11 +30,22 @@ export default {
   data() {
     return {
       season: null,
-      seasons: null,
+      _seasonDetalis: null,
     };
   },
   methods: {
+    onEmit(index){
+      console.log('emit',index)
+        // this.season = null;
+        this.season = this._seasonDetalis[index]
+    
+        
+        console.log('season?', this.season)
+      }
   },
+  // computed:{
+
+  // }
   props: ["seasons", "tvShowId"]
 };
 </script>

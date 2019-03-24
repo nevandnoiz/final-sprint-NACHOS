@@ -11,7 +11,7 @@
         <h3>{{season.name}}</h3>
       </div>
       <transition name="fade" :key="index">
-        <episodes-list v-if="index===currPreviewIdx" :episodes="season.episodes"></episodes-list>
+        <episodes-list v-if="index===currPreviewIdx && season.episodes" :episodes="season.episodes"></episodes-list>
       </transition>
     </template>
   </div>

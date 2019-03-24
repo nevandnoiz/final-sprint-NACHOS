@@ -2,7 +2,7 @@
   <section class="main-container">
     <div class="cards-container">
       <swiper :options="swiperOptions">
-        <swiper-slide v-for="(eposide, index) in this.season.episodes" :key="index">
+        <swiper-slide v-for="(eposide, index) in season.episodes" :key="index">
           <netflix-epo-card
             :epoImg="eposide.still_path"
             :title="eposide.name"

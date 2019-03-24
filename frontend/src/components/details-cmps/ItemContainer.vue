@@ -11,7 +11,7 @@
               :player-vars="{ autoplay: 1 }"
           ></youtube>-->
           <nav-bar class="nav-bar"></nav-bar>
-          <netflix-slide-main :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-container"></netflix-slide-main>
+          <netflix-slide-main v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-container"></netflix-slide-main>
 
           <div class="shadowing-container">
             <div class="details-text">
@@ -104,12 +104,9 @@ export default {
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
-    const movieCredits = await this.$store.dispatch(
-      "getMovieImages",
-      this.item.details.id
-    );
-    this.imgs = movieCredits;
-    console.log(this.imgs);
+    // const movieCredits = await this.$store.dispatch("getMovieImages",this.item.details.id);
+    // this.imgs = movieCredits;
+    // console.log(this.imgs);
     eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
      
   },
