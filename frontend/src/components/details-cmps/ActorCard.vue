@@ -1,8 +1,6 @@
 <template>
-
-  <!-- TODO Change to background img -->
-  <section class="main-container" :style="{'background-image':'url(http://image.tmdb.org/t/p/w1280/wtZj5nn6hVwgakPdg6y6gm3eFXU.jpg\''+(this.imgs.backdrops[1].file_path)}">
-    <div class="cards-container"  >
+  <section class="main-container">
+    <div class="cards-container">
       <div @click="nextActors" class="left">
         <i class="fas fa-arrow-left"></i>
       </div>
@@ -21,9 +19,8 @@
 <script>
 // import UtilityService from "@/services/UtilityService.js";
 export default {
-  props: ["item", "imgs"],
+  props: ["item"],
   created() {
-    console.log('actor', this.imgs)
     this.nextActors();
     console.log("that actors", this.item);
   },
@@ -83,39 +80,35 @@ p {
   padding-bottom: 0.2rem;
 }
 .main-container {
-  background: -webkit-linear-gradient(
-    top,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0)
-  );
-  grid-column: 1/5;
-  grid-row: 23;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: grid;
-  grid-template: 1fr;
-  /* grid-template-columns: 50px 1fr 50px; */
+      background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    grid-column: 1/5;
+    grid-row: 23;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: grid;
+    grid-template: 1fr;
+    /* grid-template-columns: 50px 1fr 50px; */
 }
 .card-container {
   align-self: flex-start;
   border-radius: 5px;
-  grid-row: 1/3;
-  display: -webkit-box;
-  /* box-shadow: 0px 0px 6px #000000; */
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  text-align: center;
+    grid-row: 1/3;
+    display: -webkit-box;
+    /* box-shadow: 0px 0px 6px #000000; */
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    text-align: center;
 }
 img {
   width: 185px;
@@ -123,41 +116,41 @@ img {
   height: 277px;
 }
 .cards-container {
-  padding: 1rem 0;
-  display: -webkit-box;
-  overflow: hidden;
-  position: relative;
-  /* grid-column: 2; */
-  grid-template-rows: 277px 1fr;
-  grid-template-columns: repeat(4, 1fr);
-  display: grid;
-  display: -ms-flexbox;
-  /* display: flex; */
-  align-items: center;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  /* grid-column: 2; */
-  justify-items: center;
+    padding: 1rem 0;
+    display: -webkit-box;
+    overflow: hidden;
+    position: relative;
+    /* grid-column: 2; */
+    grid-template-rows: 277px 1fr;
+    grid-template-columns: repeat(4,1fr);
+    display: grid;
+    display: -ms-flexbox;
+    /* display: flex; */
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    /* grid-column: 2; */
+    justify-items: center;
 }
 .right {
   /* display: none; */
-  grid-column: 6;
-  position: absolute;
-  right: 2rem;
-  color: rgba(240, 255, 255, 0.9);
-  top: 102.5px;
-  grid-row: 1;
-  font-size: 3rem;
+     grid-column: 6;
+    position: absolute;
+    right: 2rem;
+    color: rgba(240, 255, 255, 0.9);
+    top: 102.5px;
+    grid-row: 1;
+    font-size: 3rem;
 }
 .left {
   /* display: none; */
-  grid-column: 1;
-  color: rgba(240, 255, 255, 0.9);
-  position: absolute;
-  grid-row: 1;
-  top: 102.5px;
-  left: 2rem;
-  font-size: 3rem;
+grid-column: 1;
+ color: rgba(240, 255, 255, 0.9);
+    position: absolute;
+    grid-row: 1;
+    top: 102.5px;
+    left: 2rem;
+    font-size: 3rem;
 }
 .left:hover {
   cursor: pointer;
@@ -172,7 +165,7 @@ img {
 /* .cards-container:hover + .right {
   display: block
 } */
-
+    
 /* a:hover + div {
     display: block;
 } */
