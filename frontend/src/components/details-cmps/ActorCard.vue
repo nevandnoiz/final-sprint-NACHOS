@@ -80,7 +80,7 @@ p {
   padding-bottom: 0.2rem;
 }
 .main-container {
-  
+      background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
     grid-column: 1/5;
     grid-row: 23;
     -webkit-box-align: center;
@@ -119,9 +119,10 @@ img {
     padding: 1rem 0;
     display: -webkit-box;
     overflow: hidden;
+    position: relative;
     /* grid-column: 2; */
     grid-template-rows: 277px 1fr;
-    grid-template-columns: 50px repeat(4,1fr) 50px;
+    grid-template-columns: repeat(4,1fr);
     display: grid;
     display: -ms-flexbox;
     /* display: flex; */
@@ -132,13 +133,23 @@ img {
     justify-items: center;
 }
 .right {
- grid-column: 6;
+  /* display: none; */
+     grid-column: 6;
+    position: absolute;
+    right: 2rem;
+    color: rgba(240, 255, 255, 0.9);
+    top: 102.5px;
     grid-row: 1;
     font-size: 3rem;
 }
 .left {
+  /* display: none; */
 grid-column: 1;
+ color: rgba(240, 255, 255, 0.9);
+    position: absolute;
     grid-row: 1;
+    top: 102.5px;
+    left: 2rem;
     font-size: 3rem;
 }
 .left:hover {
@@ -147,6 +158,17 @@ grid-column: 1;
 .right:hover {
   cursor: pointer;
 }
+
+/* div {
+    display: none;
+} */
+/* .cards-container:hover + .right {
+  display: block
+} */
+    
+/* a:hover + div {
+    display: block;
+} */
 
 @media only screen and (max-width: 850px) {
   h1 {
@@ -158,12 +180,12 @@ grid-column: 1;
     font-size: 1rem;
     padding-bottom: 0.2rem;
   }
-  .main-container {
+  /* .main-container {
     grid-column: 1/3;
     align-items: center;
     display: grid;
     grid-template-columns: 50px 1fr 50px;
-  }
+  } */
   .card-container {
     border-radius: 5px;
 
@@ -188,21 +210,7 @@ grid-column: 1;
     /* border-radius: 5px 5px 0 0; */
     height: 277px;
   }
-  .cards-container {
-    padding: 1rem 0;
-    display: -webkit-box;
-    overflow: hidden;
-    grid-column: 2;
-    grid-template-rows: 1;
-    grid-template-columns: 50px repeat(4, 25%) 5px;
-    display: grid;
-    display: -ms-flexbox;
-    /* display: flex; */
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    /* grid-column: 2; */
-    justify-items: center;
-  }
+
   .right {
     grid-column: 3;
     grid-row: 1;
