@@ -12,7 +12,7 @@
           ></youtube>-->
           <nav-bar class="nav-bar"></nav-bar>
           <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
-          <netflix-slide-main class="netflix-container"></netflix-slide-main>
+          <netflix-slide-main :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-container"></netflix-slide-main>
 
           <div class="shadowing-container">
             <div class="details-text">

@@ -1,6 +1,6 @@
 <template>
 
-  <!-- TODO Change to background -->
+  <!-- TODO Change to background img -->
   <section class="main-container" :style="{'background-image':'url(http://image.tmdb.org/t/p/w1280/wtZj5nn6hVwgakPdg6y6gm3eFXU.jpg\''+(this.imgs.backdrops[1].file_path)}">
     <div class="cards-container"  >
       <div @click="nextActors" class="left">
@@ -23,7 +23,7 @@
 export default {
   props: ["item", "imgs"],
   created() {
-    // console.log('actor', this.imgs)
+    console.log('actor', this.imgs)
     this.nextActors();
     console.log("that actors", this.item);
   },
@@ -62,7 +62,6 @@ export default {
       }
       this.prevGalleryPos = this.nextGalleryPos;
       this.nextGalleryPos += 4;
-      console.log('actors!!!:',this.actors)
     }
   },
   computed: {
