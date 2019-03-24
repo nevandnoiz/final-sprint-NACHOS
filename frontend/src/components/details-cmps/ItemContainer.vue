@@ -4,6 +4,7 @@
     <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
       <div class="row" :style="bckColor">
         <div class="item-container">
+          <actor-card :item="item.credits"></actor-card>
           <!-- <youtube
               class="youtube-container"
               :video-id="this.item.videos.results[0].key"
@@ -88,9 +89,11 @@ import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
+import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
+      ActorCard,
     NetflixSlideMain,
     NavBar,
     SeasonsList,
