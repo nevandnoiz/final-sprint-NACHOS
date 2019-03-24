@@ -34,10 +34,8 @@ export default {
   methods: {
     onSelectSeason(index) {
       eventBus.$emit("onSeasonClick", index);
-      // console.log(index)
       // this.season = null;
       this.season = this.seasonsList[index];
-      console.log("season picked:", this.season);
     }
   },
   props: ["seasons", "tvShowId"],

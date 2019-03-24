@@ -133,7 +133,6 @@ export default {
   },
   watch: {
     "$route.params.tvShowId": function() {
-      console.log("route tvShow id");
       this.getTvShowDetails();
     }
   }

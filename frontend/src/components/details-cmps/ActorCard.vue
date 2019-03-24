@@ -21,10 +21,7 @@
 export default {
   props: ["item"],
   created() {
-    console.log('im here actor card')
-    console.log(this.item)
     this.nextActors();
-    console.log("that actors", this.item);
   },
   data() {
     return {
@@ -43,7 +40,6 @@ export default {
           for (let i = 0; i < efresh; i++) {
             this.actors.push(this.item.cast[this.prevGalleryPos]);
             // this.prevGalleryPos++
-            console.log("OVERAGAIN!");
           }
           this.nextGalleryPos = this.prevGalleryPos + 4;
           if (this.actors.length > 4) {

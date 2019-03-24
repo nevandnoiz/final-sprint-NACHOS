@@ -15,7 +15,6 @@ export default {
       id: this.tvShowId,
       seasons: this.seasons
     });
-    console.log('tds', this.seasonsDetails[0].data)
     this.season = this.seasonsDetails[0].data;
   },
   components: {
@@ -29,16 +28,10 @@ export default {
   },
   methods: {
     onEmit(index) {
-      console.log("emit", index);
       // this.season = null;
       this.season = this.seasonsDetails[index].data;
-
-      console.log("season?", this.season);
     }
   },
-  // computed:{
-
-  // }
   props: ["seasons", "tvShowId"]
 };
 </script>

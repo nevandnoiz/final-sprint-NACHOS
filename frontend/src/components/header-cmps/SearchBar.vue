@@ -45,7 +45,6 @@ export default {
     unFocused() {
       //TODO problem is on click on links of the search is unfocusing the input and deleting them before the click occur use other method instead of settimeout
       this.focus = false;
-      console.log("unfocused");
     },
     searchMovies() {
       if (!this.keyword) return;
@@ -61,7 +60,6 @@ export default {
     },
     focusChanged(event) {
       this.focus = true;
-      console.log("input is focusing");
     }
     // do something with the element.
   },

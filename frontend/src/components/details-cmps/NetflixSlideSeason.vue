@@ -30,7 +30,6 @@ export default {
   },
   props: ["item", "season", "tvShowId"],
   async created() {
-    console.log('autocard',this.season)
   },
   data() {
     return {

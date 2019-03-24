@@ -21,7 +21,6 @@ export default {
     },
     async getTvShowDetails(context, tvId) {
       const tvDetails = await TvShowsService.getTvShowDetails(tvId)
-      console.log('tv detalis from actions:', tvDetails)
       return tvDetails
     },
     async getTvShowImages(context, tvId) {

@@ -15,8 +15,6 @@
 import UtilityService from "@/services/UtilityService.js";
 export default {
   created() {
-    console.log('NUm',this.eposideNum)
-    console.log("actorsingIPo", this.epoImg);
   },
   name: "Movie",
   props: ["epoImg", "title", "description", "duration","eposideNum"],

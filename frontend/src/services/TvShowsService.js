@@ -70,6 +70,5 @@ async function getSeasonDetails(id, seasons) {
         prms.push(axios.get(`http://localhost:3003/tv/${id}/season/${season.season_number}`))
     })
     let res=await axios.all(prms)
-    console.log(res)
     return res
 }

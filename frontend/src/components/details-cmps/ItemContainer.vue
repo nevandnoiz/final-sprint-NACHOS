@@ -102,12 +102,7 @@ export default {
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
-    console.log('needed', this.item.details.id ,this.item.seasons )
-    // const movieCredits = await this.$store.dispatch("getMovieImages",this.item.details.id);
-    // this.imgs = movieCredits;
-    console.log('container item',this.item);
-    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
-     
+    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode)); 
   },
   data() {
     return {
@@ -119,10 +114,8 @@ export default {
  props: ["item", "dominantColor"],
   methods: {
     listing() {
-      console.log("img listening");
     },
     onTrailer() {
-      console.log("on trailer click");
       this.isTrailer = !this.isTrailer;
     }
   },
