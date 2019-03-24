@@ -22,17 +22,19 @@ function getNewsByStr(str) {
 }
 
 function filterNews(news, numOfArticles = 3) {
-    const filteredNews = { searchTerm: news.searchTerm, articles: [] }
+    const filteredNews = []
     news.articles.forEach(article => {
         if (
             article.description.includes(news.searchTerm) ||
             article.title.includes(news.searchTerm)) {
-            filteredNews.articles.push(article)
+            article.searchTerm = news.searchTerm
+            article.type = 'article'
+            filteredNews.push(article)
         }
     });
-    while (filteredNews.articles.length > numOfArticles) {
-        const randomIdx = Math.floor(Math.random() * filteredNews.articles.length)
-        filteredNews.articles.splice(randomIdx, 1)
+    while (filteredNews.length > numOfArticles) {
+        const randomIdx = Math.floor(Math.random() * filteredNews.length)
+        filteredNews.splice(randomIdx, 1)
     }
     return filteredNews
 }
