@@ -5,7 +5,7 @@
       <router-link to="/movies">Movies</router-link>
       <router-link to="/tv">Tv Shows</router-link>
       <router-link to="/actors">Actors</router-link>
-      <a v-if="user">{{user.name.firstName}} {{user.name.lastName}}</a>
+      <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
       <a v-else @click="login">login</a>
     </div>
     <!-- <search-bar></search-bar> -->
@@ -51,6 +51,13 @@ header {
       cursor: pointer;
     }
     a {
+      color: white;
+      margin: 10px;
+      font-size: 24px;
+      text-decoration: none;
+      font-family: sans-serif;
+    }
+    h3 {
       color: white;
       margin: 10px;
       font-size: 24px;
