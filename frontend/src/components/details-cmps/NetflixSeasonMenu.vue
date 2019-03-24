@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+box-sizing: border-box
+}
 .menu--main {
 }
 .menu--main li {
@@ -51,12 +54,14 @@ export default {
     display: inline-block;
     position: relative;
     cursor: pointer;
-    padding: 15px 20px;
+    padding: 15px 0;
     /* background-color: rgba(255, 255, 255, 0.74); */
     margin-right: -4px;
 }
 .menu--main li:hover {
-  /* background-color: #dde2e7; */
+     /* box-shadow:         inset 0 0 10px #000000; */
+     /* background-color: #dde2e7; */
+    border: 3px solid white;
 }
 .menu--main li:hover .sub-menu {
   max-height: 300px;
@@ -65,7 +70,7 @@ export default {
   transition: all 0.4s linear;
 }
 .menu--main .sub-menu {
-      display: -webkit-box;
+    display: -webkit-box;
     width: 100%;
     display: -ms-flexbox;
     display: flex;
@@ -73,23 +78,19 @@ export default {
     -webkit-box-direction: reverse;
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
-    /* display: block; */
     visibility: hidden;
-    background-color: #00000096;
     position: absolute;
     left: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
     max-height: 0;
-    /* width: 150px; */
-    overflow: hidden;
 }
 .menu--main .sub-menu li {
-       width: 100%;
+  width: 100%;
     display: inline-block;
     position: relative;
     cursor: pointer;
-    padding: 15px 20px;
+    padding: 15px 0;
     /* background-color: #f8f9fa; */
     margin-right: -4px;
     background-color: #00000096;
