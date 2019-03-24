@@ -8,7 +8,7 @@
         class="netflix-container"
       ></netflix-slide-main>
       <nav-bar class="nav-bar"></nav-bar>
-      <actor-card :imgs="imgs" :item="tvShow.credits"></actor-card>
+      <actor-card :item="tvShow.credits"></actor-card>
     </div>
 
     <!-- <review-container
