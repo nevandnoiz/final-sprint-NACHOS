@@ -7,10 +7,10 @@
           <div class="choose"></div>
           <item-preview
             class="select-item-poster"
-            :movie="item"
+            :item="item"
             :click="false"
+            :select= "true"
             @click="add(item.name)"
-            :class="{'mark': isMarked}"
           />
           <p>{{item.name}}</p>
         </div>
