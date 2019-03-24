@@ -35,19 +35,20 @@ export default {
   async created() {
     this.setReviews();
     const movieId = this.$route.params.movieId;
-    let details = await this.$store.dispatch("getMovieDetails", movieId);
-    this.movie.details = details;
-    const externalIds = await this.$store.dispatch(
-      "getMovieExternalIds",
-      movieId
+    const [details, externalIds, movieCredits, movieVideos] = await Promise.all(
+      [
+        this.$store.dispatch("getMovieDetails", movieId),
+        this.$store.dispatch("getMovieExternalIds", movieId),
+        this.$store.dispatch("getMovieCredits", movieId),
+        this.$store.dispatch("getMovieVideos", movieId)
+      ]
     );
+    this.movie.details = details;
     this.movie.externalIds = externalIds;
-    const movieCredits = await this.$store.dispatch("getMovieCredits", movieId);
     this.movie.credits = movieCredits;
-    const movieVideos = await this.$store.dispatch("getMovieVideos", movieId);
     this.movie.videos = movieVideos;
     this.setDominantColor();
-},
+  },
   destroyed() {
     this.$store.commit("setSelectedItem", null);
   },
@@ -104,7 +105,7 @@ export default {
       this.dominantColor = await AvgColorService.domColor(
         `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
       );
-    },
+    }
   },
   components: {
     ItemContainer,

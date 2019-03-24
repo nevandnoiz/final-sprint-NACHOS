@@ -47,23 +47,21 @@ export default {
   async created() {
     this.setReviews();
     const tvShowId = this.$route.params.tvShowId;
-    let details = await this.$store.dispatch("getTvShowDetails", tvShowId);
+    const [
+      details,
+      externalIds,
+      tvShowCredits,
+      tvShowVideos
+    ] = await Promise.all([
+      this.$store.dispatch("getTvShowDetails", tvShowId),
+      this.$store.dispatch("getTvShowExternalIds", tvShowId),
+      this.$store.dispatch("getTvShowCredits", tvShowId),
+      this.$store.dispatch("getTvShowVideos", tvShowId)
+    ]);
     this.tvShow.details = details;
     this.tvShow.seasons = details.seasons;
-    const externalIds = await this.$store.dispatch(
-      "getTvShowExternalIds",
-      tvShowId
-    );
     this.tvShow.externalIds = externalIds;
-    const tvShowCredits = await this.$store.dispatch(
-      "getTvShowCredits",
-      tvShowId
-    );
     this.tvShow.credits = tvShowCredits;
-    const tvShowVideos = await this.$store.dispatch(
-      "getTvShowVideos",
-      tvShowId
-    );
     this.setDominantColor();
   },
   destroyed() {

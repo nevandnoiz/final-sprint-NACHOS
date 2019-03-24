@@ -343,9 +343,9 @@ iframe {
 .icons-container > *:hover {
   cursor: pointer;
 }
-.details {
-  /* background-color: lightslategray; */
-}
+/* .details {
+  background-color: lightslategray;
+} */
 .details-text {
   padding: 20px;
   color: black;
@@ -569,9 +569,9 @@ iframe {
   .icons-container > *:hover {
     cursor: pointer;
   }
-  .details {
-    /* background-color: lightslategray; */
-  }
+  /* .details {
+    background-color: lightslategray;
+  } */
   .details-text {
     padding: 20px;
     color: black;
