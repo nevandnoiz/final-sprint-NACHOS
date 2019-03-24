@@ -1,12 +1,12 @@
 <template>
   <section v-if="movie.details && dominantColor">
     <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
-    <review-container
+    <!-- <review-container
       v-for="(review, index) in movie.reviews.results"
       :key="index"
       :review="review"
-    ></review-container>
-    <review-form></review-form>
+    ></review-container> -->
+    <!-- <review-form></review-form> -->
   </section>
 </template>
 
@@ -16,10 +16,6 @@ import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-const sightengine = require("sightengine")(
-  "1163479865",
-  "rQZS3hEBvZSJ9Nqbc5qu"
-);
 
 export default {
   data() {
@@ -49,7 +45,7 @@ export default {
     this.movie.credits = movieCredits;
     const movieVideos = await this.$store.dispatch("getMovieVideos", movieId);
     this.movie.videos = movieVideos;
-    this.getDominantColor();
+    this.dominantColor="white"
   },
   destroyed() {
     this.$store.commit("setSelectedItem", null);
@@ -103,19 +99,6 @@ export default {
         ]
       };
     },
-    async getDominantColor(url) {
-      var domColor = await sightengine
-        .check(["properties"])
-        .set_url(
-          `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
-        );
-      this.dominantColor = "#d39f4c";
-      // console.log(domColor)
-      // var hex = domColor.colors.dominant.hex + ''
-      // // Check if color background is light and convert it to darker
-      // if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
-      // this.dominantColor = hex
-    }
   },
   components: {
     ItemContainer,

@@ -1,12 +1,13 @@
 <template>
   <section v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
+    <netflix-slide-main :seasons="tvShow.seasons" :tvShowId="tvShow.details.id" class="netflix-container"></netflix-slide-main>
     <!-- <review-container
     <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
     <review-container
       v-for="(review, index) in tvShow.reviews.results"
       :key="index"
-      :review="review"
+      :review="review" item.details.id item.seasons
     ></review-container>-->
     <!-- <review-form></review-form> -->
 
@@ -19,6 +20,7 @@ import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import SeasonsList from "../components/details-cmps/SeasonsList.vue";
+import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import clr from "@/services/average-color.js";
@@ -74,9 +76,10 @@ export default {
     },
     async getDominantColor(url) {
       console.log("go!!");
-      clr.domColor(
-        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
-      );
+      this.dominantColor = "white";
+      // clr.domColor(
+      //   `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
+      // );
       // var hex = domColor.colors.dominant.hex + "";
       // // Check if color background is light and convert it to darker
       // if (UtilityService.lightOrDark(hex) === "light")
@@ -176,6 +179,7 @@ export default {
   components: {
     ItemContainer,
     SeasonsList,
+    NetflixSlideMain,
     ReviewContainer,
     ReviewForm,
     NavBar

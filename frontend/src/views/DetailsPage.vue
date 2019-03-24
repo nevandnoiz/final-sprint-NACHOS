@@ -1,5 +1,5 @@
 <template>
-  <section v-if="movie.details && dominantColor">
+  <section v-if="movie.details">
     <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
     
     <!-- <div class="reviews-container">

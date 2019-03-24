@@ -11,8 +11,6 @@
               :player-vars="{ autoplay: 1 }"
           ></youtube>-->
           <nav-bar class="nav-bar"></nav-bar>
-          <netflix-slide-main v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-container"></netflix-slide-main>
-
           <div class="shadowing-container">
             <div class="details-text">
               <p>{{item.details.overview}}</p>
@@ -33,7 +31,7 @@
             ></seasons-list>-->
 
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-                      <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
+                      <!-- <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu> -->
 
             <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
@@ -83,20 +81,20 @@ import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
-import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
+// import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
-import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
+// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
+// import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
     ActorCard,
-    NetflixSeasonMenu,
-    NetflixSlideMain,
+    // NetflixSeasonMenu,
+    // NetflixSlideMain,
     NavBar,
     SeasonsList,
-    NetflixSlideSeason,
+    // NetflixSlideSeason,
     UserControlBar,
     MediaIconsBar
   },
@@ -104,9 +102,10 @@ export default {
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
+    console.log('needed', this.item.details.id ,this.item.seasons )
     // const movieCredits = await this.$store.dispatch("getMovieImages",this.item.details.id);
     // this.imgs = movieCredits;
-    // console.log(this.imgs);
+    console.log('container item',this.item);
     eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
      
   },

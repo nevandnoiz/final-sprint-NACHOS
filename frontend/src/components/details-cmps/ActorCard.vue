@@ -21,6 +21,8 @@
 export default {
   props: ["item"],
   created() {
+    console.log('im here actor card')
+    console.log(this.item)
     this.nextActors();
     console.log("that actors", this.item);
   },

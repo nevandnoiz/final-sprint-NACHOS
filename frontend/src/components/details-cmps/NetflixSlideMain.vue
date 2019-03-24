@@ -9,20 +9,14 @@ import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue
 import { eventBus } from "@/main.js";
 export default {
   async created() {
-    eventBus.$on("onSeasonClick",index=>this.onEmit(index));
-    let seasonsDetails = [];
-    for (let season of this.seasons) {
-      let details = await this.$store.dispatch({
-        type: "getSeasonDetails",
-        id: this.tvShowId,
-        seasonNum: season.season_number
-      });
-      if (details.name !== "Specials") seasonsDetails.push(details);
-    }
-    this._seasonDetalis = seasonsDetails;
- this.season = this._seasonDetalis[0]
-
-console.log('do we have season?', this.seasons, seasonsDetails)
+    eventBus.$on("onSeasonClick", index => this.onEmit(index));
+    this.seasonsDetails = await this.$store.dispatch({
+      type: "getSeasonDetails",
+      id: this.tvShowId,
+      seasons: this.seasons
+    });
+    console.log('tds', this.seasonsDetails[0].data)
+    this.season = this.seasonsDetails[0].data;
   },
   components: {
     NetflixSlideSeason
@@ -30,18 +24,17 @@ console.log('do we have season?', this.seasons, seasonsDetails)
   data() {
     return {
       season: null,
-      _seasonDetalis: null,
+      seasonsDetails: null
     };
   },
   methods: {
-    onEmit(index){
-      console.log('emit',index)
-        // this.season = null;
-        this.season = this._seasonDetalis[index]
-    
-        
-        console.log('season?', this.season)
-      }
+    onEmit(index) {
+      console.log("emit", index);
+      // this.season = null;
+      this.season = this.seasonsDetails[index].data;
+
+      console.log("season?", this.season);
+    }
   },
   // computed:{
 
@@ -52,10 +45,10 @@ console.log('do we have season?', this.seasons, seasonsDetails)
 
 <style scoped>
 .btn-container {
-        position: absolute;
-    top: 0;
-    order: 2;
-    margin-top: 0.5rem;
-    z-index: 2;
+  position: absolute;
+  top: 0;
+  order: 2;
+  margin-top: 0.5rem;
+  z-index: 2;
 }
 </style>
