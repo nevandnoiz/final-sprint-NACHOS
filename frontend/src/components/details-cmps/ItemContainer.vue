@@ -11,12 +11,8 @@
               :player-vars="{ autoplay: 1 }"
           ></youtube>-->
           <nav-bar class="nav-bar"></nav-bar>
-          <netflix-slide-main
-            v-if="isSeasonsListMode"
-            class="netflix-container"
-            :seasons="item.seasons"
-            :tvShowId="item.details.id"
-          ></netflix-slide-main>
+          <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
+          <netflix-slide-main :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-container"></netflix-slide-main>
 
           <div class="shadowing-container">
             <div class="details-text">
@@ -38,7 +34,7 @@
             ></seasons-list>-->
 
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-            <div class="icons-container">
+            <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
               <a
                 target="_blank"
@@ -68,7 +64,7 @@
               >
                 <i class="fab fa-imdb"></i>
               </a>
-            </div>
+            </div> -->
           </div>
 
           <!-- <div class="item-details"> -->
@@ -89,11 +85,13 @@ import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
+import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
     ActorCard,
+    NetflixSeasonMenu,
     NetflixSlideMain,
     NavBar,
     SeasonsList,
@@ -105,13 +103,14 @@ export default {
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
-    const movieCredits = await this.$store.dispatch("getMovieImages", this.item.details.id);
-    this.imgs = movieCredits
-    console.log(this.imgs)
-    eventBus.$on(
-      "onSeasonsListClick",
-      () => (this.isSeasonsListMode = !this.isSeasonsListMode)
+    const movieCredits = await this.$store.dispatch(
+      "getMovieImages",
+      this.item.details.id
     );
+    this.imgs = movieCredits;
+    console.log(this.imgs);
+    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
+     
   },
   data() {
     return {
@@ -159,6 +158,21 @@ iframe {
   width: 100%;
 }
 
+.netflix-season-menu-container {
+  -webkit-box-shadow: 0px 0px 12px #000000;
+    box-shadow: 0px 0px 12px #000000;
+    /* margin-top: 1rem; */
+    width: 100%;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: flex-end;
+    /* position: relative; */
+    /* display: flex; */
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
 .netflix-container {
   box-shadow: 0px 0px 12px #000000;
   margin-top: 1rem;

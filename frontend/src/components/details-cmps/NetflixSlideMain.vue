@@ -1,21 +1,15 @@
 <template>
   <section>
-    <div class="div btn-container">
-      <button
-        @click="onSelectSeason(index)"
-        v-for="(seasonList, index) in this.seasons"
-        :key="index"
-      >{{seasonList.name}}</button>
-    </div>
     <netflix-slide-season v-if="this.season" :season="this.season"></netflix-slide-season>
   </section>
 </template>
 
 <script>
 import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
-
+import { eventBus } from "@/main.js";
 export default {
   async created() {
+    eventBus.$on("onSeasonClick",index => this.season = this.seasons[index]);
     let seasonsDeatails = [];
     for (let season of this.seasons) {
       let details = await this.$store.dispatch({
@@ -40,12 +34,6 @@ export default {
     };
   },
   methods: {
-    onSelectSeason(index) {
-      this.season = null;
-      setTimeout(() => {
-        this.season = this.seasons[index];
-      }, 0);
-    }
   },
   props: ["seasons", "tvShowId"]
 };
