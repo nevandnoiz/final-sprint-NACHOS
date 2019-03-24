@@ -5,12 +5,12 @@
     :style="{'background-image':'url(\''+img+'\')'}"
     @mouseenter="toggleIsHovered"
     @mouseleave="toggleIsHovered"
-    :class="{'hover-buttons': isHovered}"
+    :class="{'hover-buttons': isHovered, 'selected': isSelected}"
   >
     <div class="item-hover-controls" v-if="isHovered">
       <div class="hover-controls-btns">
         <i class="fas fa-plus"></i>
-        <i class="fas fa-check" :class="{'checked': isChecked}"  @click.stop="toggleCheckMark"></i>
+        <i class="fas fa-check" :class="{'checked': isChecked}" @click.stop="toggleCheckMark"></i>
       </div>
       <a href>Play Trailer</a>
     </div>
@@ -21,13 +21,14 @@
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
-  props: ["item", "click"],
+  props: ["item", "selectMode"],
   components: {},
   data() {
     return {
       img: null,
       isHovered: false,
-      isChecked: false
+      isChecked: false,
+      isSelected: false
     };
   },
   methods: {
@@ -35,7 +36,7 @@ export default {
       return UtilityService.imgURL(this.item.poster_path, 300);
     },
     pushToDetails(itemId) {
-      //  if (!this.click) return;
+      if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedMovie", this.item);
       this.$router.push(`/details/${itemId}`);
     },
@@ -44,6 +45,10 @@ export default {
     },
     toggleCheckMark() {
       this.isChecked = !this.isChecked;
+    },
+    toggleisSelected() {
+      this.$emit('toggleItem')
+      this.isSelected = !this.isSelected;
     }
   },
   computed: {},
@@ -60,6 +65,9 @@ export default {
   background-size: cover;
   cursor: pointer;
   transition: 0.5s;
+  &.selected {
+    box-shadow: inset 0 0 20px 20px #ffc107;
+  }
   .item-hover-controls {
     height: inherit;
     display: grid;
@@ -87,7 +95,7 @@ export default {
       grid-area: 3/1/3/1;
       text-align: center;
       font-size: 20px;
-      color:lightgray;
+      color: lightgray;
       text-shadow: 0 0 3px darkslategray;
     }
   }
