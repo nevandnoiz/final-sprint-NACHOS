@@ -28,7 +28,7 @@ export default {
       img: null,
       isHovered: false,
       isChecked: false,
-      isSelected: false
+      isSelected: false,
       itemTypeRoute: null
     };
   },

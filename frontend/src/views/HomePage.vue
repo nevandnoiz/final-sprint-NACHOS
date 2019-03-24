@@ -1,29 +1,30 @@
 <template>
   <div class="home">
-    <watch-next :watchNextList="watchNextList"></watch-next>
+    <backdrop-cmp :topItems="headerItems"></backdrop-cmp>
+    <watch-next v-if="user" :watchNextList="watchNextList"></watch-next>
     <feed :activities="activities"></feed>
-    <pre>
-      <!-- <a class="twitter-timeline" href="https://twitter.com/spiderman?ref_src=twsrc%5Etfw">Tweet</a> -->
-      </pre>
+    <!-- <pre> -->
+    <!-- <a class="twitter-timeline" href="https://twitter.com/spiderman?ref_src=twsrc%5Etfw">Tweet</a> -->
+    <!-- </pre> -->
   </div>
 </template>
 
 <script>
 import WatchNext from "@/components/home-cmps/WatchNext.vue";
 import feed from "@/components/home-cmps/Feed.vue";
+import BackdropCmp from "@/components/BackdropCmp.vue";
 
 export default {
   components: {
+    BackdropCmp,
     WatchNext,
     feed
   },
   data() {
-    return {
-      // user: null
-    };
+    return {};
   },
   created() {
-    // this.$store.dispatch("loadPopularMovies");
+    this.$store.dispatch(`loadPopularMovies`);
   },
   computed: {
     popularMovies() {
@@ -35,12 +36,19 @@ export default {
     user() {
       return this.$store.getters.currUser;
     },
+     popularItems() {
+      
+      return this.$store.getters.moviesToDisplay;
+    },
+    headerItems() {
+      let topFiveItems = this.popularItems.slice(0, 5);
+      return topFiveItems;
+    },
     watchNextList() {
       const currUser = this.$store.getters.currUser;
       if (currUser) {
         const lists = currUser.lists.find(list => list.name === "watchList");
-        return lists
-        
+        return lists;
       }
     }
   }
