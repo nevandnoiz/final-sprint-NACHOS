@@ -11,7 +11,6 @@
               :player-vars="{ autoplay: 1 }"
           ></youtube>-->
           <nav-bar class="nav-bar"></nav-bar>
-          <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
           <netflix-slide-main :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-container"></netflix-slide-main>
 
           <div class="shadowing-container">
@@ -34,6 +33,8 @@
             ></seasons-list>-->
 
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
+                      <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
+
             <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
               <a
