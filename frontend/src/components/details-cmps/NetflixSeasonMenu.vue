@@ -50,7 +50,7 @@ export default {
 .menu--main {
 }
 .menu--main li {
-  box-shadow: inset 0 0 9px #ffffff;
+  /* box-shadow: inset 0 0 9px #ffffff; */
   width: 100%;
   color: white;
   background-color: black;
@@ -65,7 +65,7 @@ export default {
 .menu--main li:hover {
   /* box-shadow:         inset 0 0 10px #000000; */
   /* background-color: #dde2e7; */
-  border: 3px solid white;
+  /* border: 3px solid white; */
 }
 .menu--main li:hover .sub-menu {
   max-height: 300px;

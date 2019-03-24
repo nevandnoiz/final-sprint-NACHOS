@@ -1,16 +1,17 @@
 <template>
-  <div class="details" :style="bckImage">
+  <div class="item-main-container">
     <!-- <h1>Nachos details</h1> -->
     <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
       <div class="row" :style="bckColor">
+        <div class="white-fill"></div>
         <div class="item-container">
-          <actor-card :imgs="imgs" :item="item.credits"></actor-card>
+       
           <!-- <youtube
               class="youtube-container"
               :video-id="this.item.videos.results[0].key"
               :player-vars="{ autoplay: 1 }"
           ></youtube>-->
-          <nav-bar class="nav-bar"></nav-bar>
+     
           <div class="shadowing-container">
             <div class="details-text">
               <p>{{item.details.overview}}</p>
@@ -29,9 +30,9 @@
               :seasons="item.seasons"
               :tvShowId="item.details.id"
             ></seasons-list>-->
-
+              
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-                      <!-- <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu> -->
+                      <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
 
             <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
@@ -84,13 +85,11 @@ import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 // import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-// import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
-import ActorCard from "@/components/details-cmps/ActorCard.vue";
+import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
-    ActorCard,
-    // NetflixSeasonMenu,
+    NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
     SeasonsList,
@@ -102,13 +101,12 @@ export default {
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
-    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode)); 
+    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
   },
   data() {
     return {
       isSeasonsListMode: false,
       isTrailer: false,
-      imgs: null
     };
   },
  props: ["item", "dominantColor"],
@@ -147,7 +145,9 @@ a {
 iframe {
   width: 100%;
 }
-
+.item-main-container {
+  display: flex
+}
 .netflix-season-menu-container {
   -webkit-box-shadow: 0px 0px 12px #000000;
     box-shadow: 0px 0px 12px #000000;
@@ -164,6 +164,7 @@ iframe {
     flex-direction: column;
 }
 .netflix-container {
+      padding-bottom: 20px;
   box-shadow: 0px 0px 12px #000000;
   margin-top: 1rem;
   grid-column: 1/6;
@@ -252,14 +253,17 @@ iframe {
 .detalis-sections {
   background-repeat: no-repeat;
   background-size: 100%;
-  height: 580px;
+  height: 495px;
+    background-position-y: 32%;
 }
 .row {
-  /* overflow: hidden; */
-  height: 100% !important;
-  /* width: 100vw; */
-  z-index: 2;
-  position: inherit;
+     /* overflow: hidden; */
+    height: 100% !important;
+    /* width: 100vw; */
+    display: grid;
+    grid-template-rows: 574px 1fr;
+    z-index: 2;
+    position: inherit;
 }
 
 button {
@@ -281,8 +285,15 @@ iframe {
   width: 80vw;
   height: 80vw;
 }
+.white-fill {
+      display: block;
+    background-color: white;
+    grid-row: 2;
+    padding-bottom: 285px
 
+}
 .item-container {
+  
   display: grid;
   z-index: 1;
   /* height: 750px; */
@@ -294,7 +305,7 @@ iframe {
   /* gap: 3em; */
   border-radius: 3px;
   /* padding: 40px; */
-  margin-top: 205px;
+  margin-top: 120px;
   max-width: 67%;
   /* background-color: lightslategray; */
   /* display: flex; */
@@ -481,9 +492,11 @@ iframe {
     height: 580px;
   }
   .row {
-    /* overflow: hidden; */
+     /* overflow: hidden; */
     height: 100% !important;
     /* width: 100vw; */
+    display: grid;
+    grid-template-rows: 580px 1fr;
     z-index: 2;
     position: inherit;
   }
@@ -506,24 +519,6 @@ iframe {
   iframe {
     width: 80vw;
     height: 80vw;
-  }
-
-  .item-container {
-    display: grid;
-    z-index: 1;
-    /* height: 750px; */
-    /* column-gap: 1.5em; */
-    grid-template-columns: 400px 2fr;
-    grid-template-rows: minmax(75px, auto);
-    margin: 0 auto;
-    /* grid-template-rows: repeat(14,75px); */
-    /* gap: 3em; */
-    border-radius: 3px;
-    /* padding: 40px; */
-    margin-top: 205px;
-    max-width: 67%;
-    /* background-color: lightslategray; */
-    /* display: flex; */
   }
 
   .item-poster-img {

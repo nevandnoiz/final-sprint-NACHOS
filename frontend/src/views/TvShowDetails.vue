@@ -1,11 +1,16 @@
 <template>
-  <section v-if="tvShow.details && dominantColor">
+  <div class="tv-details-container" v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-    <netflix-slide-main
-      :seasons="tvShow.seasons"
-      :tvShowId="tvShow.details.id"
-      class="netflix-container"
-    ></netflix-slide-main>
+    <div class="sub-container">
+      <netflix-slide-main
+        :seasons="tvShow.seasons"
+        :tvShowId="tvShow.details.id"
+        class="netflix-container"
+      ></netflix-slide-main>
+      <nav-bar class="nav-bar"></nav-bar>
+      <actor-card :imgs="imgs" :item="tvShow.credits"></actor-card>
+    </div>
+
     <!-- <review-container
     <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
     <review-container
@@ -16,7 +21,7 @@
     <!-- <review-form></review-form> -->
 
     <!-- <i class="fab fa-facebook"></i> -->
-  </section>
+  </div>
 </template>
 
 <script>
@@ -28,6 +33,7 @@ import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
+import ActorCard from "@/components/details-cmps/ActorCard.vue";
 
 export default {
   data() {
@@ -124,6 +130,7 @@ export default {
     }
   },
   components: {
+    ActorCard,
     ItemContainer,
     SeasonsList,
     NetflixSlideMain,
@@ -140,6 +147,16 @@ export default {
 </script>
 
 <style scoped>
+.tv-details-container {
+  display: flex;
+  flex-direction: column;
+}
+.sub-container{
+    margin: 290px auto;
+    display: block;
+    width: 967px;
+
+}
 @media only screen and (max-width: 850px) {
 }
 </style>
