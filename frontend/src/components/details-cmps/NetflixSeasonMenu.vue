@@ -52,6 +52,7 @@ export default {
 .menu--main {
 }
 .menu--main li {
+  box-shadow: inset 0 0 9px #ffffff;
   width: 100%;
   color: white;
   background-color: black;
