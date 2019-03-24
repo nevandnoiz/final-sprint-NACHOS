@@ -9,7 +9,9 @@ import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue
 import { eventBus } from "@/main.js";
 export default {
   async created() {
-    eventBus.$on("onSeasonClick",index => this.season = this.seasons[index]);
+    eventBus.$on("onSeasonClick",index => {
+      this.season = null;
+      this.season = this.seasons[index]});
     let seasonsDeatails = [];
     for (let season of this.seasons) {
       let details = await this.$store.dispatch({
