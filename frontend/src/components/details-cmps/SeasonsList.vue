@@ -5,12 +5,12 @@
         class="season-title"
         @click="selectSeason(index)"
         :key="index"
-        :style="{'background-image':'url(\''+imgURL(season.poster_path)+'\')'}"
+        :style="{'background-image':'url(\''+imgURL(season.data.poster_path)+'\')'}"
       >
-        <h3>{{season.name}}</h3>
+        <h3>{{season.data.name}}</h3>
       </div>
       <transition name="fade" :key="index">
-        <episodes-list v-if="index===currPreviewIdx" :episodes="season.episodes"></episodes-list>
+        <episodes-list v-if="index===currPreviewIdx" :episodes="season.data.episodes"></episodes-list>
       </transition>
     </template>
   </div>
@@ -32,16 +32,11 @@ export default {
     };
   },
   async created() {
-    let seasonsDeatails = [];
-    for (let season of this.seasons) {
-      let details = await this.$store.dispatch({
+    this.seasonsDeatails = await this.$store.dispatch({
         type: "getSeasonDetails",
         id: this.tvShowId,
-        seasonNum: season.season_number
+        seasons: this.seasons
       });
-      if (details.name !== "Specials") seasonsDeatails.push(details);
-    }
-    this.seasonsDeatails = seasonsDeatails;
   },
   methods: {
     selectSeason(idx) {

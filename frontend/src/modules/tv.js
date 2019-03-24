@@ -16,8 +16,8 @@ export default {
   },
   actions: {
     async loadPopularTvShows(context, payload) {
-      const tv = await TvShowsService.getPopularShows()
-      context.commit({ type: 'setPopularTv', tv: tv.results })
+      const tv = await TvShowsService.getTrendingShows()
+      context.commit({ type: 'setPopularTv', tv: tv })
     },
     async getTvShowDetails(context, tvId) {
       const tvDetails = await TvShowsService.getTvShowDetails(tvId)
@@ -47,8 +47,8 @@ export default {
       const links = await TvShowsService.getTvShowWatchLinksByKeyword(keyword)
       return links
     },
-    async getSeasonDetails(context, {id,seasonNum}) {
-      const seasonDetails = await TvShowsService.getSeasonDetails(id,seasonNum)
+    async getSeasonDetails(context, {id,seasons}) {
+      const seasonDetails = await TvShowsService.getSeasonDetails(id,seasons)
       return seasonDetails
     }
   }

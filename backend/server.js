@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
 // Set routes into variables. ex: 'const addMoviesRoute = require('./routes/movies-route')'
+const addMoviesRoute = require('./routes/movies-route')
+const addTvRoute = require('./routes/tv-route')
 
 const app = express()
 app.use(cors({
@@ -25,6 +27,8 @@ app.get('/', (req, res) => {
 })
 
 // Add routes here. ex: 'addMoviesRoute(app)'
+addMoviesRoute(app)
+addTvRoute(app)
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`))
