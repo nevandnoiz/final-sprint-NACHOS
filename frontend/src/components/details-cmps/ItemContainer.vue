@@ -32,7 +32,7 @@
             ></seasons-list>-->
               
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-                      <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
+                      <netflix-season-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
 
             <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
