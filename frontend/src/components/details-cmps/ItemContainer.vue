@@ -4,7 +4,7 @@
     <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
       <div class="row" :style="bckColor">
         <div class="item-container">
-          <actor-card :item="item.credits"></actor-card>
+          <actor-card :imgs="imgs" :item="item.credits"></actor-card>
           <!-- <youtube
               class="youtube-container"
               :video-id="this.item.videos.results[0].key"
@@ -93,7 +93,7 @@ import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
-      ActorCard,
+    ActorCard,
     NetflixSlideMain,
     NavBar,
     SeasonsList,
@@ -104,7 +104,10 @@ export default {
   mounted() {
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
-  created() {
+  async created() {
+    const movieCredits = await this.$store.dispatch("getMovieImages", this.item.details.id);
+    this.imgs = movieCredits
+    console.log(this.imgs)
     eventBus.$on(
       "onSeasonsListClick",
       () => (this.isSeasonsListMode = !this.isSeasonsListMode)
@@ -113,7 +116,8 @@ export default {
   data() {
     return {
       isSeasonsListMode: false,
-      isTrailer: false
+      isTrailer: false,
+      imgs: null
     };
   },
   props: ["item", "dominantColor"],
