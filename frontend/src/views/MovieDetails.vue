@@ -9,7 +9,7 @@
     ></review-container>-->
     <!-- <review-form></review-form> -->
         <div class="sub-container">
-    <actor-card :item="movie.credits"></actor-card>
+    <!-- <actor-card :item="movie.credits"></actor-card> -->
         </div>
 
   </div>
@@ -129,14 +129,12 @@ export default {
 </script>
 
 <style scoped>
-.item-poster-img{
-      background-color: black;
-    padding-bottom: 58px;
-}
+
+
 .sub-container{
     margin: 290px auto;
     display: block;
-    width: 967px;
+    width: 956px
 
 }
 .tv-details-container {

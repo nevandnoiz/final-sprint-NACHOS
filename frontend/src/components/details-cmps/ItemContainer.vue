@@ -18,6 +18,7 @@
             </div>
 
             <div class="shadowing">
+              <pannel-heading class="pannel-heading" :title="'Description'" :dominantColor="dominantColor"></pannel-heading>
               <h1 class="title">{{item.details.title || item.details.name}}</h1>
               <media-icons-bar class="media-icons-bar"></media-icons-bar>
               <user-control-bar class="user-control-bar"></user-control-bar>
@@ -82,6 +83,8 @@ import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
+import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
+
 // import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
@@ -89,6 +92,7 @@ import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
+    PannelHeading,
     NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
@@ -129,6 +133,7 @@ export default {
       return {
         // in the case of redComp, greenComp and blueComp are a vue prop or data
         background: this.dominantColor + "B3"
+        
       };
     },
     imgURL() {
@@ -145,6 +150,19 @@ a {
 iframe {
   width: 100%;
 }
+.pannel-heading{
+ grid-column: 1/8;
+    grid-row: 43;
+}
+   
+.pannel-heading>h1{
+padding: 0 0.5rem;
+    display: flex;
+    background-color: white;
+    height: 100%;
+    align-items: center;
+}
+    
 .item-main-container {
   display: flex
 }
@@ -164,7 +182,8 @@ iframe {
     flex-direction: column;
 }
 .netflix-container {
-      padding-bottom: 20px;
+      padding: 1rem 0;
+      /* padding-bottom: 20px; */
   box-shadow: 0px 0px 12px #000000;
   margin-top: 1rem;
   grid-column: 1/6;
@@ -253,8 +272,8 @@ iframe {
 .detalis-sections {
   background-repeat: no-repeat;
   background-size: 100%;
-  height: 495px;
     background-position-y: 32%;
+        height: 494px;
 }
 .row {
      /* overflow: hidden; */

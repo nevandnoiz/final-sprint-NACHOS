@@ -1,0 +1,47 @@
+<template>
+<div class="main-pannel-heading-container">
+ <div class="start" :style="{'background':''+dominantColor+''}" ></div>
+    <h1>{{title}}</h1>
+    <div class="end" :style="{'background':''+dominantColor+''}" ></div>
+</div>
+</template>
+
+<script>
+export default {
+props: ['dominantColor','title']
+}
+</script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css?family=Arvo");
+
+*{
+    font-family: Arvo;
+}
+
+.main-pannel-heading-container {
+    display: flex;
+    grid-column: 1fr 1fr 1fr;
+    height: 2rem;
+    flex-direction: row;
+    justify-content: center;
+}
+.start{
+/* background-color: red; */
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    width: 2rem;
+}
+
+.end {
+/* background-color: red; */
+    flex-grow: 1;
+}
+h1{
+        background-color: white;
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+</style>
