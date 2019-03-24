@@ -14,13 +14,17 @@ export default new Vuex.Store({
     UsersModule
   },
   state: {
-
+    selectedItem: ''
   },
   getters: {
-
+    selectedItem(state) {
+      return state.selectedItem
+    }
   },
   mutations: {
-    
+    setSelectedItem(state, item) {
+      state.selectedItem = item
+    }
   },
   actions: {
 

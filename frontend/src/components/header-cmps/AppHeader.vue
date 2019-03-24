@@ -1,51 +1,66 @@
 <template>
   <header>
-    <div class="container">
+    <div class="header-container">
       <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
-      <router-link to="/browse/movies">Movies</router-link>
-      <router-link to="/browse/tv">Tv Shows</router-link>
-      <router-link to="/browse/actors">Actors</router-link>
-      <router-link v-if="user" to="/profile">Profile</router-link>
-      <router-link v-else to="/login">login</router-link>
+      <router-link to="/movies">Movies</router-link>
+      <router-link to="/tv">Tv Shows</router-link>
+      <router-link to="/actors">Actors</router-link>
+      <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
+      <a v-else @click="login">login</a>
     </div>
-    <search-bar></search-bar>
+    <!-- <search-bar></search-bar> -->
   </header>
 </template>
 
 <script>
-import searchBar from '@/components/header-cmps/SearchBar.vue'
+import searchBar from "@/components/header-cmps/SearchBar1.vue";
 export default {
   components: {
     searchBar
   },
-  methods:{
-pushToHome(){
-  this.$router.push('/')
-}
+  methods: {
+    pushToHome() {
+      this.$router.push("/");
+    },
+    login() {
+      this.$store.dispatch("loadActivities");
+      this.$store.dispatch("loadUser");
+      setTimeout(() => this.$router.push("/"), 1500);
+    }
   },
-    props: ['user']
+  computed: {
+    user() {
+      return this.$store.getters.currUser;
+    }
+  }
 };
 </script>
 
 
 <style lang="scss" scoped>
 header {
-  height: 100px;
+  height: 60px;
   background-color: rgb(45, 45, 45);
-  .container {
+  .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding: 0 20px;
     img {
-      height: 100px;
+      height: 60px;
       cursor: pointer;
     }
     a {
       color: white;
       margin: 10px;
-      font-size: 30px;
+      font-size: 24px;
+      text-decoration: none;
+      font-family: sans-serif;
+    }
+    h3 {
+      color: white;
+      margin: 10px;
+      font-size: 24px;
       text-decoration: none;
       font-family: sans-serif;
     }

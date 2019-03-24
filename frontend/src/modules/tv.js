@@ -1,51 +1,55 @@
-import TvService from '../services/TvService';
+import TvShowsService from '../services/TvShowsService';
 
 export default {
   state: {
     popularTv: '',
-    selectedTv: null
   },
   getters: {
-    showsToDisplay(state) {
+    tvShowsToDisplay(state) {
       return state.popularTv
     },
-    selectedTv(state) {
-      return state.selectedTv
-    }
   },
   mutations: {
     setPopularTv(state, { tv }) {
       state.popularTv = tv
     },
-    setSelectedTv(state, tv) {
-      state.selectedTv = tv
-    }
   },
   actions: {
-    async loadPopularTv(context, payload) {
-      const tv = await TvService.getPopularShows()
-      console.log('kaka')
-      context.commit({ type: 'setPopularTv', tv: tv.results })
+    async loadPopularTvShows(context, payload) {
+      const tv = await TvShowsService.getTrendingShows()
+      context.commit({ type: 'setPopularTv', tv: tv })
     },
-    async getTvDetails(context, tvId) {
-      const tvDetails = await TvService.getTvDetails(tvId)
+    async getTvShowDetails(context, tvId) {
+      const tvDetails = await TvShowsService.getTvShowDetails(tvId)
       return tvDetails
     },
-    async getTvImages(context, tvId) {
-      const tvImages = await TvService.getTvImages(tvId)
+    async getTvShowImages(context, tvId) {
+      const tvImages = await TvShowsService.getTvShowImages(tvId)
       return tvImages
     },
-    async getTvExternalIds(context, tvId) {
-      const tvExternalIds = await TvService.getTvExternalIds(tvId)
+    async getTvShowExternalIds(context, tvId) {
+      const tvExternalIds = await TvShowsService.getTvShowExternalIds(tvId)
       return tvExternalIds
     },
-    async getTvByKeyword(context, keyword) {
-      const tv = await TvService.getTvByKeyword(keyword)
+    async getTvShowByKeyword(context, keyword) {
+      const tv = await TvShowsService.getTvShowByKeyword(keyword)
       return tv
     },
-    async getTvCredits(context, id) {
-      const tvCredits = await TvService.getTvCredits(id)
+    async getTvShowCredits(context, id) {
+      const tvCredits = await TvShowsService.getTvShowCredits(id)
       return tvCredits
+    },
+    async getTvShowVideos(context, id) {
+      const tvShowVideos = await TvShowsService.getTvShowVideos(id)
+      return tvShowVideos
+    },
+    async getTvShowWatchLinksByKeyword(context, keyword) {
+      const links = await TvShowsService.getTvShowWatchLinksByKeyword(keyword)
+      return links
+    },
+    async getSeasonDetails(context, {id,seasons}) {
+      const seasonDetails = await TvShowsService.getSeasonDetails(id,seasons)
+      return seasonDetails
     }
   }
 }

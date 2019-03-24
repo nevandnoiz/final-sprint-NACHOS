@@ -1,19 +1,26 @@
 <template>
-  <div class="backdrop-container" @click="pushToDetails(topFive[currIdx])">
+  <div class="backdrop-container" @click="pushToDetails(topItems[currIdx])">
     <!-- <button @click="next">Next</button> -->
-    <div v-for="(movie, index) in topFive" :key="index">
+    <div v-for="(item, index) in topItems" :key="index">
       <transition name="slide">
         <div
           class="backdrop-carousel-img"
           v-if="currIdx === index"
-          :style="{'background-image':'url(\''+imgURL(movie.backdrop_path)+'\')'}"
+          :style="{'background-image':'url(\''+imgURL(item.backdrop_path)+'\')'}"
         >
-          <h1>{{movie.title}}</h1>
+          <h1>{{item.title || item.name}}</h1>
         </div>
       </transition>
     </div>
     <div class="backdrop-num-btns">
-      <button @click.stop="currIdx=index" v-for="(movie, index) in topFive" :key="index"></button>
+      <div
+        class="backdrop-num-btn"
+        @click.stop="currIdx=index"
+        v-for="(item, index) in topItems"
+        :key="index"
+      >
+        <button :class="{'selected-btn': currIdx === index}"></button>
+      </div>
     </div>
   </div>
 </template>
@@ -23,12 +30,13 @@ import UtilityService from "@/services/UtilityService.js";
 import { clearTimeout } from "timers";
 
 export default {
-  props: ["topFive"],
+  props: ["topItems"],
   components: {},
   data() {
     return {
       currIdx: 0,
-      nextImgIntrvl: null
+      nextImgIntrvl: null,
+      itemTypeRoute: null
     };
   },
   methods: {
@@ -38,14 +46,14 @@ export default {
     nextImg() {
       this.currIdx = (this.currIdx + 1) % 5;
     },
-    pushToDetails(movie) {
-      this.$store.commit('setSelectedMovie', movie)
-      console.log(movie.id)
-      this.$router.push(`/details/${movie.id}`);
+    pushToDetails(item) {
+      this.$store.commit("setSelectedItem", item);
+      this.$router.push(`${this.itemTypeRoute}/details/${item.id}`);
     }
   },
   computed: {},
   created() {
+    this.itemTypeRoute = this.$route.path;
     this.nextImgIntrvl = setInterval(this.nextImg, 10000);
   },
   destroyed() {
@@ -73,8 +81,8 @@ export default {
       font-size: 46px;
       position: relative;
       top: 70%;
-      left: 8%;
-      text-shadow: 0 0 3px black;
+      left: 3%;
+      text-shadow: 3px 3px 6px black;
     }
   }
 }
@@ -83,18 +91,27 @@ export default {
   display: flex;
   justify-content: space-evenly;
   padding: 2px;
-  width: 200px;
+  width: 500px;
   position: absolute;
-  left: 10%;
-  bottom: 30%;
-  button {
-    cursor: pointer;
-    height: 20px;
-    color: white;
-    background: none;
-    border-radius: 50%;
-    border: 2px solid rgb(170, 170, 170);
-    box-shadow: 0 0 1px black;
+  left: 2%;
+  bottom: 26.8%;
+  .backdrop-num-btn {
+    height: 36px;
+    button {
+      cursor: pointer;
+      height: 3px;
+      width: 90px;
+      color: white;
+      opacity: 0.5;
+      background-color: white;
+      border: none;
+      border-radius: 2px;
+      box-shadow: 0 0 1px black;
+      transition: 0.4s;
+    }
+    .selected-btn {
+      opacity: 0.9;
+    }
   }
 }
 .slide-enter-active,

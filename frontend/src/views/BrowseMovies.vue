@@ -1,8 +1,8 @@
 <template>
   <div class="browse">
-    <backdrop-cmp :topFive="topFiveItems"></backdrop-cmp>
+    <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
     <div class="grid-container">
-      <item-preview v-for="(item, index) in popularItems" :key="index" :item="item"></item-preview>
+      <item-preview v-for="(movie, index) in popularItems" :key="index" :item="movie"></item-preview>
     </div>
   </div>
 </template>
@@ -21,37 +21,23 @@ export default {
     ItemPreview
   },
   data() {
-    return {
-      sectionKey: null,
-      SectionKey: null
-    };
+    return {};
   },
   methods: {
     posterImgURL(posterPath) {
       return UtilityService.imgURL(posterPath, 300);
     },
     loadItems() {
-      let sectionRoute = this.$route.params.section;
-      this.sectionKey = sectionRoute;
-      this.SectionKey =
-        sectionRoute.charAt(0).toUpperCase() + sectionRoute.slice(1);
-      console.log(this.sectionKey, this.SectionKey);
-      let items = "";
-      if (sectionRoute === "movies")
-        items = this.$store.getters.moviesToDisplay;
-      else if (sectionRoute === "tv")
-        items = this.$store.getters.showsToDisplay;
-      if (!items) {
-        this.$store.dispatch(`loadPopular${this.SectionKey}`);
-      }
+      let movies = this.$store.getters.moviesToDisplay;
+      if (!movies) {
+        console.log("Loaded from api");
+        this.$store.dispatch(`loadPopularMovies`);
+      } else console.log("Loaded from store");
     }
   },
   computed: {
     popularItems() {
-      if (this.sectionKey === "movies")
-        return this.$store.getters.moviesToDisplay;
-      else if (this.sectionKey === "tv")
-        return this.$store.getters.showsToDisplay;
+      return this.$store.getters.moviesToDisplay;
     },
     topFiveItems() {
       let topFiveItems = this.popularItems.slice(0, 5);
@@ -79,5 +65,21 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
   grid-area: 2/1/2/1;
+}
+
+@media only screen and (max-width: 850px) {
+  .browse {
+    display: grid;
+    grid-template: 500px 1fr/1fr;
+    padding: 20px 0;
+  }
+  .grid-container {
+    padding: 20px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
+    grid-area: 2/1/2/1;
+  }
 }
 </style>

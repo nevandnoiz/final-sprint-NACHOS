@@ -29,16 +29,17 @@ export default {
       isHovered: false,
       isChecked: false,
       isSelected: false
+      itemTypeRoute: null
     };
   },
   methods: {
     imgURL() {
-      return UtilityService.imgURL(this.item.poster_path, 300);
+      return UtilityService.imgURL(this.item.poster_path, 500);
     },
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
-      this.$store.commit("setSelectedMovie", this.item);
-      this.$router.push(`/details/${itemId}`);
+      this.$store.commit("setSelectedItem", this.item);
+      this.$router.push(`${this.itemTypeRoute}/details/${itemId}`);
     },
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
@@ -53,6 +54,7 @@ export default {
   },
   computed: {},
   created() {
+    this.itemTypeRoute=this.$route.path
     this.img = this.imgURL();
   }
 };
@@ -87,7 +89,7 @@ export default {
       transition: 0.25s;
     }
     .checked {
-      background-color: rgb(0, 179, 0);
+      background-color: rgb(1, 221, 1);
     }
     a {
       color: inherit; /* blue colors for links too */
