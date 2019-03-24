@@ -1,13 +1,21 @@
 <template>
   <section v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
+    <netflix-slide-main
+      :seasons="tvShow.seasons"
+      :tvShowId="tvShow.details.id"
+      class="netflix-container"
+    ></netflix-slide-main>
+    <!-- <review-container
     <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
     <review-container
       v-for="(review, index) in tvShow.reviews.results"
       :key="index"
-      :review="review"
-    ></review-container>
-    <review-form></review-form>
+      :review="review" item.details.id item.seasons
+    ></review-container>-->
+    <!-- <review-form></review-form> -->
+
+    <!-- <i class="fab fa-facebook"></i> -->
   </section>
 </template>
 
@@ -16,12 +24,10 @@ import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import SeasonsList from "../components/details-cmps/SeasonsList.vue";
+import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-const sightengine = require("sightengine")(
-  "1163479865",
-  "rQZS3hEBvZSJ9Nqbc5qu"
-);
+import AvgColorService from "@/services/AvgColorService.js";
 
 export default {
   data() {
@@ -58,27 +64,17 @@ export default {
       "getTvShowVideos",
       tvShowId
     );
-    this.getDominantColor();
+    this.setDominantColor();
   },
   destroyed() {
+    domcolor = null;
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    async getDominantColor(url) {
-      var domColor = await sightengine
-        .check(["properties"])
-        .set_url(
-          `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
-        );
-      this.dominantColor = "#d39f4c";
-      // var hex = domColor.colors.dominant.hex + "";
-      // // Check if color background is light and convert it to darker
-      // if (UtilityService.lightOrDark(hex) === "light")
-      //   hex = `#${UtilityService.LightenDarkenColor(
-      //     hex.replace(/#/gm, ""),
-      //     -60
-      //   )}`;
-      // this.dominantColor = hex;
+    async setDominantColor() {
+      this.dominantColor = await AvgColorService.domColor(
+        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
+      );
     },
     setReviews() {
       this.tvShow.reviews = {
@@ -127,18 +123,12 @@ export default {
           }
         ]
       };
-    },
-    async getTvShowDetails() {
-      // this.tvShow.videos = tvShowVideos;
-      // const tvShowTest = await this.$store.dispatch(
-      //   "getTvShowWatchLinksByKeyword",
-      //   "prison break"
-      // );
     }
   },
   components: {
     ItemContainer,
     SeasonsList,
+    NetflixSlideMain,
     ReviewContainer,
     ReviewForm,
     NavBar
@@ -153,4 +143,6 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (max-width: 850px) {
+}
 </style>

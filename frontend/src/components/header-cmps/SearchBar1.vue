@@ -1,7 +1,7 @@
 <template>
   <section>
     <p class="content"></p>
-    <b-field label="Find a movie">
+    <b-field>
       <b-autocomplete
         :data="data"
         placeholder="e.g. Fight Club"

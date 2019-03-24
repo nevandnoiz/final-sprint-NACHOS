@@ -1,123 +1,272 @@
 <template>
-  <div class="details">
-    <div v-if="isTrailer">
-      <youtube
-        class="youtube-container"
-        :video-id="this.item.videos.results[0].key"
-        player-vars="{ autoplay: 1 }"
-      ></youtube>
-    </div>
-
+  <div class="details" :style="bckImage">
     <!-- <h1>Nachos details</h1> -->
     <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
       <div class="row" :style="bckColor">
+        <div class="item-container">
+          <actor-card :imgs="imgs" :item="item.credits"></actor-card>
+          <!-- <youtube
+              class="youtube-container"
+              :video-id="this.item.videos.results[0].key"
+              :player-vars="{ autoplay: 1 }"
+          ></youtube>-->
+          <nav-bar class="nav-bar"></nav-bar>
+          <div class="shadowing-container">
+            <div class="details-text">
+              <p>{{item.details.overview}}</p>
+            </div>
 
+            <div class="shadowing">
+              <h1 class="title">{{item.details.title || item.details.name}}</h1>
+              <media-icons-bar class="media-icons-bar"></media-icons-bar>
+              <user-control-bar class="user-control-bar"></user-control-bar>
+            </div>
+          </div>
 
-      <div class="item-container">
-        <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-        <div class="item-details">
-          <div class="details-text">
-            <h1>{{item.details.title || item.details.name}}</h1>
-            <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
-            <!-- <h4>Release date: {{item.details.release_date}}</h4> -->
-            <p>{{item.details.overview}}</p>
+          <div class="poster-image-container">
+            <!-- <seasons-list
+              v-show="isSeasonsListMode"
+              :seasons="item.seasons"
+              :tvShowId="item.details.id"
+            ></seasons-list>-->
+
+            <img class="item-poster-img" ref="itemPoster" :src="imgURL">
+                      <!-- <netflix-season-menu :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu> -->
+
+            <!-- <div class="icons-container">
+              <i @click="onTrailer" class="far fa-play-circle"></i>
+              <a
+                target="_blank"
+                v-if="item.externalIds.twitter_id"
+                :href="`https://twitter.com/${item.externalIds.twitter_id}`"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                target="_blank"
+                v-if="item.externalIds.facebook_id"
+                :href="`https://www.facebook.com/${item.externalIds.facebook_id}`"
+              >
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a
+                target="_blank"
+                v-if="item.externalIds.instagram_id"
+                :href="`https://www.instagram.com/${item.externalIds.instagram_id}`"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                target="_blank"
+                v-if="item.externalIds.imdb_id"
+                :href="`https://www.imdb.com/title/${item.externalIds.imdb_id}`"
+              >
+                <i class="fab fa-imdb"></i>
+              </a>
+            </div> -->
           </div>
-          <div class="icons-container">
-            <i @click="onTrailer" class="far fa-play-circle"></i>
-            <a
-              target="_blank"
-              v-if="item.externalIds.twitter_id"
-              :href="`https://twitter.com/${item.externalIds.twitter_id}`"
-            >
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a
-              target="_blank"
-              v-if="item.externalIds.facebook_id"
-              :href="`https://www.facebook.com/${item.externalIds.facebook_id}`"
-            >
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a
-              target="_blank"
-              v-if="item.externalIds.instagram_id"
-              :href="`https://www.instagram.com/${item.externalIds.instagram_id}`"
-            >
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a
-              target="_blank"
-              v-if="item.externalIds.imdb_id"
-              :href="`https://www.imdb.com/title/${item.externalIds.imdb_id}`"
-            >
-              <i class="fab fa-imdb"></i>
-            </a>
-          </div>
+
+          <!-- <div class="item-details"> -->
+
+          <!-- </div> -->
         </div>
+        <button v-if="isTrailer" @click="onTrailer">Trailer</button>
       </div>
     </div>
-    <button v-if="isTrailer" @click="onTrailer">Trailer</button>
   </div>
-
-
-
-      </div>
 </template>
 <script>
+import "@/services/AvgColorService.js";
 import UtilityService from "@/services/UtilityService.js";
-
-// import colorThief from 'colorthief'
-// const color = new ColorThief()
-// var sightengine = require('sightengine')('1163479865', 'rQZS3hEBvZSJ9Nqbc5qu')
+import NavBar from "@/components/details-cmps/NavBar.vue";
+import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
+import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
+// import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
+import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
+// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
+// import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
+import ActorCard from "@/components/details-cmps/ActorCard.vue";
+import { eventBus } from "@/main.js";
 export default {
-  created() {
-    console.log(this.dominantColor)
-      
-    
+  components: {
+    ActorCard,
+    // NetflixSeasonMenu,
+    // NetflixSlideMain,
+    NavBar,
+    SeasonsList,
+    // NetflixSlideSeason,
+    UserControlBar,
+    MediaIconsBar
+  },
+  mounted() {
+    // document.getElementById("youtube-player-1").style.width = "100%";
+  },
+  async created() {
+    console.log('needed', this.item.details.id ,this.item.seasons )
+    // const movieCredits = await this.$store.dispatch("getMovieImages",this.item.details.id);
+    // this.imgs = movieCredits;
+    console.log('container item',this.item);
+    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
+     
   },
   data() {
     return {
-      isTrailer: false
+      isSeasonsListMode: false,
+      isTrailer: false,
+      imgs: null
     };
   },
-  props: ["item","dominantColor"],
+ props: ["item", "dominantColor"],
   methods: {
+    listing() {
+      console.log("img listening");
+    },
     onTrailer() {
       console.log("on trailer click");
       this.isTrailer = !this.isTrailer;
     }
   },
   computed: {
-    bckImage(){
+       bckImage() {
       return {
-         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.item.details.backdrop_path})`
-      }
+        backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
+          this.item.details.backdrop_path
+        })`
+      };
     },
     bckColor() {
-        return {
-            // in the case of redComp, greenComp and blueComp are a vue prop or data
-            background : this.dominantColor+'B3'
-        };
+      return {
+        // in the case of redComp, greenComp and blueComp are a vue prop or data
+        background: this.dominantColor + "B3"
+      };
     },
     imgURL() {
-      return UtilityService.imgURL(this.item.details.poster_path, 300);
+      return UtilityService.imgURL(this.item.details.poster_path, 500);
     }
   }
 };
 </script>
 
 <style scoped>
-.detalis-sections {
-background-repeat: no-repeat;
-    background-size: 100%;
-    height: 580px;
+a {
+  font: -webkit-control;
 }
-.row{
-    /* overflow: hidden; */
-    height: 100% !important;
-    /* width: 100vw; */
-    z-index: 2;
-    position: inherit;
+iframe {
+  width: 100%;
+}
+
+.netflix-season-menu-container {
+  -webkit-box-shadow: 0px 0px 12px #000000;
+    box-shadow: 0px 0px 12px #000000;
+    /* margin-top: 1rem; */
+    width: 100%;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: flex-end;
+    /* position: relative; */
+    /* display: flex; */
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.netflix-container {
+  box-shadow: 0px 0px 12px #000000;
+  margin-top: 1rem;
+  grid-column: 1/6;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 0 !important;
+  margin-top: 30px;
+  grid-column: 2/4;
+  font-size: 2rem;
+  grid-row: 1;
+  color: white;
+  line-height: 2.4rem;
+  align-self: end;
+}
+.nav-bar {
+  grid-column: 1/3;
+  grid-row: 3;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin: m;
+  margin-bottom: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.poster-image-container {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1;
+  grid-row: 1;
+}
+.media-icons-bar {
+  /* display: block; */
+  /* z-index: 40; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /* flex-grow: 0; */
+  grid-column: 2;
+  grid-row: 5;
+  /* margin-left: 2em; */
+}
+.shadowing-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 374px 1fr;
+  grid-column: 2;
+  grid-row: 1;
+
+  /* display: none; */
+}
+.user-control-bar {
+  z-index: 10;
+  grid-column: 2;
+  grid-row: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.shadowing {
+  grid-column: 2;
+  grid-template: repeat(10, 1fr);
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: 2em 1fr 1fr;
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+.detalis-sections {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 580px;
+}
+.row {
+  /* overflow: hidden; */
+  height: 100% !important;
+  /* width: 100vw; */
+  z-index: 2;
+  position: inherit;
 }
 
 button {
@@ -132,28 +281,38 @@ a {
   color: inherit;
   text-decoration: none;
 }
-i{
-  color: white
+i {
+  color: white;
 }
 iframe {
   width: 80vw;
   height: 80vw;
 }
+
 .item-container {
+  display: grid;
+  z-index: 1;
+  /* height: 750px; */
+  /* column-gap: 1.5em; */
+  grid-template-columns: 400px 2fr;
+  grid-template-rows: minmax(75px, auto) 1fr;
   margin: 0 auto;
+  /* grid-template-rows: repeat(14,75px); */
+  /* gap: 3em; */
   border-radius: 3px;
-  padding: 40px;
-  max-width: 60%;
+  /* padding: 40px; */
+  margin-top: 205px;
+  max-width: 67%;
   /* background-color: lightslategray; */
-  display: flex;
+  /* display: flex; */
 }
 
 .item-poster-img {
-  border-radius: 5px;
-  width: 300px;
-  /* SHADOWS */
+  /* border-radius: 5px; */
+  width: 400px;
+  grid-column: 1;
+  grid-row: 1;
   -webkit-box-shadow: 0px 0px 12px #000000;
-  -moz-box-shadow: 0px 0px 12px #000000;
   box-shadow: 0px 0px 12px #000000;
   background-color: #dddddd;
   font-family: Verdana, Geneva, sans-serif;
@@ -161,8 +320,24 @@ iframe {
   color: #888888;
   text-align: center;
 }
+.icons-container {
+  box-shadow: 0px 0px 12px #000000;
+  color: black;
+  background-color: black;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-row: 2;
+  grid-column: 1;
+}
 .icons-container > * {
-  font-size: 2rem;
+  font-size: 3rem;
   margin: 0 0.5rem;
 }
 .icons-container > *:hover {
@@ -171,17 +346,28 @@ iframe {
 .details {
   /* background-color: lightslategray; */
 }
+.details-text {
+  padding: 20px;
+  color: black;
+  margin: 0;
+  grid-column: 2;
+  /* padding-top: 300px; */
+  grid-row: 2;
+  /* padding: 0; */
+}
 .details-text > * {
-  
-  margin: 5px 0;
+  /* color: black; */
+  margin: 0;
+
+  padding: 0;
 }
-.details-text>p {
-font-size: 1.4rem;
-color: white
+.details-text > p {
+  font-size: 1.4rem;
+  color: black;
 }
-.details-text>h1 {
-font-size: 2rem;
-color: white
+.details-text > h1 {
+  font-size: 2rem;
+  color: black;
 }
 .item-container > img {
   margin-right: 20px;
@@ -194,8 +380,16 @@ color: white
 .item-details > p {
   margin-top: 20px;
 }
-
+iframe {
+  width: 100%;
+}
+#youtube-player-1 {
+  width: 100%;
+}
 .youtube-container {
+  width: 100%;
+  grid-row: 2;
+  grid-column: 1/4;
   /* position: fixed; */
   right: 0;
   left: 0;
@@ -207,7 +401,228 @@ color: white
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 50px;
+  /* padding: 50px; */
   /* background-color: lightgray; */
+}
+.youtube-container > iframe {
+  width: 100% !important;
+}
+@media only screen and (max-width: 850px) {
+  a {
+    font: -webkit-control;
+  }
+  .nav-bar {
+    grid-column: 1/3;
+    grid-row: 2;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin: m;
+    margin-bottom: 3;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .poster-image-container {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .media-icons-bar {
+    /* display: block; */
+    /* z-index: 40; */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    /* flex-grow: 0; */
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 2em;
+  }
+  .shadowing-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 374px 1fr;
+    grid-column: 2;
+    grid-row: 1;
+
+    /* display: none; */
+  }
+  .user-control-bar {
+    z-index: 10;
+    grid-column: 2;
+    grid-row: 3;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .shadowing {
+    grid-column: 2;
+    grid-template: repeat(10, 1fr);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 2em 1fr 1fr;
+    background: -webkit-linear-gradient(
+      left,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0)
+    );
+  }
+  .detalis-sections {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 580px;
+  }
+  .row {
+    /* overflow: hidden; */
+    height: 100% !important;
+    /* width: 100vw; */
+    z-index: 2;
+    position: inherit;
+  }
+
+  button {
+    position: relative;
+  }
+  * {
+    color: black;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  i {
+    color: white;
+  }
+  iframe {
+    width: 80vw;
+    height: 80vw;
+  }
+
+  .item-container {
+    display: grid;
+    z-index: 1;
+    /* height: 750px; */
+    /* column-gap: 1.5em; */
+    grid-template-columns: 400px 2fr;
+    grid-template-rows: minmax(75px, auto);
+    margin: 0 auto;
+    /* grid-template-rows: repeat(14,75px); */
+    /* gap: 3em; */
+    border-radius: 3px;
+    /* padding: 40px; */
+    margin-top: 205px;
+    max-width: 67%;
+    /* background-color: lightslategray; */
+    /* display: flex; */
+  }
+
+  .item-poster-img {
+    /* border-radius: 5px; */
+    width: 400px;
+    grid-column: 1;
+    grid-row: 1;
+    -webkit-box-shadow: 0px 0px 12px #000000;
+    box-shadow: 0px 0px 12px #000000;
+    background-color: #dddddd;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12pt;
+    color: #888888;
+    text-align: center;
+  }
+  .icons-container {
+    box-shadow: 0px 0px 12px #000000;
+    color: black;
+    background-color: black;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    align-items: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .icons-container > * {
+    font-size: 3rem;
+    margin: 0 0.5rem;
+  }
+  .icons-container > *:hover {
+    cursor: pointer;
+  }
+  .details {
+    /* background-color: lightslategray; */
+  }
+  .details-text {
+    padding: 20px;
+    color: black;
+    margin: 0;
+    grid-column: 2;
+    /* padding-top: 300px; */
+    grid-row: 2;
+    /* padding: 0; */
+  }
+  .details-text > * {
+    /* color: black; */
+    margin: 0;
+
+    padding: 0;
+  }
+  .details-text > p {
+    font-size: 1.4rem;
+    color: black;
+  }
+  .details-text > h1 {
+    font-size: 2rem;
+    color: black;
+  }
+  .item-container > img {
+    margin-right: 20px;
+  }
+  .item-details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .item-details > p {
+    margin-top: 20px;
+  }
+
+  .youtube-container {
+    grid-column: 1/3;
+    grid-row: 2;
+    /* position: fixed; */
+    right: 0;
+    left: 0;
+    top: 10vw;
+    margin: 50px auto 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 50px;
+    /* background-color: lightgray; */
+  }
 }
 </style>

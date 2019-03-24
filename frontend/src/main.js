@@ -4,11 +4,16 @@ import Element from 'element-ui'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 import router from './router'
 import store from './store' 
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+// import Buefy from 'buefy'
+// import 'buefy/dist/buefy.css'
 import './registerServiceWorker'
+// add jquery globaly
 
-Vue.use(Buefy)
+export const eventBus = new Vue()
+// TODO Get it out from globaly
+window.domcolor = null
+
+// Vue.use(Buefy)
 Vue.use(Element)
 // Vue.use(fac)
 Vue.use(VueYouTubeEmbed)
