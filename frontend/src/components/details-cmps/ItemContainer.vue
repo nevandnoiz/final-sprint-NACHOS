@@ -9,14 +9,16 @@
               :video-id="this.item.videos.results[0].key"
               :player-vars="{ autoplay: 1 }"
           ></youtube>-->
-          <!-- <actor-card-seasons></actor-card-seasons> -->
-          <!-- <actor-card :seasons="item.seasons" :tvShowId="item.details.id"></actor-card> -->
           <nav-bar class="nav-bar"></nav-bar>
+          <netflix-slide-main
+            v-if="isSeasonsListMode"
+            class="netflix-container"
+            :seasons="item.seasons"
+            :tvShowId="item.details.id"
+          ></netflix-slide-main>
 
           <div class="shadowing-container">
             <div class="details-text">
-              <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
-              <!-- <h4>Release date: {{item.details.release_date}}</h4> -->
               <p>{{item.details.overview}}</p>
             </div>
 
@@ -28,13 +30,13 @@
           </div>
 
           <div class="poster-image-container">
-            <seasons-list
+            <!-- <seasons-list
               v-show="isSeasonsListMode"
               :seasons="item.seasons"
               :tvShowId="item.details.id"
-            ></seasons-list>
+            ></seasons-list>-->
 
-            <img v-show="!isSeasonsListMode" class="item-poster-img" ref="itemPoster" :src="imgURL">
+            <img class="item-poster-img" ref="itemPoster" :src="imgURL">
             <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
               <a
@@ -75,7 +77,6 @@
         <button v-if="isTrailer" @click="onTrailer">Trailer</button>
       </div>
     </div>
-              <actor-card-seasons :seasons="item.seasons" :tvShowId="item.details.id"></actor-card-seasons>
   </div>
 </template>
 <script>
@@ -84,21 +85,21 @@ import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
-import ActorCard from "@/components/details-cmps/ActorCard.vue";
+import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
-import ActorCardSeasons from "@/components/details-cmps/ActorCardSeasons.vue";
+import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
-    ActorCardSeasons,
+    NetflixSlideMain,
     NavBar,
     SeasonsList,
-    ActorCard,
+    NetflixSlideSeason,
     UserControlBar,
     MediaIconsBar
   },
   mounted() {
-    document.getElementById("youtube-player-1").style.width = "100%";
+    // document.getElementById("youtube-player-1").style.width = "100%";
   },
   created() {
     eventBus.$on(
@@ -149,6 +150,15 @@ a {
 }
 iframe {
   width: 100%;
+}
+
+.netflix-container {
+  box-shadow: 0px 0px 12px #000000;
+  margin-top: 1rem;
+  grid-column: 1/6;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
 }
 
 .title {

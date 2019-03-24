@@ -1,18 +1,18 @@
 <template>
   <section>
-    <div class="div">
+    <div class="div btn-container">
       <button
         @click="onSelectSeason(index)"
         v-for="(seasonList, index) in this.seasons"
         :key="index"
       >{{seasonList.name}}</button>
     </div>
-    <actor-card v-if="this.season" :season="this.season"></actor-card>
+    <netflix-slide-season v-if="this.season" :season="this.season"></netflix-slide-season>
   </section>
 </template>
 
 <script>
-import ActorCard from "@/components/details-cmps/ActorCard.vue";
+import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 
 export default {
   async created() {
@@ -27,10 +27,11 @@ export default {
     }
 
     this.seasons = seasonsDeatails;
+    this.season = this.seasons[0]
         console.log('do we have season?', this.seasons, seasonsDeatails)
   },
   components: {
-    ActorCard
+    NetflixSlideSeason
   },
   data() {
     return {
@@ -40,14 +41,22 @@ export default {
   },
   methods: {
     onSelectSeason(index) {
-      this.season = this.seasons[index];
-              console.log('checkingbtn', this.season)
-
+      this.season = null;
+      setTimeout(() => {
+        this.season = this.seasons[index];
+      }, 0);
     }
   },
   props: ["seasons", "tvShowId"]
 };
 </script>
 
-<style>
+<style scoped>
+.btn-container {
+        position: absolute;
+    top: 0;
+    order: 2;
+    margin-top: 0.5rem;
+    z-index: 2;
+}
 </style>

@@ -3,7 +3,7 @@
     <div class="cards-container">
       <swiper :options="swiperOptions">
         <swiper-slide v-for="(eposide, index) in this.season.episodes" :key="index">
-          <actor-card-single
+          <netflix-epo-card
             :epoImg="eposide.still_path"
             :title="eposide.name"
             :description="eposide.overview"
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import ActorCardSingle from "@/components/details-cmps/Actor-Card-Single.vue";
+import NetflixEpoCard from "@/components/details-cmps/NetflixEpoCard.vue";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 // import UtilityService from "@/services/UtilityService.js";
 export default {
   components: {
-    ActorCardSingle,
+    NetflixEpoCard,
     swiper,
     swiperSlide
   },
@@ -46,7 +46,7 @@ export default {
       },
       seasonsDeatails: null
     };
-  }
+  },
 };
 </script>
 
@@ -64,7 +64,7 @@ export default {
 .main-container {
   z-index: 10;
   grid-row: 2;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   grid-column: 1/5;
 }
 .swiper-container {
