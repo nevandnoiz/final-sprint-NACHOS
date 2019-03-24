@@ -5,7 +5,7 @@
       v-for="(review, index) in movie.reviews.results"
       :key="index"
       :review="review"
-    ></review-container> -->
+    ></review-container>-->
     <!-- <review-form></review-form> -->
   </section>
 </template>
@@ -16,6 +16,7 @@ import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
+import AvgColorService from "@/services/AvgColorService.js";
 
 export default {
   data() {
@@ -45,8 +46,8 @@ export default {
     this.movie.credits = movieCredits;
     const movieVideos = await this.$store.dispatch("getMovieVideos", movieId);
     this.movie.videos = movieVideos;
-    this.dominantColor="white"
-  },
+    this.setDominantColor();
+},
   destroyed() {
     this.$store.commit("setSelectedItem", null);
   },
@@ -98,6 +99,11 @@ export default {
           }
         ]
       };
+    },
+    async setDominantColor() {
+      this.dominantColor = await AvgColorService.domColor(
+        `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
+      );
     },
   },
   components: {

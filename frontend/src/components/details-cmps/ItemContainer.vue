@@ -76,7 +76,7 @@
   </div>
 </template>
 <script>
-import "@/services/average-color.js";
+import "@/services/AvgColorService.js";
 import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
@@ -116,7 +116,7 @@ export default {
       imgs: null
     };
   },
-  props: ["item", "dominantColor"],
+ props: ["item", "dominantColor"],
   methods: {
     listing() {
       console.log("img listening");
@@ -127,7 +127,7 @@ export default {
     }
   },
   computed: {
-    bckImage() {
+       bckImage() {
       return {
         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
           this.item.details.backdrop_path

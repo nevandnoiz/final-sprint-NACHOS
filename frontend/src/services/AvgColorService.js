@@ -1,39 +1,30 @@
 export default {
   domColor
 }
-function domColor(imgUrl) {
-  getDomColor(imgUrl)
-  
+async function domColor(imgUrl) {
+  let hex = await getDomColor(imgUrl)
+  return hex;
 }
-function getDomColor(imgUrl) {
+async function getDomColor(imgUrl) {
   var element = document.createElement('div');
   element.className = 'row';
   element.innerHTML =
     '<div class="cell image">' +
     '  <img />' +
-    '</div>' +
-    '<div class="cell color">' +
-    '  <div class="box"></div>' +
-    '  <ul>' +
-    '    <li class="rgb"></li>' +
-    '    <li class="hex"></li>' +
-    '    <li class="hsl"></li>' +
-    '  </ul>' +
-    '</div>';
+    '</div>'
 
   var img = element.querySelector('img');
   img.crossOrigin = "Anonymous";
-  // img.src = URL.createObjectURL(file);
   img.src = imgUrl
 
-  img.onload = function() {
-    var rgb = getAverageColor(img);
-    var hexStr = '#' + ('0'+rgb.r.toString(16)).slice(-2) + ('0'+rgb.g.toString(16)).slice(-2) + ('0'+rgb.b.toString(16)).slice(-2);
-    hexStr = JSON.parse(JSON.stringify(hexStr))
-    // console.log(hexStr)
-     domcolor = hexStr
-    return hexStr;
-  };
+  var hexPrm = new Promise((resolve, rej) => {
+    img.onload = async function () {
+      var rgb = await getAverageColor(img);
+      var hexStr = '#' + ('0' + rgb.r.toString(16)).slice(-2) + ('0' + rgb.g.toString(16)).slice(-2) + ('0' + rgb.b.toString(16)).slice(-2);
+      resolve(hexStr)
+    };
+  })
+  return hexPrm
 }
 
 function getAverageColor(img) {
@@ -52,8 +43,8 @@ function getAverageColor(img) {
 
   for (var i = 0, l = data.length; i < l; i += 4) {
     r += data[i];
-    g += data[i+1];
-    b += data[i+2];
+    g += data[i + 1];
+    b += data[i + 2];
   }
 
   r = Math.floor(r / (data.length / 4));

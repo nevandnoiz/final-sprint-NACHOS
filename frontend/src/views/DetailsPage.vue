@@ -21,7 +21,7 @@ import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import clr from '@/services/average-color.js'
+import clr from '@/services/AvgColorService.js'
 
 export default {
   data() {
