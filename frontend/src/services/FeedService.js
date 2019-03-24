@@ -9,11 +9,11 @@ function getNewsByArr(items) {
     items.forEach(item => {
         getNewsByStr(item)
             .then(res => {
-                const filteredNews = filterNews(res)
+                const filteredNews = filterNews(res, 3)
                 news.push(filteredNews)
             })
     })
-    console.log(news);
+    return news;
 }
 
 function getNewsByStr(str) {
@@ -21,8 +21,8 @@ function getNewsByStr(str) {
         .then(res => { return { searchTerm: str, articles: res.data.articles } })
 }
 
-function filterNews(news) {
-    const filteredNews = {searchTerm: news.searchTerm, articles: []}
+function filterNews(news, numOfArticles = 3) {
+    const filteredNews = { searchTerm: news.searchTerm, articles: [] }
     news.articles.forEach(article => {
         if (
             article.description.includes(news.searchTerm) ||
@@ -30,5 +30,9 @@ function filterNews(news) {
             filteredNews.articles.push(article)
         }
     });
+    while (filteredNews.articles.length > numOfArticles) {
+        const randomIdx = Math.floor(Math.random() * filteredNews.articles.length)
+        filteredNews.articles.splice(randomIdx, 1)
+    }
     return filteredNews
 }
