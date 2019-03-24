@@ -16,8 +16,7 @@ export default {
   },
   actions: {
     async loadPopularMovies(context, payload) {
-      const movies = await MoviesService.getPopularMovies()
-      // console.log(movies)
+      const movies = await MoviesService.getTrendingMovies()
       context.commit({ type: 'setPopularMovies', movies: movies })
     },
     async getMovieDetails(context, movieId) {

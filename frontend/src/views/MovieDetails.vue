@@ -1,16 +1,12 @@
 <template>
-  <section v-if="tvShow.details && dominantColor">
-    <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-    <!-- <review-container
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
+  <section v-if="movie.details && dominantColor">
+    <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
     <review-container
-      v-for="(review, index) in tvShow.reviews.results"
+      v-for="(review, index) in movie.reviews.results"
       :key="index"
       :review="review"
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
-
-    <!-- <i class="fab fa-facebook"></i> -->
+    ></review-container>
+    <review-form></review-form>
   </section>
 </template>
 
@@ -18,17 +14,18 @@
 import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
-import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import clr from "@/services/average-color.js";
+const sightengine = require("sightengine")(
+  "1163479865",
+  "rQZS3hEBvZSJ9Nqbc5qu"
+);
 
 export default {
   data() {
     return {
       dominantColor: null,
-      tvShow: {
-        seasons: null,
+      movie: {
         details: null,
         videos: null,
         credits: null,
@@ -40,54 +37,26 @@ export default {
 
   async created() {
     this.setReviews();
-    const tvShowId = this.$route.params.tvShowId;
-    let details = await this.$store.dispatch("getTvShowDetails", tvShowId);
-    this.tvShow.details = details;
-    this.tvShow.seasons = details.seasons;
+    const movieId = this.$route.params.movieId;
+    let details = await this.$store.dispatch("getMovieDetails", movieId);
+    this.movie.details = details;
     const externalIds = await this.$store.dispatch(
-      "getTvShowExternalIds",
-      tvShowId
+      "getMovieExternalIds",
+      movieId
     );
-    this.tvShow.externalIds = externalIds;
-    const tvShowCredits = await this.$store.dispatch(
-      "getTvShowCredits",
-      tvShowId
-    );
-    this.tvShow.credits = tvShowCredits;
-    const tvShowVideos = await this.$store.dispatch(
-      "getTvShowVideos",
-      tvShowId
-    );
-    // this.setReviews();
-    // this.getTvShowDetails();
+    this.movie.externalIds = externalIds;
+    const movieCredits = await this.$store.dispatch("getMovieCredits", movieId);
+    this.movie.credits = movieCredits;
+    const movieVideos = await this.$store.dispatch("getMovieVideos", movieId);
+    this.movie.videos = movieVideos;
     this.getDominantColor();
   },
   destroyed() {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    setDominantColor() {
-      // Check if color background is light and convert it to darker
-      // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
-      console.log("this tv shows detalis dom color:", this.dominantColor);
-      this.dominantColor = domcolor;
-    },
-    async getDominantColor(url) {
-      console.log("go!!");
-      clr.domColor(
-        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
-      );
-      // var hex = domColor.colors.dominant.hex + "";
-      // // Check if color background is light and convert it to darker
-      // if (UtilityService.lightOrDark(hex) === "light")
-      //   hex = `#${UtilityService.LightenDarkenColor(
-      //     hex.replace(/#/gm, ""),
-      //     -60
-      //   )}`;
-      // this.dominantColor = hex;
-    },
     setReviews() {
-      this.tvShow.reviews = {
+      this.movie.reviews = {
         id: 297761,
         page: 1,
         results: [
@@ -134,62 +103,33 @@ export default {
         ]
       };
     },
-    async getTvShowDetails() {
-      const tvShowId = this.$route.params.tvShowId;
-      let details = await this.$store.dispatch("getTvShowDetails", tvShowId);
-      // if (details) console.log("tvShow details IS on storage doesnt get from API");
-      // if (!details) {
-      //   console.log("tvShow details not in sotrage GETTING FROM API");
-      //   details = await this.$store.dispatch("getTvShowDetails", tvShowId);
-      // }
-      const externalIds = await this.$store.dispatch(
-        "getTvShowExternalIds",
-        tvShowId
-      );
-      const tvShowCredits = await this.$store.dispatch(
-        "getTvShowCredits",
-        tvShowId
-      );
-      const tvShowVideos = await this.$store.dispatch(
-        "getTvShowVideos",
-        tvShowId
-      );
-      const tvShowTest = await this.$store.dispatch(
-        "getTvShowWatchLinksByKeyword",
-        "prison break"
-      );
-      console.log(tvShowTest);
-      console.log("tvShow videos are:", tvShowVideos);
-      this.tvShow.seasons = details.seasons;
-      this.tvShow.videos = tvShowVideos;
-      this.tvShow.credits = tvShowCredits;
-      this.tvShow.externalIds = externalIds;
-      this.tvShow.details = details;
-      console.log("this tv show", this.tvShow);
-      console.log(this.tvShow.credits);
-      this.getDominantColor();
-      setTimeout(() => {
-        this.setDominantColor();
-      }, 500);
+    async getDominantColor(url) {
+      var domColor = await sightengine
+        .check(["properties"])
+        .set_url(
+          `http://image.tmdb.org/t/p/w92${this.movie.details.poster_path}`
+        );
+      this.dominantColor = "#d39f4c";
+      // console.log(domColor)
+      // var hex = domColor.colors.dominant.hex + ''
+      // // Check if color background is light and convert it to darker
+      // if(UtilityService.lightOrDark(hex) === 'light') hex = `#${UtilityService.LightenDarkenColor(hex.replace(/#/gm,''), -60)}`
+      // this.dominantColor = hex
     }
   },
   components: {
     ItemContainer,
-    SeasonsList,
     ReviewContainer,
     ReviewForm,
     NavBar
   },
   watch: {
-    "$route.params.tvShowId": function() {
-      console.log("route tvShow id");
-      this.getTvShowDetails();
+    "$route.params.movieId": function() {
+      this.getMovieDetails();
     }
   }
 };
 </script>
 
 <style scoped>
-@media only screen and (max-width: 850px) {
-}
 </style>

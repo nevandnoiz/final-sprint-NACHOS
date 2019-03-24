@@ -24,8 +24,6 @@ export default {
   },
   created() {
     // this.$store.dispatch("loadPopularMovies");
-    this.$store.dispatch("loadActivities");
-    this.$store.dispatch("loadUser");
   },
   computed: {
     popularMovies() {

@@ -2,11 +2,11 @@
   <header>
     <div class="header-container">
       <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
-     <router-link to="/movies">Movies</router-link>
+      <router-link to="/movies">Movies</router-link>
       <router-link to="/tv">Tv Shows</router-link>
       <router-link to="/actors">Actors</router-link>
-      <router-link v-if="user" to="/profile">Profile</router-link>
-      <router-link v-else to="/login">login</router-link>
+      <a v-if="user">{{user.name.firstName}} {{user.name.lastName}}</a>
+      <a v-else @click="login">login</a>
     </div>
     <!-- <search-bar></search-bar> -->
   </header>
@@ -21,9 +21,18 @@ export default {
   methods: {
     pushToHome() {
       this.$router.push("/");
+    },
+    login() {
+      this.$store.dispatch("loadActivities");
+      this.$store.dispatch("loadUser");
+      setTimeout(() => this.$router.push("/"), 1500);
     }
   },
-  props: ["user"]
+  computed: {
+    user() {
+      return this.$store.getters.currUser;
+    }
+  }
 };
 </script>
 
@@ -36,7 +45,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding:0 20px;
+    padding: 0 20px;
     img {
       height: 60px;
       cursor: pointer;
