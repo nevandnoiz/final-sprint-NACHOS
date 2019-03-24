@@ -1,12 +1,11 @@
 <template>
   <section v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-    <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
     <!-- <review-container
       v-for="(review, index) in tvShow.reviews.results"
       :key="index"
       :review="review"
-    ></review-container> -->
+    ></review-container>-->
     <!-- <review-form></review-form> -->
 
     <!-- <i class="fab fa-facebook"></i> -->
@@ -20,8 +19,7 @@ import NavBar from "../components/details-cmps/NavBar.vue";
 import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import clr from '@/services/average-color.js'
-
+import clr from "@/services/average-color.js";
 
 export default {
   data() {
@@ -65,16 +63,17 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-          setDominantColor() {
-             // Check if color background is light and convert it to darker
-            // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
-           console.log('this tv shows detalis dom color:', this.dominantColor)
-           this.dominantColor = domcolor;
-           
-                              },
+    setDominantColor() {
+      // Check if color background is light and convert it to darker
+      // if (UtilityService.lightOrDark(domcolor) === "light")domcolor = `#${UtilityService.LightenDarkenColor(domcolor.replace(/#/gm, ""),-60)}`;
+      console.log("this tv shows detalis dom color:", this.dominantColor);
+      this.dominantColor = domcolor;
+    },
     async getDominantColor(url) {
-                console.log('go!!')
-     clr.domColor(`http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`)
+      console.log("go!!");
+      clr.domColor(
+        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
+      );
       // var hex = domColor.colors.dominant.hex + "";
       // // Check if color background is light and convert it to darker
       // if (UtilityService.lightOrDark(hex) === "light")
@@ -163,11 +162,11 @@ export default {
       this.tvShow.credits = tvShowCredits;
       this.tvShow.externalIds = externalIds;
       this.tvShow.details = details;
-      console.log('this tv show',this.tvShow)
+      console.log("this tv show", this.tvShow);
       console.log(this.tvShow.credits);
       this.getDominantColor();
-         setTimeout(() => {
-        this.setDominantColor()
+      setTimeout(() => {
+        this.setDominantColor();
       }, 500);
     }
   },
@@ -188,12 +187,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 @media only screen and (max-width: 850px) {
-
-
-
-  
 }
 </style>

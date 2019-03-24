@@ -1,7 +1,7 @@
 <template>
   <div class="episode-item" :style="{'background-image':'url(\''+imgURL(episode.still_path)+'\')'}">
     <h3>Episode {{episode.episode_number}} : {{episode.name}}</h3>
-    <i class="fas fa-check" :class="{'checked': isChecked}" @click="isChecked=!isChecked"></i>
+    <i class="fas fa-check check" :class="{'checked': isChecked}" @click="isChecked=!isChecked"></i>
   </div>
 </template>
 
@@ -26,12 +26,10 @@ export default {
 
 <style lang="scss" scoped>
 .episode-item {
-  border-radius: 10px;
   height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid darkslategray;
   background-size: cover;
   background-position: 50% 30%;
   opacity: 0.8;
@@ -40,7 +38,6 @@ export default {
     color: white;
     font-weight: bold;
     text-shadow: 1px 1px 4px black;
-    font-size: 20px;
   }
 }
 i {
@@ -56,5 +53,8 @@ i {
 }
 .checked {
   background-color: rgb(1, 221, 1);
+}
+.check:hover {
+  cursor: pointer;
 }
 </style>

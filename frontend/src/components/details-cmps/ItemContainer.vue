@@ -1,19 +1,18 @@
 <template>
   <div class="details" :style="bckImage">
-    <div v-if="isTrailer">
-      <youtube
-        class="youtube-container"
-        :video-id="this.item.videos.results[0].key"
-        player-vars="{ autoplay: 1 }"
-      ></youtube>
-    </div>
-
     <!-- <h1>Nachos details</h1> -->
     <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
       <div class="row" :style="bckColor">
         <div class="item-container">
-          <actor-card :item="item.credits"></actor-card>
+          <!-- <youtube
+              class="youtube-container"
+              :video-id="this.item.videos.results[0].key"
+              :player-vars="{ autoplay: 1 }"
+          ></youtube>-->
+          <!-- <actor-card-seasons></actor-card-seasons> -->
+          <!-- <actor-card :seasons="item.seasons" :tvShowId="item.details.id"></actor-card> -->
           <nav-bar class="nav-bar"></nav-bar>
+
           <div class="shadowing-container">
             <div class="details-text">
               <!-- <a href="//www.youtube.com/watch?v=XSGBVzeBUbk" data-lity>iFrame Youtube</a> -->
@@ -27,9 +26,15 @@
               <user-control-bar class="user-control-bar"></user-control-bar>
             </div>
           </div>
-          
+
           <div class="poster-image-container">
-            <img class="item-poster-img" ref="itemPoster" :src="imgURL">
+            <seasons-list
+              v-show="isSeasonsListMode"
+              :seasons="item.seasons"
+              :tvShowId="item.details.id"
+            ></seasons-list>
+
+            <img v-show="!isSeasonsListMode" class="item-poster-img" ref="itemPoster" :src="imgURL">
             <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
               <a
@@ -70,6 +75,7 @@
         <button v-if="isTrailer" @click="onTrailer">Trailer</button>
       </div>
     </div>
+              <actor-card-seasons :seasons="item.seasons" :tvShowId="item.details.id"></actor-card-seasons>
   </div>
 </template>
 <script>
@@ -79,20 +85,38 @@ import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
+import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
+import ActorCardSeasons from "@/components/details-cmps/ActorCardSeasons.vue";
+import { eventBus } from "@/main.js";
 export default {
   components: {
+    ActorCardSeasons,
     NavBar,
+    SeasonsList,
     ActorCard,
     UserControlBar,
     MediaIconsBar
   },
+  mounted() {
+    document.getElementById("youtube-player-1").style.width = "100%";
+  },
+  created() {
+    eventBus.$on(
+      "onSeasonsListClick",
+      () => (this.isSeasonsListMode = !this.isSeasonsListMode)
+    );
+  },
   data() {
     return {
+      isSeasonsListMode: false,
       isTrailer: false
     };
   },
   props: ["item", "dominantColor"],
   methods: {
+    listing() {
+      console.log("img listening");
+    },
     onTrailer() {
       console.log("on trailer click");
       this.isTrailer = !this.isTrailer;
@@ -123,6 +147,9 @@ export default {
 a {
   font: -webkit-control;
 }
+iframe {
+  width: 100%;
+}
 
 .title {
   margin-bottom: 0 !important;
@@ -136,7 +163,7 @@ a {
 }
 .nav-bar {
   grid-column: 1/3;
-  grid-row: 2;
+  grid-row: 3;
   margin-top: 10px;
   margin-bottom: 20px;
   margin: m;
@@ -159,18 +186,18 @@ a {
   grid-row: 1;
 }
 .media-icons-bar {
-    /* display: block; */
-    /* z-index: 40; */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    /* flex-grow: 0; */
-    grid-column: 2;
-    grid-row: 5;
-    /* margin-left: 2em; */
+  /* display: block; */
+  /* z-index: 40; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /* flex-grow: 0; */
+  grid-column: 2;
+  grid-row: 5;
+  /* margin-left: 2em; */
 }
 .shadowing-container {
   display: grid;
@@ -240,7 +267,7 @@ iframe {
   /* height: 750px; */
   /* column-gap: 1.5em; */
   grid-template-columns: 400px 2fr;
-  grid-template-rows: minmax(75px, auto);
+  grid-template-rows: minmax(75px, auto) 1fr;
   margin: 0 auto;
   /* grid-template-rows: repeat(14,75px); */
   /* gap: 3em; */
@@ -325,8 +352,16 @@ iframe {
 .item-details > p {
   margin-top: 20px;
 }
-
+iframe {
+  width: 100%;
+}
+#youtube-player-1 {
+  width: 100%;
+}
 .youtube-container {
+  width: 100%;
+  grid-row: 2;
+  grid-column: 1/4;
   /* position: fixed; */
   right: 0;
   left: 0;
@@ -338,10 +373,12 @@ iframe {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 50px;
+  /* padding: 50px; */
   /* background-color: lightgray; */
 }
-
+.youtube-container > iframe {
+  width: 100% !important;
+}
 @media only screen and (max-width: 850px) {
   a {
     font: -webkit-control;
@@ -543,6 +580,8 @@ iframe {
   }
 
   .youtube-container {
+    grid-column: 1/3;
+    grid-row: 2;
     /* position: fixed; */
     right: 0;
     left: 0;

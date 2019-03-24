@@ -5,7 +5,8 @@
         class="season-title"
         @click="selectSeason(index)"
         :key="index"
-        :style="{'background-image':'url(\''+imgURL(season.poster_path)+'\')'}"
+        
+        :style="{'background':'grey'}"
       >
         <h3>{{season.name}}</h3>
       </div>
@@ -56,19 +57,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.season-title:hover {
+  cursor: pointer;
+}
 .seasons-container {
-  background-color:#2d2d2d;
-  border: 1px solid gray;
-  border-radius: 10px;
-  padding: 3px;
-  margin: 0 200px;
-  text-align: center;
+    width: 100%;
+    margin: 0;
+    background-color: #2d2d2d;
+    text-align: center;
   .season-title {
-  border-radius: 10px;
     background-size: cover;
     background-position: 50% 35%;
-    height: 75px;
-    border: 1px solid gray;
+    margin: 0.2rem 0;
+        padding: 0.2rem;
     background-color: white;
       h3 {
         opacity: 1;
@@ -98,14 +99,12 @@ export default {
 
 
 .seasons-container {
-  border: 1px solid gray;
-  border-radius:10px;
   padding: 3px;
   margin: 0 200px;
   text-align:center;
   .season-title {
     height: 46px;
-  border: 1px solid gray;
+  // border: 1px solid gray;
     background-color: white;
   }
 }
