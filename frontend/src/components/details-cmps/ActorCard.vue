@@ -23,7 +23,6 @@
 export default {
   props: ["item"],
   created() {
-    console.log("actor card", item);
   },
   data() {
     return {};
