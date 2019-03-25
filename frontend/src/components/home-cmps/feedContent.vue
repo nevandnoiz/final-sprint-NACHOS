@@ -21,7 +21,7 @@ export default {
   computed: {
     feedItems: function() {
       return this.activities.concat(this.articles.flat());
-    }
+    },
   }
 };
 </script>

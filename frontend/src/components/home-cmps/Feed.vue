@@ -1,6 +1,6 @@
 <template>
   <section class="feed">
-    <select-defualt v-if="!articles" @generateFeed="generateFeed"/>
+    <select-defualt v-if="!user" @generateFeed="generateFeed"/>
     <feed-content v-if="articles" :articles="articles"/>
   </section>
 </template>
@@ -12,7 +12,7 @@ import feedContent from "@/components/home-cmps/feedContent";
 import FeedService from "@/services/FeedService";
 export default {
   props: {
-    activities: Array
+    user: Object
   },
   components: {
     selectDefualt,
@@ -26,6 +26,18 @@ export default {
   methods: {
     generateFeed(items) {
       this.articles = FeedService.getNewsByArr(items);
+    }
+  },
+  computed: {
+    activities() {
+      return this.$store.getters.activities;
+    }
+  },
+  wtach: {
+    user: function() {
+      if (this.user) {
+        this.$store.dispatch("loadActivities");
+      }
     }
   }
 };
