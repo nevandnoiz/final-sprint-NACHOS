@@ -5,6 +5,7 @@ import MoviesModule from './modules/movies.js'
 import TvModule from './modules/tv.js'
 import ActorsModule from './modules/actors.js'
 import UsersModule from './modules/users.js'
+import ReviewsModule from './modules/reviews.js'
 
 
 Vue.use(Vuex)
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     MoviesModule,
     TvModule,
     ActorsModule,
-    UsersModule
+    UsersModule,
+    ReviewsModule
   },
   state: {
     selectedItem: '',
