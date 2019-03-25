@@ -28,7 +28,7 @@ function filterNews(news, numOfArticles = 3) {
             article.description.includes(news.searchTerm) ||
             article.title.includes(news.searchTerm)) {
             article.searchTerm = news.searchTerm
-            article.type = 'article'
+            article.type = 'FeedArticle'
             filteredNews.push(article)
         }
     });

@@ -1,18 +1,16 @@
 <template>
   <section class="feedContent">
-    <feed-article v-for="(item, idx) in feedItems" :key="idx" :article="item"/>
-    <feed-activity v-for="(activity,idx) in feedItems" :activity="activity" :key="idx"/>
-    <!-- <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type"/> -->
+    <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type" :item="item"/>
   </section>
 </template>
 
 <script>
 import FeedArticle from "@/components/home-cmps/FeedArticle";
-import FeedActivity from "@/components/home-cmps/FeedActivity";
+import activity from "@/components/home-cmps/FeedActivity";
 export default {
   components: {
     FeedArticle,
-    FeedActivity
+    activity
   },
   props: {
     articles: {

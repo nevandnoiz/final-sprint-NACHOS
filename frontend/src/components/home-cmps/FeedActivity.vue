@@ -3,7 +3,7 @@
     <div>
       <p>
         {{userName}} {{type}}
-        <a @click="toItem">{{item}}</a>
+        <a @click="toItem">{{itemName}}</a>
         {{action}}
       </p>
 
@@ -17,39 +17,39 @@
 <script>
 export default {
   props: {
-    activity: Object
+    item: Object
   },
   methods: {
     toItem() {
       this.$router.push(
-        `/${this.activity.item_type}/details/${this.activity.item_id}`
+        `/${this.item.item_type}/details/${this.item.item_id}`
       );
     }
   },
   computed: {
     userName: function() {
       return (
-        this.activity.byUser.name.firstName +
+        this.item.byUser.name.firstName +
         " " +
-        this.activity.byUser.name.lastName
+        this.item.byUser.name.lastName
       );
     },
     type: function() {
-      const activity = this.activity.activity;
+      const activity = this.item.activity;
       if (activity === "rate") return "rated";
       else if (activity === "listAdd") return "added";
     },
-    item: function() {
-      return this.activity.itemTitle;
+    itemName: function() {
+      return this.item.itemTitle;
     },
     action: function() {
-      const activity = this.activity.activity;
-      if (activity === "rate") return `with ${this.activity.value} stars.`;
-      else if (activity === "listAdd") return `to his ${this.activity.value} list.`;
+      const activity = this.item.activity;
+      if (activity === "rate") return `with ${this.item.value} stars.`;
+      else if (activity === "listAdd") return `to his ${this.item.value} list.`;
 
     },
     creadted() {
-      console.log(this.activity);
+      console.log(this.item);
     }
   }
 };
