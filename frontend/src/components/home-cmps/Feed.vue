@@ -31,7 +31,6 @@ export default {
   computed: {
     activities() {
       const activities = this.$store.getters.activities;
-    //   if(!activities) return []
       return activities
     }
   },
