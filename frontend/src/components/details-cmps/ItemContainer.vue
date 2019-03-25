@@ -12,8 +12,8 @@
        
      
           <div class="shadowing-container">
-            <div class="details-text">
-              <p>{{item.details.overview}}</p>
+            <div  :style="{'background':''+dominantColor+''}" class="details-text">
+              <p :style="{'color':''+isLightOrDark+''}" >{{item.details.overview}}</p>
             </div>
 
             <div class="shadowing">
@@ -157,6 +157,10 @@ export default {
     }
   },
   computed: {
+      isLightOrDark() {
+        if(UtilityService.lightOrDark(this.dominantColor) === 'light') return 'black'
+        else return 'white'
+      },
        bckImage() {
       return {
         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
@@ -410,6 +414,7 @@ iframe {
   background-color: lightslategray;
 } */
 .details-text {
+
       box-shadow: 0px 0px 12px #000000;
     padding: 20px;
     /* color: black; */
