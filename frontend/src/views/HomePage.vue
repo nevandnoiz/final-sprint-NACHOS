@@ -3,9 +3,6 @@
     <backdrop-cmp v-if="!user" :topItems="headerItems"></backdrop-cmp>
     <watch-next v-if="user" :watchNextList="watchNextList"></watch-next>
     <feed :user="user"></feed>
-    <!-- <pre> -->
-    <!-- <a class="twitter-timeline" href="https://twitter.com/spiderman?ref_src=twsrc%5Etfw">Tweet</a> -->
-    <!-- </pre> -->
   </div>
 </template>
 
@@ -44,9 +41,8 @@ export default {
       return topFiveItems;
     },
     watchNextList() {
-      const currUser = this.$store.getters.currUser;
-      if (currUser) {
-        const lists = currUser.lists.find(list => list.name === "watchList");
+      if (this.user) {
+        const lists = this.user.lists.find(list => list.name === "watchList");
         return lists;
       }
     }

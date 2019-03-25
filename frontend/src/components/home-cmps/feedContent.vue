@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import util from '@/services/UtilityService.js'
 import FeedArticle from "@/components/home-cmps/FeedArticle";
 import activity from "@/components/home-cmps/FeedActivity";
 export default {
@@ -26,7 +27,10 @@ export default {
     feedItems: function() {
       if (!this.activities) return this.articles.flat();
       if (!this.articles) return this.activities;
-      else return this.activities.concat(this.articles.flat());
+      else {
+        const combArr = this.activities.concat(this.articles.flat())
+        return util.shuffleArray(combArr)
+        };
     }
   }
 };

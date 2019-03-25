@@ -1,6 +1,6 @@
 <template>
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
-    <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
+    <!-- <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
       <netflix-slide-main
         :seasons="tvShow.seasons"
@@ -8,7 +8,9 @@
         class="netflix-container"
       ></netflix-slide-main>
       <nav-bar class="nav-bar"></nav-bar>
-      <actor-card :item="tvShow.credits"></actor-card>
+      <actor-card :item="tvShow.credits"></actor-card> -->
+
+      {{tvShow.details}}
     </div>
 
     <!-- <review-container
@@ -21,7 +23,7 @@
     <!-- <review-form></review-form> -->
 
     <!-- <i class="fab fa-facebook"></i> -->
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

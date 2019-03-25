@@ -24,22 +24,30 @@ export default {
     };
   },
   methods: {
-    generateFeed(items) {
-      this.articles = FeedService.getNewsByArr(items);
+    generateFeed(items, numOfArticles) {
+      this.articles = FeedService.getNewsByArr(items, numOfArticles);
     }
   },
   computed: {
     activities() {
       const activities = this.$store.getters.activities;
-      return activities
+      return activities;
+    },
+    userFavoriteItems() {
+      if (this.user) {
+        const list = this.user.lists.find(list => list.name === "favorites");
+        const favoriteItems = list.items.map(item => item.name);
+        return favoriteItems;
+      }
     }
   },
-  wtach: {
+  watch: {
     user: function() {
       if (this.user) {
         this.$store.dispatch("loadActivities");
+        this.generateFeed(this.userFavoriteItems, 1);
       }
-    }
+    },
   }
 };
 </script>
