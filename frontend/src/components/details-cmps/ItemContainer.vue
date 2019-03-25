@@ -6,11 +6,6 @@
         <div class="white-fill"></div>
         <div class="item-container">
        
-          <!-- <youtube
-              class="youtube-container"
-              :video-id="this.item.videos.results[0].key"
-              :player-vars="{ autoplay: 1 }"
-          ></youtube>-->
      
           <div class="shadowing-container">
             <div class="details-text">
@@ -18,7 +13,7 @@
             </div>
 
             <div class="shadowing">
-              <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading>
+              <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
               <h1 class="title">{{item.details.title || item.details.name}}</h1>
               <media-icons-bar class="media-icons-bar"></media-icons-bar>
               <user-control-bar class="user-control-bar"></user-control-bar>
@@ -102,6 +97,7 @@ export default {
     MediaIconsBar
   },
   mounted() {
+
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
@@ -408,12 +404,7 @@ iframe {
 .item-details > p {
   margin-top: 20px;
 }
-iframe {
-  width: 100%;
-}
-#youtube-player-1 {
-  width: 100%;
-}
+
 .youtube-container {
   width: 100%;
   grid-row: 2;
@@ -432,9 +423,7 @@ iframe {
   /* padding: 50px; */
   /* background-color: lightgray; */
 }
-.youtube-container > iframe {
-  width: 100% !important;
-}
+
 @media only screen and (max-width: 850px) {
   a {
     font: -webkit-control;

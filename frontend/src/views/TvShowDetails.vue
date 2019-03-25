@@ -2,7 +2,7 @@
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
-      <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading>
+      <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
       <netflix-slide-main
         :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
@@ -14,23 +14,19 @@
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
             
-        <div class="reviews" 
-          >
+        <div class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+              <review-container v-for="(review, index) in tvShow.reviews.results" :key="index" :review="review" item.details.id item.seasons></review-container>
+
         </div>
       </div>
       <!-- <nav-bar class="nav-bar"></nav-bar> -->
       <!-- <actor-card :item="tvShow.credits"></actor-card> -->
     </div>
+    <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
 
-    <!-- <review-container
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
-    <review-container
-      v-for="(review, index) in tvShow.reviews.results"
-      :key="index"
-      :review="review" item.details.id item.seasons
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
+ 
+    <review-form></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
@@ -64,6 +60,7 @@ export default {
 
   async created() {
     this.setReviews();
+    console.log(this.tvShow.reviews)
     const tvShowId = this.$route.params.tvShowId;
     const [
       details,
@@ -175,7 +172,7 @@ export default {
   margin-top: 1.3rem;
 }
 .netflix-container {
-      padding-bottom: 1.5rem;
+      /* padding-bottom: 1.5rem; */
 }
 .tv-details-container {
   display: flex;
