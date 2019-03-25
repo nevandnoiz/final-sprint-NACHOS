@@ -7,6 +7,7 @@ import BrowseActors from './views/BrowseActors.vue'
 import MovieDetails from './views/MovieDetails.vue'
 import TvShowDetails from './views/TvShowDetails.vue'
 import ActorDetails from './views/ActorDetails.vue'
+import UserPage from './views/UserPage.vue'
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ export default new Router({
       path: '/tv/details/:actorId',
       name: 'actorDetails',
       component: ActorDetails
+    },
+    {
+      path: '/user/:userId',
+      name: 'userPage',
+      component: UserPage
     },
   ]
 })

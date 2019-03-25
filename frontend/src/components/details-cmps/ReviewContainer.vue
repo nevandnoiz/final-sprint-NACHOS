@@ -4,7 +4,7 @@
     <div class="review-text">
       <section>
         <h1>A Review by {{review.author}}</h1>
-        <h2>Writted by{{review.author}} in 01 in March 2019</h2>
+        <h2>Writted by {{review.author}} in 01 March 2019</h2>
       </section>
 
       <p>{{review.content}}</p>
