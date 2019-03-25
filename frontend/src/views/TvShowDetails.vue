@@ -9,8 +9,14 @@
       ></youtube>
     </div>
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
+<<<<<<< HEAD
     <div class="_netflix">
   <netflix-slide-main
+=======
+    <div class="sub-container">
+      <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading>
+      <netflix-slide-main
+>>>>>>> parent of d6a7827... css
         :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
@@ -24,6 +30,7 @@
         <div class="Actors">
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
+<<<<<<< HEAD
 
         <div class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
@@ -34,15 +41,33 @@
             item.details.id
             item.seasons
           ></review-container>
+=======
+            
+        <div class="reviews" 
+          >
+          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+>>>>>>> parent of d6a7827... css
         </div>
       </div>
       <!-- <nav-bar class="nav-bar"></nav-bar> -->
     </div>
+<<<<<<< HEAD
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
         <review-form></review-form>
 
       <actor-card :item="tvShow.credits"></actor-card>
 
+=======
+
+    <!-- <review-container
+    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
+    <review-container
+      v-for="(review, index) in tvShow.reviews.results"
+      :key="index"
+      :review="review" item.details.id item.seasons
+    ></review-container>-->
+    <!-- <review-form></review-form> -->
+>>>>>>> parent of d6a7827... css
 
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
@@ -86,7 +111,10 @@ export default {
       }, 2000);
     });
     this.setReviews();
+<<<<<<< HEAD
     console.log(this.tvShow.reviews);
+=======
+>>>>>>> parent of d6a7827... css
     const tvShowId = this.$route.params.tvShowId;
     const [
       details,
@@ -201,7 +229,11 @@ export default {
   margin-top: 1.3rem;
 }
 .netflix-container {
+<<<<<<< HEAD
   /* padding-bottom: 1.5rem; */
+=======
+      padding-bottom: 1.5rem;
+>>>>>>> parent of d6a7827... css
 }
 .tv-details-container {
   display: flex;
