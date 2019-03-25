@@ -92,8 +92,8 @@ export default {
   padding: 2px;
   width: 500px;
   position: relative;
-  left: 2%;
-  top: 90%;
+  left: 25px;
+  top: 452px;
   .backdrop-num-btn {
     height: 36px;
     button {
