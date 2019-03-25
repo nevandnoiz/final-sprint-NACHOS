@@ -17,37 +17,39 @@
 <script>
 export default {
   props: {
-    activities: Array
+    activity: Object
   },
   methods: {
     toItem() {
       this.$router.push(
-        `/${this.activities[0].item_type}/details/${this.activities[0].item_id}`
+        `/${this.activity.item_type}/details/${this.activity.item_id}`
       );
     }
   },
   computed: {
     userName: function() {
       return (
-        this.activities[0].byUser.name.firstName +
+        this.activity.byUser.name.firstName +
         " " +
-        this.activities[0].byUser.name.lastName
+        this.activity.byUser.name.lastName
       );
     },
     type: function() {
-      const activity = this.activities[0].activity;
+      const activity = this.activity.activity;
       if (activity === "rate") return "rated";
       else if (activity === "listAdd") return "added";
     },
     item: function() {
-      return this.activities[0].itemTitle;
+      return this.activity.itemTitle;
     },
     action: function() {
-      const value = this.activities[0].value;
-      if (typeof value === "number")
-        return `with ${this.activities[0].value} stars.`;
-      else if (typeof value === "listAdd")
-        return `to  his ${this.activities[0].value} list.`;
+      const activity = this.activity.activity;
+      if (activity === "rate") return `with ${this.activity.value} stars.`;
+      else if (activity === "listAdd") return `to his ${this.activity.value} list.`;
+
+    },
+    creadted() {
+      console.log(this.activity);
     }
   }
 };
