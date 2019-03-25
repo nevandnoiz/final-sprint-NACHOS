@@ -1,14 +1,21 @@
 <template>
-  <div>
+  <div class="activity">
     <div>
       <p>
         {{userName}} {{type}}
-        <a @click="toItem">{{itemName}}</a>
+        <a @click="toItem" class="link">{{itemName}}</a>
         {{action}}
       </p>
 
-      <button>Like</button>
-      <button>Comment</button>
+      <div class="btns">
+        <div class="likes">
+          <button>Like</button>
+          <p>{{this.item.likes}}</p>
+        </div>
+        <div>
+          <button>Comment</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,17 +28,13 @@ export default {
   },
   methods: {
     toItem() {
-      this.$router.push(
-        `/${this.item.item_type}/details/${this.item.item_id}`
-      );
+      this.$router.push(`/${this.item.item_type}/details/${this.item.item_id}`);
     }
   },
   computed: {
     userName: function() {
       return (
-        this.item.byUser.name.firstName +
-        " " +
-        this.item.byUser.name.lastName
+        this.item.byUser.name.firstName + " " + this.item.byUser.name.lastName
       );
     },
     type: function() {
@@ -46,7 +49,6 @@ export default {
       const activity = this.item.activity;
       if (activity === "rate") return `with ${this.item.value} stars.`;
       else if (activity === "listAdd") return `to his ${this.item.value} list.`;
-
     },
     creadted() {
       console.log(this.item);
@@ -59,5 +61,19 @@ export default {
 p {
   font-family: sans-serif;
   font-size: 20px;
+}
+.activity {
+  margin-top: 20px
+}
+.link {
+  color: gray;
+}
+
+.btns{
+  display: flex;
+}
+
+.likes {
+  display: flex;
 }
 </style>

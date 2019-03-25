@@ -9,6 +9,7 @@ const users = []
 const activities = [
     {
         _id: 'abc321321',
+        timestamp: null,
         byUser: {
             name: {
                 firstName: 'Eyal',
@@ -21,9 +22,12 @@ const activities = [
         type: 'activity',
         activity: 'rate',
         value: 5,
+        comments: [],
+        likes: 7
     },
     {
         _id: 'abc321356',
+        timestamp: null,
         byUser: {
             name: {
                 firstName: 'Yaniv',
@@ -36,6 +40,8 @@ const activities = [
         type: 'activity',
         activity: 'listAdd',
         value: 'Favorite',
+        comments: [],
+        likes: 0
     }
 ]
 
@@ -55,7 +61,7 @@ function getUser() {
         },
         mail: null,
         img: null,
-        following: null,
+        following: [],
         lists: [
             {
                 name: 'favorites',
