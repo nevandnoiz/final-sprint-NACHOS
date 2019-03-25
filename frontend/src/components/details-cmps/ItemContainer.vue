@@ -18,7 +18,7 @@
             </div>
 
             <div class="shadowing">
-              <pannel-heading class="pannel-heading" :title="'Description'" :dominantColor="dominantColor"></pannel-heading>
+              <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading>
               <h1 class="title">{{item.details.title || item.details.name}}</h1>
               <media-icons-bar class="media-icons-bar"></media-icons-bar>
               <user-control-bar class="user-control-bar"></user-control-bar>
@@ -144,13 +144,20 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Arvo");
+
+*{
+    font-family: Arvo;
+}
+
 a {
   font: -webkit-control;
 }
 iframe {
   width: 100%;
 }
-.pannel-heading{
+.pannel-heading-epo{
+      margin-top: 1.3rem;
  grid-column: 1/8;
     grid-row: 43;
 }
@@ -182,7 +189,9 @@ padding: 0 0.5rem;
     flex-direction: column;
 }
 .netflix-container {
-      padding: 1rem 0;
+      padding-bottom: 2rem;
+    background-color: rgb(39, 36, 18);
+      /* padding: 1rem 0; */
       /* padding-bottom: 20px; */
   box-shadow: 0px 0px 12px #000000;
   margin-top: 1rem;
@@ -383,10 +392,6 @@ iframe {
   margin: 0;
 
   padding: 0;
-}
-.details-text > p {
-  font-size: 1.4rem;
-  color: black;
 }
 .details-text > h1 {
   font-size: 2rem;
@@ -595,7 +600,7 @@ iframe {
     padding: 0;
   }
   .details-text > p {
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: black;
   }
   .details-text > h1 {

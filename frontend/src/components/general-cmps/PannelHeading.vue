@@ -22,7 +22,7 @@ props: ['dominantColor','title']
 .main-pannel-heading-container {
     display: flex;
     grid-column: 1fr 1fr 1fr;
-    height: 2rem;
+    height: 1.5rem;
     flex-direction: row;
     justify-content: center;
 }

@@ -2,24 +2,25 @@
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
-      <pannel-heading class="pannel-heading" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading>
+      <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading>
       <netflix-slide-main
+        :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
         class="netflix-container"
-        :style="{'background':''+dominantColor+''}"
       ></netflix-slide-main>
-      <!-- <nav-bar class="nav-bar"></nav-bar> -->
-
-           <div class="review-and-info-main-contaier">
-        <div class="reviews-main-contaier">
-<pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
-        </div>
-        <div class="actors-container">
+      <div class="content-info-container">
+        <div class="Actors">
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
+            
+        <div class="reviews" 
+          >
+          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+        </div>
       </div>
-      <!-- <actor-card  :item="tvShow.credits"></actor-card> -->
+      <!-- <nav-bar class="nav-bar"></nav-bar> -->
+      <!-- <actor-card :item="tvShow.credits"></actor-card> -->
     </div>
 
     <!-- <review-container
@@ -159,39 +160,31 @@ export default {
 </script>
 
 <style scoped>
-.netflix-container {
-      /* background-color: rgb(39, 36, 18); */
-    padding: 1rem 0;
-}
-.review-and-info-main-contaier{
+.content-info-container {
     display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
     grid-template-columns: 1fr 2fr;
-}
-.reviews-main-contaier{
-      grid-column: 2;
-    /* background-color: lightgray; */
     height: 800px;
-    /* margin: 2rem 0; */
 }
-.actors-container {
-     grid-column: 1;
-    /* background-color: lightgray; */
-    height: 800px;
-    grid-row: 1;
-    /* margin: 0 2rem 0 0;
-    margin-right: 2rem; */
+.reviews {
+ 
 }
-.pannel-heading{
+
+.pannel-heading-epo {
+  margin-top: 1.3rem;
+}
+.netflix-container {
+      padding-bottom: 1.5rem;
 }
 .tv-details-container {
   display: flex;
   flex-direction: column;
 }
-.sub-container{
-    margin: 290px auto;
-    display: block;
-    width: 956px;
-
+.sub-container {
+  margin: 290px auto;
+  display: block;
+  width: 967px;
 }
 @media only screen and (max-width: 850px) {
 }
