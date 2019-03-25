@@ -1,6 +1,6 @@
 <template>
   <section class="feed">
-    <select-defualt v-if="!user" @generateFeed="generateFeed"/>
+    <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
     <feed-content v-if="articles || user" :articles="articles" :activities="activities"/>
   </section>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <section class="feedContent">
     <feed-article v-for="(item, idx) in feedItems" :key="idx" :article="item"/>
-    <!-- <feed-activity :activities="activities"/> -->
+    <feed-activity :activities="activities" v-if="activities"/>
     <!-- <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type"/> -->
   </section>
 </template>
@@ -26,10 +26,8 @@ export default {
   },
   computed: {
     feedItems: function() {
-      console.log(this.articles);
-
-      return this.articles
-      // if (!this.articles) return this.activities;
+      if (!this.articles) return this.activities;
+      return this.articles.flat()
       // return this.activities.concat(this.articles.flat());
     }
   }
