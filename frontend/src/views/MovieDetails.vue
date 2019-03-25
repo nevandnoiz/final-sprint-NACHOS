@@ -141,6 +141,19 @@ export default {
 </script>
 
 <style>
+div *::-webkit-scrollbar{
+  width: 10px;
+  height: 1px;
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
 html, body {
   background: #f5f5f5
 }

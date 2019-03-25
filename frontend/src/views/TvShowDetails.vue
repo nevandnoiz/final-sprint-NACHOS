@@ -19,6 +19,8 @@
       ></netflix-slide-main>
       <div class="content-info-container">
         <div class="Actors">
+                <actor-card :item="tvShow.credits"></actor-card>
+
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
             
@@ -29,7 +31,6 @@
         </div>
       </div>
       <!-- <nav-bar class="nav-bar"></nav-bar> -->
-      <!-- <actor-card :item="tvShow.credits"></actor-card> -->
     </div>
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
 
@@ -173,11 +174,16 @@ export default {
 </script>
 
 <style scoped>
+.Actors {
+      display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 24px 1fr;
+}
 .content-info-container {
     display: grid;
     gap: 2rem;
     margin-top: 2rem;
-    grid-template-columns: 1fr 2fr;
+ grid-template-columns: 210px 2fr;
     height: 800px;
 }
 .reviews {
