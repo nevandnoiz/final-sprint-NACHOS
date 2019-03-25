@@ -23,25 +23,21 @@ export default {
   data() {
     return {};
   },
-  created() {
-    this.$store.dispatch(`loadPopularMovies`);
+  async created() {
+    this.$store.dispatch(`loadTrendingAll`);
   },
   computed: {
-    popularMovies() {
-      return this.$store.getters.moviesToDisplay;
-    },
     activities() {
       return this.$store.getters.activities;
     },
     user() {
       return this.$store.getters.currUser;
     },
-     popularItems() {
-      
-      return this.$store.getters.moviesToDisplay;
+     trendingItems() {
+      return this.$store.getters.trendingToDisplay;
     },
     headerItems() {
-      let topFiveItems = this.popularItems.slice(0, 5);
+      let topFiveItems = this.trendingItems.slice(0, 5);
       return topFiveItems;
     },
     watchNextList() {
