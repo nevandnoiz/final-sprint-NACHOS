@@ -88,30 +88,4 @@ export default {
 
 
 
-
-@media only screen and (max-width: 850px) {
-
-
-.seasons-container {
-  padding: 3px;
-  margin: 0 200px;
-  text-align:center;
-  .season-title {
-    height: 46px;
-  // border: 1px solid gray;
-    background-color: white;
-  }
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  overflow: hidden;
-}
-.fade-enter, .fade-leave-to {
-  max-height: 0;
-  opacity: 0;
-}
-
-  
-}
 </style>

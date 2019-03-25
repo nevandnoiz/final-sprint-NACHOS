@@ -1,6 +1,6 @@
 <template>
   <section>
-    <netflix-slide-season v-if="season" :season="season"></netflix-slide-season>
+    <netflix-slide-season v-if="season" :seasons="this.seasons" :season="season"></netflix-slide-season>
   </section>
 </template>
 

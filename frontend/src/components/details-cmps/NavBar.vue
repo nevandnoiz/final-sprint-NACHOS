@@ -95,24 +95,5 @@ export default {};
 
 
 
-@media only screen and (max-width: 850px) {
-
-
-.navbar-nav{
-    font-size: 1.3rem;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-evenly;
-}
-#navbarNavDropdown {
-    display: flex !important;
-    justify-content: space-between !important;
-}
-.main-navbar-container {
-    /* margin-bottom: 120px */
-}
-
-  
-}
 </style>
 

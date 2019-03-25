@@ -47,14 +47,7 @@ export default {
   },
 
   async created() {
-    eventBus.$on("playTrailer", () => {
-      this.isTrailerPlaying = true;
-      setTimeout(() => {
-        // document.getElementById("youtube-player-1").style.width = "100vw";
-        // document.getElementById("youtube-player-1").style.height = "720px";
-      }, 2000);
-    });
-
+    eventBus.$on("playTrailer", () => this.isTrailerPlaying = true)
     this.setReviews();
     const movieId = this.$route.params.movieId;
     const [details, externalIds, movieCredits, movieVideos] = await Promise.all(
@@ -148,6 +141,9 @@ export default {
 </script>
 
 <style>
+html, body {
+  background: #f5f5f5
+}
 div.ytp-chrome-top.ytp-show-watch-later-title.ytp-share-button-visible.ytp-show-share-title.ytp-show-cards-title{
   display: none !important
 }

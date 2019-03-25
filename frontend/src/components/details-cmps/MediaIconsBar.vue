@@ -30,22 +30,4 @@ export default {};
 
 
 
-
-@media only screen and (max-width: 850px) {
-
-
-.amazon{
-       padding: 5px;
-    border-radius: 5px;
-    background-color: white; 
-}
-.netflix{
-    margin: 0 5px;
-           padding: 5px;
-    border-radius: 5px;
-    background-color: black; 
-}
-
-  
-}
 </style>

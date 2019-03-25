@@ -31,6 +31,8 @@ export default {
       seasonsList: null
     };
   },
+
+
   methods: {
     onSelectSeason(index) {
       eventBus.$emit("onSeasonClick", index);

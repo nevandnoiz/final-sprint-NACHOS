@@ -66,19 +66,4 @@ export default {
   grid-area: 2/1/2/1;
 }
 
-@media only screen and (max-width: 850px) {
-  .browse {
-    display: grid;
-    grid-template: 500px 1fr/1fr;
-    padding: 20px 0;
-  }
-  .grid-container {
-    padding: 20px;
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    justify-items: center;
-    grid-area: 2/1/2/1;
-  }
-}
 </style>

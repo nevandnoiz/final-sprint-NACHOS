@@ -1,5 +1,13 @@
 <template>
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
+        <div class="main-youtube-container" v-if="isTrailerPlaying">
+      <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
+      <youtube
+        class="youtube-container"
+        :video-id="this.tvShow.videos.results[0].key"
+        :player-vars="{ autoplay: 1 }"
+      ></youtube>
+    </div>
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
       <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
@@ -43,9 +51,11 @@ import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
+import { eventBus } from "@/main.js";
 export default {
   data() {
     return {
+      isTrailerPlaying: false,
       dominantColor: null,
       tvShow: {
         seasons: null,
@@ -59,6 +69,7 @@ export default {
   },
 
   async created() {
+        eventBus.$on("playTrailer", () => this.isTrailerPlaying = true)
     this.setReviews();
     console.log(this.tvShow.reviews)
     const tvShowId = this.$route.params.tvShowId;
@@ -77,6 +88,7 @@ export default {
     this.tvShow.seasons = details.seasons;
     this.tvShow.externalIds = externalIds;
     this.tvShow.credits = tvShowCredits;
+    this.tvShow.videos = tvShowVideos
     this.setDominantColor();
   },
   destroyed() {
@@ -84,6 +96,10 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
+    closeTrailer() {
+      console.log('click from tv')
+      this.isTrailerPlaying = false;
+    },
     async setDominantColor() {
       this.dominantColor = await AvgColorService.domColor(
         `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
@@ -182,7 +198,5 @@ export default {
   margin: 290px auto;
   display: block;
   width: 967px;
-}
-@media only screen and (max-width: 850px) {
 }
 </style>

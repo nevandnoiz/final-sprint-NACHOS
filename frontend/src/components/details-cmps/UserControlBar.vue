@@ -56,6 +56,4 @@ i {
   width: 100%;
 }
 
-@media only screen and (max-width: 850px) {
-}
 </style>
