@@ -59,7 +59,6 @@ export default {
 .browse {
   display: grid;
   grid-template: 500px 1fr/1fr;
-  padding: 20px 0;
 }
 .grid-container {
   padding: 20px;
