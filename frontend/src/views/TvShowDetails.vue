@@ -34,7 +34,7 @@
     </div>
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
 
- 
+    <new-review></new-review>
     <review-form></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
@@ -51,6 +51,7 @@ import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
+import NewReview from "@/components/details-cmps/NewReview.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 import { eventBus } from "@/main.js";
 export default {
@@ -156,6 +157,7 @@ export default {
     }
   },
   components: {
+    NewReview,
     PannelHeading,
     ActorCard,
     ItemContainer,
