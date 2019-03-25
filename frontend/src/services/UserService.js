@@ -10,16 +10,32 @@ const activities = [
     {
         _id: 'abc321321',
         byUser: {
-            Name: {
-                firstName: 'tal',
+            name: {
+                firstName: 'Eyal',
                 lastName: 'wiener'
             }, _id: 'abc123'
         },
         item_id: 79501,
         item_type: 'tv',
         itemTitle: "Doom Patrol",
-        Type: 'rate',
+        type: 'activity',
+        activity: 'rate',
         value: 5,
+    },
+    {
+        _id: 'abc321356',
+        byUser: {
+            name: {
+                firstName: 'Yaniv',
+                lastName: 'wiener'
+            }, _id: '987agv'
+        },
+        item_id: 324857,
+        item_type: 'movies',
+        itemTitle: "Spider-Man: Into the Spider-Verse",
+        type: 'activity',
+        activity: 'listAdd',
+        value: 'Favorite',
     }
 ]
 
