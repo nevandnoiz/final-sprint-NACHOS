@@ -1,37 +1,27 @@
-import ReviewsService from '../services/ReviewsService.js';
+import ReviewService from '../services/MoviesService';
 
 export default {
     state: {
-        currItemReviews: [],
+        // popularMovies: [],
+        // selectedMovie: null
     },
     getters: {
-        currItemReviews(state) {
-          return state.currItemReviews
-        },
+        // moviesToDisplay(state) {
+        //   return state.popularMovies
+        // },
         // selectedMovie(state) {
         //   return state.selectedMovie
         // }
     },
     mutations: {
-        setCurrItemReviews(state, { reviews }) {
-          state.currItemReviews = reviews
-        },
-        addReview(state, { newReview }) {
-          state.currItemReviews.push(newReview)
-        },
+        // setPopularMovies(state, { movies }) {
+        //   state.popularMovies = movies
+        // },
         // setSelectedMovie(state, movie) {
         //   state.selectedMovie = movie
         // }
     },
     actions: {
-        async loadReviewsByType(context, {itemType,itemId}) {
-            const reviews = await ReviewsService.loadReviewsByType(itemType,itemId)
-            context.commit({ type: 'setCurrItemReviews', reviews })
-            return reviews
-          },
-        async addReview(context, {newReview,itemType,itemId}) {
-            const reviews = await ReviewsService.addReview(newReview,itemType,itemId)
-            context.commit({ type: 'addReview', newReview })
-          },
+
     }
 }

@@ -3,7 +3,7 @@
     <b-field>
       <b-autocomplete
         :data="data"
-        placeholder="Search"
+        placeholder="Search ALL"
         field="title"
         :loading="isFetching"
         @typing="getAsyncData"

@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     imgURL() {
-      if (this.item.profile_path) return UtilityService.imgURL(this.item.profile_path, 500);
       return UtilityService.imgURL(this.item.poster_path, 500);
     },
     pushToDetails(itemId) {
@@ -49,13 +48,13 @@ export default {
       this.isChecked = !this.isChecked;
     },
     toggleisSelected() {
-      this.$emit("toggleItem");
+      this.$emit('toggleItem')
       this.isSelected = !this.isSelected;
     }
   },
   computed: {},
   created() {
-    this.itemTypeRoute = this.$route.path;
+    this.itemTypeRoute=this.$route.path
     this.img = this.imgURL();
   }
 };
@@ -81,16 +80,13 @@ export default {
     }
     i {
       font-size: 18px;
-      margin: 9px 9px 9px 0;
+      margin: 6px 6px 6px 0;
       background-color: white;
       opacity: 0.5;
       color: darkslategray;
-      padding: 8px;
+      padding: 6px;
       border-radius: 50%;
-      transition: 0.2s;
-    }
-    i:hover {
-      opacity: 0.75;
+      transition: 0.25s;
     }
     .checked {
       background-color: rgb(1, 221, 1);

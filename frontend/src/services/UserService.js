@@ -10,32 +10,16 @@ const activities = [
     {
         _id: 'abc321321',
         byUser: {
-            name: {
-                firstName: 'Eyal',
+            Name: {
+                firstName: 'tal',
                 lastName: 'wiener'
             }, _id: 'abc123'
         },
         item_id: 79501,
         item_type: 'tv',
         itemTitle: "Doom Patrol",
-        type: 'activity',
-        activity: 'rate',
+        Type: 'rate',
         value: 5,
-    },
-    {
-        _id: 'abc321356',
-        byUser: {
-            name: {
-                firstName: 'Yaniv',
-                lastName: 'wiener'
-            }, _id: '987agv'
-        },
-        item_id: 324857,
-        item_type: 'movies',
-        itemTitle: "Spider-Man: Into the Spider-Verse",
-        type: 'activity',
-        activity: 'listAdd',
-        value: 'Favorite',
     }
 ]
 
@@ -47,21 +31,19 @@ function getActivities() {
 
 function getUser() {
     return {
-        id: 'abc123',
+        _id: 'abc123',
         password: '123123',
         name: {
             firstName: 'tal',
             lastName: 'wiener'
         },
-        email: 'email@wiener.tal',
+        mail: null,
         img: null,
         following: null,
         lists: [
             {
                 name: 'favorites',
-                items: [
-                    { "vote_count": 74, "id": 450001, "video": false, "vote_average": 5.5, "title": "Master Z: Ip Man Legacy", "popularity": 324.002, "poster_path": "\/2WfjB6FUDTIBVI2y02UGbnHR82s.jpg", "original_language": "cn", "original_title": "葉問外傳：張天志", "genre_ids": [28], "backdrop_path": "\/grtVFGJ4ts0nDAPpc1JWbBoVKTu.jpg", "adult": false, "overview": "After being defeated by Ip Man, Cheung Tin Chi is attempting to keep a low profile. While going about his business, he gets into a fight with a foreigner by the name of Davidson, who is a big boss behind the bar district. Tin Chi fights hard with Wing Chun and earns respect.", "release_date": "2018-12-20" }
-                ]
+                items: []
             },
             {
                 name: 'watchList',
