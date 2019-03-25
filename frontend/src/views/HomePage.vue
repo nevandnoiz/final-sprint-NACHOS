@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-container">
     <backdrop-cmp :topItems="headerItems"></backdrop-cmp>
     <watch-next v-if="user" :watchNextList="watchNextList"></watch-next>
     <feed :activities="activities"></feed>
@@ -54,3 +54,11 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss" scoped>
+.home-container{
+  display:grid;
+  grid-template: 500px 1fr/1fr;
+  }
+</style>
