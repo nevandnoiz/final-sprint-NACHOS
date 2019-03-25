@@ -18,15 +18,16 @@
         class="netflix-container"
       ></netflix-slide-main>
       <div class="content-info-container">
-        <div class="Actors">
-                <actor-card :item="tvShow.credits"></actor-card>
+        <div :style="{'background':''+dominantColor+''}" class="Actors">
+                <actor-card :dominantColor="dominantColor" :item="tvShow.credits"></actor-card>
 
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
 
-        <div class="reviews">
+        <div :style="{'background':''+dominantColor+''}" class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <review-container
+          
             v-for="(review, index) in tvShow.reviews"
             :key="index"
             :review="review"
@@ -190,6 +191,7 @@ export default {
 
 <style scoped>
 .Actors {
+      box-shadow: 0px 0px 12px #000000;
       display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 24px 1fr;
@@ -202,6 +204,7 @@ export default {
     height: 800px;
 }
 .reviews {
+      box-shadow: 0px 0px 12px #000000;
 }
 
 .pannel-heading-epo {

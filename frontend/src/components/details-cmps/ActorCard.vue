@@ -7,8 +7,8 @@
 
       <div class="card-container" v-for="(actor, index) in item.cast" :key="index">
         <img :src="'http://image.tmdb.org/t/p/w300'+actor.profile_path">
-        <h1>{{actor.name}}</h1>
-        <p>{{actor.character}}</p>
+        <h1 :style="{'color':''+isLightOrDark+''}" >{{actor.name}}</h1>
+        <p :style="{'color':''+isLightOrDark+''}" >{{actor.character}}</p>
       </div>
 
       <!-- <div @click="nextActors" class="right">
@@ -19,16 +19,22 @@
 </template>
 
 <script>
-// import UtilityService from "@/services/UtilityService.js";
+import UtilityService from "@/services/UtilityService.js";
 export default {
-  props: ["item"],
+  props: ["item", "dominantColor"],
   created() {
+    console.log('from actor', this.dominantColor)
   },
   data() {
     return {};
   },
   methods: {},
-  computed: {}
+  computed: {
+        isLightOrDark(){
+      if(UtilityService.lightOrDark(this.dominantColor) === 'light') return 'black'
+      else return 'white'
+    }
+  }
 };
 </script>
 
