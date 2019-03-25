@@ -27,6 +27,8 @@ export default {
   computed: {
     feedItems: function() {
       if (!this.activities) return this.articles.flat();
+      if (!this.articles) return this.activities
+      else return this.activities.concat(this.articles.flat());
     }
   }
 };
