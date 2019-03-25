@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       swiperOptions: {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 1,
         freeMode: true,
         loop: true,

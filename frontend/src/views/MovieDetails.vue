@@ -17,8 +17,9 @@
     ></review-container>-->
     <!-- <review-form></review-form> -->
     <div class="sub-container">
-      <!-- <actor-card :item="movie.credits"></actor-card> -->
     </div>
+          <actor-card :item="movie.credits"></actor-card>
+
   </div>
 </template>
 
@@ -148,6 +149,9 @@ export default {
 </script>
 
 <style>
+/* body,html  {
+  background-color: rgb(230, 230, 230)
+} */
 div.ytp-chrome-top.ytp-show-watch-later-title.ytp-share-button-visible.ytp-show-share-title.ytp-show-cards-title{
   display: none !important
 }
@@ -181,7 +185,7 @@ div[data-layer="1"]{
     height: 93vh;
 }
 .sub-container {
-  margin: 290px auto;
+  margin: 0 auto;
   display: block;
   width: 956px;
 }
