@@ -1,10 +1,9 @@
 <template>
-  <section>
-    <p class="content"></p>
+  <section class="search-bar-container">
     <b-field>
       <b-autocomplete
         :data="data"
-        placeholder="e.g. Fight Club"
+        placeholder="Search ALL"
         field="title"
         :loading="isFetching"
         @typing="getAsyncData"
@@ -62,3 +61,8 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.search-bar-container {
+  grid-area: 2/1/2/1;
+}
+</style>

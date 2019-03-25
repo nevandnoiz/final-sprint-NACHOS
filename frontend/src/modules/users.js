@@ -30,5 +30,10 @@ export default {
       context.commit({ type: 'setUser', user })
       return user
     },
+    // async addToWatchList(context, payload) {
+    //   const user = await UserServies.addToWatchList()
+    //   // context.commit({ type: 'setUser', user })
+    //   return user
+    // },
   }
 }

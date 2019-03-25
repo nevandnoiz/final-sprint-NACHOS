@@ -9,7 +9,7 @@
 <script>
 import selectDefualt from "@/components/home-cmps/selectDefualt";
 import feedContent from "@/components/home-cmps/feedContent";
-import FeeSdervice from "@/services/FeedService";
+import FeedService from "@/services/FeedService";
 export default {
   props: {
     activities: Array
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     generateFeed(items) {
-      this.articles = FeeSdervice.getNewsByArr(items);
+      this.articles = FeedService.getNewsByArr(items);
     }
   }
 };

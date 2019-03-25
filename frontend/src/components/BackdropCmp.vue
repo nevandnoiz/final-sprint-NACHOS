@@ -94,7 +94,7 @@ export default {
   width: 500px;
   position: absolute;
   left: 2%;
-  bottom: 26.8%;
+  bottom: 23.5%;
   .backdrop-num-btn {
     height: 36px;
     button {
@@ -107,7 +107,10 @@ export default {
       border: none;
       border-radius: 2px;
       box-shadow: 0 0 1px black;
-      transition: 0.4s;
+      transition: opacity 0.4s, background-color 0.1s;
+    }
+    button:hover {
+      background-color: rgb(226, 226, 226);
     }
     .selected-btn {
       opacity: 0.9;

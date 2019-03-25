@@ -12,7 +12,7 @@
         <i class="fas fa-plus"></i>
         <i class="fas fa-check" :class="{'checked': isChecked}" @click.stop="toggleCheckMark"></i>
       </div>
-      <a href>Play Trailer</a>
+      <a href="#">Play Trailer</a>
     </div>
   </div>
 </template>
