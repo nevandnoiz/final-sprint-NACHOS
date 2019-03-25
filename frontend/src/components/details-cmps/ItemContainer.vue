@@ -1,6 +1,6 @@
 <template>
 <section>
-      <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
+      <div v-if="!isTrailer" class="details-sections" :style="bckImage">
         <div :style="bckColor" class="row">
 
         </div>
@@ -315,7 +315,7 @@ padding: 0 0.5rem;
   grid-template-columns: 2em 1fr 1fr;
   background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
-.detalis-sections {
+.details-sections {
       position: relative;
   background-repeat: no-repeat;
   background-size: 100%;
