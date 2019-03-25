@@ -1,8 +1,8 @@
 <template>
   <div class="home-container">
-    <backdrop-cmp :topItems="headerItems"></backdrop-cmp>
+    <backdrop-cmp v-if="!user" :topItems="headerItems"></backdrop-cmp>
     <watch-next v-if="user" :watchNextList="watchNextList"></watch-next>
-    <feed :activities="activities"></feed>
+    <feed :user="user"></feed>
     <!-- <pre> -->
     <!-- <a class="twitter-timeline" href="https://twitter.com/spiderman?ref_src=twsrc%5Etfw">Tweet</a> -->
     <!-- </pre> -->
@@ -23,25 +23,21 @@ export default {
   data() {
     return {};
   },
-  created() {
-    this.$store.dispatch(`loadPopularMovies`);
+  async created() {
+    this.$store.dispatch(`loadTrendingAll`);
   },
   computed: {
-    popularMovies() {
-      return this.$store.getters.moviesToDisplay;
-    },
     activities() {
       return this.$store.getters.activities;
     },
     user() {
       return this.$store.getters.currUser;
     },
-     popularItems() {
-      
-      return this.$store.getters.moviesToDisplay;
+     trendingItems() {
+      return this.$store.getters.trendingToDisplay;
     },
     headerItems() {
-      let topFiveItems = this.popularItems.slice(0, 5);
+      let topFiveItems = this.trendingItems.slice(0, 5);
       return topFiveItems;
     },
     watchNextList() {
@@ -57,8 +53,8 @@ export default {
 
 
 <style lang="scss" scoped>
-.home-container{
-  display:grid;
+.home-container {
+  display: grid;
   grid-template: 500px 1fr/1fr;
-  }
+}
 </style>
