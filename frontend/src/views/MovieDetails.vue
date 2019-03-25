@@ -1,6 +1,14 @@
 <template>
+  <div class="tv-details-container" v-show="movie.details && dominantColor">
+    <div class="main-youtube-container" v-if="isTrailerPlaying">
+      <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
+      <youtube
+        class="youtube-container"
+        :video-id="this.movie.videos.results[0].key"
+        :player-vars="{ autoplay: 1 }"
+      ></youtube>
+    </div>
 
-  <div class="tv-details-container" v-if="movie.details && dominantColor">
     <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
     <!-- <review-container
       v-for="(review, index) in movie.reviews.results"
@@ -8,16 +16,9 @@
       :review="review"
     ></review-container>-->
     <!-- <review-form></review-form> -->
-<<<<<<< HEAD
     <div class="sub-container">
+      <!-- <actor-card :item="movie.credits"></actor-card> -->
     </div>
-          <actor-card :item="movie.credits"></actor-card>
-=======
-        <div class="sub-container">
-    <!-- <actor-card :item="movie.credits"></actor-card> -->
-        </div>
->>>>>>> parent of d6a7827... css
-
   </div>
 </template>
 
@@ -29,10 +30,11 @@ import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
-
+import { eventBus } from "@/main.js";
 export default {
   data() {
     return {
+      isTrailerPlaying: false,
       dominantColor: null,
       movie: {
         details: null,
@@ -45,6 +47,14 @@ export default {
   },
 
   async created() {
+    eventBus.$on("playTrailer", () => {
+      this.isTrailerPlaying = true;
+      setTimeout(() => {
+        // document.getElementById("youtube-player-1").style.width = "100vw";
+        // document.getElementById("youtube-player-1").style.height = "720px";
+      }, 2000);
+    });
+
     this.setReviews();
     const movieId = this.$route.params.movieId;
     const [details, externalIds, movieCredits, movieVideos] = await Promise.all(
@@ -65,6 +75,9 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
+    closeTrailer() {
+      this.isTrailerPlaying = false;
+    },
     setReviews() {
       this.movie.reviews = {
         id: 297761,
@@ -134,11 +147,7 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
 <style>
-/* body,html  {
-  background-color: rgb(230, 230, 230)
-} */
 div.ytp-chrome-top.ytp-show-watch-later-title.ytp-share-button-visible.ytp-show-share-title.ytp-show-cards-title{
   display: none !important
 }
@@ -157,27 +166,24 @@ div[data-layer="1"]{
     z-index: 200;
         top: 60px;
             width: 100vw;
-=======
-<style scoped>
->>>>>>> parent of d6a7827... css
 
+    background-color: black;
+}
+.youtube-container {
+    height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 200;
+}
 
-<<<<<<< HEAD
 .youtube-container > iframe {
       width: 100%;
     height: 93vh;
 }
 .sub-container {
-  margin: 0 auto;
+  margin: 290px auto;
   display: block;
   width: 956px;
-=======
-.sub-container{
-    margin: 290px auto;
-    display: block;
-    width: 956px
-
->>>>>>> parent of d6a7827... css
 }
 .tv-details-container {
   display: flex;

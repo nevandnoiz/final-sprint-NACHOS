@@ -1,73 +1,32 @@
 <template>
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
-    <div class="main-youtube-container" v-if="isTrailerPlaying">
-      <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
-      <youtube
-        class="youtube-container"
-        :video-id="this.tvShow.videos.results[0].key"
-        :player-vars="{ autoplay: 1 }"
-      ></youtube>
-    </div>
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-<<<<<<< HEAD
-    <div class="_netflix">
-  <netflix-slide-main
-=======
     <div class="sub-container">
-      <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading>
+      <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
       <netflix-slide-main
->>>>>>> parent of d6a7827... css
         :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
         class="netflix-container"
       ></netflix-slide-main>
-    </div>
-    <div class="sub-container">
-      <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
-    
       <div class="content-info-container">
         <div class="Actors">
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
-<<<<<<< HEAD
-
+            
         <div class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
-          <review-container
-            v-for="(review, index) in tvShow.reviews.results"
-            :key="index"
-            :review="review"
-            item.details.id
-            item.seasons
-          ></review-container>
-=======
-            
-        <div class="reviews" 
-          >
-          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
->>>>>>> parent of d6a7827... css
+              <review-container v-for="(review, index) in tvShow.reviews.results" :key="index" :review="review" item.details.id item.seasons></review-container>
+
         </div>
       </div>
       <!-- <nav-bar class="nav-bar"></nav-bar> -->
+      <!-- <actor-card :item="tvShow.credits"></actor-card> -->
     </div>
-<<<<<<< HEAD
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
-        <review-form></review-form>
 
-      <actor-card :item="tvShow.credits"></actor-card>
-
-=======
-
-    <!-- <review-container
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
-    <review-container
-      v-for="(review, index) in tvShow.reviews.results"
-      :key="index"
-      :review="review" item.details.id item.seasons
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
->>>>>>> parent of d6a7827... css
+ 
+    <review-form></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
@@ -84,12 +43,9 @@ import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
-import { eventBus } from "@/main.js";
-
 export default {
   data() {
     return {
-      isTrailerPlaying: false,
       dominantColor: null,
       tvShow: {
         seasons: null,
@@ -103,18 +59,8 @@ export default {
   },
 
   async created() {
-        eventBus.$on("playTrailer", () => {
-      this.isTrailerPlaying = true;
-      setTimeout(() => {
-        // document.getElementById("youtube-player-1").style.width = "100vw";
-        // document.getElementById("youtube-player-1").style.height = "720px";
-      }, 2000);
-    });
     this.setReviews();
-<<<<<<< HEAD
-    console.log(this.tvShow.reviews);
-=======
->>>>>>> parent of d6a7827... css
+    console.log(this.tvShow.reviews)
     const tvShowId = this.$route.params.tvShowId;
     const [
       details,
@@ -131,7 +77,6 @@ export default {
     this.tvShow.seasons = details.seasons;
     this.tvShow.externalIds = externalIds;
     this.tvShow.credits = tvShowCredits;
-    this.tvShow.videos = tvShowVideos;
     this.setDominantColor();
   },
   destroyed() {
@@ -139,9 +84,6 @@ export default {
     this.$store.commit("setSelectedItem", null);
   },
   methods: {
-    closeTrailer() {
-      this.isTrailerPlaying = false
-    },
     async setDominantColor() {
       this.dominantColor = await AvgColorService.domColor(
         `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
@@ -216,35 +158,30 @@ export default {
 
 <style scoped>
 .content-info-container {
-  display: grid;
-  gap: 2rem;
-  margin-top: 1rem;
-  grid-template-columns: 1fr 2fr;
-  height: 800px;
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 2fr;
+    height: 800px;
 }
 .reviews {
+
 }
 
 .pannel-heading-epo {
   margin-top: 1.3rem;
 }
 .netflix-container {
-<<<<<<< HEAD
-  /* padding-bottom: 1.5rem; */
-=======
-      padding-bottom: 1.5rem;
->>>>>>> parent of d6a7827... css
+      /* padding-bottom: 1.5rem; */
 }
 .tv-details-container {
   display: flex;
   flex-direction: column;
-      width: 100vw;
 }
-
-._netflix{
-  margin: 290px 0 0;
+.sub-container {
+  margin: 290px auto;
   display: block;
-  /* width: 967px; */
+  width: 967px;
 }
 @media only screen and (max-width: 850px) {
 }
