@@ -38,7 +38,7 @@ props: ['dominantColor','title']
     flex-grow: 1;
 }
 h1{
-        background-color: #f5f5f5;
+        background-color: white;
     padding: 0 0.5rem;
     display: flex;
     align-items: center;

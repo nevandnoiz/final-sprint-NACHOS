@@ -54,7 +54,7 @@ p {
 .main-container {
   grid-row: 2;
   justify-content: center;
-  height: 995px;
+  height: 1000px;
   display: flex;
   direction:rtl;
   overflow: scroll;

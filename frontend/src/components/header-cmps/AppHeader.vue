@@ -7,7 +7,7 @@
         <router-link to="/tv">Tv Shows</router-link>
         <router-link to="/actors">Actors</router-link>
         <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <a v-else @click="login">login</a>
+        <a v-else @click="login">Login</a>
       </div>
     </div>
   </header>

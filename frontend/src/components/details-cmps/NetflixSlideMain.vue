@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NetflixSlideSeason from "@/components/details-cmps/netflixSlideSeason.vue";
+import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import { eventBus } from "@/main.js";
 export default {
   async created() {

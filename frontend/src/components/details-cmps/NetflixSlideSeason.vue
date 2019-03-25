@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NetflixEpoCard from "@/components/details-cmps/netflixEpoCard.vue";
+import NetflixEpoCard from "@/components/details-cmps/NetflixEpoCard.vue";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
  import { eventBus } from "@/main.js";

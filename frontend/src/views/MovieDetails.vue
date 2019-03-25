@@ -10,14 +10,18 @@
     </div>
 
     <item-container v-if="this.movie.details" :item="movie" :dominantColor="dominantColor"></item-container>
-    <!-- <review-container
+    <div class="sub-container">
+            <div class="content-info-container">
+                      <div class="reviews">
+    <review-container
       v-for="(review, index) in movie.reviews.results"
       :key="index"
       :review="review"
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
-    <div class="sub-container">
+    ></review-container>
+    <review-form></review-form>
+     </div>
       <!-- <actor-card :item="movie.credits"></actor-card> -->
+    </div>
     </div>
   </div>
 </template>
@@ -184,7 +188,13 @@ div[data-layer="1"]{
   width: 100%;
   z-index: 200;
 }
-
+.content-info-container {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 2fr;
+    height: 800px;
+}
 .youtube-container > iframe {
       width: 100%;
     height: 93vh;
