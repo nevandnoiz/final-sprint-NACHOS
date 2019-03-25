@@ -1,21 +1,22 @@
 <template>
   <div>
     <section>
-      <h2>Choose tv shows you like</h2>
-      <div class="selector">
-        <div class="select-item" v-for="item in items" :key="item.id">
+      <h2 class="section-header">Choose tv shows you like</h2>
+      <div v-if="items" class="selector">
+        <div class="select-item" v-for="item in itemToShow" :key="item.id">
           <div class="choose"></div>
           <item-preview
             class="select-item-poster"
-            :movie="item"
+            :item="item"
             :click="false"
-            @click="add(item.name)"
-            :class="{'mark': isMarked}"
+            :selectMode="true"
+            @toggleItem="toggleItem(item.name)"
           />
           <p>{{item.name}}</p>
         </div>
       </div>
     </section>
+    <button v-if="likedItems.length > 2" @click="$emit('generateFeed', likedItems)">go</button>
   </div>
 </template>
 
@@ -38,9 +39,23 @@ export default {
       )
       .then(res => (this.items = res.data.results));
   },
+
   methods: {
-    add(itemName) {
-      this.likedItems.push(itemName);
+    toggleItem(itemName) {
+      const itemIdx = this.likedItems.indexOf(itemName);
+      if (itemIdx >= 0) this.likedItems.splice(itemIdx, 1);
+      else this.likedItems.push(itemName);
+    }
+  },
+  computed: {
+    itemToShow: function() {
+      const itemsToShow = [];
+      for (let i = 0; i < 10; i++) {
+        const randomNum = Math.floor(Math.random() * this.items.length);
+        itemsToShow.push(this.items[randomNum]);
+        this.items.splice(randomNum, 1);
+      }
+      return itemsToShow;
     }
   }
 };
@@ -49,9 +64,8 @@ export default {
 <style lang="scss" scoped>
 .selector {
   display: flex;
-  width: 100vh;
   flex-wrap: wrap;
-
+  justify-content: center;
   .select-item {
     margin: 10px;
   }
@@ -59,5 +73,14 @@ export default {
     width: 130px;
     height: 200px;
   }
+}
+.section-header {
+  text-align: center;
+  font-size: 40px;
+  font-family: sans-serif;
+}
+
+section {
+  margin-top: 25px
 }
 </style>
