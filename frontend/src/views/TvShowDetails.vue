@@ -168,7 +168,7 @@ export default {
     height: 800px;
 }
 .reviews {
- 
+
 }
 
 .pannel-heading-epo {
