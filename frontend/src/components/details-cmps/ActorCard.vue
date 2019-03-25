@@ -54,7 +54,6 @@ p {
 }
 .main-container {
   grid-row: 2;
-  background-color: #edeaea;
   justify-content: center;
   height: 1000px;
   display: flex;
@@ -66,7 +65,7 @@ p {
       display: flex;
     flex-direction: column;
  margin: 2rem 0;
-    background: white;
+    /* background: white; */
     border-radius: 3px;
        padding: 0.5rem 0;
     -webkit-box-sizing: content-box;

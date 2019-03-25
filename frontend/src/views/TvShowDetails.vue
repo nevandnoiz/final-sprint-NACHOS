@@ -194,6 +194,7 @@ export default {
   margin-top: 1.3rem;
 }
 .netflix-container {
+      box-shadow: 0px 0px 12px #000000;
       /* padding-bottom: 1.5rem; */
 }
 .tv-details-container {
@@ -201,8 +202,9 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 290px auto;
-  display: block;
-  width: 967px;
+    margin: 256px auto;
+    display: block;
+    width: 977px;
+    z-index: 1;
 }
 </style>

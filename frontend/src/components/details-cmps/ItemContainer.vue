@@ -224,6 +224,7 @@ padding: 0 0.5rem;
     flex-direction: column;
 }
 .netflix-container {
+      box-shadow: 0px 0px 12px #000000;
       padding-bottom: 2rem;
     background-color: rgb(39, 36, 18);
       /* padding: 1rem 0; */
@@ -409,16 +410,18 @@ iframe {
   background-color: lightslategray;
 } */
 .details-text {
-  padding: 20px;
-  color: black;
-  margin: 0;
-  grid-column: 2;
-  /* padding-top: 300px; */
-  grid-row: 2;
-  /* padding: 0; */
+      box-shadow: 0px 0px 12px #000000;
+    padding: 20px;
+    /* color: black; */
+    margin: 0;
+    grid-column: 2;
+    /* padding-top: 300px; */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+    grid-row: 2;
+    /* padding: 0; */
 }
 .details-text > * {
-  /* color: black; */
+  color: white;
   margin: 0;
 
   padding: 0;

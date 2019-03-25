@@ -92,6 +92,7 @@ methods: {
   border: 0 !important
 }
 .el-select {
+      box-shadow: 0px 0px 12px #000000;
 
       position: absolute;
     /* color: black; */
