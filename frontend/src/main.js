@@ -10,7 +10,6 @@ import './registerServiceWorker'
 import "@/assets/global.css"
 export const eventBus = new Vue()
 // TODO Get it out from globaly
-window.domcolor = null
 
 Vue.use(Buefy)
 Vue.use(Element)
