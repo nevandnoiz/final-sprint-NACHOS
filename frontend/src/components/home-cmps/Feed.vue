@@ -1,7 +1,7 @@
 <template>
   <section class="feed">
     <select-defualt v-if="!user" @generateFeed="generateFeed"/>
-    <feed-content v-if="articles" :articles="articles"/>
+    <feed-content v-if="articles || user" :articles="articles" :activities="activities"/>
   </section>
 </template>
 
@@ -30,7 +30,9 @@ export default {
   },
   computed: {
     activities() {
-      return this.$store.getters.activities;
+      const activities = this.$store.getters.activities;
+    //   if(!activities) return []
+      return activities
     }
   },
   wtach: {
