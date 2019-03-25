@@ -1,5 +1,6 @@
 <template>
   <div class="backdrop-container" @click="pushToDetails(topItems[currIdx])">
+    <!-- <button @click="next">Next</button> -->
     <div v-for="(item, index) in topItems" :key="index">
       <transition name="slide">
         <div
@@ -91,9 +92,9 @@ export default {
   justify-content: space-evenly;
   padding: 2px;
   width: 500px;
-  position: relative;
-  left: 25px;
-  top: 452px;
+  position: absolute;
+  left: 2%;
+  bottom: 23.5%;
   .backdrop-num-btn {
     height: 36px;
     button {
