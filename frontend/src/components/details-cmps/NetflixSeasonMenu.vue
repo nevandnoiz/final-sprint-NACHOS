@@ -31,10 +31,13 @@ export default {
       seasonsList: null
     };
   },
+
+
   methods: {
     onSelectSeason(index) {
       eventBus.$emit("onSeasonClick", index);
       // this.season = null;
+      this.season = null;
       this.season = this.seasonsList[index];
     }
   },
