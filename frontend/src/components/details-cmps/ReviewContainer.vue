@@ -14,6 +14,9 @@
 
 <script>
 export default {
+  created() {
+    console.log('from review container got review:', this.review)
+  },
   props: ["review"],
   data() {
     return {};
@@ -32,9 +35,8 @@ section > h2 {
   font-size: 1.2rem;
 }
 .review-container {
-  margin: 25px auto;
-  display: flex;
-  width: 60%;
+  margin: 25px 0;
+    display: flex;
 }
 .review-text {
   margin-left: 20px;

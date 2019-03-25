@@ -41,6 +41,7 @@ export default {
 header {
   position: fixed;
   height: 60px;
+  z-index: 100000;
   width: 100vw;
   background-color: rgb(45, 45, 45);
   grid-area: 1/1/1/1;

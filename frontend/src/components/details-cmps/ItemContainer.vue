@@ -6,11 +6,6 @@
         <div class="white-fill"></div>
         <div class="item-container">
        
-          <!-- <youtube
-              class="youtube-container"
-              :video-id="this.item.videos.results[0].key"
-              :player-vars="{ autoplay: 1 }"
-          ></youtube>-->
      
           <div class="shadowing-container">
             <div class="details-text">
@@ -18,6 +13,7 @@
             </div>
 
             <div class="shadowing">
+              <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
               <h1 class="title">{{item.details.title || item.details.name}}</h1>
               <media-icons-bar class="media-icons-bar"></media-icons-bar>
               <user-control-bar class="user-control-bar"></user-control-bar>
@@ -82,6 +78,8 @@ import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
+import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
+
 // import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
@@ -89,6 +87,7 @@ import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
+    PannelHeading,
     NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
@@ -98,6 +97,7 @@ export default {
     MediaIconsBar
   },
   mounted() {
+
     // document.getElementById("youtube-player-1").style.width = "100%";
   },
   async created() {
@@ -129,6 +129,7 @@ export default {
       return {
         // in the case of redComp, greenComp and blueComp are a vue prop or data
         background: this.dominantColor + "B3"
+        
       };
     },
     imgURL() {
@@ -139,12 +140,32 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Arvo");
+
+*{
+    font-family: Arvo;
+}
+
 a {
   font: -webkit-control;
 }
 iframe {
   width: 100%;
 }
+.pannel-heading-epo{
+      margin-top: 1.3rem;
+ grid-column: 1/8;
+    grid-row: 43;
+}
+   
+.pannel-heading>h1{
+padding: 0 0.5rem;
+    display: flex;
+    background-color: white;
+    height: 100%;
+    align-items: center;
+}
+    
 .item-main-container {
   display: flex
 }
@@ -164,7 +185,10 @@ iframe {
     flex-direction: column;
 }
 .netflix-container {
-      padding-bottom: 20px;
+      padding-bottom: 2rem;
+    background-color: rgb(39, 36, 18);
+      /* padding: 1rem 0; */
+      /* padding-bottom: 20px; */
   box-shadow: 0px 0px 12px #000000;
   margin-top: 1rem;
   grid-column: 1/6;
@@ -253,8 +277,8 @@ iframe {
 .detalis-sections {
   background-repeat: no-repeat;
   background-size: 100%;
-  height: 495px;
     background-position-y: 32%;
+        height: 494px;
 }
 .row {
      /* overflow: hidden; */
@@ -365,10 +389,6 @@ iframe {
 
   padding: 0;
 }
-.details-text > p {
-  font-size: 1.4rem;
-  color: black;
-}
 .details-text > h1 {
   font-size: 2rem;
   color: black;
@@ -384,12 +404,7 @@ iframe {
 .item-details > p {
   margin-top: 20px;
 }
-iframe {
-  width: 100%;
-}
-#youtube-player-1 {
-  width: 100%;
-}
+
 .youtube-container {
   width: 100%;
   grid-row: 2;
@@ -408,9 +423,7 @@ iframe {
   /* padding: 50px; */
   /* background-color: lightgray; */
 }
-.youtube-container > iframe {
-  width: 100% !important;
-}
+
 @media only screen and (max-width: 850px) {
   a {
     font: -webkit-control;
@@ -576,7 +589,7 @@ iframe {
     padding: 0;
   }
   .details-text > p {
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: black;
   }
   .details-text > h1 {

@@ -2,23 +2,31 @@
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
+      <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
       <netflix-slide-main
+        :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
         class="netflix-container"
       ></netflix-slide-main>
-      <nav-bar class="nav-bar"></nav-bar>
-      <actor-card :item="tvShow.credits"></actor-card>
-    </div>
+      <div class="content-info-container">
+        <div class="Actors">
+          <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
+        </div>
+            
+        <div class="reviews">
+          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+              <review-container v-for="(review, index) in tvShow.reviews.results" :key="index" :review="review" item.details.id item.seasons></review-container>
 
-    <!-- <review-container
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
-    <review-container
-      v-for="(review, index) in tvShow.reviews.results"
-      :key="index"
-      :review="review" item.details.id item.seasons
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
+        </div>
+      </div>
+      <!-- <nav-bar class="nav-bar"></nav-bar> -->
+      <!-- <actor-card :item="tvShow.credits"></actor-card> -->
+    </div>
+    <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
+
+ 
+    <review-form></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
@@ -34,7 +42,7 @@ import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
-
+import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 export default {
   data() {
     return {
@@ -52,6 +60,7 @@ export default {
 
   async created() {
     this.setReviews();
+    console.log(this.tvShow.reviews)
     const tvShowId = this.$route.params.tvShowId;
     const [
       details,
@@ -130,6 +139,7 @@ export default {
     }
   },
   components: {
+    PannelHeading,
     ActorCard,
     ItemContainer,
     SeasonsList,
@@ -147,15 +157,31 @@ export default {
 </script>
 
 <style scoped>
+.content-info-container {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 2fr;
+    height: 800px;
+}
+.reviews {
+
+}
+
+.pannel-heading-epo {
+  margin-top: 1.3rem;
+}
+.netflix-container {
+      /* padding-bottom: 1.5rem; */
+}
 .tv-details-container {
   display: flex;
   flex-direction: column;
 }
-.sub-container{
-    margin: 290px auto;
-    display: block;
-    width: 967px;
-
+.sub-container {
+  margin: 290px auto;
+  display: block;
+  width: 967px;
 }
 @media only screen and (max-width: 850px) {
 }

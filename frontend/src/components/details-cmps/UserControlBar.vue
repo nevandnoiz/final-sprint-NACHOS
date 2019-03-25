@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="control-bar">
-      <i class="far fa-play-circle"></i>
+      <i @click="playTrailer" class="far fa-play-circle"></i>
       <div @click="onSeasonsListClick" class="list-btn">
         <i :class="{ 'active': isSeasonsListMode }" class="fas fa-list-ul"></i>
       </div>
@@ -17,14 +17,17 @@ import { eventBus } from "@/main.js";
 export default {
   data() {
     return {
-        isSeasonsListMode: false
+      isSeasonsListMode: false
     };
   },
   methods: {
+    playTrailer() {
+      eventBus.$emit("playTrailer");
+    },
     onSeasonsListClick() {
       console.log("click");
       eventBus.$emit("onSeasonsListClick");
-      this.isSeasonsListMode = !this.isSeasonsListMode
+      this.isSeasonsListMode = !this.isSeasonsListMode;
     }
   }
 };
@@ -32,7 +35,7 @@ export default {
 
 <style scoped>
 .active {
-    color: green !important
+  color: green !important;
 }
 i:hover {
   cursor: pointer;
