@@ -1,4 +1,5 @@
 const axios = require('axios')
+const mongoService = require('./mongo-service')
 
 module.exports = {
     getTrendingShows,
@@ -7,6 +8,8 @@ module.exports = {
     getTvShowExternalIds,
     getTvShowByKeyword,
     getTvShowCredits,
+    getTvShowReviews,
+    addReview,
     getTvShowSeasons,
     getTvShowWatchLinksByKeyword,
     getTvShowVideos,
@@ -65,6 +68,52 @@ function getTvShowCredits(id) {
         })
 }
 
+function getTvShowReviews(id) {
+    let collection = ''
+    return mongoService.connect()
+        .then(db => {
+            collection = db.collection('tv-reviews')
+            return db.collection('tv-reviews').find({ itemId: id }).toArray()
+        })
+        .then(dbReviews => {
+            if (!dbReviews.length) {
+                return axios.get(`https://api.themoviedb.org/3/tv/${id}/reviews?api_key=fd807ad0f521ce282a03431f7288592d`)
+                    .then(res => {
+                        let reviews = res.data.results
+                        return reviews.map(review => {
+                            return {
+                                id: review.id,
+                                author: review.author,
+                                content: review.content,
+                                rating: _getRandomRating()
+                            }
+                        })
+                    })
+                    .then(reviews => {
+                        collection.insertOne({ itemId: id, reviews })
+                        return reviews
+                    })
+            } else {
+                return dbReviews[0].reviews
+            }
+        })
+}
+
+function addReview(newReview, tvShowId) {
+    return mongoService.connect()
+        .then(db => {
+            db.collection('tv-reviews').update({
+                itemId: tvShowId
+            }, {
+                    $push: {
+                        reviews: newReview
+                    }
+                })
+                .then(() => newReview)
+        })
+    return true
+}
+
 function getTvShowSeasons(id) {
     return axios.get(`https://api.themoviedb.org/3/tv/${id}/season/1?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
         .then(res => res.data)
@@ -109,3 +158,6 @@ function getSeasonDetails(id, seasonNum) {
         })
 }
 
+function _getRandomRating() {
+    return (Math.floor(Math.random() * (10 - 0 + 1))) / 2;
+}

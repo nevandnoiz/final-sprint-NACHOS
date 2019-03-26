@@ -13,7 +13,7 @@ function addTvRoutes(app) {
     app.get('/tv/details/:id', (req, res) => {
         const tvShowId = req.params.id;
         TvService.getTvShowDetails(tvShowId)
-            .then(details =>res.send(details))
+            .then(details => res.send(details))
     })
     app.get('/tv/imgs/:id', (req, res) => {
         const tvShowId = req.params.id;
@@ -28,7 +28,23 @@ function addTvRoutes(app) {
     app.get('/tv/credits/:id', (req, res) => {
         const tvShowId = req.params.id;
         TvService.getTvShowCredits(tvShowId)
-            .then(credits => res.send(credits))
+        .then(credits => res.send(credits))
+    })
+    app.get('/tv/reviews/:id', (req, res) => {
+        console.log('GET')
+        const tvShowId = req.params.id;
+        TvService.getTvShowReviews(tvShowId)
+        .then(reviews => {
+            return res.send(reviews)
+        })
+    })
+    app.post('/tv/reviews/:id', (req, res) => {
+        console.log('POST')
+        const tvShowId = req.params.id;
+        const newReview = req.body
+        TvService.addReview(newReview, tvShowId)
+        .then(()=>res.send('Worked'))
+        // .then(review => res.send('great'))
     })
     app.get('/tv/videos/:id', (req, res) => {
         const tvShowId = req.params.id;
@@ -43,7 +59,7 @@ function addTvRoutes(app) {
     app.get('/tv/:id/season/:num', (req, res) => {
         const tvShowId = req.params.id;
         const seasonNum = req.params.num;
-        TvService.getSeasonDetails(tvShowId,seasonNum)
+        TvService.getSeasonDetails(tvShowId, seasonNum)
             .then(seasons => res.send(seasons))
     })
 

@@ -7,6 +7,7 @@ export default {
     getTvShowExternalIds,
     getTvShowByKeyword,
     getTvShowCredits,
+    getTvShowReviews,
     getTvShowSeasons,
     getTvShowWatchLinksByKeyword,
     getTvShowVideos,
@@ -43,6 +44,12 @@ async function getTvShowByKeyword(keyword) {
 
 async function getTvShowCredits(id) {
     let res = await axios.get(`http://localhost:3003/tv/credits/${id}`)
+    return res.data
+}
+
+async function getTvShowReviews(id) {
+    let res = await axios.get(`http://localhost:3003/tv/reviews/${id}`)
+    console.log(res)
     return res.data
 }
 

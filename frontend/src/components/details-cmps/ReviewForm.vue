@@ -9,10 +9,11 @@
         placeholder="Text"
         v-model="review.content"
       ></el-input>
-      <button @click="sendReview">send</button>
+      <button @click="$emit('addReview',review)">Send</button>
     </div>
   </section>
 </template>
+
 
 <script>
 export default {
@@ -22,20 +23,13 @@ export default {
       review: {
         id: "123",
         author: "",
+        rating:3.5,
         content: ""
       },
       setReview: true
     };
   },
   methods:{
-    sendReview(){
-       this.$store.dispatch({
-         type: "addReview",
-         newReview: this.review,
-         itemType: this.type,
-        itemId: this.itemId
-      })
-    }
   }
 };
 </script>

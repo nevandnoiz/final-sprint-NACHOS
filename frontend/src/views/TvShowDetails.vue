@@ -1,6 +1,6 @@
 <template>
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
-        <div class="main-youtube-container" v-if="isTrailerPlaying">
+    <div class="main-youtube-container" v-if="isTrailerPlaying">
       <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
       <youtube
         class="youtube-container"
@@ -19,7 +19,7 @@
       ></netflix-slide-main>
       <div class="content-info-container">
         <div class="Actors">
-                <actor-card :item="tvShow.credits"></actor-card>
+          <actor-card :item="tvShow.credits"></actor-card>
 
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
@@ -40,7 +40,7 @@
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
 
     <new-review></new-review>
-    <review-form type="tv" :itemId="tvShow.details.id"></review-form>
+    <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
@@ -76,21 +76,19 @@ export default {
   },
 
   async created() {
-        eventBus.$on("playTrailer", () => this.isTrailerPlaying = true)
-    this.setReviews();
-    console.log(this.tvShow.reviews)
+    eventBus.$on("playTrailer", () => (this.isTrailerPlaying = true));
     const tvShowId = this.$route.params.tvShowId;
     const [
       details,
       externalIds,
-      tvShowCredits,
       tvShowVideos,
-      tvShowReviews
+      tvShowCredits,
+      tvShowReviews,
     ] = await Promise.all([
       this.$store.dispatch("getTvShowDetails", tvShowId),
       this.$store.dispatch("getTvShowExternalIds", tvShowId),
-      this.$store.dispatch("getTvShowCredits", tvShowId),
       this.$store.dispatch("getTvShowVideos", tvShowId),
+      this.$store.dispatch("getTvShowCredits", tvShowId),
       this.$store.dispatch({
         type: "loadReviewsByType",
         itemType: "tv",
@@ -100,19 +98,18 @@ export default {
     this.tvShow.details = details;
     this.tvShow.seasons = details.seasons;
     this.tvShow.externalIds = externalIds;
+    this.tvShow.videos = tvShowVideos;
     this.tvShow.credits = tvShowCredits;
-    this.tvShow.videos = tvShowVideos
     this.tvShow.reviews = tvShowReviews;
-    // this.setReviews();
     this.setDominantColor();
   },
   destroyed() {
     domcolor = null;
     this.$store.commit("setSelectedItem", null);
+    this.$store.commit("setCurrItemReviews", null);
   },
   methods: {
     closeTrailer() {
-      console.log('click from tv')
       this.isTrailerPlaying = false;
     },
     async setDominantColor() {
@@ -120,53 +117,13 @@ export default {
         `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
       );
     },
-    addReview(review) {
-      console.log(this.tvShow.reviews);
-      this.tvShow.reviews.push(review);
-    },
-    setReviews() {
-      this.tvShow.reviews = [
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        },
-        {
-          id: "57a814dc9251415cfb00309a",
-          author: "NeoBrowser",
-          score: "8",
-          content:
-            "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-          url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-        }
-      ];
+    addReview(newReview) {
+      this.$store.dispatch({
+        type: "addReview",
+        newReview: newReview,
+        itemType: "tv",
+        itemId: this.tvShow.details.id
+      });
     }
   },
   components: {
@@ -190,16 +147,16 @@ export default {
 
 <style scoped>
 .Actors {
-      display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 24px 1fr;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 24px 1fr;
 }
 .content-info-container {
-    display: grid;
-    gap: 2rem;
-    margin-top: 2rem;
- grid-template-columns: 210px 2fr;
-    height: 800px;
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  grid-template-columns: 210px 2fr;
+  height: 800px;
 }
 .reviews {
 }
@@ -208,17 +165,17 @@ export default {
   margin-top: 1.3rem;
 }
 .netflix-container {
-      box-shadow: 0px 0px 12px #000000;
-      /* padding-bottom: 1.5rem; */
+  box-shadow: 0px 0px 12px #000000;
+  /* padding-bottom: 1.5rem; */
 }
 .tv-details-container {
   display: flex;
   flex-direction: column;
 }
 .sub-container {
-    margin: 256px auto;
-    display: block;
-    width: 977px;
-    z-index: 1;
+  margin: 256px auto;
+  display: block;
+  width: 977px;
+  z-index: 1;
 }
 </style>
