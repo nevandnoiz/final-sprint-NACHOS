@@ -18,13 +18,13 @@
         class="netflix-container"
       ></netflix-slide-main>
       <div class="content-info-container">
-        <div :style="{'background':''+dominantColor+''}" class="Actors">
+        <div class="Actors">
                 <actor-card :dominantColor="dominantColor" :item="tvShow.credits"></actor-card>
 
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
 
-        <div :style="{'background':''+dominantColor+''}" class="reviews">
+        <div class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <review-container
           

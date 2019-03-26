@@ -145,6 +145,11 @@ export default {
 </script>
 
 <style>
+html, body,div {
+   cursor: url(./Untitled-23.gif), auto;
+}
+
+
 div *::-webkit-scrollbar{
   width: 10px;
   height: 1px;
