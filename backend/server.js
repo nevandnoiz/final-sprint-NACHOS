@@ -14,7 +14,7 @@ const addTwitterRoutes = require('./routes/twitter-route')
 const addTvRoute = require('./routes/tv-route')
 const addActorsRoute = require('./routes/actors-route')
 const addReviewsRoute = require('./routes/reviews-route')
-// const addUserRoute = require('./routes/user-route')
+const addUserRoute = require('./routes/user-route')
 
 const app = express()
 app.use(cors({
@@ -49,6 +49,7 @@ addActorsRoute(app)
 addReviewsRoute(app)
 addTwitterRoutes(app)
 // addUserRoute(app)
+addUserRoute(app)
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`))

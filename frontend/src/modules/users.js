@@ -7,7 +7,14 @@ export default {
   },
   getters: {
     activities: state => state.activities,
-    currUser: state => state.currUser
+    currUser: state => state.currUser,
+    getUserForComment: function (state) {
+      if (state.currUser) return {
+        _id: state.currUser._id,
+        name: state.currUser.name,
+        img: state.currUser.img
+      }
+    }
   },
   mutations: {
     setCurrUser(state, { user }) {
@@ -19,6 +26,10 @@ export default {
     setUser(state, { user }) {
       state.currUser = user
     },
+    updateActivity(state, { newActivity }) {
+      const idx = state.activities.findIndex(activity => activity._id === newActivity._id)
+      state.activities.splice(idx, 1, newActivity)
+    }
   },
   actions: {
     async loadActivities(context, payload) {
@@ -26,10 +37,28 @@ export default {
       context.commit({ type: 'setActivities', activities })
     },
     async loadUser(context, payload) {
-      const user = await UserServies.getUser()
+      const user = await UserServies.loadUser()
+      if (user) context.commit({ type: 'setUser', user })
+    },
+    async loginUser(context, payload) {
+      const user = await UserServies.loginUser()
       context.commit({ type: 'setUser', user })
       return user
     },
+    async addLikeToActivity(context, activity) {
+      const newActivity = await UserServies.addLikeToActivity(activity)
+      context.commit({ type: 'updateActivity', newActivity })
+    },
+
+    async addCommentToActivity(context, { comment, activity }) {
+      const commentObj = {
+        user: context.getters.getUserForComment,
+        comment,
+        timestamp: Date.now()
+      }
+      const newActivity = await UserServies.addCommentToActivity(commentObj, activity)
+      context.commit({ type: 'updateActivity', newActivity })
+    }
     // async addToWatchList(context, payload) {
     //   const user = await UserServies.addToWatchList()
     //   // context.commit({ type: 'setUser', user })

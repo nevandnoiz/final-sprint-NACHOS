@@ -1,7 +1,13 @@
 <template>
   <section class="feed">
     <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
-    <feed-content v-if="articles || user" :articles="articles" :activities="activities"/>
+    <feed-content
+      v-if="articles || user"
+      :articles="articles"
+      :activities="activities"
+      @addLike="addLike"
+      @addComment="addComment"
+    />
   </section>
 </template>
 
@@ -24,21 +30,35 @@ export default {
     };
   },
   methods: {
-    generateFeed(items) {
-      this.articles = FeedService.getNewsByArr(items);
+    generateFeed(items, numOfArticles) {
+      this.articles = FeedService.getNewsByArr(items, numOfArticles);
+    },
+    addLike(item) {
+      this.$store.dispatch("addLikeToActivity", item);
+    },
+    addComment(details) {
+      this.$store.dispatch("addCommentToActivity", details);  
+      // {comment, activity}    
     }
   },
   computed: {
     activities() {
       const activities = this.$store.getters.activities;
-    //   if(!activities) return []
-      return activities
+      return activities;
+    },
+    userFavoriteItems() {
+      if (this.user) {
+        const list = this.user.lists.find(list => list.name === "favorites");
+        const favoriteItems = list.items.map(item => item.name);
+        return favoriteItems;
+      }
     }
   },
-  wtach: {
+  watch: {
     user: function() {
       if (this.user) {
         this.$store.dispatch("loadActivities");
+        this.generateFeed(this.userFavoriteItems, 1);
       }
     }
   }

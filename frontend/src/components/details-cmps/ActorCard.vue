@@ -23,7 +23,6 @@ import UtilityService from "@/services/UtilityService.js";
 export default {
   props: ["item"],
   created() {
-   
   },
   data() {
     return {};
@@ -57,7 +56,7 @@ p {
 .main-container {
   grid-row: 2;
   justify-content: center;
-    height: 995px;
+  height: 995px;
   display: flex;
   direction:rtl;
   overflow: scroll;

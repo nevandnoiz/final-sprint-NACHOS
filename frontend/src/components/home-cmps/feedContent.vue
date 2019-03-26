@@ -1,18 +1,17 @@
 <template>
   <section class="feedContent">
-    <feed-article v-for="(item, idx) in feedItems" :key="idx" :article="item"/>
-    <feed-activity :activities="activities" v-if="activities"/>
-    <!-- <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type"/> -->
+    <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type" :item="item" @addLike="$emit('addLike', item)" @addComment="$emit('addComment', $event)"/>
   </section>
 </template>
 
 <script>
+import util from '@/services/UtilityService.js'
 import FeedArticle from "@/components/home-cmps/FeedArticle";
-import FeedActivity from "@/components/home-cmps/FeedActivity";
+import activity from "@/components/home-cmps/FeedActivity";
 export default {
   components: {
     FeedArticle,
-    FeedActivity
+    activity
   },
   props: {
     articles: {
@@ -26,9 +25,13 @@ export default {
   },
   computed: {
     feedItems: function() {
+      if (!this.activities) return this.articles.flat();
       if (!this.articles) return this.activities;
-      return this.articles.flat()
-      // return this.activities.concat(this.articles.flat());
+      else {
+        const combArr = this.activities.concat(this.articles.flat())
+        return  combArr
+        // util.shuffleArray(combArr)
+        };
     }
   }
 };

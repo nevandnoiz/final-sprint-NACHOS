@@ -42,7 +42,7 @@ export default new Vuex.Store({
   actions: {
     async loadTrendingAll(context, payload) {
       let res = await axios.get(`http://localhost:3003/all`)
-      console.log(res.data.results)
+      // console.log(res.data.results)
       const trending = res.data.results
       context.commit({ type: 'setTrending', trending })
     },

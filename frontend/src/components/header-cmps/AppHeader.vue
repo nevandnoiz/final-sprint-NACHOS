@@ -16,16 +16,17 @@
 <script>
 export default {
   components: {
-    // searchBar 
+    // searchBar
   },
   methods: {
     pushToHome() {
       this.$router.push("/");
     },
     login() {
-      this.$store.dispatch("loadActivities");
-      this.$store.dispatch("loadUser");
-      setTimeout(() => this.$router.push("/"), 1500);
+      this.$store
+        .dispatch("loginUser")
+        .then(() => this.$store.dispatch("loadActivities"))
+        .then(() => setTimeout(() => this.$router.push("/"), 1000));
     }
   },
   computed: {
@@ -50,13 +51,13 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-      img {
-        height: 60px;
-        cursor: pointer;
-      }
-    .links-section{
+    img {
+      height: 60px;
+      cursor: pointer;
+    }
+    .links-section {
       width: 475px;
-      display:flex;
+      display: flex;
       justify-content: space-evenly;
       a {
         color: white;
