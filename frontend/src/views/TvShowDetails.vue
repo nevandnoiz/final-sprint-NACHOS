@@ -26,13 +26,17 @@
 
         <div class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
-          <review-container
+
+   <twitter-feed :keyword="tvShow.details.name"></twitter-feed>
+
+
+          <!-- <review-container
             v-for="(review, index) in tvShow.reviews"
             :key="index"
             :review="review"
             item.details.id
             item.seasons
-          ></review-container>
+          ></review-container> -->
         </div>
       </div>
       <!-- <nav-bar class="nav-bar"></nav-bar> -->
@@ -41,7 +45,6 @@
 
     <new-review></new-review>
     <review-form type="tv" :itemId="tvShow.details.id"></review-form>
-    <Tweet class="tweet" :id="'1378000488'" :options="{ theme: 'dark' }"/>
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
 </template>
@@ -59,8 +62,9 @@ import AvgColorService from "@/services/AvgColorService.js";
 import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import NewReview from "@/components/details-cmps/NewReview.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
+import TwitterFeed from "@/components/general-cmps/TwitterFeed.vue";
 import { eventBus } from "@/main.js";
-import { Tweet, Moment, Timeline } from 'vue-tweet-embed'
+
 export default {
   data() {
     return {
@@ -78,10 +82,11 @@ export default {
   },
 
   async created() {
+    
 // console.log('twit is:',TwitterService.getUserTweet())      
   eventBus.$on("playTrailer", () => this.isTrailerPlaying = true)
     this.setReviews();
-    console.log(this.tvShow.reviews)
+    // console.log(this.tvShow.reviews)
     const tvShowId = this.$route.params.tvShowId;
     const [
       details,
@@ -108,6 +113,7 @@ export default {
     this.tvShow.reviews = tvShowReviews;
     // this.setReviews();
     this.setDominantColor();
+    // console.log(this.tvShow.details.name)
   },
   destroyed() {
     domcolor = null;
@@ -173,7 +179,7 @@ export default {
     }
   },
   components: {
-    Tweet,
+    TwitterFeed,
     NewReview,
     PannelHeading,
     ActorCard,

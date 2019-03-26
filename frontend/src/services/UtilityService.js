@@ -2,8 +2,16 @@ export default {
     imgURL,
     lightOrDark,
     LightenDarkenColor,
-    hexToRgb
+    hexToRgb,
+    removeDuplicates,
 }
+
+function removeDuplicates(a) {
+   return a.filter(function(item, pos) {
+        return a.indexOf(item) == pos;
+    })
+}
+
 function imgURL(posterPath, size) {
     return `http://image.tmdb.org/t/p/w${size}${posterPath}`
 }

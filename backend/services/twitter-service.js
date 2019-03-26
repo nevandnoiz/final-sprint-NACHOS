@@ -16,7 +16,7 @@ module.exports = {
 
 var params = {
     q: 'banana',
-    count: 100
+    count: 1
 }
 var T = new Twit(config)
 
@@ -25,18 +25,7 @@ function searchByKeyword(keyword,cb) {
 
     var params = {
         q: keyword,
-        count: 20
+        count: 10
     }
    bot.get('search/tweets', params, cb)
-
-}
-
-function gotData(err, data, res){
-    // console.log(data)
-    // return data
-    var test = new Promise(function(reso,rej){
-        reso(data)
-    })
-    // console.log(test)
-    // return test
 }
