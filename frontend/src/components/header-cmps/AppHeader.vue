@@ -7,7 +7,7 @@
         <router-link to="/tv">Tv Shows</router-link>
         <router-link to="/actors">Actors</router-link>
         <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <a v-else @click="login">login</a>
+        <a v-else @click="login">Login</a>
       </div>
     </div>
   </header>
@@ -41,6 +41,7 @@ export default {
 header {
   position: fixed;
   height: 60px;
+  z-index: 100000;
   width: 100vw;
   background-color: rgb(45, 45, 45);
   grid-area: 1/1/1/1;

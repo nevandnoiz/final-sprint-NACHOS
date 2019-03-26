@@ -39,6 +39,10 @@ export default {
       const tvCredits = await TvShowsService.getTvShowCredits(id)
       return tvCredits
     },
+    async getTvShowReviews(context, id) {
+      const tvCredits = await TvShowsService.getTvShowReviews(id)
+      return tvCredits
+    },
     async getTvShowVideos(context, id) {
       const tvShowVideos = await TvShowsService.getTvShowVideos(id)
       return tvShowVideos

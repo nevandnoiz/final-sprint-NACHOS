@@ -73,7 +73,6 @@ export default {
     background-size: cover;
     overflow: hidden;
     background-position: center 20%;
-    z-index: -1;
     h1 {
       font-family: Verdana, Geneva, sans-serif;
       font-weight: bold;

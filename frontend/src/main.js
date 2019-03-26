@@ -7,7 +7,7 @@ import store from './store'
 import Buefy from 'buefy'
 import './registerServiceWorker'
 // add jquery globaly
-
+import "@/assets/global.css"
 export const eventBus = new Vue()
 // TODO Get it out from globaly
 window.domcolor = null

@@ -55,13 +55,13 @@ function getActivities() {
 
 function getUser() {
     return {
-        _id: 'abc123',
+        id: 'abc123',
         password: '123123',
         name: {
             firstName: 'tal',
             lastName: 'wiener'
         },
-        mail: null,
+        email: 'email@wiener.tal',
         img: null,
         following: [],
         lists: [
