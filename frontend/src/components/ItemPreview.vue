@@ -9,8 +9,8 @@
   >
     <div class="item-hover-controls" v-if="isHovered">
       <div class="hover-controls-btns">
-        <i class="fas fa-plus"></i>
-        <i class="fas fa-check" :class="{'checked': isChecked}" @click.stop="toggleCheckMark"></i>
+        <i class="fas fa-plus" :class="{'checked': isChecked}" @click.stop="toggleWatchList"></i>
+        <i class="fas fa-check"></i>
       </div>
       <a href="#">Play Trailer</a>
     </div>
@@ -45,13 +45,13 @@ export default {
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
     },
-    toggleCheckMark() {
+    toggleWatchList() {
       this.isChecked = !this.isChecked;
     },
     toggleisSelected() {
       this.$emit("toggleItem");
       this.isSelected = !this.isSelected;
-    }
+    },
   },
   computed: {},
   created() {
