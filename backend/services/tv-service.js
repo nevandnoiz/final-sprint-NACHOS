@@ -1,5 +1,6 @@
 const axios = require('axios')
 
+
 module.exports = {
     getTrendingShows,
     getTvShowDetails,
@@ -10,7 +11,7 @@ module.exports = {
     getTvShowSeasons,
     getTvShowWatchLinksByKeyword,
     getTvShowVideos,
-    getSeasonDetails
+    getSeasonDetails,
 }
 
 function getTrendingShows(page = 1) {
@@ -108,4 +109,3 @@ function getSeasonDetails(id, seasonNum) {
             console.log(err)
         })
 }
-

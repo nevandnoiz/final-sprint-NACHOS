@@ -1,6 +1,6 @@
 <template>
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
-        <div class="main-youtube-container" v-if="isTrailerPlaying">
+    <div class="main-youtube-container" v-if="isTrailerPlaying">
       <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
       <youtube
         class="youtube-container"
@@ -19,7 +19,7 @@
       ></netflix-slide-main>
       <div class="content-info-container">
         <div class="Actors">
-                <actor-card :dominantColor="dominantColor" :item="tvShow.credits"></actor-card>
+          <actor-card :dominantColor="dominantColor" :item="tvShow.credits"></actor-card>
 
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
@@ -27,7 +27,6 @@
         <div class="reviews">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <review-container
-          
             v-for="(review, index) in tvShow.reviews"
             :key="index"
             :review="review"
@@ -42,12 +41,13 @@
 
     <new-review></new-review>
     <review-form type="tv" :itemId="tvShow.details.id"></review-form>
-
+    <Tweet class="tweet" :id="'1378000488'" :options="{ theme: 'dark' }"/>
     <!-- <i class="fab fa-facebook"></i> -->
   </div>
 </template>
 
 <script>
+import TwitterService from "@/services/TwitterService.js";
 import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
@@ -60,6 +60,7 @@ import ActorCard from "@/components/details-cmps/ActorCard.vue";
 import NewReview from "@/components/details-cmps/NewReview.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 import { eventBus } from "@/main.js";
+import { Tweet, Moment, Timeline } from 'vue-tweet-embed'
 export default {
   data() {
     return {
@@ -77,7 +78,8 @@ export default {
   },
 
   async created() {
-        eventBus.$on("playTrailer", () => this.isTrailerPlaying = true)
+// console.log('twit is:',TwitterService.getUserTweet())      
+  eventBus.$on("playTrailer", () => this.isTrailerPlaying = true)
     this.setReviews();
     console.log(this.tvShow.reviews)
     const tvShowId = this.$route.params.tvShowId;
@@ -171,6 +173,7 @@ export default {
     }
   },
   components: {
+    Tweet,
     NewReview,
     PannelHeading,
     ActorCard,
@@ -191,37 +194,44 @@ export default {
 
 <style scoped>
 .Actors {
-      box-shadow: 0px 0px 12px #000000;
-      display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 24px 1fr;
+  box-shadow: 0px 0px 12px #000000;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 24px 1fr;
 }
 .content-info-container {
-    display: grid;
-    gap: 2rem;
-    margin-top: 2rem;
- grid-template-columns: 210px 2fr;
-    height: 800px;
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  grid-template-columns: 210px 2fr;
+  height: 800px;
 }
 .reviews {
-      box-shadow: 0px 0px 12px #000000;
+  box-shadow: 0px 0px 12px #000000;
 }
 
 .pannel-heading-epo {
   margin-top: 1.3rem;
 }
 .netflix-container {
-      box-shadow: 0px 0px 12px #000000;
-      /* padding-bottom: 1.5rem; */
+  box-shadow: 0px 0px 12px #000000;
+  /* padding-bottom: 1.5rem; */
 }
 .tv-details-container {
   display: flex;
   flex-direction: column;
 }
 .sub-container {
-    margin: 256px auto;
-    display: block;
-    width: 977px;
-    z-index: 1;
+  margin: 256px auto;
+  display: block;
+  width: 977px;
+  z-index: 1;
+}
+.tweet {
+  position: absolute;
+  min-width: 220px;
+  z-index: 4234234234;
+  top: 1081px;
+  left: 457px;
 }
 </style>

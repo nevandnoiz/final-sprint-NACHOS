@@ -15,6 +15,12 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "mongodb": "^3.1.1"
+    "mongodb": "^3.1.1",
+    "oauth": "^0.9.15",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "require": "^2.4.20",
+    "twit": "^2.2.11",
+    "twit-promise": "^2.1.0"
   }
 }
