@@ -9,7 +9,7 @@
 
       <div class="btns">
         <div class="likes">
-          <button>Like</button>
+          <button @click="$emit('addLike', item)">Like</button>
           <p>{{this.item.likes}}</p>
         </div>
         <div>
@@ -51,7 +51,7 @@ export default {
       else if (activity === "listAdd") return `to his ${this.item.value} list.`;
     },
     creadted() {
-      console.log(this.item);
+
     }
   }
 };

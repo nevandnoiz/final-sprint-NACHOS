@@ -1,6 +1,6 @@
 <template>
   <section class="feedContent">
-    <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type" :item="item"/>
+    <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type" :item="item" @addLike="$emit('addLike', item)"/>
   </section>
 </template>
 
@@ -29,7 +29,8 @@ export default {
       if (!this.articles) return this.activities;
       else {
         const combArr = this.activities.concat(this.articles.flat())
-        return util.shuffleArray(combArr)
+        return  combArr
+        // util.shuffleArray(combArr)
         };
     }
   }

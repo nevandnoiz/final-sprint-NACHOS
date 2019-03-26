@@ -1,7 +1,12 @@
 <template>
   <section class="feed">
     <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
-    <feed-content v-if="articles || user" :articles="articles" :activities="activities"/>
+    <feed-content
+      v-if="articles || user"
+      :articles="articles"
+      :activities="activities"
+      @addLike="addLike"
+    />
   </section>
 </template>
 
@@ -26,6 +31,9 @@ export default {
   methods: {
     generateFeed(items, numOfArticles) {
       this.articles = FeedService.getNewsByArr(items, numOfArticles);
+    },
+    addLike(item) {
+      this.$store.dispatch("addLikeToActivity", item);
     }
   },
   computed: {
@@ -47,7 +55,7 @@ export default {
         this.$store.dispatch("loadActivities");
         this.generateFeed(this.userFavoriteItems, 1);
       }
-    },
+    }
   }
 };
 </script>
