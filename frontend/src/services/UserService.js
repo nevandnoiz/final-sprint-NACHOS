@@ -1,39 +1,49 @@
 import axios from 'axios'
+import util from '../services/UtilityService.js'
 
 export default {
     getActivities,
-    getUser
+    getUser,
+    addLikeToActivity
 }
 
 const users = []
 const activities = [
     {
         _id: 'abc321321',
+        timestamp: null,
         byUser: {
-            Name: {
+            name: {
                 firstName: 'Eyal',
                 lastName: 'wiener'
             }, _id: 'abc123'
         },
-        item_id: 79501,
+        // item_id: 79501,
         item_type: 'tv',
         itemTitle: "Doom Patrol",
-        Type: 'rate',
+        type: 'activity',
+        activity: 'rate',
         value: 5,
+        comments: [],
+        likes: 7
     },
     {
         _id: 'abc321356',
+        timestamp: null,
         byUser: {
-            Name: {
+            name: {
                 firstName: 'Yaniv',
                 lastName: 'wiener'
             }, _id: '987agv'
         },
-        item_id: 324857,
-        item_type: 'movie',
+        // item_id: 324857,
+        item_type: 'movies',
         itemTitle: "Spider-Man: Into the Spider-Verse",
-        Type: 'listAdd',
+        type: 'activity',
+        activity: 'listAdd',
         value: 'Favorite',
+        comments: [],
+        likes: 0
     }
 ]
 
@@ -53,11 +63,15 @@ function getUser() {
         },
         mail: null,
         img: null,
-        following: null,
+        following: [],
         lists: [
             {
                 name: 'favorites',
-                items: []
+                items: [
+                    { "backdrop_path": "/xVzvD5BPAU4HpleFSo8QOdHkndo.jpg", "created_by": [{ "id": 4027, "credit_id": "5256cb3f19c2956ff605e5de", "name": "Frank Darabont", "gender": 2, "profile_path": "/9KVvZtDyy8DXacw2TTsjC9VLxQi.jpg" }], "episode_run_time": [42, 60, 45], "first_air_date": "2010-10-31", "genres": [{ "id": 10759, "name": "Action & Adventure" }, { "id": 18, "name": "Drama" }, { "id": 10765, "name": "Sci-Fi & Fantasy" }], "homepage": "http://www.amctv.com/shows/the-walking-dead/", "id": 1402, "in_production": true, "languages": ["en"], "last_air_date": "2019-03-24", "last_episode_to_air": { "air_date": "2019-03-24", "episode_number": 15, "id": 1628154, "name": "The Calm Before", "overview": "", "production_code": "", "season_number": 9, "show_id": 1402, "still_path": "/jKDvLdxkN5VO2AXsUnjeka0a0Qv.jpg", "vote_average": 0, "vote_count": 0 }, "name": "The Walking Dead", "next_episode_to_air": { "air_date": "2019-03-31", "episode_number": 16, "id": 1628155, "name": "The Storm", "overview": "", "production_code": "", "season_number": 9, "show_id": 1402, "still_path": null, "vote_average": 0, "vote_count": 0 }, "networks": [{ "name": "AMC", "id": 174, "logo_path": "/pmvRmATOCaDykE6JrVoeYxlFHw3.png", "origin_country": "US" }], "number_of_episodes": 131, "number_of_seasons": 9, "origin_country": ["US"], "original_language": "en", "original_name": "The Walking Dead", "overview": "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.", "popularity": 157.024, "poster_path": "/bjU4tLlyp8W4yTB0Hqn8J1IDUnD.jpg", "production_companies": [{ "id": 23242, "logo_path": "/fOALFvgnO1ZdIaA9PNIAAuaDKWd.png", "name": "AMC Networks", "origin_country": "US" }, { "id": 4854, "logo_path": null, "name": "American Movie Classics (AMC)", "origin_country": "" }, { "id": 23921, "logo_path": "/simDvqT8y6jhP530ggUMbikvVKc.png", "name": "Circle of Confusion", "origin_country": "US" }, { "id": 11533, "logo_path": "/tWM9pmzVYxok4GbQIttxdcml1yT.png", "name": "Valhalla Motion Pictures", "origin_country": "US" }, { "id": 3982, "logo_path": null, "name": "Darkwoods Productions", "origin_country": "US" }], "seasons": [{ "air_date": "2010-10-11", "episode_count": 43, "id": 3646, "name": "Specials", "overview": "", "poster_path": "/dJ8jOjIwgG6CybD4X5rTunO4cZ6.jpg", "season_number": 0 }, { "air_date": "2010-10-31", "episode_count": 6, "id": 3643, "name": "Season 1", "overview": "", "poster_path": "/yaOB2Y8GcoXwjNQ3apq67bMbNHF.jpg", "season_number": 1 }, { "air_date": "2011-10-16", "episode_count": 13, "id": 3644, "name": "Season 2", "overview": "", "poster_path": "/wpG9SDyz23t3vU8dTbtSvEkxv8r.jpg", "season_number": 2 }, { "air_date": "2012-10-14", "episode_count": 16, "id": 3645, "name": "Season 3", "overview": "", "poster_path": "/mDVPeQ5ZaaeO2Qh7VlXZchHHuLN.jpg", "season_number": 3 }, { "air_date": "2013-10-13", "episode_count": 16, "id": 3647, "name": "Season 4", "overview": "", "poster_path": "/pLXlKKQOoUZAjWsXwacZCj6SWIb.jpg", "season_number": 4 }, { "air_date": "2014-10-12", "episode_count": 16, "id": 60391, "name": "Season 5", "overview": "After the season 4 finale left most of the main characters at the mercy of the sadistic inhabitants of Terminus. Season 5 will offer new directions for the group of survivors as scientist Eugene Porter promises a cure to the zombie virus if he can be safely escorted to Washington DC, but getting there is easier said than done.", "poster_path": "/oiQbg5WqdHqBWMrtbzJeS6vb2Lt.jpg", "season_number": 5 }, { "air_date": "2015-10-11", "episode_count": 16, "id": 68814, "name": "Season 6", "overview": "With no hope of safety in Alexandria, Rick's group is forced to resume their precarious fight for survival. In the fight for humanity, many have become inhumane. While the Alexandrians must adapt to the hardness of Rick's group, Rick's group must retreat from their violent ways. This won't happen easily, but now there is more at stake than simply surviving. Rick's group is fighting for a chance at normalcy in a world of chaos.", "poster_path": "/kwVAeAA6TlZWr6lRP2yVTyR2aif.jpg", "season_number": 6 }, { "air_date": "2016-10-23", "episode_count": 16, "id": 76834, "name": "Season 7", "overview": "Rick and his group's world becomes even more brutal due to Negan's deadly example of what happens if they don't live under his rules. Everyone must begin again.", "poster_path": "/nO2rbewsaek4J1M6sN3PsS5Sf2C.jpg", "season_number": 7 }, { "air_date": "2017-10-22", "episode_count": 16, "id": 91735, "name": "Season 8", "overview": "Rick and his survivors bring \"All-Out War\" to Negan and his forces. The Saviors are larger, better-equipped, and ruthless - but Rick and the unified communities are fighting for the promise of a brighter future. The battle lines are drawn as they launch into a kinetic, action-packed offensive.", "poster_path": "/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg", "season_number": 8 }, { "air_date": "2018-10-07", "episode_count": 16, "id": 109531, "name": "Season 9", "overview": "", "poster_path": "/5KKovNGmh20sDBnyFyuaYTOSmh8.jpg", "season_number": 9 }], "status": "Returning Series", "type": "Scripted", "vote_average": 7.3, "vote_count": 4055 },
+                    { "backdrop_path": "/gX8SYlnL9ZznfZwEH4KJUePBFUM.jpg", "created_by": [{ "id": 9813, "credit_id": "5256c8c219c2956ff604858a", "name": "David Benioff", "gender": 2, "profile_path": "/8CuuNIKMzMUL1NKOPv9AqEwM7og.jpg" }, { "id": 228068, "credit_id": "552e611e9251413fea000901", "name": "D. B. Weiss", "gender": 2, "profile_path": "/caUAtilEe06OwOjoQY3B7BgpARi.jpg" }], "episode_run_time": [60], "first_air_date": "2011-04-17", "genres": [{ "id": 10765, "name": "Sci-Fi & Fantasy" }, { "id": 18, "name": "Drama" }, { "id": 10759, "name": "Action & Adventure" }], "homepage": "http://www.hbo.com/game-of-thrones", "id": 1399, "in_production": true, "languages": ["es", "en", "de"], "last_air_date": "2017-08-27", "last_episode_to_air": { "air_date": "2017-08-27", "episode_number": 7, "id": 1340528, "name": "The Dragon and the Wolf", "overview": "A meeting is held in King's Landing. Problems arise in the North.", "production_code": "707", "season_number": 7, "show_id": 1399, "still_path": "/jLe9VcbGRDUJeuM8IwB7VX4GDRg.jpg", "vote_average": 9.011, "vote_count": 46 }, "name": "Game of Thrones", "next_episode_to_air": { "air_date": "2019-04-14", "episode_number": 1, "id": 1551825, "name": "Episode 1", "overview": "", "production_code": "", "season_number": 8, "show_id": 1399, "still_path": null, "vote_average": 8, "vote_count": 1 }, "networks": [{ "name": "HBO", "id": 49, "logo_path": "/tuomPhY2UtuPTqqFnKMVHvSb724.png", "origin_country": "US" }], "number_of_episodes": 73, "number_of_seasons": 8, "origin_country": ["US"], "original_language": "en", "original_name": "Game of Thrones", "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.", "popularity": 238.778, "poster_path": "/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg", "production_companies": [{ "id": 76043, "logo_path": "/9RO2vbQ67otPrBLXCaC8UMp3Qat.png", "name": "Revolution Sun Studios", "origin_country": "US" }, { "id": 3268, "logo_path": "/tuomPhY2UtuPTqqFnKMVHvSb724.png", "name": "HBO", "origin_country": "US" }, { "id": 12525, "logo_path": null, "name": "Television 360", "origin_country": "" }, { "id": 5820, "logo_path": null, "name": "Generator Entertainment", "origin_country": "" }, { "id": 12526, "logo_path": null, "name": "Bighead Littlehead", "origin_country": "" }], "seasons": [{ "air_date": "2010-12-05", "episode_count": 15, "id": 3627, "name": "Specials", "overview": "", "poster_path": "/kMTcwNRfFKCZ0O2OaBZS0nZ2AIe.jpg", "season_number": 0 }, { "air_date": "2011-04-17", "episode_count": 10, "id": 3624, "name": "Season 1", "overview": "Trouble is brewing in the Seven Kingdoms of Westeros. For the driven inhabitants of this visionary world, control of Westeros' Iron Throne holds the lure of great power. But in a land where the seasons can last a lifetime, winter is coming...and beyond the Great Wall that protects them, an ancient evil has returned. In Season One, the story centers on three primary areas: the Stark and the Lannister families, whose designs on controlling the throne threaten a tenuous peace; the dragon princess Daenerys, heir to the former dynasty, who waits just over the Narrow Sea with her malevolent brother Viserys; and the Great Wall--a massive barrier of ice where a forgotten danger is stirring.", "poster_path": "/zwaj4egrhnXOBIit1tyb4Sbt3KP.jpg", "season_number": 1 }, { "air_date": "2012-04-01", "episode_count": 10, "id": 3625, "name": "Season 2", "overview": "The cold winds of winter are rising in Westeros...war is coming...and five kings continue their savage quest for control of the all-powerful Iron Throne. With winter fast approaching, the coveted Iron Throne is occupied by the cruel Joffrey, counseled by his conniving mother Cersei and uncle Tyrion. But the Lannister hold on the Throne is under assault on many fronts. Meanwhile, a new leader is rising among the wildings outside the Great Wall, adding new perils for Jon Snow and the order of the Night's Watch.", "poster_path": "/5tuhCkqPOT20XPwwi9NhFnC1g9R.jpg", "season_number": 2 }, { "air_date": "2013-03-31", "episode_count": 10, "id": 3626, "name": "Season 3", "overview": "Duplicity and treachery...nobility and honor...conquest and triumph...and, of course, dragons. In Season 3, family and loyalty are the overarching themes as many critical storylines from the first two seasons come to a brutal head. Meanwhile, the Lannisters maintain their hold on King's Landing, though stirrings in the North threaten to alter the balance of power; Robb Stark, King of the North, faces a major calamity as he tries to build on his victories; a massive army of wildlings led by Mance Rayder march for the Wall; and Daenerys Targaryen--reunited with her dragons--attempts to raise an army in her quest for the Iron Throne.", "poster_path": "/7d3vRgbmnrRQ39Qmzd66bQyY7Is.jpg", "season_number": 3 }, { "air_date": "2014-04-06", "episode_count": 10, "id": 3628, "name": "Season 4", "overview": "The War of the Five Kings is drawing to a close, but new intrigues and plots are in motion, and the surviving factions must contend with enemies not only outside their ranks, but within.", "poster_path": "/dniQ7zw3mbLJkd1U0gdFEh4b24O.jpg", "season_number": 4 }, { "air_date": "2015-04-12", "episode_count": 10, "id": 62090, "name": "Season 5", "overview": "The War of the Five Kings, once thought to be drawing to a close, is instead entering a new and more chaotic phase. Westeros is on the brink of collapse, and many are seizing what they can while the realm implodes, like a corpse making a feast for crows.", "poster_path": "/527sR9hNDcgVDKNUE3QYra95vP5.jpg", "season_number": 5 }, { "air_date": "2016-04-24", "episode_count": 10, "id": 71881, "name": "Season 6", "overview": "Following the shocking developments at the conclusion of season five, survivors from all parts of Westeros and Essos regroup to press forward, inexorably, towards their uncertain individual fates. Familiar faces will forge new alliances to bolster their strategic chances at survival, while new characters will emerge to challenge the balance of power in the east, west, north and south.", "poster_path": "/zvYrzLMfPIenxoq2jFY4eExbRv8.jpg", "season_number": 6 }, { "air_date": "2017-07-15", "episode_count": 7, "id": 81266, "name": "Season 7", "overview": "The long winter is here. And with it comes a convergence of armies and attitudes that have been brewing for years.", "poster_path": "/3dqzU3F3dZpAripEx9kRnijXbOj.jpg", "season_number": 7 }, { "air_date": "2019-04-13", "episode_count": 6, "id": 107971, "name": "Season 8", "overview": null, "poster_path": "/aJ8Bkb8Fck3sk5UIGGWGAkRiznC.jpg", "season_number": 8 }], "status": "Returning Series", "type": "Scripted", "vote_average": 8.2, "vote_count": 5426 },
+                    { "backdrop_path": "/eceERFCjdYEDPDQpVBreukypTI8.jpg", "created_by": [{ "id": 222330, "credit_id": "584f423cc3a36831ce001187", "name": "Brit Marling", "gender": 1, "profile_path": "/4OLcUgDjBlEumPdrWf9c78JSwDr.jpg" }, { "id": 933739, "credit_id": "584f424bc3a3682f58001152", "name": "Zal Batmanglij", "gender": 2, "profile_path": "/kkDU7v5eDZTWbRIoPsRYT3AdcoG.jpg" }], "episode_run_time": [60], "first_air_date": "2016-12-16", "genres": [{ "id": 10765, "name": "Sci-Fi & Fantasy" }, { "id": 9648, "name": "Mystery" }, { "id": 18, "name": "Drama" }], "homepage": "https://www.netflix.com/title/80044950", "id": 69061, "in_production": true, "languages": ["en"], "last_air_date": "2019-03-22", "last_episode_to_air": { "air_date": "2019-03-22", "episode_number": 8, "id": 1722343, "name": "Overview", "overview": "While BBA and the others converge on the clinic, Nina persuades Hap to show her his research, and Karim unlocks one of the house's final secrets.", "production_code": "", "season_number": 2, "show_id": 69061, "still_path": "/4GnqkTkBMgWaQ2nMtZI6uiw8Kcv.jpg", "vote_average": 10, "vote_count": 1 }, "name": "The OA", "next_episode_to_air": null, "networks": [{ "name": "Netflix", "id": 213, "logo_path": "/wwemzKWzjKYJFfCeiB57q3r4Bcm.png", "origin_country": "" }], "number_of_episodes": 16, "number_of_seasons": 2, "origin_country": [], "original_language": "en", "original_name": "The OA", "overview": "Prairie Johnson, blind as a child, comes home to the community she grew up in with her sight restored. Some hail her a miracle, others a dangerous mystery, but Prairie won’t talk with the FBI or her parents about the seven years she went missing.", "popularity": 66.591, "poster_path": "/rueY4slMeKtTGitm0raFUJvgaa5.jpg", "production_companies": [{ "id": 81, "logo_path": "/8wOfUhA7vwU2gbPjQy7Vv3EiF0o.png", "name": "Plan B Entertainment", "origin_country": "US" }, { "id": 10039, "logo_path": "/b8w4LldQolMKiLZw4FQJBcXSDGI.png", "name": "Anonymous Content", "origin_country": "US" }], "seasons": [{ "air_date": "2016-12-16", "episode_count": 8, "id": 82773, "name": "Season 1", "overview": "", "poster_path": "/mUtZ3a6b6xLhUWcLjJxFGqo1Hom.jpg", "season_number": 1 }, { "air_date": "2019-03-22", "episode_count": 8, "id": 119554, "name": "Season 2", "overview": "", "poster_path": "/tTPu0drneFbUPswym2pXbKNZrO3.jpg", "season_number": 2 }], "status": "Returning Series", "type": "Scripted", "vote_average": 7.4, "vote_count": 293 }
+                ]
             },
             {
                 name: 'watchList',
@@ -70,4 +84,12 @@ function getUser() {
         ],
         userActivities: []
     }
+}
+
+
+function addLikeToActivity(activity) {
+    const newActivity = util.deepCopy(activity)
+    newActivity.likes++
+    //TODO: replace the activty in the server for the user
+    return newActivity // return the new obj from the server after update succes
 }
