@@ -10,13 +10,18 @@
     </div>
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
+
+         <actors-swiper 
+         class="netflix-container"
+    :seasons="tvShow.seasons" 
+    :tvShowId="tvShow.details.id"></actors-swiper>
       <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
-      <netflix-slide-main
+      <!-- <netflix-slide-main
         :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
         class="netflix-container"
-      ></netflix-slide-main>
+      ></netflix-slide-main> -->
       <div class="content-info-container">
         <div class="Actors">
           <actor-card :item="tvShow.credits"></actor-card>
@@ -46,9 +51,7 @@
     <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
-    <actors-swiper 
-    :seasons="tvShow.seasons" 
-    :tvShowId="tvShow.details.id"></actors-swiper>
+ 
   </div>
 </template>
 

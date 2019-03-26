@@ -8,7 +8,8 @@ import Buefy from 'buefy'
 import './registerServiceWorker'
 // add jquery globaly
 import VueMasonry from 'vue-masonry-css'
- 
+import VueCarousel from 'vue-carousel';
+
 
 import "@/assets/global.css"
 export const eventBus = new Vue()
@@ -16,6 +17,7 @@ Vue.use(VueMasonry);
 Vue.use(Buefy)
 Vue.use(Element)
 // Vue.use(fac)
+Vue.use(VueCarousel);
 Vue.use(VueYouTubeEmbed)
 Vue.config.productionTip = false;
 
