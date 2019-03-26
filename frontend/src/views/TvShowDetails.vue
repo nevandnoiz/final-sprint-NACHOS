@@ -89,6 +89,7 @@ export default {
   },
 
   async created() {
+    console.log('log from tv show details', this.tvShow)
     eventBus.$on("playTrailer", () => (this.isTrailerPlaying = true));
     const tvShowId = this.$route.params.tvShowId;
     const [
@@ -191,7 +192,7 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 256px auto;
+      margin: 227px auto;
   display: block;
   width: 977px;
   z-index: 1;

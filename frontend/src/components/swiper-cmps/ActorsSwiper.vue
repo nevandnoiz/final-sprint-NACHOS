@@ -1,11 +1,9 @@
 <template>
   <section class="slider-main-container">
-    <carousel 
-    :paginationEnabled="false"
-    :navigationEnabled="true"
-    :per-page="5">
+
+    <carousel :paginationEnabled="false" :navigationEnabled="true" :per-page="5">
       <slide
-      class="slider-card"
+        class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
         v-for="(eposide, index) in season.episodes"
         :key="index"
@@ -20,7 +18,7 @@ import UtilityService from "@/services/UtilityService.js";
 
 export default {
   async created() {
-    eventBus.$on("onSeasonClick", index => this.onEmit(index));
+     eventBus.$on("onSeasonClick", index => this.onEmit(index));
     this.seasonsDetails = await this.$store.dispatch({
       type: "getSeasonDetails",
       id: this.tvShowId,
@@ -29,7 +27,7 @@ export default {
     console.log(this.seasonsDetails);
     this.season = this.seasonsDetails[0].data;
     console.log(this.season, " this season");
-    console.log("swiper,", Swiper);
+    // console.log("swiper,", Swiper);
   },
   components: {},
   data() {
@@ -39,19 +37,20 @@ export default {
     };
   },
   methods: {
+        onEmit(index) {
+      // this.season = null;
+      this.season = this.seasonsDetails[index].data;
+    },
     imgURL(stillPath) {
       return UtilityService.imgURL(stillPath, 780);
     },
-    onEmit(index) {
-      // this.season = null;
-      this.season = this.seasonsDetails[index].data;
-    }
+ 
   },
   props: ["seasons", "tvShowId"]
 };
 </script>
 
-<style>
+<style scoped>
 .slider-main-container {
   z-index: 3423423423;
 }
@@ -62,11 +61,12 @@ export default {
 .slider-card {
   background-color: black;
   background-size: 287px;
-    height: 161px;
-    border: 1px solid;
-    background-repeat: no-repeat;
+  height: 161px;
+  border: 1px solid;
+  background-repeat: no-repeat;
 }
-.VueCarousel-slide {
-  background-color: black !important
+
+.cards-container-of-season-netflix {
+  position: relative;
 }
 </style>

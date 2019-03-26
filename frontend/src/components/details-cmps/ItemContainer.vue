@@ -13,6 +13,8 @@
      
           <div class="shadowing-container">
             <div  :style="{'background':''+dominantColor+''}" class="details-text">
+
+              <seasons-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-menu>
               <p :style="{'color':''+isLightOrDark+''}" >{{item.details.overview}}</p>
             </div>
 
@@ -65,7 +67,7 @@
             ></seasons-list>-->
               
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-                      <netflix-season-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
+                      <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
 
             <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
@@ -113,6 +115,7 @@
 </template>
 <script>
 import "@/services/AvgColorService.js";
+import SeasonsMenu from "@/components/details-cmps/SeasonsMenu.vue";
 import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
@@ -131,15 +134,13 @@ export default {
     // NetflixSlideMain,
     NavBar,
     SeasonsList,
+    SeasonsMenu,
     // NetflixSlideSeason,
     UserControlBar,
     MediaIconsBar
   },
-  mounted() {
-
-    // document.getElementById("youtube-player-1").style.width = "100%";
-  },
   async created() {
+    console.log('this item from itemContianer:',this.item)
     eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
   },
   data() {
@@ -414,16 +415,13 @@ iframe {
   background-color: lightslategray;
 } */
 .details-text {
-
+position: relative;
       box-shadow: 0px 0px 12px #000000;
     padding: 20px;
-    /* color: black; */
     margin: 0;
     grid-column: 2;
-    /* padding-top: 300px; */
     background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
     grid-row: 2;
-    /* padding: 0; */
 }
 .details-text > * {
   color: white;
