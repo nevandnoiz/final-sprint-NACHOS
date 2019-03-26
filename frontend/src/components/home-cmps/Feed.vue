@@ -6,6 +6,7 @@
       :articles="articles"
       :activities="activities"
       @addLike="addLike"
+      @addComment="addComment"
     />
   </section>
 </template>
@@ -34,6 +35,10 @@ export default {
     },
     addLike(item) {
       this.$store.dispatch("addLikeToActivity", item);
+    },
+    addComment(details) {
+      this.$store.dispatch("addCommentToActivity", details);  
+      // {comment, activity}    
     }
   },
   computed: {

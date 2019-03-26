@@ -4,7 +4,8 @@ import util from '../services/UtilityService.js'
 export default {
     getActivities,
     getUser,
-    addLikeToActivity
+    addLikeToActivity,
+    addCommentToActivity
 }
 
 const users = []
@@ -18,7 +19,7 @@ const activities = [
                 lastName: 'wiener'
             }, _id: 'abc123'
         },
-        // item_id: 79501,
+        item_id: 79501,
         item_type: 'tv',
         itemTitle: "Doom Patrol",
         type: 'activity',
@@ -36,13 +37,17 @@ const activities = [
                 lastName: 'wiener'
             }, _id: '987agv'
         },
-        // item_id: 324857,
+        item_id: 324857,
         item_type: 'movies',
         itemTitle: "Spider-Man: Into the Spider-Verse",
         type: 'activity',
         activity: 'listAdd',
         value: 'Favorite',
-        comments: [],
+        comments: [{
+            user: 'bobo',
+            comment: 'a comment!',
+            timestamp: 34053053
+        }],
         likes: 0
     }
 ]
@@ -55,7 +60,7 @@ function getActivities() {
 
 function getUser() {
     return {
-        id: 'abc123',
+        _id: 'abc123',
         password: '123123',
         name: {
             firstName: 'tal',
@@ -90,6 +95,13 @@ function getUser() {
 function addLikeToActivity(activity) {
     const newActivity = util.deepCopy(activity)
     newActivity.likes++
+    //TODO: replace the activty in the server for the user
+    return newActivity // return the new obj from the server after update succes
+}
+
+function addCommentToActivity(comment, activity) {
+    const newActivity = util.deepCopy(activity)
+    newActivity.comments.unshift(comment)
     //TODO: replace the activty in the server for the user
     return newActivity // return the new obj from the server after update succes
 }
