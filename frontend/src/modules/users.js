@@ -19,6 +19,10 @@ export default {
     setUser(state, { user }) {
       state.currUser = user
     },
+    addLikeToActivity(state, { newActivity }) {
+      const idx = state.activities.findIndex(activity => activity._id === newActivity._id )
+      state.activities.splice(idx, 1, newActivity)
+    }
   },
   actions: {
     async loadActivities(context, payload) {
@@ -30,6 +34,11 @@ export default {
       context.commit({ type: 'setUser', user })
       return user
     },
+    async addLikeToActivity(context, activity) {
+      const newActivity = await UserServies.addLikeToActivity(activity)
+      context.commit({ type: 'addLikeToActivity', newActivity })
+    }
+
     // async addToWatchList(context, payload) {
     //   const user = await UserServies.addToWatchList()
     //   // context.commit({ type: 'setUser', user })

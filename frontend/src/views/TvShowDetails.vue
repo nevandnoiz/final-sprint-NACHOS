@@ -43,7 +43,7 @@
     <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

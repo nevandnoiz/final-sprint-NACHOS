@@ -1,11 +1,11 @@
 <template>
   <div class="article" v-show="ready">
-    <img ref="imgTest" :src="article.urlToImage" alt>
+    <img ref="imgTest" :src="item.urlToImage" alt>
     <div class="article-text">
       <h2>
-        <a :href="article.url" target="/">{{article.title}}</a>
+        <a :href="item.url" target="/">{{item.title}}</a>
       </h2>
-      <h4>{{article.description}}</h4>
+      <h4>{{item.description}}</h4>
     </div>
     <hr>
   </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ["article"],
+  props: ["item"],
   data() {
     return {
       ready: false

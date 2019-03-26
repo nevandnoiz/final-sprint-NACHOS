@@ -4,12 +4,12 @@ export default {
     getNewsByArr
 }
 
-function getNewsByArr(items) {
+function getNewsByArr(items, numOfArticles = 3) {
     const news = []
     items.forEach(item => {
         getNewsByStr(item)
             .then(res => {
-                const filteredNews = filterNews(res, 3)
+                const filteredNews = filterNews(res, numOfArticles)
                 news.push(filteredNews)
             })
     })
@@ -21,14 +21,14 @@ function getNewsByStr(str) {
         .then(res => { return { searchTerm: str, articles: res.data.articles } })
 }
 
-function filterNews(news, numOfArticles = 3) {
+function filterNews(news, numOfArticles) {
     const filteredNews = []
     news.articles.forEach(article => {
         if (
             article.description.includes(news.searchTerm) ||
             article.title.includes(news.searchTerm)) {
             article.searchTerm = news.searchTerm
-            article.type = 'article'
+            article.type = 'FeedArticle'
             filteredNews.push(article)
         }
     });

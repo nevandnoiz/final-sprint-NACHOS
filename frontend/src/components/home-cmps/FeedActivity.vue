@@ -1,14 +1,21 @@
 <template>
-  <div>
+  <div class="activity">
     <div>
       <p>
         {{userName}} {{type}}
-        <a @click="toItem">{{item}}</a>
+        <a @click="toItem" class="link">{{itemName}}</a>
         {{action}}
       </p>
 
-      <button>Like</button>
-      <button>Comment</button>
+      <div class="btns">
+        <div class="likes">
+          <button @click="$emit('addLike', item)">Like</button>
+          <p>{{this.item.likes}}</p>
+        </div>
+        <div>
+          <button>Comment</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,37 +24,34 @@
 <script>
 export default {
   props: {
-    activities: Array
+    item: Object
   },
   methods: {
     toItem() {
-      this.$router.push(
-        `/${this.activities[0].item_type}/details/${this.activities[0].item_id}`
-      );
+      this.$router.push(`/${this.item.item_type}/details/${this.item.item_id}`);
     }
   },
   computed: {
     userName: function() {
       return (
-        this.activities[0].byUser.name.firstName +
-        " " +
-        this.activities[0].byUser.name.lastName
+        this.item.byUser.name.firstName + " " + this.item.byUser.name.lastName
       );
     },
     type: function() {
-      const activity = this.activities[0].activity;
+      const activity = this.item.activity;
       if (activity === "rate") return "rated";
       else if (activity === "listAdd") return "added";
     },
-    item: function() {
-      return this.activities[0].itemTitle;
+    itemName: function() {
+      return this.item.itemTitle;
     },
     action: function() {
-      const value = this.activities[0].value;
-      if (typeof value === "number")
-        return `with ${this.activities[0].value} stars.`;
-      else if (typeof value === "listAdd")
-        return `to  his ${this.activities[0].value} list.`;
+      const activity = this.item.activity;
+      if (activity === "rate") return `with ${this.item.value} stars.`;
+      else if (activity === "listAdd") return `to his ${this.item.value} list.`;
+    },
+    creadted() {
+
     }
   }
 };
@@ -57,5 +61,19 @@ export default {
 p {
   font-family: sans-serif;
   font-size: 20px;
+}
+.activity {
+  margin-top: 20px
+}
+.link {
+  color: gray;
+}
+
+.btns{
+  display: flex;
+}
+
+.likes {
+  display: flex;
 }
 </style>

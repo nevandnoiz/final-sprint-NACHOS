@@ -2,8 +2,11 @@ export default {
     imgURL,
     lightOrDark,
     LightenDarkenColor,
-    hexToRgb
+    hexToRgb,
+    shuffleArray,
+    deepCopy
 }
+
 function imgURL(posterPath, size) {
     return `http://image.tmdb.org/t/p/w${size}${posterPath}`
 }
@@ -61,11 +64,23 @@ function lightOrDark(color) {
     }
 }
 
-function hexToRgb(color,opacity) {
+function hexToRgb(color, opacity) {
     color = color.replace('#', '')
     let r = parseInt(color.substring(0, 2), 16)
     let g = parseInt(color.substring(2, 4), 16)
     let b = parseInt(color.substring(4, 6), 16)
     let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')'
     return result
+}
+
+function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj))
+}
+
+function shuffleArray(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
 }
