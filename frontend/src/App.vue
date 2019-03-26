@@ -18,6 +18,9 @@ export default {
   components: {
     AppHeader,
     searchBar
+  },
+  created(){
+    this.$store.dispatch('loadUser')
   }
 };
 </script>

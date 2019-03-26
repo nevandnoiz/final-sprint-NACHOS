@@ -31,7 +31,6 @@ function addTvRoutes(app) {
         .then(credits => res.send(credits))
     })
     app.get('/tv/reviews/:id', (req, res) => {
-        console.log('GET')
         const tvShowId = req.params.id;
         TvService.getTvShowReviews(tvShowId)
         .then(reviews => {
@@ -39,7 +38,6 @@ function addTvRoutes(app) {
         })
     })
     app.post('/tv/reviews/:id', (req, res) => {
-        console.log('POST')
         const tvShowId = req.params.id;
         const newReview = req.body
         TvService.addReview(newReview, tvShowId)

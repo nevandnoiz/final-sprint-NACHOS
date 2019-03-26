@@ -3,9 +3,9 @@ const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
 
 
-function checkLogin({ nickname }) {
+function checkLogin({ email, password }) {
     return mongoService.connect()
-        .then(db => db.collection('user').findOne({ nickname }))
+        .then(db => db.collection('users').findOne({email,password}))
 }
 
 
@@ -14,8 +14,6 @@ function getById(id) {
     return mongoService.connect()
         .then(db => db.collection('user').findOne({ _id }))
 }
-
-
 
 function query() {
     return mongoService.connect()

@@ -37,7 +37,11 @@ export default {
       context.commit({ type: 'setActivities', activities })
     },
     async loadUser(context, payload) {
-      const user = await UserServies.getUser()
+      const user = await UserServies.loadUser()
+      if (user) context.commit({ type: 'setUser', user })
+    },
+    async loginUser(context, payload) {
+      const user = await UserServies.loginUser()
       context.commit({ type: 'setUser', user })
       return user
     },
@@ -55,7 +59,6 @@ export default {
       const newActivity = await UserServies.addCommentToActivity(commentObj, activity)
       context.commit({ type: 'updateActivity', newActivity })
     }
-
     // async addToWatchList(context, payload) {
     //   const user = await UserServies.addToWatchList()
     //   // context.commit({ type: 'setUser', user })
