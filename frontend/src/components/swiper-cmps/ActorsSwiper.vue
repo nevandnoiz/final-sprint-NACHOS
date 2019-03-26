@@ -1,13 +1,15 @@
 <template>
   <section class="slider-main-container">
-    <carousel :per-page="5">
+    <carousel 
+    :paginationEnabled="false"
+    :navigationEnabled="true"
+    :per-page="5">
       <slide
       class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
         v-for="(eposide, index) in season.episodes"
         :key="index"
       ></slide>
-      <slide>Slide 2 Content</slide>
     </carousel>
   </section>
 </template>
@@ -49,7 +51,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .slider-main-container {
   z-index: 3423423423;
 }
@@ -58,9 +60,13 @@ export default {
   height: 300px;
 }
 .slider-card {
+  background-color: black;
   background-size: 287px;
     height: 161px;
     border: 1px solid;
     background-repeat: no-repeat;
+}
+.VueCarousel-slide {
+  background-color: black !important
 }
 </style>
