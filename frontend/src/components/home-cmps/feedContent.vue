@@ -1,6 +1,6 @@
 <template>
   <section class="feedContent">
-    <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type" :item="item" @addLike="$emit('addLike', item)"/>
+    <component v-for="(item, idx) in feedItems" :key="idx" :is="item.type" :item="item" @addLike="$emit('addLike', item)" @addComment="$emit('addComment', $event)"/>
   </section>
 </template>
 

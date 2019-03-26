@@ -8,7 +8,9 @@ export default {
     getActivities,
     loginUser,
     loadUser,
-    addLikeToActivity
+    addLikeToActivity,
+    addCommentToActivity
+
 }
 
 const users = []
@@ -23,7 +25,7 @@ const activities = [
                 lastName: 'wiener'
             }, _id: 'abc123'
         },
-        // item_id: 79501,
+        item_id: 79501,
         item_type: 'tv',
         itemTitle: "Doom Patrol",
         type: 'activity',
@@ -41,13 +43,17 @@ const activities = [
                 lastName: 'wiener'
             }, _id: '987agv'
         },
-        // item_id: 324857,
+        item_id: 324857,
         item_type: 'movies',
         itemTitle: "Spider-Man: Into the Spider-Verse",
         type: 'activity',
         activity: 'listAdd',
         value: 'Favorite',
-        comments: [],
+        comments: [{
+            user: 'bobo',
+            comment: 'a comment!',
+            timestamp: 34053053
+        }],
         likes: 0
     }
 ]
@@ -65,6 +71,12 @@ function addLikeToActivity(activity) {
     return newActivity // return the new obj from the server after update succes
 }
 
+function addCommentToActivity(comment, activity) {
+    const newActivity = util.deepCopy(activity)
+    newActivity.comments.unshift(comment)
+    //TODO: replace the activty in the server for the user
+    return newActivity // return the new obj from the server after update succes
+}
 function loginUser() {
     let user = { email: 'email@wiener.tal', password: '123123' }
     return axios.post(`http://localhost:3003/login`,

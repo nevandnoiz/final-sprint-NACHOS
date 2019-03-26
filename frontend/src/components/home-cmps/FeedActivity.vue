@@ -13,8 +13,17 @@
           <p>{{this.item.likes}}</p>
         </div>
         <div>
-          <button>Comment</button>
+          <button @click="allowComment = true">Comment</button>
         </div>
+      </div>
+
+      <div class="comment" v-if="allowComment">
+        <textarea v-model="comment" name="" id="" cols="30" rows="1"></textarea>
+        <button @click="addComment">comment</button>
+      </div>
+
+      <div class="comments">
+        <activity-comment v-for="(comment, idx) in item.comments" :key="idx" :comment="comment"/>
       </div>
     </div>
   </div>
@@ -22,13 +31,28 @@
 
 
 <script>
+import activityComment from '@/components/home-cmps/activityComment'
+
 export default {
+  components: {
+    activityComment
+  },
   props: {
     item: Object
+  },
+  data(){
+    return {
+      allowComment: false,
+      comment: ''
+    }
   },
   methods: {
     toItem() {
       this.$router.push(`/${this.item.item_type}/details/${this.item.item_id}`);
+    },
+    addComment(){
+      this.$emit('addComment', {comment: this.comment, activity: this.item})
+      this.comment = ''
     }
   },
   computed: {
@@ -50,9 +74,7 @@ export default {
       if (activity === "rate") return `with ${this.item.value} stars.`;
       else if (activity === "listAdd") return `to his ${this.item.value} list.`;
     },
-    creadted() {
-
-    }
+    creadted() {}
   }
 };
 </script>
@@ -63,13 +85,13 @@ p {
   font-size: 20px;
 }
 .activity {
-  margin-top: 20px
+  margin-top: 20px;
 }
 .link {
   color: gray;
 }
 
-.btns{
+.btns {
   display: flex;
 }
 
