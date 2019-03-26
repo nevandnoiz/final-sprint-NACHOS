@@ -145,9 +145,10 @@ export default {
 </script>
 
 <style>
-html, body,div {
+/* lol */
+/* html, body,div {
    cursor: url(./Untitled-23.gif), auto;
-}
+} */
 
 
 div *::-webkit-scrollbar{
