@@ -7,6 +7,7 @@
         v-for="(eposide, index) in season.episodes"
         :key="index"
       >
+        <div class="color-fill" @mouseover="mouseOver" @mouseleave="mouseLeave" :style="{'background':''+dominantColor+'66'}"></div>
         <div class="check-container">
           <i class="fas fa-check" @click="onCheckEpo"></i>
         </div>
@@ -36,6 +37,7 @@ export default {
   components: {},
   data() {
     return {
+      fillColor: true,
       season: null,
       seasonsDetails: null,
 
@@ -43,6 +45,9 @@ export default {
     };
   },
   methods: {
+    mouseOver(){
+      this.fillColor = false;
+    },
     onCheckEpo() {
       console.log('checked')
     },
@@ -53,12 +58,25 @@ export default {
       return UtilityService.imgURL(stillPath, 780);
     }
   },
-  props: ["seasons", "tvShowId"]
+  props: ["seasons", "tvShowId", "dominantColor"]
 };
 </script>
 
 <style scoped>
+
+.color-fill{
+    z-index: 2434;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.color-fill:hover{
+  background-image: none;
+  background-color: none !important
+}
+
 h1 {
+  z-index: 434134;
   color: white;
   margin: 0.1rem 0.5rem;
   align-self: flex-start;
@@ -67,11 +85,13 @@ h1 {
 }
 
 p {
+  z-index: 434134;
   color: white;
   align-self: end;
   margin: 0.2rem;
 }
 i {
+  z-index: 434134;
   font-size: 42px;
   margin: 9px 9px 9px 0;
   background-color: white;

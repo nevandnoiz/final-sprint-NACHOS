@@ -187,6 +187,7 @@ iframe {
 
 }
 .social-main-container {
+  /* z-index: 4235345345; */
     display: flex;
     -ms-flex-pack: end;
     justify-content: flex-end;
@@ -196,7 +197,7 @@ iframe {
     -ms-flex-align: end;
     align-items: flex-end;
     display: flex;
-    z-index: 3333;
+    /* z-index: 23333; */
     -ms-flex-direction: row;
     flex-direction: row;
     grid-row: 1;

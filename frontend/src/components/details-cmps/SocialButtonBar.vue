@@ -53,11 +53,15 @@ props:['item']
     color:white
 }
 .icons-container {
+      width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 355435345643564535;
      /* background: black; */
        /* background: black; */
 }
 i{
-        font-size: 2rem;
+        font-size: 1.3rem;
     padding: 0.5rem 0;
     margin: 0 0.3rem;
 }
