@@ -1,24 +1,24 @@
 <template>
-  <div class="tv-details-container" v-if="tvShow.details && dominantColor">
+  <div class="tv-details-container" v-if="item.details && dominantColor">
     <div class="main-youtube-container" v-if="isTrailerPlaying">
       <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
       <youtube
         class="youtube-container"
-        :video-id="this.tvShow.videos.results[0].key"
+        :video-id="this.item.videos.results[0].key"
         :player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
-    <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
+    <item-container v-if="this.item.details" :item="item" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
       <episodes-swiper
-      :dominantColor="dominantColor"
+        v-if="itemType==='tv'"
         class="netflix-container"
-        :seasons="tvShow.seasons"
-        :tvShowId="tvShow.details.id"
+        :seasons="item.seasons"
+        :tvShowId="item.details.id"
       ></episodes-swiper>
       <div class="content-info-container">
         <div class="Actors">
-          <actor-card :item="tvShow.credits"></actor-card>
+          <actor-card :item="item.credits"></actor-card>
 
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
@@ -26,14 +26,14 @@
         <div class="reviews-section">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <div class="reviews-conatier">
-            <new-review  v-for="(review, index) in tvShow.reviews" :key="index" :review="review"></new-review>
-            <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
+            <new-review v-for="(review, index) in item.reviews" :key="index" :review="review"></new-review>
+            <review-form @addReview="addReview" :itemId="item.details.id"></review-form>
           </div>
-          <!-- <twitter-feed :keyword="tvShow.details.name"></twitter-feed> -->
+          <!-- <twitter-feed :keyword="item.details.name"></twitter-feed> -->
         </div>
       </div>
     </div>
-    <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
+    <!-- <seasons-list :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list> -->
   </div>
 </template>
 
@@ -56,9 +56,11 @@ import { eventBus } from "@/main.js";
 export default {
   data() {
     return {
+      kaka: false,
+      itemType: null,
       isTrailerPlaying: false,
       dominantColor: null,
-      tvShow: {
+      item: {
         seasons: null,
         details: null,
         videos: null,
@@ -70,32 +72,61 @@ export default {
   },
 
   async created() {
+    let type = this.$route.params.itemType;
+    this.itemType = type;
     eventBus.$on("playTrailer", () => (this.isTrailerPlaying = true));
-    const tvShowId = this.$route.params.tvShowId;
-    const [
-      details,
-      externalIds,
-      tvShowVideos,
-      tvShowCredits,
-      tvShowReviews
-    ] = await Promise.all([
-      this.$store.dispatch("getTvShowDetails", tvShowId),
-      this.$store.dispatch("getTvShowExternalIds", tvShowId),
-      this.$store.dispatch("getTvShowVideos", tvShowId),
-      this.$store.dispatch("getTvShowCredits", tvShowId),
-      this.$store.dispatch({
-        type: "loadReviewsByType",
-        itemType: "tv",
-        itemId: tvShowId
-      })
-    ]);
-    this.tvShow.details = details;
-    this.tvShow.seasons = details.seasons;
-    this.tvShow.externalIds = externalIds;
-    this.tvShow.videos = tvShowVideos;
-    this.tvShow.credits = tvShowCredits;
-    this.tvShow.reviews = tvShowReviews;
-    this.setDominantColor();
+    if (type === "tv") {
+      const itemId = this.$route.params.itemId;
+      const [
+        details,
+        externalIds,
+        itemVideos,
+        itemCredits,
+        itemReviews
+      ] = await Promise.all([
+        this.$store.dispatch("getTvShowDetails", itemId),
+        this.$store.dispatch("getTvShowExternalIds", itemId),
+        this.$store.dispatch("getTvShowVideos", itemId),
+        this.$store.dispatch("getTvShowCredits", itemId),
+        this.$store.dispatch({
+          type: "loadReviewsByType",
+          itemType: "tv",
+          itemId: itemId
+        })
+      ]);
+      this.item.details = details;
+      this.item.seasons = details.seasons;
+      this.item.externalIds = externalIds;
+      this.item.videos = itemVideos;
+      this.item.credits = itemCredits;
+      this.item.reviews = itemReviews;
+      this.setDominantColor();
+    } else {
+      const itemId = this.$route.params.itemId;
+      const [
+        details,
+        externalIds,
+        itemVideos,
+        itemCredits,
+        itemReviews
+      ] = await Promise.all([
+        this.$store.dispatch("getMovieDetails", itemId),
+        this.$store.dispatch("getMovieExternalIds", itemId),
+        this.$store.dispatch("getMovieVideos", itemId),
+        this.$store.dispatch("getMovieCredits", itemId),
+        this.$store.dispatch({
+          type: "loadReviewsByType",
+          itemType: "movies",
+          itemId: itemId
+        })
+      ]);
+      this.item.details = details;
+      this.item.externalIds = externalIds;
+      this.item.videos = itemVideos;
+      this.item.credits = itemCredits;
+      this.item.reviews = itemReviews;
+      this.setDominantColor();
+    }
   },
   destroyed() {
     domcolor = null;
@@ -108,7 +139,7 @@ export default {
     },
     async setDominantColor() {
       this.dominantColor = await AvgColorService.domColor(
-        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
+        `http://image.tmdb.org/t/p/w92${this.item.details.poster_path}`
       );
     },
     addReview(newReview) {
@@ -116,7 +147,7 @@ export default {
         type: "addReview",
         newReview: JSON.parse(JSON.stringify(newReview)),
         itemType: "tv",
-        itemId: this.tvShow.details.id
+        itemId: this.item.details.id
       });
     }
   },
@@ -132,8 +163,8 @@ export default {
     NavBar
   },
   watch: {
-    "$route.params.tvShowId": function() {
-      this.getTvShowDetails();
+    "$route.params.itemId": function() {
+      this.$router.go();
     }
   }
 };
@@ -141,7 +172,7 @@ export default {
 
 <style scoped>
 .Actors {
-  /* box-shadow: 0px 0px 12px#000000; */
+  box-shadow: 0px 0px 12px #000000;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 24px 1fr;
@@ -154,6 +185,7 @@ export default {
   height: 800px;
 }
 .reviews-section {
+  box-shadow: 0px 0px 12px #000000;
 }
 
 .pannel-heading-epo {

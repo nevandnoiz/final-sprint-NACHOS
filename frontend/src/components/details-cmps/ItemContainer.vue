@@ -123,7 +123,6 @@ export default {
     MediaIconsBar
   },
   async created() {
-    console.log('this item from itemContianer:',this.item)
     eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
   },
   data() {
@@ -142,6 +141,7 @@ export default {
   },
   computed: {
       isLightOrDark() {
+        console.log('do we have dom colo?', this.dominantColor)
         if(UtilityService.lightOrDark(this.dominantColor) === 'light') return 'black'
         else return 'white'
       },

@@ -15,7 +15,7 @@
               <img width="32" :src="`https://image.tmdb.org/t/p/w500/${props.option.poster_path}`">
             </div>
             <div class="media-content">
-              {{ props.option.title }}
+              {{ props.option.title ||props.option.name }}
               <br>
               <small>
                 Released at {{ props.option.release_date }},
@@ -32,6 +32,8 @@
 
 <script>
 const _ = require("underscore");
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -50,12 +52,15 @@ export default {
         return;
       }
       this.isFetching = true;
-      let movies = await this.$store.dispatch("getMoviesByKeyword", name);
-      this.data = movies.results;
+      let items = await axios(
+        `https://api.themoviedb.org/3/search/multi?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&query=${name}&page=1&include_adult=false`
+      );
+      this.data = items.data.results;
       this.isFetching = false;
     },
-    pushToDetails(movie) {
-      this.$router.push(`/movies/details/${movie.id}`);
+    pushToDetails(item) {
+      if (item.media_type === 'tv') return this.$router.push(`/tv/details/${item.id}`);
+      else return this.$router.push(`/movies/details/${item.id}`);
     }
   }
 };

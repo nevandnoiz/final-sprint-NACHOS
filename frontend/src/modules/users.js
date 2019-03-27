@@ -54,7 +54,6 @@ export default {
     },
     async loadUser(context, payload) {
       const user = await UserServies.loadUser()
-      console.log(user)
       if (user) context.commit({ type: 'setUser', user })
     },
     async loginUser(context, payload) {

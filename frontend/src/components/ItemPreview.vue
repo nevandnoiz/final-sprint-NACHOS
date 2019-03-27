@@ -54,7 +54,7 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
-      this.$router.push(`${this.itemTypeRoute}/details/${itemId}`);
+      this.$router.push(`/${this.itemTypeRoute}/details/${itemId}`);
     },
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
@@ -69,7 +69,7 @@ export default {
         await this.$store.dispatch({
           type: "addActivityByType",
           item: this.item,
-          itemType: this.itemTypeRoute.substring(1),
+          itemType: this.itemTypeRoute,
           activityType: "add to list",
           value: "watchList"
         });
@@ -91,7 +91,7 @@ export default {
         await this.$store.dispatch({
           type: "addActivityByType",
           item: this.item,
-          itemType: this.itemTypeRoute.substring(1),
+          itemType: this.itemTypeRoute,
           activityType: "add to list",
           value: "favorites"
         });
@@ -125,7 +125,7 @@ export default {
     }
   },
   created() {
-    this.itemTypeRoute = this.$route.path;
+    this.itemTypeRoute = this.$route.path.substring(1);
     let isOnWatchList = this.isItemInList("watchList");
     if (isOnWatchList) {
       console.log(isOnWatchList);
