@@ -19,7 +19,7 @@
         <p>{{this.item.likes}}</p>
       </div>
       <div>
-        <button @click="allowComment = true">Comment</button>
+        <button @click="focusComment">Comment</button>
       </div>
     </div>
 
@@ -27,13 +27,14 @@
       <div class="comments">
         <activity-comment v-for="(comment, idx) in item.comments" :key="idx" :comment="comment"/>
       </div>
-      <div class="comment-container" v-if="allowComment">
+      <div class="comment-container">
         <div
           class="textarea-div"
           contenteditable="true"
           @input="togglePlaceholder"
           @keydown.enter.prevent
           @keyup.enter="addComment"
+          ref="textarea"
         ></div>
         <div class="placeholder-div" v-show="showPlaceholder">Write a comment...</div>
       </div>
@@ -78,9 +79,12 @@ export default {
       if (ev.target.innerText.length > 0) this.showPlaceholder = false;
       else this.showPlaceholder = true;
     },
-    addLike(){
-      this.$emit('addLike', this.item)
-      this.like = true
+    addLike() {
+      this.$emit("addLike", this.item);
+      this.like = true;
+    },
+    focusComment(){
+      this.$refs.textarea.focus()
     }
   },
   computed: {
@@ -109,9 +113,9 @@ export default {
         return util.imgURL(url, 780);
       }
     },
-    heart: function(){
-      if (this.like) return 'fas fa-heart'
-      else return 'far fa-heart'
+    heart: function() {
+      if (this.like) return "fas fa-heart";
+      else return "far fa-heart";
     }
   },
   created() {
@@ -133,13 +137,19 @@ p {
   font-family: sans-serif;
   font-size: 20px;
 }
+
 .activity {
   margin-top: 20px;
   width: 50vw;
   border: 1px solid lightgray;
+  border-radius: 8px;
+  background-color: white;
 }
-.link {
-  color: gray;
+a.link{
+  color: #f57f16
+}
+a.link:hover{
+  text-decoration: underline;
 }
 
 .btns {
@@ -148,7 +158,7 @@ p {
   justify-content: space-evenly;
   margin-bottom: 8px;
 }
-.comments{
+.comments {
   margin-bottom: 25px;
 }
 .likes {
@@ -175,19 +185,28 @@ p {
 }
 .comment-container {
   position: relative;
+  height: 40px;
+  margin: 8px;
+  background-color: #f5f5f5;
+  border: 1px solid gray;
+  border-radius: 20px;
   .textarea-div,
   .placeholder-div {
     position: absolute;
     bottom: 0;
+    padding-left: 15px;
   }
   .textarea-div {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 48vw;
     z-index: 2;
+    margin-bottom: 8px;
+    outline: none;
   }
   .placeholder-div {
     z-index: 1;
     color: gray;
+    min-width: 48vw;
+    margin-bottom: 8px;
   }
 }
 
@@ -195,7 +214,7 @@ p {
   font-size: 1.7em;
   cursor: pointer;
   margin-right: 5px;
-  &.fas{
+  &.fas {
     color: #e31b23;
   }
 }
