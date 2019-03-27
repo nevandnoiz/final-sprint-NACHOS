@@ -1,11 +1,16 @@
 <template>
   <el-select class="netflix-menu" @change="onSelectSeason" v-model="seasonIdx">
     <el-option
+      class="episoide-btn-container"
       v-for="(season,index) in seasonsList"
       :key="index"
       :label="season.name"
       :value="index"
-    ></el-option>
+    >
+      <p>{{season.name}}</p>
+      
+      <i class="fas fa-check check-button-season-menu"></i>
+    </el-option>
   </el-select>
 </template>
 
@@ -33,6 +38,29 @@ export default {
 };
 </script>
 <style>
+.episoide-btn-container {
+      align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.check-button-season-menu {
+     font-size: 10px;
+    margin: 9px 9px 9px 0;
+    background-color: white;
+    opacity: 0.5;
+    color: darkslategray;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    justify-content: center;
+    border-radius: 50%;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+}
+.check-button-season-menu:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
 .netflix-menu {
   z-index: 33773;
 }
@@ -46,6 +74,7 @@ export default {
   border: 0 !important;
 }
 .el-select-dropdown__item {
+  height: auto !important;
   color: white !important;
   background-color: #2d2d2d !important;
 }

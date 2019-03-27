@@ -1,7 +1,6 @@
 const axios = require('axios')
 const mongoService = require('./mongo-service')
 
-const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     getTrendingShows,
@@ -102,10 +101,9 @@ function getTvShowReviews(id) {
 }
 
 function addReview(newReview, tvShowId) {
-    newReview.id = new ObjectId()
     return mongoService.connect()
-    .then(db => {
-            db.collection('tv-reviews').updateOne({
+        .then(db => {
+            db.collection('tv-reviews').update({
                 itemId: tvShowId
             }, {
                     $push: {
@@ -114,6 +112,7 @@ function addReview(newReview, tvShowId) {
                 })
                 .then(() => newReview)
         })
+    return true
 }
 
 function getTvShowSeasons(id) {
