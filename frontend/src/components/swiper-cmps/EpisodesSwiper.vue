@@ -23,7 +23,6 @@ import UtilityService from "@/services/UtilityService.js";
 
 export default {
   async created() {
-    console.log('epiSwiper:' , this.seasons,this)
     eventBus.$on("onSeasonClick", index => this.onEmit(index));
     this.seasonsDetails = await this.$store.dispatch({
       type: "getSeasonDetails",
