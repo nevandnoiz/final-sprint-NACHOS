@@ -44,7 +44,7 @@
                 
 
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-            <div class="black-filler"></div>
+            <!-- <div class="black-filler"></div> -->
                       <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
 
             <!-- <div class="icons-container">

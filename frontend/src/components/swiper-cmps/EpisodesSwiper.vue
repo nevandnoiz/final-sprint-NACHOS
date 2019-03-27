@@ -143,7 +143,10 @@ i:hover {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  border: 1px solid;
+  /* padding: 0 3px; */
+  /* border: 1px solid; */
+  border-left: 2px solid;
+  border-right: 2px solid;
   background-repeat: no-repeat;
 }
 
