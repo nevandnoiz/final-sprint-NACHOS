@@ -206,7 +206,8 @@ div[data-layer="1"]{
     height: 93vh;
 }
 .sub-container {
-        margin: 274px auto;
+    margin: 214px auto;
+
     display: block;
        width: 76vw;
     z-index: 1;
