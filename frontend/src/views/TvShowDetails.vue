@@ -139,7 +139,7 @@ export default {
     addReview(newReview) {
       this.$store.dispatch({
         type: "addReview",
-        newReview: newReview,
+        newReview: JSON.parse(JSON.stringify(newReview)),
         itemType: "tv",
         itemId: this.tvShow.details.id
       });
