@@ -24,7 +24,6 @@ function addRoutes(app) {
             reviewService.query({ userId })
         ])
             .then(([user, reviews]) => {
-                console.log({ user })
                 res.json({ user, reviews })
             })
     })
@@ -36,12 +35,9 @@ function addRoutes(app) {
     })
 
     app.get('/login', (req, res) => {
-        console.log(req.session.user)
         if (req.session.userEmail) {
-            console.log(req.session.userEmail)
             userService.loadFromSession(req.session.userEmail)
                 .then(user => {
-                    console.log(user)
                     return res.json(user)
                 })
         }
@@ -70,11 +66,19 @@ function addRoutes(app) {
     app.delete('/user/:userId/lists/:listType/:itemId', (req, res) => {
         const userId = req.params.userId
         const itemId = req.params.itemId
-        console.log('asdasdasdas',itemId)
         const listType = req.params.listType
         userService.removeFromListByType(userId, itemId, listType)
             .then(() => {
                 res.send('OK')
+            })
+    })
+
+    app.post('/user/:userId/activities', (req, res) => {
+        const userId = req.params.userId
+        const activity = req.body
+        userService.addActivityByType(userId, activity)
+            .then(activity => {
+                res.json(activity)
             })
     })
 

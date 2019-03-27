@@ -47,8 +47,24 @@ function removeFromListByType(userId, itemId, listType) {
         })
 }
 
-
-
+function addActivityByType(userId, activity) {
+    userId = ObjectId(userId)
+    activity._id = new ObjectId()
+    return mongoService.connect()
+        .then(db => {
+            db.collection('users').updateOne(
+                {
+                    "_id": userId,
+                },
+                {
+                    $push: { "userActivities": activity }
+                }
+            )
+        })
+        .then(result => {
+            return activity;
+        })
+}
 
 function getById(id) {
     const _id = new ObjectId(id)
@@ -77,7 +93,6 @@ function addUser({ nickname }) {
 
 
 
-
 module.exports = {
     query,
     getById,
@@ -85,5 +100,6 @@ module.exports = {
     checkLogin,
     loadFromSession,
     addToListByType,
-    removeFromListByType
+    removeFromListByType,
+    addActivityByType
 }

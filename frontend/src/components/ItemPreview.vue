@@ -59,14 +59,21 @@ export default {
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
     },
-    toggleWatchList() {
-      if (!this.isOnWatchList)
-        this.$store.dispatch({
+    async toggleWatchList() {
+      if (!this.isOnWatchList) {
+        await this.$store.dispatch({
           type: "addToListByType",
           addedItem: this.item,
           listType: "watchList"
         });
-      else
+        await this.$store.dispatch({
+          type: "addActivityByType",
+          item: this.item,
+          itemType: this.itemTypeRoute.substring(1),
+          activityType: "add to list",
+          value: "watchList"
+        });
+      } else
         this.$store.dispatch({
           type: "removeFromListByType",
           itemId: this.item.id,
@@ -74,19 +81,27 @@ export default {
         });
       this.isOnWatchList = !this.isOnWatchList;
     },
-    toggleFavorite() {
-      if (!this.isFavorite)
-        this.$store.dispatch({
+    async toggleFavorite() {
+      if (!this.isFavorite) {
+        await this.$store.dispatch({
           type: "addToListByType",
           addedItem: this.item,
           listType: "favorites"
         });
-      else
+        await this.$store.dispatch({
+          type: "addActivityByType",
+          item: this.item,
+          itemType: this.itemTypeRoute.substring(1),
+          activityType: "add to list",
+          value: "favorites"
+        });
+      } else {
         this.$store.dispatch({
           type: "removeFromListByType",
           itemId: this.item.id,
           listType: "favorites"
         });
+      }
       this.isFavorite = !this.isFavorite;
     },
     toggleisSelected() {
