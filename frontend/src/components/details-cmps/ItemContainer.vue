@@ -1,6 +1,6 @@
 <template>
 <section>
-      <div v-if="!isTrailer" class="detalis-sections" :style="bckImage">
+      <div v-if="!isTrailer" class="details-sections" :style="bckImage">
         <div :style="bckColor" class="row">
 
         </div>
@@ -12,8 +12,10 @@
        
      
           <div class="shadowing-container">
-            <div class="details-text">
-              <p>{{item.details.overview}}</p>
+            <div  :style="{'background':''+dominantColor+''}" class="details-text">
+
+              <seasons-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-menu>
+              <p :style="{'color':''+isLightOrDark+''}" >{{item.details.overview}}</p>
             </div>
 
             <div class="shadowing">
@@ -65,7 +67,7 @@
             ></seasons-list>-->
               
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-                      <netflix-season-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id" class="netflix-season-menu-container"></netflix-season-menu>
+                      <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
 
             <!-- <div class="icons-container">
               <i @click="onTrailer" class="far fa-play-circle"></i>
@@ -113,6 +115,7 @@
 </template>
 <script>
 import "@/services/AvgColorService.js";
+import SeasonsMenu from "@/components/details-cmps/SeasonsMenu.vue";
 import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
@@ -122,24 +125,22 @@ import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 // import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
+// import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
     PannelHeading,
-    NetflixSeasonMenu,
+    // NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
     SeasonsList,
+    SeasonsMenu,
     // NetflixSlideSeason,
     UserControlBar,
     MediaIconsBar
   },
-  mounted() {
-
-    // document.getElementById("youtube-player-1").style.width = "100%";
-  },
   async created() {
+    console.log('this item from itemContianer:',this.item)
     eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
   },
   data() {
@@ -157,6 +158,10 @@ export default {
     }
   },
   computed: {
+      isLightOrDark() {
+        if(UtilityService.lightOrDark(this.dominantColor) === 'light') return 'black'
+        else return 'white'
+      },
        bckImage() {
       return {
         backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
@@ -307,7 +312,7 @@ padding: 0 0.5rem;
 }
 
 .shadowing {
-  z-index: 2331;
+  z-index: 2;
   grid-column: 2;
   grid-template: repeat(10, 1fr);
   display: grid;
@@ -315,7 +320,7 @@ padding: 0 0.5rem;
   grid-template-columns: 2em 1fr 1fr;
   background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
-.detalis-sections {
+.details-sections {
       position: relative;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -370,7 +375,7 @@ iframe {
 }
 
 .item-poster-img {
-  z-index: 34234;
+  z-index: 3;
   /* border-radius: 5px; */
   width: 400px;
   grid-column: 1;
@@ -410,15 +415,13 @@ iframe {
   background-color: lightslategray;
 } */
 .details-text {
+position: relative;
       box-shadow: 0px 0px 12px #000000;
     padding: 20px;
-    /* color: black; */
     margin: 0;
     grid-column: 2;
-    /* padding-top: 300px; */
     background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
     grid-row: 2;
-    /* padding: 0; */
 }
 .details-text > * {
   color: white;

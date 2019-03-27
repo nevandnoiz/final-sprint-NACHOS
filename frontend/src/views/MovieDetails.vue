@@ -145,6 +145,12 @@ export default {
 </script>
 
 <style>
+/* lol */
+/* html, body,div {
+   cursor: url(./Untitled-23.gif), auto;
+} */
+
+
 div *::-webkit-scrollbar{
   width: 10px;
   height: 1px;
@@ -200,7 +206,7 @@ div[data-layer="1"]{
     height: 93vh;
 }
 .sub-container {
-    margin: 256px auto;
+        margin: 227px auto;
     display: block;
     width: 977px;
     z-index: 1;

@@ -6,12 +6,13 @@ import TvModule from './modules/tv.js'
 import ActorsModule from './modules/actors.js'
 import UsersModule from './modules/users.js'
 import ReviewsModule from './modules/reviews.js'
-
+import TwitterModule from './modules/twitter.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    TwitterModule,
     MoviesModule,
     TvModule,
     ActorsModule,

@@ -5,8 +5,11 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const axios = require('axios')
 
+// console.log(config)
+
 // Set routes into variables. ex: 'const addMoviesRoute = require('./routes/movies-route')'
 const addMoviesRoute = require('./routes/movies-route')
+const addTwitterRoutes = require('./routes/twitter-route')
 const addTvRoute = require('./routes/tv-route')
 const addActorsRoute = require('./routes/actors-route')
 const addReviewsRoute = require('./routes/reviews-route')
@@ -43,7 +46,11 @@ addMoviesRoute(app)
 addTvRoute(app)
 addActorsRoute(app)
 addReviewsRoute(app)
+addTwitterRoutes(app)
+// addUserRoute(app)
 addUserRoute(app)
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`))
+
+// console.log(request)

@@ -1,6 +1,7 @@
 const axios = require('axios')
 const mongoService = require('./mongo-service')
 
+
 module.exports = {
     getTrendingShows,
     getTvShowDetails,
@@ -13,7 +14,7 @@ module.exports = {
     getTvShowSeasons,
     getTvShowWatchLinksByKeyword,
     getTvShowVideos,
-    getSeasonDetails
+    getSeasonDetails,
 }
 
 function getTrendingShows(page = 1) {
