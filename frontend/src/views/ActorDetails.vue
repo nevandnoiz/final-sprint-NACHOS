@@ -28,7 +28,7 @@
 import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
-// import SeasonsList from "../components/details-cmps/SeasonsList.vue";
+import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
@@ -132,7 +132,7 @@ export default {
   components: {
     ActorCard,
     ItemContainer,
-    // SeasonsList,
+    SeasonsList,
     // NetflixSlideMain,
     ReviewContainer,
     ReviewForm,

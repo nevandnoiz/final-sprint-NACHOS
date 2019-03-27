@@ -123,7 +123,7 @@ import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 
 // import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
-// import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
+import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 // import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import { eventBus } from "@/main.js";
@@ -133,7 +133,7 @@ export default {
     // NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
-    
+    SeasonsList,
     SeasonsMenu,
     // NetflixSlideSeason,
     UserControlBar,
