@@ -9,8 +9,20 @@
   >
     <div class="item-hover-controls" v-if="currUser && isHovered">
       <div class="hover-controls-btns">
-        <i class="fas fa-plus" :class="{'checked': isChecked}" @click.stop="toggleWatchList"></i>
-        <i class="fas fa-check"></i>
+        <i
+          v-if="isOnWatchList"
+          class="fas fa-list"
+          :class="{'on-watch-list': isOnWatchList}"
+          @click.stop="toggleWatchList"
+        ></i>
+        <i
+          v-else
+          class="fas fa-plus"
+          :class="{'on-watch-list': isOnWatchList}"
+          @click.stop="toggleWatchList"
+        ></i>
+        <!-- <i class="fas fa-plus" :class="{'checked': isOnWatchList}" @click.stop="toggleWatchList"></i> -->
+        <i class="fas fa-heart" :class="{'on-favorites': isFavorite}" @click.stop="toggleFavorite"></i>
       </div>
       <a href="#">Play Trailer</a>
     </div>
@@ -27,14 +39,16 @@ export default {
     return {
       img: null,
       isHovered: false,
-      isChecked: false,
+      isOnWatchList: false,
+      isFavorite: false,
       isSelected: false,
       itemTypeRoute: null
     };
   },
   methods: {
     imgURL() {
-      if (this.item.profile_path) return UtilityService.imgURL(this.item.profile_path, 500);
+      if (this.item.profile_path)
+        return UtilityService.imgURL(this.item.profile_path, 500);
       return UtilityService.imgURL(this.item.poster_path, 500);
     },
     pushToDetails(itemId) {
@@ -45,23 +59,83 @@ export default {
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
     },
-    toggleWatchList() {
-      if (!this.isChecked) this.$store.dispatch('addToListByType',this.item)
-      else this.$store.dispatch('removeFromListByType',this.item.id)
-      this.isChecked = !this.isChecked;
+    async toggleWatchList() {
+      if (!this.isOnWatchList) {
+        await this.$store.dispatch({
+          type: "addToListByType",
+          addedItem: this.item,
+          listType: "watchList"
+        });
+        await this.$store.dispatch({
+          type: "addActivityByType",
+          item: this.item,
+          itemType: this.itemTypeRoute.substring(1),
+          activityType: "add to list",
+          value: "watchList"
+        });
+      } else
+        this.$store.dispatch({
+          type: "removeFromListByType",
+          itemId: this.item.id,
+          listType: "watchList"
+        });
+      this.isOnWatchList = !this.isOnWatchList;
+    },
+    async toggleFavorite() {
+      if (!this.isFavorite) {
+        await this.$store.dispatch({
+          type: "addToListByType",
+          addedItem: this.item,
+          listType: "favorites"
+        });
+        await this.$store.dispatch({
+          type: "addActivityByType",
+          item: this.item,
+          itemType: this.itemTypeRoute.substring(1),
+          activityType: "add to list",
+          value: "favorites"
+        });
+      } else {
+        this.$store.dispatch({
+          type: "removeFromListByType",
+          itemId: this.item.id,
+          listType: "favorites"
+        });
+      }
+      this.isFavorite = !this.isFavorite;
     },
     toggleisSelected() {
       this.$emit("toggleItem");
       this.isSelected = !this.isSelected;
     },
+    isItemInList(listType) {
+      if (this.$store.getters.currUser) {
+        let lists = this.$store.getters.currUserLists;
+        let list = lists.find(list => list.name === listType);
+        let item = list.items.some(item => {
+          return item.id === this.item.id;
+        });
+        return item;
+      }
+    }
   },
   computed: {
-    currUser(){
-      return this.$store.getters.currUser
+    currUser() {
+      return this.$store.getters.currUser;
     }
   },
   created() {
     this.itemTypeRoute = this.$route.path;
+    let isOnWatchList = this.isItemInList("watchList");
+    if (isOnWatchList) {
+      console.log(isOnWatchList);
+      this.isOnWatchList = true;
+    }
+    let isFavorite = this.isItemInList("favorites");
+    if (isFavorite) {
+      console.log(isFavorite);
+      this.isFavorite = true;
+    }
     this.img = this.imgURL();
   }
 };
@@ -98,8 +172,11 @@ export default {
     i:hover {
       opacity: 0.75;
     }
-    .checked {
+    .on-watch-list {
       background-color: rgb(1, 221, 1);
+    }
+    .on-favorites {
+      background-color: rgb(255, 89, 89);
     }
     a {
       color: inherit; /* blue colors for links too */

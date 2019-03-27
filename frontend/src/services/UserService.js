@@ -11,7 +11,8 @@ export default {
     addLikeToActivity,
     addCommentToActivity,
     addToListByType,
-    removeFromListByType
+    removeFromListByType,
+    addActivityByType
 }
 
 const users = []
@@ -72,12 +73,17 @@ function addLikeToActivity(activity) {
     return newActivity // return the new obj from the server after update succes
 }
 
-function addToListByType(addedItem,userId) {
-    return axios.post(`http://localhost:3003/user/${userId}/lists`, addedItem)
+function addToListByType(addedItem, userId, listType) {
+    return axios.post(`http://localhost:3003/user/${userId}/lists/${listType}`, addedItem)
 }
 
-function removeFromListByType(itemId,userId) {
-    return axios.delete(`http://localhost:3003/user/${userId}/lists/${itemId}`)
+function removeFromListByType(itemId, userId, listType) {
+    return axios.delete(`http://localhost:3003/user/${userId}/lists/${listType}/${itemId}`)
+}
+
+function addActivityByType(user, item, itemType, activityType,value) {
+    let activity = _createActivity(user, item, itemType, activityType,value)
+    return axios.post(`http://localhost:3003/user/${user._id}/activities`, activity)
 }
 
 function addCommentToActivity(comment, activity) {
@@ -102,9 +108,26 @@ function loadUser() {
         })
 }
 
-
-
-
+function _createActivity(user, item, itemType, activityType,value) {
+    return {
+        timestamp: Date.now(),
+        byUser: {
+            name: {
+                firstName: user.name.firstName,
+                lastName: user.name.lastName,
+            },
+            _id: user._id
+        },
+        item_id: item.id,
+        item_type: itemType,
+        itemTitle: (item.title) ? item.title : item.name,
+        type: 'activity',
+        activity: activityType,
+        value: value,
+        comments: [],
+        likes: 0
+    }
+}
 
 
 
