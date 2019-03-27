@@ -7,7 +7,7 @@
         v-for="(eposide, index) in season.episodes"
         :key="index"
       >
-        <div class="color-fill" @mouseover="mouseOver" @mouseleave="mouseLeave" :style="{'background':''+dominantColor+'66'}"></div>
+        <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div>
         <div class="check-container">
           <i class="fas fa-check" @click="onCheckEpo"></i>
         </div>
