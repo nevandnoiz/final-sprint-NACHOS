@@ -65,7 +65,7 @@ import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import EpisodesSwiper from "@/components/swiper-cmps/EpisodesSwiper.vue";
-// import SeasonsList from "../components/details-cmps/SeasonsList.vue";
+import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
@@ -137,9 +137,10 @@ export default {
       );
     },
     addReview(newReview) {
+      console.log('details')
       this.$store.dispatch({
         type: "addReview",
-        newReview: JSON.parse(JSON.stringify(newReview)),
+        newReview: newReview,
         itemType: "tv",
         itemId: this.tvShow.details.id
       });
@@ -152,6 +153,8 @@ export default {
     PannelHeading,
     ActorCard,
     ItemContainer,
+    SeasonsList,
+    // NetflixSlideMain,
     ReviewContainer,
     ReviewForm,
     NavBar
