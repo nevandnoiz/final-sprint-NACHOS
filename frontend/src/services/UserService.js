@@ -9,8 +9,9 @@ export default {
     loginUser,
     loadUser,
     addLikeToActivity,
-    addCommentToActivity
-
+    addCommentToActivity,
+    addToListByType,
+    removeFromListByType
 }
 
 const users = []
@@ -71,6 +72,14 @@ function addLikeToActivity(activity) {
     return newActivity // return the new obj from the server after update succes
 }
 
+function addToListByType(addedItem,userId) {
+    return axios.post(`http://localhost:3003/user/${userId}/lists`, addedItem)
+}
+
+function removeFromListByType(itemId,userId) {
+    return axios.delete(`http://localhost:3003/user/${userId}/lists/${itemId}`)
+}
+
 function addCommentToActivity(comment, activity) {
     const newActivity = util.deepCopy(activity)
     newActivity.comments.unshift(comment)
@@ -111,6 +120,8 @@ function loadUser() {
 //         email: 'email@wiener.tal',
 //         img: null,
 //         following: [],
+
+// user={id:123,lists:[{name:favorites,lists:[{},{},{}]},{name:watchlist,list:[{},{}]}]}
 //         lists: [
 //             {
 //                 name: 'favorites',

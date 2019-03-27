@@ -7,7 +7,7 @@
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered, 'selected': isSelected}"
   >
-    <div class="item-hover-controls" v-if="isHovered">
+    <div class="item-hover-controls" v-if="currUser && isHovered">
       <div class="hover-controls-btns">
         <i class="fas fa-plus" :class="{'checked': isChecked}" @click.stop="toggleWatchList"></i>
         <i class="fas fa-check"></i>
@@ -46,6 +46,8 @@ export default {
       this.isHovered = !this.isHovered;
     },
     toggleWatchList() {
+      if (!this.isChecked) this.$store.dispatch('addToListByType',this.item)
+      else this.$store.dispatch('removeFromListByType',this.item.id)
       this.isChecked = !this.isChecked;
     },
     toggleisSelected() {
@@ -53,7 +55,11 @@ export default {
       this.isSelected = !this.isSelected;
     },
   },
-  computed: {},
+  computed: {
+    currUser(){
+      return this.$store.getters.currUser
+    }
+  },
   created() {
     this.itemTypeRoute = this.$route.path;
     this.img = this.imgURL();

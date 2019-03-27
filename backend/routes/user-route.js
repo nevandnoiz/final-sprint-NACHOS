@@ -35,20 +35,44 @@ function addRoutes(app) {
             .then(user => res.json(user))
     })
 
+    app.get('/login', (req, res) => {
+        console.log(req.session.user)
+        if (req.session.user) res.send(req.session.user)
+        else res.send(null)
+    })
+
     app.post('/login', (req, res) => {
         const loginDetails = req.body
         userService.checkLogin(loginDetails)
             .then(user => {
                 req.session.user = user
-                console.log("login", req.session.user)
                 res.json(user)
             })
     })
+    
+    app.post('/user/:userId/lists', (req, res) => {
+        const userId = req.params.userId
+        const addItem = req.body
+        const listType = 'watchList'
+        userService.addToListByType(userId,addItem,listType)
+        //     .then(user => {
+        //         req.session.user = user
+        //         console.log("login", req.session.user)
+        //         res.json(user)
+        //     })
+    })
 
-    app.get('/login', (req, res) => {
-        console.log(req.session.user)
-        if (req.session.user) res.send(req.session.user)
-        else res.send(null)
+    app.delete('/user/:userId/lists/:itemId', (req, res) => {
+        const userId = req.params.userId
+        const itemId = req.params.itemId
+        const listType = 'watchList'
+        console.log(userId,itemId)
+        userService.removeFromListByType(userId,itemId,listType)
+        //     .then(user => {
+        //         req.session.user = user
+        //         console.log("login", req.session.user)
+        //         res.json(user)
+        //     })
     })
 
 }
