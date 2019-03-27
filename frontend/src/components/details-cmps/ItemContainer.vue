@@ -12,6 +12,11 @@
        
      
           <div class="shadowing-container">
+            <div class="social-main-container">
+
+<social-button-bar :item="item"></social-button-bar>
+            </div>
+            
             <div  :style="{'background':''+dominantColor+''}" class="details-text">
 
               <seasons-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-menu>
@@ -20,37 +25,7 @@
 
             <div class="shadowing">
               <!-- icons -->
-              <!-- <div class="icons-container">
-              <i @click="onTrailer" class="far fa-play-circle"></i>
-              <a
-                target="_blank"
-                v-if="item.externalIds.twitter_id"
-                :href="`https://twitter.com/${item.externalIds.twitter_id}`"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                target="_blank"
-                v-if="item.externalIds.facebook_id"
-                :href="`https://www.facebook.com/${item.externalIds.facebook_id}`"
-              >
-                <i class="fab fa-facebook"></i>
-              </a>
-              <a
-                target="_blank"
-                v-if="item.externalIds.instagram_id"
-                :href="`https://www.instagram.com/${item.externalIds.instagram_id}`"
-              >
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a
-                target="_blank"
-                v-if="item.externalIds.imdb_id"
-                :href="`https://www.imdb.com/title/${item.externalIds.imdb_id}`"
-              >
-                <i class="fab fa-imdb"></i>
-              </a>
-            </div> -->
+
               <!-- end icons -->
               <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
               <h1 class="title">{{item.details.title || item.details.name}}</h1>
@@ -60,13 +35,16 @@
           </div>
 
           <div class="poster-image-container">
+            
             <!-- <seasons-list
               v-show="isSeasonsListMode"
               :seasons="item.seasons"
               :tvShowId="item.details.id"
             ></seasons-list>-->
-              
+                
+
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
+            <div class="black-filler"></div>
                       <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
 
             <!-- <div class="icons-container">
@@ -110,6 +88,9 @@
       </div>
     </div>
   </div>
+  <p>
+  </p>
+  
 </section>
 
 </template>
@@ -118,6 +99,7 @@ import "@/services/AvgColorService.js";
 import SeasonsMenu from "@/components/details-cmps/SeasonsMenu.vue";
 import UtilityService from "@/services/UtilityService.js";
 import NavBar from "@/components/details-cmps/NavBar.vue";
+import SocialButtonBar from "@/components/details-cmps/SocialButtonBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
@@ -130,6 +112,7 @@ import { eventBus } from "@/main.js";
 export default {
   components: {
     PannelHeading,
+    SocialButtonBar,
     // NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
@@ -196,6 +179,29 @@ a {
 iframe {
   width: 100%;
 }
+.black-filler {
+      background: black;
+      height: 73px;
+    /* z-index: 343434543; */
+    /* background: antiquewhite; */
+
+}
+.social-main-container {
+    display: flex;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    color: white;
+    -ms-flex-order: 2;
+    order: 2;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    display: flex;
+    z-index: 3333;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    grid-row: 1;
+    grid-column: 2;
+}
 .pannel-heading-epo{
       margin-top: 1.3rem;
  grid-column: 1/8;
@@ -211,7 +217,8 @@ padding: 0 0.5rem;
 }
     
 .item-main-container {
-  display: flex
+  display: flex;
+      justify-content: center;
 }
 .netflix-season-menu-container {
   -webkit-box-shadow: 0px 0px 12px #000000;
@@ -312,13 +319,14 @@ padding: 0 0.5rem;
 }
 
 .shadowing {
-  z-index: 2;
-  grid-column: 2;
-  grid-template: repeat(10, 1fr);
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  grid-template-columns: 2em 1fr 1fr;
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    z-index: 33;
+    grid-row: 1;
+    grid-column: 2;
+    grid-template: repeat(10, 1fr);
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 2em 1fr 1fr;
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 .details-sections {
       position: relative;
@@ -366,7 +374,7 @@ iframe {
 }
 .item-container {
     display: grid;
-    width: 68%;
+    width: 76vw;
     z-index: 1;
     grid-template-columns: 400px 2fr;
     grid-template-rows: minmax(75px, auto) 1fr;
@@ -388,7 +396,7 @@ iframe {
   color: #888888;
   text-align: center;
 }
-.icons-container {
+/* .icons-container {
   box-shadow: 0px 0px 12px #000000;
   color: black;
   background-color: black;
@@ -403,10 +411,10 @@ iframe {
   display: flex;
   grid-row: 2;
   grid-column: 1;
-}
+} */
 .icons-container > * {
   font-size: 3rem;
-  margin: 0 0.5rem;
+  /* margin: 0 0.5rem; */
 }
 .icons-container > *:hover {
   cursor: pointer;

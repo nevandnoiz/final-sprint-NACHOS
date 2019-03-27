@@ -73,7 +73,9 @@ h2{
 }
 .new-review-container {
   width: auto !important;
-  padding: 20px;
+      width: auto !important;
+    padding: 20px;
+    max-width: 51vw !important;
 }
 .card-inner {
   display: none;
