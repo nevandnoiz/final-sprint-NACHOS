@@ -5,7 +5,7 @@
         <i class="fas fa-arrow-left"></i>
       </div>-->
 
-      <div class="card-container" v-for="(actor, index) in item.cast" :key="index">
+      <div class="card-container" v-for="(actor, index) in item.cast" :key="index" v-if="actor.profile_path">
         <img :src="'http://image.tmdb.org/t/p/w300'+actor.profile_path">
         <h1>{{actor.name}}</h1>
         <p>{{actor.character}}</p>
