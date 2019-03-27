@@ -137,6 +137,7 @@ export default {
       );
     },
     addReview(newReview) {
+      console.log('details')
       this.$store.dispatch({
         type: "addReview",
         newReview: newReview,
