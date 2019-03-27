@@ -20,7 +20,6 @@ async function getDomColor(imgUrl) {
   var hexPrm = new Promise((resolve, rej) => {
     img.onload = async function () {
       var rgb = await getAverageColor(img);
-      console.log('rgb', rgb)
       var hexStr = '#' + ('0' + rgb.r.toString(16)).slice(-2) + ('0' + rgb.g.toString(16)).slice(-2) + ('0' + rgb.b.toString(16)).slice(-2);
       resolve(hexStr)
     };
