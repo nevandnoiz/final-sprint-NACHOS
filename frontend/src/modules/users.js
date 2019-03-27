@@ -2,20 +2,21 @@ import UserServies from '../services/UserService';
 
 export default {
   state: {
-    currUser: null,
+    currUser: '',
     activities: null,
   },
   getters: {
     activities: state => state.activities,
     currUser: state => state.currUser,
     currUserId: state => state.currUser._id,
+    currUserLists: state => state.currUser.lists,
     getUserForComment: function (state) {
       if (state.currUser) return {
         _id: state.currUser._id,
         name: state.currUser.name,
         img: state.currUser.img
       }
-    }
+    },
   },
   mutations: {
     setCurrUser(state, { user }) {
@@ -30,7 +31,21 @@ export default {
     updateActivity(state, { newActivity }) {
       const idx = state.activities.findIndex(activity => activity._id === newActivity._id)
       state.activities.splice(idx, 1, newActivity)
-    }
+    },
+    addToList(state, { addedItem, listType }) {
+      let lists = state.currUser.lists
+      const listIdx = lists.findIndex(list => list.name === listType)
+      state.currUser.lists[listIdx].items.push(addedItem)
+    },
+    removeFromList(state, { itemId, listType }) {
+      let lists = state.currUser.lists
+      const listIdx = lists.findIndex(list => list.name === listType)
+      const itemIdx = lists[listIdx].items.findIndex(item => item.id === itemId)
+      state.currUser.lists[listIdx].items.splice(itemIdx, 1)
+    },
+    addActivity(state, { activity }) {
+      state.currUser.userActivities.push(activity)
+    },
   },
   actions: {
     async loadActivities(context, payload) {
@@ -39,6 +54,7 @@ export default {
     },
     async loadUser(context, payload) {
       const user = await UserServies.loadUser()
+      console.log(user)
       if (user) context.commit({ type: 'setUser', user })
     },
     async loginUser(context, payload) {
@@ -46,15 +62,21 @@ export default {
       context.commit({ type: 'setUser', user })
       return user
     },
-    async addToListByType(context, addedItem) {
-      let userId=context.getters.currUserId
-      const addToList = await UserServies.addToListByType(addedItem,userId)
-      // context.commit({ type: 'updateActivity', newActivity })
+    async addToListByType(context, { addedItem, listType }) {
+      let userId = context.getters.currUserId
+      const add = await UserServies.addToListByType(addedItem, userId, listType)
+      context.commit({ type: 'addToList', addedItem, listType })
     },
-    async removeFromListByType(context, itemId) {
-      let userId=context.getters.currUserId
-      const addToList = await UserServies.removeFromListByType(itemId,userId)
-      // context.commit({ type: 'updateActivity', newActivity })
+    async removeFromListByType(context, { itemId, listType }) {
+      let userId = context.getters.currUserId
+      const remove = await UserServies.removeFromListByType(itemId, userId, listType)
+      context.commit({ type: 'removeFromList', itemId, listType })
+    },
+    async addActivityByType(context, { item, itemType, activityType,value }) {
+      let user = context.getters.currUser
+      const res = await UserServies.addActivityByType(user, item, itemType, activityType,value)
+      let activity=res.data
+      context.commit({ type: 'addActivity', activity })
     },
     async addLikeToActivity(context, activity) {
       const newActivity = await UserServies.addLikeToActivity(activity)

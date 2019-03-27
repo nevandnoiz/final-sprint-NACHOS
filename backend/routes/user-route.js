@@ -24,7 +24,6 @@ function addRoutes(app) {
             reviewService.query({ userId })
         ])
             .then(([user, reviews]) => {
-                console.log({ user })
                 res.json({ user, reviews })
             })
     })
@@ -36,8 +35,12 @@ function addRoutes(app) {
     })
 
     app.get('/login', (req, res) => {
-        console.log(req.session.user)
-        if (req.session.user) res.send(req.session.user)
+        if (req.session.userEmail) {
+            userService.loadFromSession(req.session.userEmail)
+                .then(user => {
+                    return res.json(user)
+                })
+        }
         else res.send(null)
     })
 
@@ -45,34 +48,38 @@ function addRoutes(app) {
         const loginDetails = req.body
         userService.checkLogin(loginDetails)
             .then(user => {
-                req.session.user = user
+                req.session.userEmail = user.email
                 res.json(user)
             })
     })
-    
-    app.post('/user/:userId/lists', (req, res) => {
+
+    app.post('/user/:userId/lists/:listType', (req, res) => {
         const userId = req.params.userId
         const addItem = req.body
-        const listType = 'watchList'
-        userService.addToListByType(userId,addItem,listType)
-        //     .then(user => {
-        //         req.session.user = user
-        //         console.log("login", req.session.user)
-        //         res.json(user)
-        //     })
+        const listType = req.params.listType
+        userService.addToListByType(userId, addItem, listType)
+            .then(() => {
+                res.send('OK')
+            })
     })
 
-    app.delete('/user/:userId/lists/:itemId', (req, res) => {
+    app.delete('/user/:userId/lists/:listType/:itemId', (req, res) => {
         const userId = req.params.userId
         const itemId = req.params.itemId
-        const listType = 'watchList'
-        console.log(userId,itemId)
-        userService.removeFromListByType(userId,itemId,listType)
-        //     .then(user => {
-        //         req.session.user = user
-        //         console.log("login", req.session.user)
-        //         res.json(user)
-        //     })
+        const listType = req.params.listType
+        userService.removeFromListByType(userId, itemId, listType)
+            .then(() => {
+                res.send('OK')
+            })
+    })
+
+    app.post('/user/:userId/activities', (req, res) => {
+        const userId = req.params.userId
+        const activity = req.body
+        userService.addActivityByType(userId, activity)
+            .then(activity => {
+                res.json(activity)
+            })
     })
 
 }

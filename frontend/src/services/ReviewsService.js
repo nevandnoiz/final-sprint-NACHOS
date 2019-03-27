@@ -12,5 +12,6 @@ async function loadReviewsByType(type,id){
 }
 
 function addReview(newReview,type,id) {
+    console.log('service')
     return axios.post(`http://localhost:3003/${type}/reviews/${id}`, newReview)
 }
