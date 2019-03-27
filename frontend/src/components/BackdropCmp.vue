@@ -91,9 +91,9 @@ export default {
   justify-content: space-evenly;
   padding: 2px;
   width: 500px;
-  position: absolute;
+  position: relative;
   left: 2%;
-  bottom: 23.5%;
+  top: 450px;
   .backdrop-num-btn {
     height: 36px;
     button {
