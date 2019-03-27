@@ -5,7 +5,9 @@
     <div class="routes-container">
       <router-view/>
     </div>
+  <footer></footer>
   </div>
+
 </template>
 
 <script>
@@ -34,4 +36,9 @@ export default {
 .routes-container {
   grid-area: 3/1/3/1;
 }
+
+footer{
+  height: 200px;
+}
+
 </style>

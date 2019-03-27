@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
 import WatchNext from "@/components/home-cmps/WatchNext.vue";
 import feed from "@/components/home-cmps/Feed.vue";
 import BackdropCmp from "@/components/BackdropCmp.vue";
