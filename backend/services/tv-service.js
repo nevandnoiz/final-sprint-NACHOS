@@ -101,7 +101,6 @@ function getTvShowReviews(id) {
 }
 
 function addReview(newReview, tvShowId) {
-    newReview.id = new ObjectId()
     return mongoService.connect()
         .then(db => {
             db.collection('tv-reviews').update({
@@ -113,6 +112,7 @@ function addReview(newReview, tvShowId) {
                 })
                 .then(() => newReview)
         })
+    return true
 }
 
 function getTvShowSeasons(id) {
