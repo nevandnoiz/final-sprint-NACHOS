@@ -172,7 +172,7 @@ export default {
 
 <style scoped>
 .Actors {
-  box-shadow: 0px 0px 12px #000000;
+  /* box-shadow: 0px 0px 12px #000000; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 24px 1fr;
@@ -185,7 +185,7 @@ export default {
   height: 800px;
 }
 .reviews-section {
-  box-shadow: 0px 0px 12px #000000;
+  /* box-shadow: 0px 0px 12px #000000; */
 }
 
 .pannel-heading-epo {
