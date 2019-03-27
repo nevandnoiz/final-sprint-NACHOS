@@ -93,6 +93,7 @@ export default {
   },
 
   async created() {
+    console.log('kaki to kaka')
     console.log("log from tv show details", this.tvShow);
     eventBus.$on("playTrailer", () => (this.isTrailerPlaying = true));
     const tvShowId = this.$route.params.tvShowId;
