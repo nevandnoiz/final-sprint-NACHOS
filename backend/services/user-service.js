@@ -8,6 +8,11 @@ function checkLogin({ email, password }) {
         .then(db => db.collection('users').findOne({ email, password }))
 }
 
+function loadFromSession(email) {
+    return mongoService.connect()
+        .then(db => db.collection('users').findOne({ email }))
+}
+
 function addToListByType(userId, addItem, listType) {
     userId = ObjectId(userId)
     return mongoService.connect()
@@ -25,19 +30,20 @@ function addToListByType(userId, addItem, listType) {
 }
 
 function removeFromListByType(userId, itemId, listType) {
+    // console.log(userId, itemId, listType)
+    itemId = +itemId
     userId = ObjectId(userId)
     return mongoService.connect()
         .then(db => {
-            db.collection('users').update(
+            db.collection('users').updateOne(
                 {
                     "_id": userId,
-                    "lists.name": listType,
+                    "lists.name": listType
                 },
                 {
-                    $pull: { "lists.$.items": {"id":itemId} }
+                    $pull: { "lists.$.items": { id: itemId } }
                 }
             )
-                .then(res => console.log(res))
         })
 }
 
@@ -77,6 +83,7 @@ module.exports = {
     getById,
     addUser,
     checkLogin,
+    loadFromSession,
     addToListByType,
     removeFromListByType
 }

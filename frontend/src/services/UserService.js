@@ -72,12 +72,12 @@ function addLikeToActivity(activity) {
     return newActivity // return the new obj from the server after update succes
 }
 
-function addToListByType(addedItem,userId) {
-    return axios.post(`http://localhost:3003/user/${userId}/lists`, addedItem)
+function addToListByType(addedItem,userId,listType) {
+    return axios.post(`http://localhost:3003/user/${userId}/lists/${listType}`, addedItem)
 }
 
-function removeFromListByType(itemId,userId) {
-    return axios.delete(`http://localhost:3003/user/${userId}/lists/${itemId}`)
+function removeFromListByType(itemId,userId,listType) {
+    return axios.delete(`http://localhost:3003/user/${userId}/lists/${listType}/${itemId}`)
 }
 
 function addCommentToActivity(comment, activity) {

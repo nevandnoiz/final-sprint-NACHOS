@@ -40,7 +40,7 @@
             :review="review"
             item.details.id
             item.seasons
-          ></review-container>-->
+          ></review-container> -->
         </div>
       </div>
       <!-- <nav-bar class="nav-bar"></nav-bar> -->
