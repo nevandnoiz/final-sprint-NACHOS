@@ -32,11 +32,6 @@ async created() {
     ]);
     this.searchResults = searchRes;
 
-
-
-
-
-// console.log(this.$store.dispatch("getSeachTwitter", lion king))
 },
 data() {
     return {

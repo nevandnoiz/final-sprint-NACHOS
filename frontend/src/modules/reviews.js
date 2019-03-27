@@ -30,7 +30,6 @@ export default {
             return reviews
         },
         async addReview(context, { newReview, itemType, itemId }) {
-            console.log('module')
             const reviews = await ReviewsService.addReview(newReview, itemType, itemId)
             context.commit({ type: 'addReview', newReview })
         },
