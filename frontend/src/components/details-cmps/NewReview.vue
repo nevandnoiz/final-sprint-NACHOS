@@ -58,8 +58,29 @@ export default {
 </script>
 
 <style scoped>
-.card-inner{
-    display: none;
-    margin-left: 4rem;
+h2{
+	font-weight: 700;
+}
+.card-review-header {
+  justify-content: space-between;
+      margin-bottom: 1rem;
+  display: flex;
+}
+.nostar {
+  opacity: 0.32;
+  color: gray !important;
+}
+.stars {
+  display: flex;
+}
+.new-review-container {
+  width: auto !important;
+      width: auto !important;
+    padding: 20px;
+    max-width: 51vw !important;
+}
+.card-inner {
+  display: none;
+  margin-left: 4rem;
 }
 </style>

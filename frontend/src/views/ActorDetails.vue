@@ -152,9 +152,9 @@ export default {
   flex-direction: column;
 }
 .sub-container{
-       margin: 227px auto;
+       margin: 274px auto;
     display: block;
-    width: 967px;
+       width: 76vw;
 
 }
 @media only screen and (max-width: 850px) {

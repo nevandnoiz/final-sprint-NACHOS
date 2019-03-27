@@ -206,9 +206,9 @@ div[data-layer="1"]{
     height: 93vh;
 }
 .sub-container {
-        margin: 227px auto;
+        margin: 274px auto;
     display: block;
-    width: 977px;
+       width: 76vw;
     z-index: 1;
 }
 .tv-details-container {

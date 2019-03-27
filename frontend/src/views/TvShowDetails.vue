@@ -10,18 +10,18 @@
     </div>
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
-
-         <episodes-swiper 
-         class="netflix-container"
-    :seasons="tvShow.seasons" 
-    :tvShowId="tvShow.details.id"></episodes-swiper>
+      <episodes-swiper
+        class="netflix-container"
+        :seasons="tvShow.seasons"
+        :tvShowId="tvShow.details.id"
+      ></episodes-swiper>
       <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
       <!-- <netflix-slide-main
         :style="{'background':''+dominantColor+''}"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
         class="netflix-container"
-      ></netflix-slide-main> -->
+      ></netflix-slide-main>-->
       <div class="content-info-container">
         <div class="Actors">
           <actor-card :item="tvShow.credits"></actor-card>
@@ -29,10 +29,16 @@
           <pannel-heading class="pannel-heading" :title="'Actors'" :dominantColor="dominantColor"></pannel-heading>
         </div>
 
-        <div class="reviews">
-          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+        <div class="reviews-section">
 
-          <twitter-feed :keyword="tvShow.details.name"></twitter-feed>
+          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+          <div class="reviews-conatier">
+            <new-review v-for="(review, index) in tvShow.reviews" :key="index" :review="review"></new-review>
+            <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
+          </div>
+          
+
+          <!-- <twitter-feed :keyword="tvShow.details.name"></twitter-feed> -->
 
           <!-- <review-container
             v-for="(review, index) in tvShow.reviews"
@@ -47,11 +53,9 @@
     </div>
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
 
-    <new-review></new-review>
-    <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
+    
 
     <!-- <i class="fab fa-facebook"></i> -->
- 
   </div>
 </template>
 
@@ -89,7 +93,7 @@ export default {
   },
 
   async created() {
-    console.log('log from tv show details', this.tvShow)
+    console.log("log from tv show details", this.tvShow);
     eventBus.$on("playTrailer", () => (this.isTrailerPlaying = true));
     const tvShowId = this.$route.params.tvShowId;
     const [
@@ -176,7 +180,7 @@ export default {
   grid-template-columns: 210px 2fr;
   height: 800px;
 }
-.reviews {
+.reviews-section {
   box-shadow: 0px 0px 12px #000000;
 }
 
@@ -192,9 +196,9 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-      margin: 227px auto;
+  margin: 274px auto;
   display: block;
-  width: 977px;
+      width: 76vw;
   z-index: 1;
 }
 .tweet {
