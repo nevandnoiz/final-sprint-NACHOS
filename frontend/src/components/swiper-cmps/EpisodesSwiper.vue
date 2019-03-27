@@ -1,6 +1,6 @@
 <template>
-  <section class="slider-main-container">
-
+  <section v-if="this.season.episodes" class="slider-main-container">
+    <h1></h1>
     <carousel :paginationEnabled="false" :navigationEnabled="true" :per-page="5">
       <slide
         class="slider-card"
@@ -18,16 +18,13 @@ import UtilityService from "@/services/UtilityService.js";
 
 export default {
   async created() {
-     eventBus.$on("onSeasonClick", index => this.onEmit(index));
+    eventBus.$on("onSeasonClick", index => this.onEmit(index));
     this.seasonsDetails = await this.$store.dispatch({
       type: "getSeasonDetails",
       id: this.tvShowId,
       seasons: this.seasons
     });
-    console.log(this.seasonsDetails);
-    this.season = this.seasonsDetails[0].data;
-    console.log(this.season, " this season");
-    // console.log("swiper,", Swiper);
+    this.onEmit(0)
   },
   components: {},
   data() {
@@ -37,14 +34,12 @@ export default {
     };
   },
   methods: {
-        onEmit(index) {
-      // this.season = null;
+    onEmit(index) {
       this.season = this.seasonsDetails[index].data;
     },
     imgURL(stillPath) {
       return UtilityService.imgURL(stillPath, 780);
-    },
- 
+    }
   },
   props: ["seasons", "tvShowId"]
 };

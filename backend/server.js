@@ -7,7 +7,6 @@ const axios = require('axios')
 
 // console.log(config)
 
-
 // Set routes into variables. ex: 'const addMoviesRoute = require('./routes/movies-route')'
 const addMoviesRoute = require('./routes/movies-route')
 const addTwitterRoutes = require('./routes/twitter-route')

@@ -11,10 +11,10 @@
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
 
-         <actors-swiper 
+         <episodes-swiper 
          class="netflix-container"
     :seasons="tvShow.seasons" 
-    :tvShowId="tvShow.details.id"></actors-swiper>
+    :tvShowId="tvShow.details.id"></episodes-swiper>
       <!-- <pannel-heading class="pannel-heading-epo" :title="'Episodes'" :dominantColor="dominantColor"></pannel-heading> -->
       <!-- <netflix-slide-main
         :style="{'background':''+dominantColor+''}"
@@ -60,9 +60,9 @@ import TwitterService from "@/services/TwitterService.js";
 import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
-import ActorsSwiper from "@/components/swiper-cmps/ActorsSwiper.vue";
+import EpisodesSwiper from "@/components/swiper-cmps/EpisodesSwiper.vue";
 import SeasonsList from "../components/details-cmps/SeasonsList.vue";
-import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
+// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
@@ -142,14 +142,14 @@ export default {
     }
   },
   components: {
-    ActorsSwiper,
+    EpisodesSwiper,
     TwitterFeed,
     NewReview,
     PannelHeading,
     ActorCard,
     ItemContainer,
     SeasonsList,
-    NetflixSlideMain,
+    // NetflixSlideMain,
     ReviewContainer,
     ReviewForm,
     NavBar

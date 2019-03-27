@@ -2,11 +2,11 @@
   <div class="tv-details-container" v-if="tvShow.details && dominantColor">
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
-      <netflix-slide-main
+      <!-- <netflix-slide-main
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
         class="netflix-container"
-      ></netflix-slide-main>
+      ></netflix-slide-main> -->
       <nav-bar class="nav-bar"></nav-bar>
       <actor-card :item="tvShow.credits"></actor-card>
     </div>
@@ -29,7 +29,7 @@ import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import SeasonsList from "../components/details-cmps/SeasonsList.vue";
-import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
+// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
@@ -133,7 +133,7 @@ export default {
     ActorCard,
     ItemContainer,
     SeasonsList,
-    NetflixSlideMain,
+    // NetflixSlideMain,
     ReviewContainer,
     ReviewForm,
     NavBar

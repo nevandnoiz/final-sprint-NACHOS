@@ -125,12 +125,12 @@ import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 // import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
 // import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
+// import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
 import { eventBus } from "@/main.js";
 export default {
   components: {
     PannelHeading,
-    NetflixSeasonMenu,
+    // NetflixSeasonMenu,
     // NetflixSlideMain,
     NavBar,
     SeasonsList,
@@ -312,7 +312,7 @@ padding: 0 0.5rem;
 }
 
 .shadowing {
-  z-index: 2331;
+  z-index: 2;
   grid-column: 2;
   grid-template: repeat(10, 1fr);
   display: grid;
@@ -375,7 +375,7 @@ iframe {
 }
 
 .item-poster-img {
-  z-index: 34234;
+  z-index: 3;
   /* border-radius: 5px; */
   width: 400px;
   grid-column: 1;
