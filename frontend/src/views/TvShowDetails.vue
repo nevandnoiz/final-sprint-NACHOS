@@ -30,9 +30,10 @@
         </div>
 
         <div class="reviews">
-          <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
+                    <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
 
-          <twitter-feed :keyword="tvShow.details.name"></twitter-feed>
+              <new-review v-for="(review, index) in tvShow.reviews" :key="index" :review="review"></new-review>
+          <!-- <twitter-feed :keyword="tvShow.details.name"></twitter-feed> -->
 
           <!-- <review-container
             v-for="(review, index) in tvShow.reviews"
@@ -47,7 +48,6 @@
     </div>
     <!-- <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list> -->
 
-    <new-review></new-review>
     <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
 
     <!-- <i class="fab fa-facebook"></i> -->
