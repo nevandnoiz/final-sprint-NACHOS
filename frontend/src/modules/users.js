@@ -8,6 +8,7 @@ export default {
   getters: {
     activities: state => state.activities,
     currUser: state => state.currUser,
+    currUserId: state => state.currUser._id,
     getUserForComment: function (state) {
       if (state.currUser) return {
         _id: state.currUser._id,
@@ -44,6 +45,16 @@ export default {
       const user = await UserServies.loginUser()
       context.commit({ type: 'setUser', user })
       return user
+    },
+    async addToListByType(context, addedItem) {
+      let userId=context.getters.currUserId
+      const addToList = await UserServies.addToListByType(addedItem,userId)
+      // context.commit({ type: 'updateActivity', newActivity })
+    },
+    async removeFromListByType(context, itemId) {
+      let userId=context.getters.currUserId
+      const addToList = await UserServies.removeFromListByType(itemId,userId)
+      // context.commit({ type: 'updateActivity', newActivity })
     },
     async addLikeToActivity(context, activity) {
       const newActivity = await UserServies.addLikeToActivity(activity)
