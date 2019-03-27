@@ -200,11 +200,11 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 214px auto;
+  margin: 226px auto;
 
   display: block;
   width: 76vw;
-  z-index: 1;
+  z-index: 3;
 }
 .tweet {
   position: absolute;
