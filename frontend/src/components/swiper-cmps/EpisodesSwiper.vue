@@ -4,13 +4,14 @@
       <slide
         class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
-        v-for="(eposide, index) in season.episodes"
+        v-for="(eposide, index) in getSeason.episodes"
         :key="index"
       >
         <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div>
         <div class="check-container">
           <i class="fas fa-check" @click="onCheckEpo"></i>
         </div>
+    <check-episode v-if="currUser" :episode="eposide"></check-episode>
         <h1>{{eposide.episode_number}}</h1>
         <p>{{eposide.name}}</p>
       </slide>
@@ -21,6 +22,7 @@
 <script>
 import { eventBus } from "@/main.js";
 import UtilityService from "@/services/UtilityService.js";
+import CheckEpisode from "@/components/swiper-cmps/CheckEpisode.vue";
 
 export default {
   async created() {
@@ -30,25 +32,29 @@ export default {
       id: this.tvShowId,
       seasons: this.seasons
     });
+    eventBus.$on("watchedSeason", this.toggleWatchedSeason);
     this.onEmit(0);
-    // console.log(this.season.episodes);
   },
-  components: {},
+  components: {
+    CheckEpisode
+  },
   data() {
     return {
       fillColor: true,
       season: null,
       seasonsDetails: null,
-
+      isChecked: false,
       checkedEpisodes: null
     };
   },
   methods: {
-    mouseOver(){
-      this.fillColor = false;
-    },
-    onCheckEpo() {
-      console.log('checked')
+    toggleMarkWatched(episode) {
+      this.isChecked=!this.isChecked
+      // this.$store.dispatch({
+      //   type: "markWatched",
+      //   showId: episode.show_id,
+      //   epId: episode.id
+      // });
     },
     onEmit(index) {
       this.season = this.seasonsDetails[index].data;
@@ -57,7 +63,15 @@ export default {
       return UtilityService.imgURL(stillPath, 780);
     }
   },
-  props: ["seasons", "tvShowId", "dominantColor"]
+  computed: {
+    currUser() {
+      return this.$store.getters.currUser;
+    },
+    getSeason(){
+      return this.season
+    }
+  },
+  props: ["seasons", "tvShowId","dominantColor"]
 };
 </script>
 

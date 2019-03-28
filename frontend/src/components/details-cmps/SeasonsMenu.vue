@@ -9,7 +9,7 @@
     >
       <p>{{season.name}}</p>
       
-      <i class="fas fa-check check-button-season-menu"></i>
+      <i class="fas fa-check check-button-season-menu" @click="emitWatchedSeason"></i>
     </el-option>
   </el-select>
 </template>
@@ -33,6 +33,10 @@ export default {
   methods: {
     onSelectSeason(index) {
       eventBus.$emit("onSeasonClick", this.seasonIdx);
+    },
+    emitWatchedSeason(){
+      console.log('coming soon')
+      // eventBus.$emit('watchedSeason')
     }
   }
 };

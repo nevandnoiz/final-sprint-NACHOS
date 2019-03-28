@@ -44,6 +44,7 @@ export default {
     .user-name {
       text-transform: capitalize;
       margin-left: 5px;
+      font-weight: 500
     }
   }
 

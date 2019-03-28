@@ -26,7 +26,7 @@
         <div class="reviews-section">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <div class="reviews-conatier">
-            <new-review v-for="(review, index) in item.reviews" :key="index" :review="review"></new-review>
+            <new-review v-for="(review, index) in item.reviews"  :reviewIdx="index" :key="index" :review="review"></new-review>
             <review-form @addReview="addReview" :itemId="item.details.id"></review-form>
           </div>
           <!-- <twitter-feed :keyword="item.details.name"></twitter-feed> -->
@@ -56,7 +56,6 @@ import { eventBus } from "@/main.js";
 export default {
   data() {
     return {
-      kaka: false,
       itemType: null,
       isTrailerPlaying: false,
       dominantColor: null,
@@ -142,13 +141,14 @@ export default {
         `http://image.tmdb.org/t/p/w92${this.item.details.poster_path}`
       );
     },
-    addReview(newReview) {
-      this.$store.dispatch({
+    async addReview(newReview) {
+      await this.$store.dispatch({
         type: "addReview",
         newReview: JSON.parse(JSON.stringify(newReview)),
         itemType: "tv",
         itemId: this.item.details.id
       });
+      // eventBus.$emit('finishAddReview')
     }
   },
   components: {

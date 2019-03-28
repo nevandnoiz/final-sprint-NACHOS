@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 export default {
+    getTopRatedShows,
+    getPopularShows,
     getTrendingShows,
     getTvShowDetails,
     getTvShowImages,
@@ -14,10 +16,22 @@ export default {
     getSeasonDetails
 }
 
+async function getTopRatedShows(page = 1) {
+    let res = await axios.get(`http://localhost:3003/tv/top_rated/${page}`)
+    const tvShows = res.data
+    return tvShows
+}
+
+async function getPopularShows(page = 1) {
+    let res = await axios.get(`http://localhost:3003/tv/popular/${page}`)
+    const tvShows = res.data
+    return tvShows
+}
+
 async function getTrendingShows(page = 1) {
-    let res = await axios.get(`http://localhost:3003/tv/${page}`)
-    const trending = res.data
-    return trending
+    let res = await axios.get(`http://localhost:3003/tv/trending/${page}`)
+    const tvShows = res.data
+    return tvShows
 }
 
 async function getTvShowDetails(id) {

@@ -2,7 +2,7 @@ import UserServies from '../services/UserService';
 
 export default {
   state: {
-    currUser: '',
+    currUser: null,
     activities: null,
   },
   getters: {
@@ -10,6 +10,7 @@ export default {
     currUser: state => state.currUser,
     currUserId: state => state.currUser._id,
     currUserLists: state => state.currUser.lists,
+    currUserWatchedEpisodes: state => state.currUser.watchedEpisodes,
     getUserForComment: function (state) {
       if (state.currUser) return {
         _id: state.currUser._id,
@@ -43,6 +44,18 @@ export default {
       const itemIdx = lists[listIdx].items.findIndex(item => item.id === itemId)
       state.currUser.lists[listIdx].items.splice(itemIdx, 1)
     },
+    addWatchedEp(state, { showId, epId }) {
+      let watched = state.currUser.watchedEpisodes
+      const showIdx = watched.findIndex(show => show.id === showId)
+      if (showIdx < 0) state.currUser.watchedEpisodes.push({ id: showId, episodes: [{ epId }] })
+      else state.currUser.watchedEpisodes[showIdx].episodes.push({ epId })
+    },
+    removeWatchedEp(state, { showId, epId }) {
+      let watched = state.currUser.watchedEpisodes
+      const showIdx = watched.findIndex(show => show.id === showId)
+      const epIdx = watched[showIdx].episodes.findIndex(ep => ep.epId === epId)
+      state.currUser.watchedEpisodes[showIdx].episodes.splice(epIdx, 1)
+    },
     addActivity(state, { activity }) {
       state.currUser.userActivities.push(activity)
     },
@@ -54,6 +67,7 @@ export default {
     },
     async loadUser(context, payload) {
       const user = await UserServies.loadUser()
+      // console.log(user)
       if (user) context.commit({ type: 'setUser', user })
     },
     async loginUser(context, payload) {
@@ -71,10 +85,20 @@ export default {
       const remove = await UserServies.removeFromListByType(itemId, userId, listType)
       context.commit({ type: 'removeFromList', itemId, listType })
     },
-    async addActivityByType(context, { item, itemType, activityType,value }) {
+    async markWatched(context, { showId, epId }) {
+      let userId = context.getters.currUserId
+      const mark = await UserServies.markWatched(userId, showId, epId)
+      context.commit({ type: 'addWatchedEp', showId, epId })
+    },
+    async unmarkWatched(context, { showId, epId }) {
+      let userId = context.getters.currUserId
+      const unmark = await UserServies.unmarkWatched(userId, showId, epId)
+      context.commit({ type: 'removeWatchedEp', showId, epId })
+    },
+    async addActivityByType(context, { item, itemType, activityType, value }) {
       let user = context.getters.currUser
-      const res = await UserServies.addActivityByType(user, item, itemType, activityType,value)
-      let activity=res.data
+      const res = await UserServies.addActivityByType(user, item, itemType, activityType, value)
+      let activity = res.data
       context.commit({ type: 'addActivity', activity })
     },
     async addLikeToActivity(context, activity) {

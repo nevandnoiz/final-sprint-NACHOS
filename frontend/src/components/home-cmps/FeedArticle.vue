@@ -1,13 +1,29 @@
 <template>
   <div class="article" v-show="ready">
-    <img ref="imgTest" :src="item.urlToImage" alt>
-    <div class="article-text">
+    <div class="source">
+      <img src alt>
+      <p>
+        {{sourceName}} posted an article by {{auther}} about
+        <a
+          @click="toItem"
+          class="link"
+        >{{itemName}}</a>
+      </p>
+    </div>
+
+    <div class="article-preview">
       <h2>
         <a :href="item.url" target="/">{{item.title}}</a>
       </h2>
-      <h4>{{item.description}}</h4>
+      <p>
+        {{item.description}}
+        <a :href="item.url" target="/">Read more...</a>
+      </p>
     </div>
-    <hr>
+
+    <div class="article-img">
+      <img ref="img" :src="item.urlToImage" alt>
+    </div>
   </div>
 </template>
 
@@ -20,37 +36,90 @@ export default {
     };
   },
   mounted() {
-    var imgTest = this.$refs.imgTest;
-    imgTest.onload = () => (this.ready = true);
+    const img = this.$refs.img;
+    img.onload = () => (this.ready = true);
+  },
+  computed: {
+    sourceName: function() {
+      return this.item.source.name;
+    },
+    auther: data => data.item.author,
+    itemName: data => data.item.searchTerm.searchTerm,
+    itemLink: data => data.item.searchTerm.id
+  },
+  methods: {
+    toItem() {
+      const detailsRoute = this.item.searchTerm.type === "tv" ? "tv" : "movies";
+      this.$router.push(`/${detailsRoute}/details/${this.item.searchTerm.id}`);
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .article {
-  width: inherit;
-  display: flex;
-  margin-top: 25px;
+  margin-top: 20px;
+  width: 50vw;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  background-color: white;
 }
 
-.article-text {
+.source {
   display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  h4 {
-    margin-top: 10px;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 8px;
+  margin-top: 8px;
+  img {
+    min-height: 40px;
+    min-width: 40px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  p {
+    font-size: 20px;
+  }
+  a.link {
+    color: #f57f16;
+  }
+  a.link:hover {
+    text-decoration: underline;
+    color: inherit;
   }
 }
 
-h2 {
-  font-size: 2em;
+.article-preview {
+  margin-left: 12px;
+  margin-top: 12px;
+  h2 {
+    a {
+      color: black;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #f57f16;
+    }
+    font-size: 28px;
+  }
+
+  p {
+    margin-top: 8px;
+    a {
+      color: #f57f16;
+    }
+    a:hover {
+      color: black;
+    }
+  }
 }
-a {
-  color: gray;
-}
-img {
-  height: 250px;
-  width: 400px;
-  object-fit: cover;
+
+.article-img {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  img {
+    width: 100%;
+  }
 }
 </style>

@@ -73,6 +73,28 @@ function addRoutes(app) {
             })
     })
 
+    app.post('/user/:userId/episodes/:showId', (req, res) => {
+        const userId = req.params.userId
+        const showId = req.params.showId
+        const epId = req.body.epId
+        // console.log('mark',userId,showId,epId)
+        userService.markWatched(userId,showId,epId)
+            .then(() => {
+                res.send('OK')
+            })
+    })
+
+    app.delete('/user/:userId/episodes/:showId/:epId', (req, res) => {
+        const userId = req.params.userId
+        const showId = req.params.showId
+        const epId = req.params.epId
+        // console.log('unmark',userId,showId,epId)
+        userService.unmarkWatched(userId,showId,epId)
+            .then(() => {
+                res.send('OK')
+            })
+    })
+
     app.post('/user/:userId/activities', (req, res) => {
         const userId = req.params.userId
         const activity = req.body

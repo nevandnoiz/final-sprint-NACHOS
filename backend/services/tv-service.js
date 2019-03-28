@@ -4,6 +4,8 @@ const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
+    getTopRatedShows,
+    getPopularShows,
     getTrendingShows,
     getTvShowDetails,
     getTvShowImages,
@@ -18,14 +20,28 @@ module.exports = {
     getSeasonDetails,
 }
 
+function getTopRatedShows(page = 1) {
+    return axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
+        .then(res => res.data.results)
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+function getPopularShows(page = 1) {
+    return axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
+        .then(res => res.data.results)
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 function getTrendingShows(page = 1) {
     return axios.get(`https://api.themoviedb.org/3/trending/tv/day?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
         .then(res => res.data.results)
         .catch(err => {
             console.log(err)
         })
-    // const popular = res.data
-    // return popular
 }
 
 function getTvShowDetails(id) {

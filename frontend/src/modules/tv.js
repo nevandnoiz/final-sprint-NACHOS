@@ -2,22 +2,31 @@ import TvShowsService from '../services/TvShowsService';
 
 export default {
   state: {
-    popularTv: '',
+    tvShows: '',
   },
   getters: {
     tvShowsToDisplay(state) {
-      return state.popularTv
+      return state.tvShows
     },
   },
   mutations: {
-    setPopularTv(state, { tv }) {
-      state.popularTv = tv
+    setTvShows(state, { tv }) {
+      tv.forEach(item => item.type = 'tv');
+      state.tvShows = tv
     },
   },
   actions: {
-    async loadPopularTvShows(context, payload) {
+    async getTopRatedShows(context, payload) {
+      const tv = await TvShowsService.getTopRatedShows()
+      context.commit({ type: 'setTvShows', tv: tv })
+    },
+    async getPopularShows(context, payload) {
+      const tv = await TvShowsService.getPopularShows()
+      context.commit({ type: 'setTvShows', tv: tv })
+    },
+    async getTrendingShows(context, payload) {
       const tv = await TvShowsService.getTrendingShows()
-      context.commit({ type: 'setPopularTv', tv: tv })
+      context.commit({ type: 'setTvShows', tv: tv })
     },
     async getTvShowDetails(context, tvId) {
       const tvDetails = await TvShowsService.getTvShowDetails(tvId)
@@ -51,8 +60,8 @@ export default {
       const links = await TvShowsService.getTvShowWatchLinksByKeyword(keyword)
       return links
     },
-    async getSeasonDetails(context, {id,seasons}) {
-      const seasonDetails = await TvShowsService.getSeasonDetails(id,seasons)
+    async getSeasonDetails(context, { id, seasons }) {
+      const seasonDetails = await TvShowsService.getSeasonDetails(id, seasons)
       return seasonDetails
     }
   }

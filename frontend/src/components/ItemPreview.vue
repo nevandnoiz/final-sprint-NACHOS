@@ -9,20 +9,39 @@
   >
     <div class="item-hover-controls" v-if="currUser && isHovered">
       <div class="hover-controls-btns">
-        <i
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="Remove from Watch List"
+          placement="bottom"
           v-if="isOnWatchList"
-          class="fas fa-list"
-          :class="{'on-watch-list': isOnWatchList}"
-          @click.stop="toggleWatchList"
-        ></i>
-        <i
+        >
+          <i
+            class="fas fa-list"
+            :class="{'on-watch-list': isOnWatchList}"
+            @click.stop="toggleWatchList"
+          ></i>
+        </el-tooltip>
+        <el-tooltip
           v-else
-          class="fas fa-plus"
-          :class="{'on-watch-list': isOnWatchList}"
-          @click.stop="toggleWatchList"
-        ></i>
-        <!-- <i class="fas fa-plus" :class="{'checked': isOnWatchList}" @click.stop="toggleWatchList"></i> -->
-        <i class="fas fa-heart" :class="{'on-favorites': isFavorite}" @click.stop="toggleFavorite"></i>
+          class="item"
+          effect="dark"
+          content="Add to Watch List"
+          placement="bottom"
+        >
+          <i
+            class="fas fa-plus"
+            :class="{'on-watch-list': isOnWatchList}"
+            @click.stop="toggleWatchList"
+          ></i>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="Favorites" placement="bottom">
+          <i
+            class="fas fa-heart"
+            :class="{'on-favorites': isFavorite}"
+            @click.stop="toggleFavorite"
+          ></i>
+        </el-tooltip>
       </div>
       <a href="#">Play Trailer</a>
     </div>
@@ -54,7 +73,8 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
-      this.$router.push(`/${this.itemTypeRoute}/details/${itemId}`);
+      const detailsRoute = this.item.type === 'tv' ? 'tv' : 'movies'
+      this.$router.push(`/${detailsRoute}/details/${itemId}`);
     },
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
@@ -128,12 +148,11 @@ export default {
     this.itemTypeRoute = this.$route.path.substring(1);
     let isOnWatchList = this.isItemInList("watchList");
     if (isOnWatchList) {
-      console.log(isOnWatchList);
+      // console.log(isOnWatchList);
       this.isOnWatchList = true;
     }
     let isFavorite = this.isItemInList("favorites");
     if (isFavorite) {
-      console.log(isFavorite);
       this.isFavorite = true;
     }
     this.img = this.imgURL();
@@ -155,7 +174,7 @@ export default {
     height: inherit;
     display: grid;
     grid-template: 20px 1fr 40px/1fr;
-    .hover-controls-btns {
+    .hover-controls-bwtns {
       grid-area: 1/1/1/1;
       justify-self: flex-end;
     }

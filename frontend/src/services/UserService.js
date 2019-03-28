@@ -12,7 +12,9 @@ export default {
     addCommentToActivity,
     addToListByType,
     removeFromListByType,
-    addActivityByType
+    addActivityByType,
+    markWatched,
+    unmarkWatched,
 }
 
 const users = []
@@ -51,11 +53,25 @@ const activities = [
         type: 'activity',
         activity: 'listAdd',
         value: 'Favorite',
-        comments: [{
-            user: 'bobo',
-            comment: 'a comment!',
-            timestamp: 34053053
-        }],
+        comments: [],
+        likes: 0
+    },
+    {
+        _id: '098765456',
+        timestamp: null,
+        byUser: {
+            name: {
+                firstName: 'Yaniv',
+                lastName: 'wiener'
+            }, _id: '987agv'
+        },
+        item_id: 1399,
+        item_type: 'tv',
+        itemTitle: "Game Of Thrones",
+        type: 'activity',
+        activity: 'listAdd',
+        value: 'watchList',
+        comments: [],
         likes: 0
     }
 ]
@@ -79,6 +95,14 @@ function addToListByType(addedItem, userId, listType) {
 
 function removeFromListByType(itemId, userId, listType) {
     return axios.delete(`http://localhost:3003/user/${userId}/lists/${listType}/${itemId}`)
+}
+
+function markWatched(userId, showId, epId) {
+    return axios.post(`http://localhost:3003/user/${userId}/episodes/${showId}`, {epId})
+}
+
+function unmarkWatched(userId, showId, epId) {
+    return axios.delete(`http://localhost:3003/user/${userId}/episodes/${showId}/${epId}`)
 }
 
 function addActivityByType(user, item, itemType, activityType,value) {
