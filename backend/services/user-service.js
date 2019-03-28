@@ -64,7 +64,6 @@ function markWatched(userId, showId, epId) {
             if (show) {
                 return mongoService.connect()
                     .then(db => {
-                        console.log('yup')
                         db.collection('users').updateOne(
                             {
                                 "_id": userId,
@@ -78,7 +77,6 @@ function markWatched(userId, showId, epId) {
             } else {
                 return mongoService.connect()
                     .then(db => {
-                        console.log('nope')
                         let itemObj = { id: showId, episodes: [{ epId }] }
                         db.collection('users').updateOne(
                             {
@@ -94,14 +92,11 @@ function markWatched(userId, showId, epId) {
 }
 
 function unmarkWatched(userId, showId, epId) {
-    console.log('unmark')
-    console.log(userId, showId, epId)
     userId = ObjectId(userId)
     showId = +showId
     epId = +epId
     return mongoService.connect()
         .then(db => {
-            console.log('mongo')
             db.collection('users').updateOne(
                 {
                     "_id": userId,

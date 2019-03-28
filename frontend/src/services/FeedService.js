@@ -17,7 +17,7 @@ function getNewsByArr(items, numOfArticles = 3) {
 }
 
 function getNewsByObj(obj) {
-    return axios.get(`https://newsapi.org/v2/everything?q=${obj.name}&from=2019-03-01&sortBy=relevancy&apiKey=cb55db45cf6e44ce9d46a7e7cefc1922`)
+    return axios.get(`https://newsapi.org/v2/everything?q=${obj.name}&from=2019-03-01&sortBy=relevancy&apiKey=0736df3056df41bba05f36a2ff24ca25`)
         .then(res => { return { searchTerm: obj.name, id: obj.id, type: obj.item_type, articles: res.data.articles } })
 }
 
