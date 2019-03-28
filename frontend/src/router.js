@@ -40,11 +40,11 @@ export default new Router({
       name: 'itemDetails',
       component: ItemDetails
     },
-    // {
-    //   path: '/tv/details/:actorId',
-    //   name: 'actorDetails',
-    //   component: ActorDetails
-    // },
+    {
+      path: '/actors/:actorId',
+      name: 'actorDetails',
+      component: ActorDetails
+    },
     {
       path: '/user/:userId',
       name: 'userPage',

@@ -35,8 +35,8 @@ export default {
       const actors = await ActorsService.getActorsByKeyword(keyword)
       return actors
     },
-    async getActorCredits(context, id) {
-      const actorCredits = await ActorsService.getActorCredits(id)
+    async getActorMovieCredits(context, id) {
+      const actorCredits = await ActorsService.getActorMovieCredits(id)
       return actorCredits
     },
     async getActorVideos(context, id) {

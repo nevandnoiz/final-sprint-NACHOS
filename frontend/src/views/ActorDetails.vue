@@ -1,163 +1,92 @@
 <template>
-  <div class="tv-details-container" v-if="tvShow.details && dominantColor">
-    <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-    <div class="sub-container">
-      <!-- <netflix-slide-main
-        :seasons="tvShow.seasons"
-        :tvShowId="tvShow.details.id"
-        class="netflix-container"
-      ></netflix-slide-main> -->
-      <nav-bar class="nav-bar"></nav-bar>
-      <actor-card :item="tvShow.credits"></actor-card>
+  <section>
+    <h1>Hello</h1>
+    <div class="biography-container">
+      <img :src="`http://image.tmdb.org/t/p/w300${actor.profile_path}`">
+      <div class="text-container">
+        <h1>{{actor.name}}</h1>
+        <h2>Biography</h2>
+        <p>{{actor.biography}}</p>
+      </div>
     </div>
+    <div class="nav-bar-filler"></div>
+    <div v-if="actor" class="personal-info">
+      <h1>Personal Info</h1>
 
-    <!-- <review-container
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
-    <review-container
-      v-for="(review, index) in tvShow.reviews.results"
-      :key="index"
-      :review="review" item.details.id item.seasons
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
+      <h2>Known for:</h2>
+      <p>{{actor.known_for_department}}</p>
 
-    <!-- <i class="fab fa-facebook"></i> -->
-  </div>
+      <h2>Gender</h2>
+      <p>{{actor.gender}}</p>
+
+      <h2>Birthday</h2>
+      <p>{{actor.birthday}}</p>
+      <h2>Place of Birth</h2>
+      <p>{{actor.place_of_birth}}</p>
+      <h2 v-if="actor.homepage">Official Site</h2>
+      <p v-if="actor.homepage">{{actor.homepage}}</p>
+    </div>
+    <div class="actors-movies-container">
+      <div v-for="(movie, index) in actorMovies.cast" :key="index" class="movie-img-container">
+        <img :src="`http://image.tmdb.org/t/p/w300${movie.poster_path}`">
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 import UtilityService from "@/services/UtilityService.js";
-import ItemContainer from "../components/details-cmps/ItemContainer.vue";
-import NavBar from "../components/details-cmps/NavBar.vue";
-// import SeasonsList from "../components/details-cmps/SeasonsList.vue";
-// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
-import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import AvgColorService from "@/services/AvgColorService.js";
-import ActorCard from "@/components/details-cmps/ActorCard.vue";
-
 export default {
   data() {
     return {
-      dominantColor: null,
-      tvShow: {
-        seasons: null,
-        details: null,
-        videos: null,
-        credits: null,
-        reviews: null,
-        externalIds: null
-      }
+      actor: null,
+      actorMovies: null
     };
   },
-
   async created() {
-    this.setReviews();
-    const tvShowId = this.$route.params.tvShowId;
-    const [
-      details,
-      externalIds,
-      tvShowCredits,
-      tvShowVideos
-    ] = await Promise.all([
-      this.$store.dispatch("getTvShowDetails", tvShowId),
-      this.$store.dispatch("getTvShowExternalIds", tvShowId),
-      this.$store.dispatch("getTvShowCredits", tvShowId),
-      this.$store.dispatch("getTvShowVideos", tvShowId)
-    ]);
-    this.tvShow.details = details;
-    this.tvShow.seasons = details.seasons;
-    this.tvShow.externalIds = externalIds;
-    this.tvShow.credits = tvShowCredits;
-    this.setDominantColor();
-  },
-  destroyed() {
-    domcolor = null;
-    this.$store.commit("setSelectedItem", null);
-  },
-  methods: {
-    async setDominantColor() {
-      this.dominantColor = await AvgColorService.domColor(
-        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
-      );
-    },
-    setReviews() {
-      this.tvShow.reviews = {
-        id: 297761,
-        page: 1,
-        results: [
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          }
-        ]
-      };
-    }
-  },
-  components: {
-    ActorCard,
-    ItemContainer,
-    // SeasonsList,
-    // NetflixSlideMain,
-    ReviewContainer,
-    ReviewForm,
-    NavBar
-  },
-  watch: {
-    "$route.params.tvShowId": function() {
-      this.getTvShowDetails();
-    }
+    console.log("hey");
+
+    var actor = await this.$store.dispatch("getActorDetails", "5081");
+    this.actor = actor;
+    var actorMovies = await this.$store.dispatch(
+      "getActorMovieCredits",
+      "5081"
+    );
+    this.actorMovies = actorMovies;
+    // console.log(actorMovies)
+    console.log(this.actor);
+    console.log(this.actorMovies);
   }
 };
 </script>
 
 <style scoped>
-.tv-details-container {
+h1{
+  font-size: 2.2 srem;
+}
+p {
+  font-size: 1.2rem;
+}
+.biography-container{
+      display: flex;
+    width: 70vw;
+    margin: 0 auto;
+}
+.text-container {
   display: flex;
+  padding-left: 2rem;
   flex-direction: column;
+  width: 327px;
 }
-.sub-container{
-      margin: 226px auto;
-      z-index: 3;
-    display: block;
-       width: 76vw;
-
+.actors-movies-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 50vw;
+  margin: 0 auto;
+  gap: 0.5rem;
 }
-@media only screen and (max-width: 850px) {
+.nav-bar-filler {
+  height: 70px;
+  background-color: black;
 }
 </style>

@@ -46,38 +46,6 @@
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
             <!-- <div class="black-filler"></div> -->
                       <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
-
-            <!-- <div class="icons-container">
-              <i @click="onTrailer" class="far fa-play-circle"></i>
-              <a
-                target="_blank"
-                v-if="item.externalIds.twitter_id"
-                :href="`https://twitter.com/${item.externalIds.twitter_id}`"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                target="_blank"
-                v-if="item.externalIds.facebook_id"
-                :href="`https://www.facebook.com/${item.externalIds.facebook_id}`"
-              >
-                <i class="fab fa-facebook"></i>
-              </a>
-              <a
-                target="_blank"
-                v-if="item.externalIds.instagram_id"
-                :href="`https://www.instagram.com/${item.externalIds.instagram_id}`"
-              >
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a
-                target="_blank"
-                v-if="item.externalIds.imdb_id"
-                :href="`https://www.imdb.com/title/${item.externalIds.imdb_id}`"
-              >
-                <i class="fab fa-imdb"></i>
-              </a>
-            </div> -->
           </div>
 
           <!-- <div class="item-details"> -->
@@ -103,26 +71,21 @@ import SocialButtonBar from "@/components/details-cmps/SocialButtonBar.vue";
 import MediaIconsBar from "@/components/details-cmps/MediaIconsBar.vue";
 import UserControlBar from "@/components/details-cmps/UserControlBar.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
-
-// import NetflixSlideSeason from "@/components/details-cmps/NetflixSlideSeason.vue";
 // import SeasonsList from "@/components/details-cmps/SeasonsList.vue";
-// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-// import NetflixSeasonMenu from "@/components/details-cmps/NetflixSeasonMenu.vue";
+
 import { eventBus } from "@/main.js";
 export default {
   components: {
     PannelHeading,
     SocialButtonBar,
-    // NetflixSeasonMenu,
-    // NetflixSlideMain,
-    NavBar,
-    
+    NavBar,   
     SeasonsMenu,
-    // NetflixSlideSeason,
     UserControlBar,
     MediaIconsBar
   },
   async created() {
+    var test = await this.$store.dispatch("getTvShowWatchLinksByKeyword","Prison Break")
+    console.log(test.results[0].locations[4])
     eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
   },
   data() {

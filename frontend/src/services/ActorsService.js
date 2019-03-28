@@ -7,7 +7,7 @@ export default {
     getActorExternalIds,
     getActorsByKeyword,
     getActorWatchLinksByKeyword,
-    getActorCredits,
+    getActorMovieCredits,
     getActorVideos,
 }
 
@@ -18,6 +18,7 @@ async function getPopularActors(page = 1) {
 }
 
 async function getActorDetails(id) {
+    console.log('front service', id)
     let res = await axios.get(`http://localhost:3003/actors/details/${id}`)
     return res.data
 }
@@ -39,7 +40,8 @@ async function getActorsByKeyword(keyword) {
     return tv
 }
 
-async function getActorCredits(id) {
+async function getActorMovieCredits(id) {
+    console.log('id from actor service for movies', id)
     let res = await axios.get(`http://localhost:3003/actors/credits/${id}`)
     return res.data
 }
