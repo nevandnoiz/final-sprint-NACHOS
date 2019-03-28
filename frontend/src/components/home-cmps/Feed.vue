@@ -37,8 +37,7 @@ export default {
       this.$store.dispatch("addLikeToActivity", item);
     },
     addComment(details) {
-      this.$store.dispatch("addCommentToActivity", details);  
-      // {comment, activity}    
+      this.$store.dispatch("addCommentToActivity", details);
     }
   },
   computed: {
@@ -49,7 +48,10 @@ export default {
     userFavoriteItems() {
       if (this.user) {
         const list = this.user.lists.find(list => list.name === "favorites");
-        const favoriteItems = list.items.map(item => item.name);
+        const favoriteItems = list.items.map(function(item) {
+          const title = item.type === "tv" ? item.name : item.title;
+          return { name: title, id: item.id, item_type: item.type };
+        });
         return favoriteItems;
       }
     }
@@ -60,6 +62,11 @@ export default {
         this.$store.dispatch("loadActivities");
         this.generateFeed(this.userFavoriteItems, 1);
       }
+    }
+  },
+  created() {
+    if (this.user) {
+      this.generateFeed(this.userFavoriteItems, 1);
     }
   }
 };

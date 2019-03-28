@@ -7,7 +7,7 @@ export default {
 function getNewsByArr(items, numOfArticles = 3) {
     const news = []
     items.forEach(item => {
-        getNewsByStr(item)
+        getNewsByObj(item)
             .then(res => {
                 const filteredNews = filterNews(res, numOfArticles)
                 news.push(filteredNews)
@@ -16,9 +16,9 @@ function getNewsByArr(items, numOfArticles = 3) {
     return news;
 }
 
-function getNewsByStr(str) {
-    return axios.get(`https://newsapi.org/v2/everything?q=${str}&from=2019-03-01&sortBy=relevancy&apiKey=cb55db45cf6e44ce9d46a7e7cefc1922`)
-        .then(res => { return { searchTerm: str, articles: res.data.articles } })
+function getNewsByObj(obj) {
+    return axios.get(`https://newsapi.org/v2/everything?q=${obj.name}&from=2019-03-01&sortBy=relevancy&apiKey=cb55db45cf6e44ce9d46a7e7cefc1922`)
+        .then(res => { return { searchTerm: obj.name, id: obj.id, type: obj.item_type, articles: res.data.articles } })
 }
 
 function filterNews(news, numOfArticles) {
@@ -27,7 +27,7 @@ function filterNews(news, numOfArticles) {
         if (
             article.description.includes(news.searchTerm) ||
             article.title.includes(news.searchTerm)) {
-            article.searchTerm = news.searchTerm
+            article.searchTerm = { searchTerm: news.searchTerm, id: news.id, type: news.type }
             article.type = 'FeedArticle'
             filteredNews.push(article)
         }

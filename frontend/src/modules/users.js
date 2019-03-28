@@ -2,7 +2,7 @@ import UserServies from '../services/UserService';
 
 export default {
   state: {
-    currUser: '',
+    currUser: null,
     activities: null,
   },
   getters: {
@@ -54,7 +54,7 @@ export default {
     },
     async loadUser(context, payload) {
       const user = await UserServies.loadUser()
-      console.log(user)
+      // console.log(user)
       if (user) context.commit({ type: 'setUser', user })
     },
     async loginUser(context, payload) {

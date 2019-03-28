@@ -54,7 +54,8 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
-      this.$router.push(`${this.itemTypeRoute}/details/${itemId}`);
+      const detailsRoute = this.item.type === 'tv' ? 'tv' : 'movies'
+      this.$router.push(`/${detailsRoute}/details/${itemId}`);
     },
     toggleIsHovered() {
       this.isHovered = !this.isHovered;
@@ -128,12 +129,11 @@ export default {
     this.itemTypeRoute = this.$route.path;
     let isOnWatchList = this.isItemInList("watchList");
     if (isOnWatchList) {
-      console.log(isOnWatchList);
+      // console.log(isOnWatchList);
       this.isOnWatchList = true;
     }
     let isFavorite = this.isItemInList("favorites");
     if (isFavorite) {
-      console.log(isFavorite);
       this.isFavorite = true;
     }
     this.img = this.imgURL();
@@ -155,7 +155,7 @@ export default {
     height: inherit;
     display: grid;
     grid-template: 20px 1fr 40px/1fr;
-    .hover-controls-btns {
+    .hover-controls-bwtns {
       grid-area: 1/1/1/1;
       justify-self: flex-end;
     }

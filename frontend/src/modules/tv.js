@@ -11,6 +11,7 @@ export default {
   },
   mutations: {
     setPopularTv(state, { tv }) {
+      tv.forEach(item => item.type = 'tv');
       state.popularTv = tv
     },
   },
@@ -51,8 +52,8 @@ export default {
       const links = await TvShowsService.getTvShowWatchLinksByKeyword(keyword)
       return links
     },
-    async getSeasonDetails(context, {id,seasons}) {
-      const seasonDetails = await TvShowsService.getSeasonDetails(id,seasons)
+    async getSeasonDetails(context, { id, seasons }) {
+      const seasonDetails = await TvShowsService.getSeasonDetails(id, seasons)
       return seasonDetails
     }
   }

@@ -31,16 +31,16 @@ export default {
       return UtilityService.imgURL(posterPath, 300);
     },
     loadItems() {
-           let tvShows = this.$store.getters.tvShowsToDisplay;
+      let tvShows = this.$store.getters.tvShowsToDisplay;
       if (!tvShows) {
-        console.log('Loaded from api')
+        console.log("Loaded from api");
         this.$store.dispatch(`loadPopularTvShows`);
-      } else console.log('Loaded from store')
+      } else console.log("Loaded from store");
     }
   },
   computed: {
     popularItems() {
-        return this.$store.getters.tvShowsToDisplay;
+      return this.$store.getters.tvShowsToDisplay;
     },
     topFiveItems() {
       let topFiveItems = this.popularItems.slice(0, 5);

@@ -23,6 +23,8 @@
       </div>
     </div>
 
+    <hr>
+
     <div>
       <div class="comments">
         <activity-comment v-for="(comment, idx) in item.comments" :key="idx" :comment="comment"/>
@@ -83,8 +85,8 @@ export default {
       this.$emit("addLike", this.item);
       this.like = true;
     },
-    focusComment(){
-      this.$refs.textarea.focus()
+    focusComment() {
+      this.$refs.textarea.focus();
     }
   },
   computed: {
@@ -134,7 +136,6 @@ export default {
 
 <style lang="scss" scoped>
 p {
-  font-family: sans-serif;
   font-size: 20px;
 }
 
@@ -145,10 +146,10 @@ p {
   border-radius: 8px;
   background-color: white;
 }
-a.link{
-  color: #f57f16
+a.link {
+  color: #f57f16;
 }
-a.link:hover{
+a.link:hover {
   text-decoration: underline;
 }
 
@@ -181,7 +182,9 @@ a.link:hover{
 
 .item-img {
   margin-top: 10px;
-  margin-bottom: 20px;
+  img {
+    width: 100%;
+  }
 }
 .comment-container {
   position: relative;
