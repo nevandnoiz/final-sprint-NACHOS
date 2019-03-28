@@ -130,7 +130,7 @@ export default {
     }
   },
   destroyed() {
-    domcolor = null;
+    // domcolor = null;
     this.$store.commit("setSelectedItem", null);
     this.$store.commit("setCurrItemReviews", null);
   },
