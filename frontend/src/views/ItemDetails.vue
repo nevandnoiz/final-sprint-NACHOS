@@ -148,7 +148,7 @@ export default {
         itemType: "tv",
         itemId: this.item.details.id
       });
-      eventBus.$emit('finishAddReview')
+      // eventBus.$emit('finishAddReview')
     }
   },
   components: {
