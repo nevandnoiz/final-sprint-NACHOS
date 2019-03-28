@@ -26,7 +26,7 @@ export default {
       this.$store
         .dispatch("loginUser")
         .then(() => this.$store.dispatch("loadActivities"))
-        .then(() => setTimeout(() => this.$router.push("/"), 1000));
+        this.$router.push("/")
     }
   },
   computed: {

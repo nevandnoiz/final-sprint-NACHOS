@@ -1,4 +1,7 @@
 const axios = require('axios')
+const mongoService = require('./mongo-service')
+
+const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     getTrendingMovies,
@@ -7,6 +10,8 @@ module.exports = {
     getMovieShowExternalIds,
     getMovieShowByKeyword,
     getMovieShowCredits,
+    getMoviesReviews,
+    addReview,
     getMovieWatchLinksByKeyword,
     getMovieShowVideos,
 }
@@ -63,6 +68,52 @@ function getMovieShowCredits(id) {
         })
 }
 
+function getMoviesReviews(id) {
+    let collection = ''
+    return mongoService.connect()
+        .then(db => {
+            collection = db.collection('movie-reviews')
+            return db.collection('movie-reviews').find({ itemId: id }).toArray()
+        })
+        .then(dbReviews => {
+            if (!dbReviews.length) {
+                return axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=fd807ad0f521ce282a03431f7288592d`)
+                    .then(res => {
+                        let reviews = res.data.results
+                        return reviews.map(review => {
+                            return {
+                                id: review.id,
+                                author: review.author,
+                                content: review.content,
+                                rating: _getRandomRating()
+                            }
+                        })
+                    })
+                    .then(reviews => {
+                        collection.insertOne({ itemId: id, reviews })
+                        return reviews
+                    })
+            } else {
+                return dbReviews[0].reviews
+            }
+        })
+}
+
+function addReview(newReview, movieId) {
+    newReview.id = new ObjectId()
+    return mongoService.connect()
+    .then(db => {
+            db.collection('movie-reviews').updateOne({
+                itemId: movieId
+            }, {
+                    $push: {
+                        reviews: newReview
+                    }
+                })
+                .then(() => newReview)
+        })
+}
+
 function getMovieWatchLinksByKeyword(keyword, region) {
     keyword = keyword.replace(/\s/gm, '+')
     region ? region = '&country=' + region : region = ''
@@ -81,3 +132,6 @@ function getMovieShowVideos(id) {
         })
 }
 
+function _getRandomRating() {
+    return (Math.floor(Math.random() * (10 - 0 + 1))) / 2;
+}

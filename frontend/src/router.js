@@ -4,8 +4,9 @@ import HomePage from './views/HomePage.vue'
 import BrowseMovies from './views/BrowseMovies.vue'
 import BrowseTvShows from './views/BrowseTvShows.vue'
 import BrowseActors from './views/BrowseActors.vue'
-import MovieDetails from './views/MovieDetails.vue'
-import TvShowDetails from './views/TvShowDetails.vue'
+// import MovieDetails from './views/MovieDetails.vue'
+// import TvShowDetails from './views/TvShowDetails.vue'
+import ItemDetails from './views/ItemDetails.vue'
 import ActorDetails from './views/ActorDetails.vue'
 import UserPage from './views/UserPage.vue'
 
@@ -36,21 +37,26 @@ export default new Router({
       name: 'actors',
       component: BrowseActors
     },
+    // {
+    //   path: '/movies/details/:movieId',
+    //   name: 'movieDetails',
+    //   component: MovieDetails
+    // },
+    // {
+    //   path: '/tv/details/:tvShowId',
+    //   name: 'tvShowDetails',
+    //   component: TvShowDetails
+    // },
     {
-      path: '/movies/details/:movieId',
-      name: 'movieDetails',
-      component: MovieDetails
+      path: '/:itemType/details/:itemId',
+      name: 'itemDetails',
+      component: ItemDetails
     },
-    {
-      path: '/tv/details/:tvShowId',
-      name: 'tvShowDetails',
-      component: TvShowDetails
-    },
-    {
-      path: '/tv/details/:actorId',
-      name: 'actorDetails',
-      component: ActorDetails
-    },
+    // {
+    //   path: '/tv/details/:actorId',
+    //   name: 'actorDetails',
+    //   component: ActorDetails
+    // },
     {
       path: '/user/:userId',
       name: 'userPage',

@@ -9,20 +9,39 @@
   >
     <div class="item-hover-controls" v-if="currUser && isHovered">
       <div class="hover-controls-btns">
-        <i
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="Remove from Watch List"
+          placement="bottom"
           v-if="isOnWatchList"
-          class="fas fa-list"
-          :class="{'on-watch-list': isOnWatchList}"
-          @click.stop="toggleWatchList"
-        ></i>
-        <i
+        >
+          <i
+            class="fas fa-list"
+            :class="{'on-watch-list': isOnWatchList}"
+            @click.stop="toggleWatchList"
+          ></i>
+        </el-tooltip>
+        <el-tooltip
           v-else
-          class="fas fa-plus"
-          :class="{'on-watch-list': isOnWatchList}"
-          @click.stop="toggleWatchList"
-        ></i>
-        <!-- <i class="fas fa-plus" :class="{'checked': isOnWatchList}" @click.stop="toggleWatchList"></i> -->
-        <i class="fas fa-heart" :class="{'on-favorites': isFavorite}" @click.stop="toggleFavorite"></i>
+          class="item"
+          effect="dark"
+          content="Add to Watch List"
+          placement="bottom"
+        >
+          <i
+            class="fas fa-plus"
+            :class="{'on-watch-list': isOnWatchList}"
+            @click.stop="toggleWatchList"
+          ></i>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="Favorites" placement="bottom">
+          <i
+            class="fas fa-heart"
+            :class="{'on-favorites': isFavorite}"
+            @click.stop="toggleFavorite"
+          ></i>
+        </el-tooltip>
       </div>
       <a href="#">Play Trailer</a>
     </div>
@@ -70,7 +89,7 @@ export default {
         await this.$store.dispatch({
           type: "addActivityByType",
           item: this.item,
-          itemType: this.itemTypeRoute.substring(1),
+          itemType: this.itemTypeRoute,
           activityType: "add to list",
           value: "watchList"
         });
@@ -92,7 +111,7 @@ export default {
         await this.$store.dispatch({
           type: "addActivityByType",
           item: this.item,
-          itemType: this.itemTypeRoute.substring(1),
+          itemType: this.itemTypeRoute,
           activityType: "add to list",
           value: "favorites"
         });
@@ -126,7 +145,7 @@ export default {
     }
   },
   created() {
-    this.itemTypeRoute = this.$route.path;
+    this.itemTypeRoute = this.$route.path.substring(1);
     let isOnWatchList = this.isItemInList("watchList");
     if (isOnWatchList) {
       // console.log(isOnWatchList);

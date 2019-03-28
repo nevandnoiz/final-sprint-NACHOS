@@ -30,6 +30,20 @@ function addTvRoutes(app) {
         MoviesService.getMovieShowCredits(movieId)
             .then(credits => res.send(credits))
     })
+    app.get('/movies/reviews/:id', (req, res) => {
+        const movieId = req.params.id;
+        MoviesService.getMoviesReviews(movieId)
+        .then(reviews => {
+            return res.send(reviews)
+        })
+    })
+    app.post('/movies/reviews/:id', (req, res) => {
+        const movieId = req.params.id;
+        const newReview = req.body
+        MoviesService.addReview(newReview, movieId)
+        .then(()=>res.send('Worked'))
+        // .then(review => res.send('great'))
+    })
     app.get('/movies/videos/:id', (req, res) => {
         const movieId = req.params.id;
         MoviesService.getMovieShowVideos(movieId)
@@ -37,10 +51,10 @@ function addTvRoutes(app) {
     })
 
     // DELETE
-    // app.delete('/movies/:tvShowId', (req, res) => {
-    //     const tvShowId = req.params.tvShowId;
-    //     MoviesService.remove(tvShowId)
-    //         .then(() => res.end(`Tv ${tvShowId} Deleted `))
+    // app.delete('/movies/:movieId', (req, res) => {
+    //     const movieId = req.params.movieId;
+    //     MoviesService.remove(movieId)
+    //         .then(() => res.end(`Tv ${movieId} Deleted `))
     // })
 
     // CREATE
@@ -53,7 +67,7 @@ function addTvRoutes(app) {
     // })
 
     // UPDATE
-    // app.put('/movies/:tvShowId', (req, res) => {
+    // app.put('/movies/:movieId', (req, res) => {
     //     const tv = req.body;
     //     MoviesService.update(tv)
     //         .then(tv => res.json(tv))

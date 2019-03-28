@@ -47,6 +47,73 @@ function removeFromListByType(userId, itemId, listType) {
         })
 }
 
+function markWatched(userId, showId, epId) {
+    userId = ObjectId(userId)
+    showId = +showId
+    epId = +epId
+    return mongoService.connect()
+        .then(db => {
+            let show = db.collection('users').findOne(
+                {
+                    "_id": userId,
+                    "watchedEpisodes.id": showId
+                })
+            return show
+        })
+        .then(show => {
+            if (show) {
+                return mongoService.connect()
+                    .then(db => {
+                        console.log('yup')
+                        db.collection('users').updateOne(
+                            {
+                                "_id": userId,
+                                "watchedEpisodes.id": showId
+                            },
+                            {
+                                $push: { "watchedEpisodes.$.episodes": { epId } }
+                            }
+                        )
+                    })
+            } else {
+                return mongoService.connect()
+                    .then(db => {
+                        console.log('nope')
+                        let itemObj = { id: showId, episodes: [{ epId }] }
+                        db.collection('users').updateOne(
+                            {
+                                "_id": userId,
+                            },
+                            {
+                                $push: { "watchedEpisodes": itemObj }
+                            }
+                        )
+                    })
+            }
+        })
+}
+
+function unmarkWatched(userId, showId, epId) {
+    console.log('unmark')
+    console.log(userId, showId, epId)
+    userId = ObjectId(userId)
+    showId = +showId
+    epId = +epId
+    return mongoService.connect()
+        .then(db => {
+            console.log('mongo')
+            db.collection('users').updateOne(
+                {
+                    "_id": userId,
+                    "watchedEpisodes.id": showId
+                },
+                {
+                    $pull: { "watchedEpisodes.$.episodes": { epId: epId } }
+                }
+            )
+        })
+}
+
 function addActivityByType(userId, activity) {
     userId = ObjectId(userId)
     activity._id = new ObjectId()
@@ -101,5 +168,7 @@ module.exports = {
     loadFromSession,
     addToListByType,
     removeFromListByType,
+    markWatched,
+    unmarkWatched,
     addActivityByType
 }
