@@ -64,7 +64,7 @@ export default {
 
 <style lang="scss" scoped>
 .browse {
-  background: #000000bf;
+  // background: #000000bf;
   padding: 20px;
   display: grid;
   grid-gap: 20px;
