@@ -11,6 +11,7 @@ export default {
   },
   mutations: {
     setTvShows(state, { tv }) {
+      tv.forEach(item => item.type = 'tv');
       state.tvShows = tv
     },
   },

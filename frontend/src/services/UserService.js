@@ -53,11 +53,7 @@ const activities = [
         type: 'activity',
         activity: 'listAdd',
         value: 'Favorite',
-        comments: [{
-            user: 'bobo',
-            comment: 'a comment!',
-            timestamp: 34053053
-        }],
+        comments: [],
         likes: 0
     }
 ]

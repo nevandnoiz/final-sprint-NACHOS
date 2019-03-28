@@ -64,7 +64,6 @@ header {
         margin: 10px;
         font-size: 22px;
         text-decoration: none;
-        font-family: sans-serif;
         transition: 0.175s;
       }
       a:hover {
@@ -75,7 +74,6 @@ header {
         margin: 10px;
         font-size: 24px;
         text-decoration: none;
-        font-family: sans-serif;
       }
     }
   }

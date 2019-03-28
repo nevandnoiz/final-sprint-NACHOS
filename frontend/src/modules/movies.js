@@ -11,6 +11,7 @@ export default {
   },
   mutations: {
     setPopularMovies(state, { movies }) {
+      movies.forEach( movie => movie.type = 'movie');
       state.popularMovies = movies
     },
   },
