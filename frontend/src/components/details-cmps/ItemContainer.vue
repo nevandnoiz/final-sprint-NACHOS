@@ -170,9 +170,6 @@ export default {
 a {
   font: -webkit-control;
 }
-iframe {
-  width: 100%;
-}
 .black-filler {
       background: black;
       height: 73px;
@@ -356,10 +353,7 @@ a {
 i {
   color: white;
 }
-iframe {
-  width: 80vw;
-  height: 80vw;
-}
+
 .white-fill {
       display: none;
     background-color: #f5f5f5;
@@ -436,6 +430,7 @@ position: relative;
   font-size: 2rem;
   color: black;
 }
+
 .item-container > img {
   margin-right: 20px;
 }

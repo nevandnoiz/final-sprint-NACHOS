@@ -9,7 +9,7 @@
       >
         <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div>
         <div class="check-container">
-          <i class="fas fa-check" @click="onCheckEpo"></i>
+          <i class="fas fa-check"></i>
         </div>
     <check-episode v-if="currUser" :episode="eposide"></check-episode>
         <h1>{{eposide.episode_number}}</h1>
