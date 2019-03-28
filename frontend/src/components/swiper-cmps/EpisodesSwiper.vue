@@ -7,11 +7,8 @@
         v-for="(eposide, index) in getSeason.episodes"
         :key="index"
       >
-    <check-episode v-if="currUser" :episode="eposide"></check-episode>
         <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div>
-        <div class="check-container">
-          <i class="fas fa-check" @click="onCheckEpo"></i>
-        </div>
+    <check-episode v-if="currUser" :episode="eposide"></check-episode>
         <h1>{{eposide.episode_number}}</h1>
         <p>{{eposide.name}}</p>
       </slide>
@@ -55,11 +52,6 @@ export default {
       //   showId: episode.show_id,
       //   epId: episode.id
       // });
-    mouseOver(){
-      this.fillColor = false;
-    },
-    onCheckEpo() {
-      console.log('checked')
     },
     onEmit(index) {
       this.season = this.seasonsDetails[index].data;
@@ -108,6 +100,7 @@ p {
   align-self: end;
   margin: 0.2rem;
 }
+
 .slider-main-container {
   z-index: 3423423423;
 }

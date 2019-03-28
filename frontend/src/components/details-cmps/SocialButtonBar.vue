@@ -56,7 +56,7 @@ props:['item']
       width: 100%;
     display: flex;
     justify-content: flex-end;
-    z-index: 355435345643564535;
+    z-index: 35;
      /* background: black; */
        /* background: black; */
 }

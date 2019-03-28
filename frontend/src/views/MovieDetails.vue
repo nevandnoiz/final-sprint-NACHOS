@@ -173,13 +173,7 @@ div.ytp-chrome-top.ytp-show-watch-later-title.ytp-share-button-visible.ytp-show-
 div[data-layer="1"]{
   display: none
 }
-.youtube-close-btn {
-      z-index: 201;
-    /* right: 0; */
-    right: 0;
-    top: 0;
-    position: absolute;
-}
+
 .main-youtube-container {
     position: fixed;
     z-index: 200;

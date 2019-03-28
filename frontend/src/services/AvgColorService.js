@@ -10,15 +10,10 @@ async function domColor(imgUrl) {
 async function getDomColor(imgUrl) {
   var element = document.createElement('div');
   // element.className = 'row';
-  element.innerHTML =
-    '<div class="cell image">' +
-    '  <img />' +
-    '</div>'
+  element.innerHTML =`<div class="cell image"><img crossorigin="anonymous" src="${imgUrl}"/></div>`
 
   var img = element.querySelector('img');
-  img.crossOrigin = "Anonymous";
-  img.src = imgUrl
-
+  
   var hexPrm = new Promise((resolve, rej) => {
     img.onload = async function () {
       var rgb = await getAverageColor(img);
