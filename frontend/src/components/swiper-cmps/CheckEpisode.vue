@@ -35,7 +35,6 @@ export default {
       this.isChecked = !this.isChecked;
     },
     init() {
-      console.log(this.episode);
       let isWatched = this.isWatched();
       if (isWatched) {
         this.isChecked = true;
