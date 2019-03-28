@@ -4,11 +4,11 @@
       <slide
         class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
-        v-for="(eposide, index) in getSeason.episodes"
+        v-for="(eposide, index) in season.episodes"
         :key="index"
       >
-        <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div>
-    <check-episode v-if="currUser" :episode="eposide"></check-episode>
+        <!-- <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div> -->
+    <check-episode :key="key" v-if="currUser" :episode="eposide"></check-episode>
         <h1>{{eposide.episode_number}}</h1>
         <p>{{eposide.name}}</p>
       </slide>
@@ -37,6 +37,7 @@ export default {
   },
   data() {
     return {
+      key: 1,
       fillColor: true,
       season: null,
       seasonsDetails: null,
@@ -54,6 +55,7 @@ export default {
       // });
     // },
     onEmit(index) {
+      this.kaka+=1
       this.season = this.seasonsDetails[index].data;
     },
     imgURL(stillPath) {
@@ -64,9 +66,6 @@ export default {
     currUser() {
       return this.$store.getters.currUser;
     },
-    getSeason(){
-      return this.season
-    }
   },
   props: ["seasons", "tvShowId", "dominantColor"]
 };
