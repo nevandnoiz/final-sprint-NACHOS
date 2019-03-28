@@ -12,7 +12,9 @@ export default {
     addCommentToActivity,
     addToListByType,
     removeFromListByType,
-    addActivityByType
+    addActivityByType,
+    markWatched,
+    unmarkWatched,
 }
 
 const users = []
@@ -79,6 +81,14 @@ function addToListByType(addedItem, userId, listType) {
 
 function removeFromListByType(itemId, userId, listType) {
     return axios.delete(`http://localhost:3003/user/${userId}/lists/${listType}/${itemId}`)
+}
+
+function markWatched(userId, showId, epId) {
+    return axios.post(`http://localhost:3003/user/${userId}/episodes/${showId}`, {epId})
+}
+
+function unmarkWatched(userId, showId, epId) {
+    return axios.delete(`http://localhost:3003/user/${userId}/episodes/${showId}/${epId}`)
 }
 
 function addActivityByType(user, item, itemType, activityType,value) {
