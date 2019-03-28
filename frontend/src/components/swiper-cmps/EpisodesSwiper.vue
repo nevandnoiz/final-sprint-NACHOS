@@ -52,7 +52,7 @@ export default {
       //   showId: episode.show_id,
       //   epId: episode.id
       // });
-    },
+    // },
     onEmit(index) {
       this.season = this.seasonsDetails[index].data;
     },
