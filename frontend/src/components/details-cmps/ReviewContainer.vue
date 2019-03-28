@@ -15,7 +15,6 @@
 <script>
 export default {
   created() {
-    console.log('from review container got review:', this.review)
   },
   props: ["review"],
   data() {

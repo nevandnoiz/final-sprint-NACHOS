@@ -35,7 +35,6 @@ export default {
     loadItems() {
       let actors = this.$store.getters.actorsToDisplay;
       if (!actors) {
-        console.log("Loaded from api");
         this.$store.dispatch(`loadPopularActors`);
       } else console.log("Loaded from store");
     },

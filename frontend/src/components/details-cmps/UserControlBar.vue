@@ -25,7 +25,6 @@ export default {
       eventBus.$emit("playTrailer");
     },
     onSeasonsListClick() {
-      console.log("click");
       eventBus.$emit("onSeasonsListClick");
       this.isSeasonsListMode = !this.isSeasonsListMode;
     }

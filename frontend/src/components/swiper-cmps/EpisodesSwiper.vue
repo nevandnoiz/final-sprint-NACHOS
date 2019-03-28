@@ -4,7 +4,7 @@
       <slide
         class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
-        v-for="(eposide, index) in season.episodes"
+        v-for="(eposide, index) in getSeason.episodes"
         :key="index"
       >
     <check-episode v-if="currUser" :episode="eposide"></check-episode>
@@ -30,7 +30,6 @@ export default {
     });
     eventBus.$on("watchedSeason", this.toggleWatchedSeason);
     this.onEmit(0);
-    // console.log(this.season.episodes);
   },
   components: {
     CheckEpisode
@@ -62,6 +61,9 @@ export default {
   computed: {
     currUser() {
       return this.$store.getters.currUser;
+    },
+    getSeason(){
+      return this.season
     }
   },
   props: ["seasons", "tvShowId"]

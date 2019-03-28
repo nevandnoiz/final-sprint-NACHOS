@@ -147,12 +147,10 @@ export default {
     this.itemTypeRoute = this.$route.path.substring(1);
     let isOnWatchList = this.isItemInList("watchList");
     if (isOnWatchList) {
-      console.log(isOnWatchList);
       this.isOnWatchList = true;
     }
     let isFavorite = this.isItemInList("favorites");
     if (isFavorite) {
-      console.log(isFavorite);
       this.isFavorite = true;
     }
     this.img = this.imgURL();

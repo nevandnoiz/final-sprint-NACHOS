@@ -3,7 +3,17 @@ const TvService = require('../services/tv-service')
 function addTvRoutes(app) {
 
     // LIST
-    app.get('/tv/:page', (req, res) => {
+    app.get('/tv/top_rated/:page/', (req, res) => {
+        const page = req.params.page;
+        TvService.getTopRatedShows(page)
+            .then(tvShows => res.send(tvShows))
+    })
+    app.get('/tv/popular/:page/', (req, res) => {
+        const page = req.params.page;
+        TvService.getPopularShows(page)
+            .then(tvShows => res.send(tvShows))
+    })
+    app.get('/tv/trending/:page/', (req, res) => {
         const page = req.params.page;
         TvService.getTrendingShows(page)
             .then(tvShows => res.send(tvShows))

@@ -5,12 +5,12 @@
 </template>
 
 <script>
+import { eventBus } from "@/main.js";
+
 export default {
   created() {
-    let isWatched = this.isWatched();
-    if (isWatched) {
-      this.isChecked = true;
-    }
+    eventBus.$on("onSeasonClick", this.init);
+    this.init();
   },
   components: {},
   data() {
@@ -33,6 +33,13 @@ export default {
           epId: episode.id
         });
       this.isChecked = !this.isChecked;
+    },
+    init() {
+      this.$forceUpdate();
+      let isWatched = this.isWatched();
+      if (isWatched) {
+        this.isChecked = true;
+      }
     },
     isWatched() {
       if (this.$store.getters.currUser) {

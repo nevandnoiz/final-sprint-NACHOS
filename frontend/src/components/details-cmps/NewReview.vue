@@ -68,7 +68,6 @@ export default {
     goto() {
       let ref = `review-${this.reviewIdx + 1}`;
       let element = this.$refs[ref];
-      console.log(element);
       let top = element.offsetTop;
 
       window.scrollTo(0, top);
