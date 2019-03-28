@@ -168,7 +168,6 @@ function getSeasonDetails(id, seasonNum) {
             let seasonDetails = (({ air_date, id, name, overview, poster_path, season_number }) =>
                 ({ air_date, id, name, overview, poster_path, season_number }))(result)
             seasonDetails.episodes = episodes
-            // console.log(seasonDetails)
             return seasonDetails
         })
         .catch(err => {
