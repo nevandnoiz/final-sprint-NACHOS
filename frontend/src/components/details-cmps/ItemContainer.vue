@@ -146,18 +146,12 @@ export default {
         else return 'white'
       },
        bckImage() {
-      return {
-        backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
-          this.item.details.backdrop_path
-        })`
-      };
+         return {backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.item.details.backdrop_path})`};
     },
     bckColor() {
-      return {
-        // in the case of redComp, greenComp and blueComp are a vue prop or data
-        background: this.dominantColor + "B3"
-        
-      };
+              // in the case of redComp, greenComp and blueComp are a vue prop or data
+              console.log(UtilityService.lightOrDark(this.dominantColor))
+      if(UtilityService.lightOrDark(this.dominantColor) === 'dark') return {background: this.dominantColor + "B3"};
     },
     imgURL() {
       return UtilityService.imgURL(this.item.details.poster_path, 500);
@@ -338,7 +332,6 @@ padding: 0 0.5rem;
         height: 494px;
 }
 .row {
-    background: rgba(39, 36, 18, 0.7);
     width: 100%;
     top: 0;
     position: absolute;
@@ -430,7 +423,7 @@ position: relative;
     padding: 20px;
     margin: 0;
     grid-column: 1/3;
-    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+    /* background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)); */
     grid-row: 2;
 }
 .details-text > * {
