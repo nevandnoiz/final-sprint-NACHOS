@@ -206,10 +206,11 @@ div[data-layer="1"]{
     height: 93vh;
 }
 .sub-container {
-        margin: 274px auto;
+    margin: 226px auto;
+
     display: block;
        width: 76vw;
-    z-index: 1;
+    z-index: 3;
 }
 .tv-details-container {
   display: flex;

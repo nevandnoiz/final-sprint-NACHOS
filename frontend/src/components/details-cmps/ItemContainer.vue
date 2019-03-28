@@ -44,7 +44,7 @@
                 
 
             <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-            <div class="black-filler"></div>
+            <!-- <div class="black-filler"></div> -->
                       <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
 
             <!-- <div class="icons-container">
@@ -141,22 +141,17 @@ export default {
   },
   computed: {
       isLightOrDark() {
+        console.log('do we have dom colo?', this.dominantColor)
         if(UtilityService.lightOrDark(this.dominantColor) === 'light') return 'black'
         else return 'white'
       },
        bckImage() {
-      return {
-        backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
-          this.item.details.backdrop_path
-        })`
-      };
+         return {backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.item.details.backdrop_path})`};
     },
     bckColor() {
-      return {
-        // in the case of redComp, greenComp and blueComp are a vue prop or data
-        background: this.dominantColor + "B3"
-        
-      };
+              // in the case of redComp, greenComp and blueComp are a vue prop or data
+              console.log(UtilityService.lightOrDark(this.dominantColor))
+      if(UtilityService.lightOrDark(this.dominantColor) === 'dark') return {background: this.dominantColor + "B3"};
     },
     imgURL() {
       return UtilityService.imgURL(this.item.details.poster_path, 500);
@@ -186,6 +181,7 @@ iframe {
 
 }
 .social-main-container {
+  /* z-index: 4235345345; */
     display: flex;
     -ms-flex-pack: end;
     justify-content: flex-end;
@@ -195,7 +191,7 @@ iframe {
     -ms-flex-align: end;
     align-items: flex-end;
     display: flex;
-    z-index: 3333;
+    /* z-index: 23333; */
     -ms-flex-direction: row;
     flex-direction: row;
     grid-row: 1;
@@ -298,7 +294,7 @@ padding: 0 0.5rem;
 }
 .shadowing-container {
   display: grid;
-  grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
   grid-template-rows: 374px 1fr;
   grid-column: 2;
   grid-row: 1;
@@ -318,9 +314,10 @@ padding: 0 0.5rem;
 }
 
 .shadowing {
+  
     z-index: 33;
     grid-row: 1;
-    grid-column: 2;
+    grid-column: 1/3;
     grid-template: repeat(10, 1fr);
     display: grid;
     grid-template-rows: repeat(5, 1fr);
@@ -335,7 +332,6 @@ padding: 0 0.5rem;
         height: 494px;
 }
 .row {
-    background: rgba(39, 36, 18, 0.7);
     width: 100%;
     top: 0;
     position: absolute;
@@ -426,8 +422,8 @@ position: relative;
       box-shadow: 0px 0px 12px #000000;
     padding: 20px;
     margin: 0;
-    grid-column: 2;
-    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+    grid-column: 1/3;
+    /* background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)); */
     grid-row: 2;
 }
 .details-text > * {

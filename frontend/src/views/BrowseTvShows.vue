@@ -66,6 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .browse {
+  // background: #000000bf;
   display: grid;
   grid-template: 500px 0 1fr/1fr;
 }

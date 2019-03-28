@@ -54,6 +54,7 @@ p {
   padding-bottom: 0.2rem;
 }
 .main-container {
+  margin-top: 1.4rem;
   grid-row: 2;
   justify-content: center;
   height: 995px;

@@ -5,9 +5,11 @@ async function domColor(imgUrl) {
   let hex = await getDomColor(imgUrl)
   return hex;
 }
+
+
 async function getDomColor(imgUrl) {
   var element = document.createElement('div');
-  element.className = 'row';
+  // element.className = 'row';
   element.innerHTML =
     '<div class="cell image">' +
     '  <img />' +

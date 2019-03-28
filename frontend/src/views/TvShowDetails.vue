@@ -11,6 +11,7 @@
     <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
       <episodes-swiper
+      :dominantColor="dominantColor"
         class="netflix-container"
         :seasons="tvShow.seasons"
         :tvShowId="tvShow.details.id"
@@ -25,7 +26,7 @@
         <div class="reviews-section">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <div class="reviews-conatier">
-            <new-review v-for="(review, index) in tvShow.reviews" :key="index" :review="review"></new-review>
+            <new-review  v-for="(review, index) in tvShow.reviews" :key="index" :review="review"></new-review>
             <review-form @addReview="addReview" :itemId="tvShow.details.id"></review-form>
           </div>
           <!-- <twitter-feed :keyword="tvShow.details.name"></twitter-feed> -->
@@ -140,7 +141,7 @@ export default {
 
 <style scoped>
 .Actors {
-  box-shadow: 0px 0px 12px #000000;
+  /* box-shadow: 0px 0px 12px#000000; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 24px 1fr;
@@ -153,7 +154,6 @@ export default {
   height: 800px;
 }
 .reviews-section {
-  box-shadow: 0px 0px 12px #000000;
 }
 
 .pannel-heading-epo {
@@ -168,10 +168,11 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 274px auto;
+  margin: 226px auto;
+
   display: block;
   width: 76vw;
-  z-index: 1;
+ z-index: 3;
 }
 .tweet {
   position: absolute;

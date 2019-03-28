@@ -16,7 +16,7 @@
   <b-field horizontal>
       <!-- Label left empty for spacing -->
       <p class="control">
-        <button @click="$emit('addReview',review)" class="button is-primary">Send message</button>
+        <button @click="onSendReview()" class="button is-primary">Send message</button>
       </p>
     </b-field>
 </div>
@@ -59,7 +59,14 @@ export default {
       setReview: true
     };
   },
-  methods: {}
+  methods: {
+    onSendReview(review){
+      this.$emit('addReview',this.review)
+      this.review.rating = 0;
+      this.review.author = '';
+      this.review.content = ''
+    }
+  }
 };
 </script>
 

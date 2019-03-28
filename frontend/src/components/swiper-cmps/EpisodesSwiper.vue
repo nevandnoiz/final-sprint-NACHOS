@@ -8,6 +8,10 @@
         :key="index"
       >
     <check-episode v-if="currUser" :episode="eposide"></check-episode>
+        <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div>
+        <div class="check-container">
+          <i class="fas fa-check" @click="onCheckEpo"></i>
+        </div>
         <h1>{{eposide.episode_number}}</h1>
         <p>{{eposide.name}}</p>
       </slide>
@@ -36,6 +40,7 @@ export default {
   },
   data() {
     return {
+      fillColor: true,
       season: null,
       seasonsDetails: null,
       isChecked: false,
@@ -43,13 +48,18 @@ export default {
     };
   },
   methods: {
-    toggleMarkWatched(episode) {
-      this.isChecked=!this.isChecked
+    // toggleMarkWatched(episode) {
+    //   this.isChecked=!this.isChecked
       // this.$store.dispatch({
       //   type: "markWatched",
       //   showId: episode.show_id,
       //   epId: episode.id
       // });
+    mouseOver(){
+      this.fillColor = false;
+    },
+    onCheckEpo() {
+      console.log('checked')
     },
     onEmit(index) {
       this.season = this.seasonsDetails[index].data;
@@ -66,12 +76,25 @@ export default {
       return this.season
     }
   },
-  props: ["seasons", "tvShowId"]
+  props: ["seasons", "tvShowId", "dominantColor"]
 };
 </script>
 
 <style scoped>
+
+.color-fill{
+    z-index: 2434;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.color-fill:hover{
+  background-image: none;
+  background-color: none !important
+}
+
 h1 {
+  z-index: 434134;
   color: white;
   margin: 0.1rem 0.5rem;
   align-self: flex-start;
@@ -80,6 +103,7 @@ h1 {
 }
 
 p {
+  z-index: 434134;
   color: white;
   align-self: end;
   margin: 0.2rem;
@@ -102,7 +126,10 @@ p {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  border: 1px solid;
+  /* padding: 0 3px; */
+  /* border: 1px solid; */
+  border-left: 2px solid;
+  border-right: 2px solid;
   background-repeat: no-repeat;
 }
 
