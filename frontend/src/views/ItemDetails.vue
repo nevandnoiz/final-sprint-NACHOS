@@ -3,6 +3,8 @@
     <div class="main-youtube-container" v-if="isTrailerPlaying">
       <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
       <youtube
+      v-if="isTrailerPlaying"
+       crossorigin="anonymous"
         class="youtube-container"
         :video-id="this.item.videos.results[0].key"
         :player-vars="{ autoplay: 1 }"

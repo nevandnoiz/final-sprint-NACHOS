@@ -15,6 +15,7 @@ import searchBar from "@/components/header-cmps/SearchBar1.vue";
 import AppHeader from "./components/header-cmps/AppHeader";
 import buefy from "./buefy.css";
 import reset from "./reset.css";
+import global from "./global.css";
 
 export default {
   components: {
