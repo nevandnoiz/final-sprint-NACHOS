@@ -48,6 +48,7 @@ i {
   margin-right: 1rem;
 }
 .control-bar {
+      z-index: 4534534565464567546;
   display: flex;
   flex-direction: row;
   align-items: center;

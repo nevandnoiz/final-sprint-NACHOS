@@ -59,7 +59,6 @@ function lightOrDark(color) {
         return 'light';
     }
     else {
-
         return 'dark';
     }
 }

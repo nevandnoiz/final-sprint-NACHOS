@@ -55,6 +55,24 @@ const activities = [
         value: 'Favorite',
         comments: [],
         likes: 0
+    },
+    {
+        _id: '098765456',
+        timestamp: null,
+        byUser: {
+            name: {
+                firstName: 'Yaniv',
+                lastName: 'wiener'
+            }, _id: '987agv'
+        },
+        item_id: 1399,
+        item_type: 'tv',
+        itemTitle: "Game Of Thrones",
+        type: 'activity',
+        activity: 'listAdd',
+        value: 'watchList',
+        comments: [],
+        likes: 0
     }
 ]
 

@@ -3,6 +3,8 @@
     <div class="main-youtube-container" v-if="isTrailerPlaying">
       <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
       <youtube
+      v-if="isTrailerPlaying"
+       crossorigin="anonymous"
         class="youtube-container"
         :video-id="this.item.videos.results[0].key"
         :player-vars="{ autoplay: 1 }"
@@ -128,7 +130,6 @@ export default {
     }
   },
   destroyed() {
-    domcolor = null;
     this.$store.commit("setSelectedItem", null);
     this.$store.commit("setCurrItemReviews", null);
   },
@@ -172,7 +173,7 @@ export default {
 
 <style scoped>
 .Actors {
-  box-shadow: 0px 0px 12px #000000;
+  /* box-shadow: 0px 0px 12px #000000; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 24px 1fr;
@@ -185,7 +186,7 @@ export default {
   height: 800px;
 }
 .reviews-section {
-  box-shadow: 0px 0px 12px #000000;
+  /* box-shadow: 0px 0px 12px #000000; */
 }
 
 .pannel-heading-epo {
@@ -200,10 +201,11 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 274px auto;
+  margin: 226px auto;
+
   display: block;
   width: 76vw;
-  z-index: 1;
+  z-index: 3;
 }
 .tweet {
   position: absolute;

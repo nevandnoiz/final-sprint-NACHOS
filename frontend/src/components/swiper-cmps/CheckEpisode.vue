@@ -35,7 +35,6 @@ export default {
       this.isChecked = !this.isChecked;
     },
     init() {
-      this.$forceUpdate();
       let isWatched = this.isWatched();
       if (isWatched) {
         this.isChecked = true;
