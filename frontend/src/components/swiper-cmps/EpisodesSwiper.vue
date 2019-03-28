@@ -55,7 +55,7 @@ export default {
       // });
     // },
     onEmit(index) {
-      this.kaka+=1
+      this.key+=1
       this.season = this.seasonsDetails[index].data;
     },
     imgURL(stillPath) {
