@@ -1,6 +1,6 @@
 <template>
   <section v-if="season" class="slider-main-container">
-    <carousel :paginationEnabled="false" :navigationEnabled="true" :per-page="5">
+    <carousel :paginationEnabled="false" :navigationEnabled="true" :per-page="5" :initialSlide="0">
       <slide
         class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
@@ -8,7 +8,7 @@
         :key="index"
       >
         <!-- <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div> -->
-    <check-episode :key="key" v-if="currUser" :episode="eposide"></check-episode>
+        <check-episode :key="key" v-if="currUser" :episode="eposide"></check-episode>
         <h1>{{eposide.episode_number}}</h1>
         <p>{{eposide.name}}</p>
       </slide>
@@ -29,7 +29,8 @@ export default {
       id: this.tvShowId,
       seasons: this.seasons
     });
-    eventBus.$on("watchedSeason", this.toggleWatchedSeason);
+    let isSeasonCheckedArr = this.isSeasonWatched();
+    eventBus.$emit('isSeasonChecked',isSeasonCheckedArr)
     this.onEmit(0);
   },
   components: {
@@ -47,33 +48,54 @@ export default {
   },
   methods: {
     onEmit(index) {
-      this.key+=1
+      this.key += 1;
       this.season = this.seasonsDetails[index].data;
     },
     imgURL(stillPath) {
       return UtilityService.imgURL(stillPath, 780);
+    },
+    isSeasonWatched() {
+      return this.seasonsDetails.map(season => {
+        let episodesCheck = season.data.episodes.map(episode => {
+          if (this.isEpisodeWatched(episode)) return true;
+          else return false;
+        });
+        if (episodesCheck.includes(false)) return false;
+        else return true;
+      });
+    },
+    isEpisodeWatched(episode) {
+      if (this.$store.getters.currUser) {
+        let watched = this.$store.getters.currUserWatchedEpisodes;
+        if (!watched) return false;
+        let show = watched.find(show => show.id === episode.show_id);
+        if (!show) return false;
+        let watchedEpisode = show.episodes.some(watchedEpisode => {
+          return watchedEpisode.epId == episode.id;
+        });
+        return watchedEpisode;
+      }
     }
   },
   computed: {
     currUser() {
       return this.$store.getters.currUser;
-    },
+    }
   },
   props: ["seasons", "tvShowId", "dominantColor"]
 };
 </script>
 
 <style scoped>
-
-.color-fill{
-    z-index: 2434;
-    height: 100%;
-    position: absolute;
-    width: 100%;
+.color-fill {
+  z-index: 2434;
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
-.color-fill:hover{
+.color-fill:hover {
   background-image: none;
-  background-color: none !important
+  background-color: none !important;
 }
 
 h1 {

@@ -8,16 +8,19 @@
       :value="index"
     >
       <p>{{season.name}}</p>
-
-      <i v-if="currUser" class="fas fa-check check-button-season-menu" @click.stop="emitWatchedSeason"></i>
+      <check-season @checkSeasonClicked="onCheckSeasonClicked" v-if="currUser" :season="season"></check-season>
     </el-option>
   </el-select>
 </template>
 
 <script>
+import CheckSeason from "@/components/details-cmps/CheckSeason.vue";
 import { eventBus } from "@/main.js";
 
 export default {
+  components: {
+    CheckSeason
+  },
   data() {
     return {
       seasonIdx: 0,
@@ -31,12 +34,13 @@ export default {
   },
   props: ["seasons", "tvShowId"],
   methods: {
-    onSelectSeason(index) {
-      eventBus.$emit("onSeasonClick", this.seasonIdx);
+    async onSelectSeason(index) {
+      await eventBus.$emit("onSeasonClick", this.seasonIdx);
     },
-    emitWatchedSeason() {
-      console.log("coming soon");
-      // eventBus.$emit('watchedSeason')
+    async onCheckSeasonClicked(index) {
+      this.seasonIdx = index;
+      await this.onSelectSeason(index);
+      eventBus.$emit("ok", index+1);
     }
   },
   computed: {
@@ -69,6 +73,9 @@ export default {
 .check-button-season-menu:hover {
   cursor: pointer;
   opacity: 0.75;
+}
+.checked-season {
+  background-color: rgb(104, 255, 104);
 }
 .netflix-menu {
   z-index: 33773;

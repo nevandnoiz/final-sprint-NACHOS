@@ -70,8 +70,9 @@ function markWatched(userId, showId, epId) {
                                 "watchedEpisodes.id": showId
                             },
                             {
-                                $push: { "watchedEpisodes.$.episodes": { epId } }
+                                $addToSet: { "watchedEpisodes.$.episodes": { epId } }
                             }
+                            
                         )
                     })
             } else {

@@ -1,6 +1,6 @@
 <template>
   <div class="check-container">
-    <i class="fas fa-check" :class="{'checked': isChecked}" @click="toggleMarkWatched(episode)"></i>
+    <i class="fas fa-check" :class="{'checked': isChecked}" @click="toggleMarkWatched()"></i>
   </div>
 </template>
 
@@ -9,7 +9,14 @@ import { eventBus } from "@/main.js";
 
 export default {
   created() {
-    eventBus.$on("onSeasonClick", this.init);
+    eventBus.$on("watchedSeason", seasonNum => {
+      if (this.episode.season_number === seasonNum)
+        return this.markWatched();
+    });
+    eventBus.$on("unwatchedSeason", seasonNum => {
+      if (this.episode.season_number === seasonNum)
+        return this.unmarkWatched();
+    });
     this.init();
   },
   components: {},
@@ -19,20 +26,25 @@ export default {
     };
   },
   methods: {
-    toggleMarkWatched(episode) {
-      if (!this.isChecked)
-        this.$store.dispatch({
-          type: "markWatched",
-          showId: episode.show_id,
-          epId: episode.id
-        });
-      else
-        this.$store.dispatch({
-          type: "unmarkWatched",
-          showId: episode.show_id,
-          epId: episode.id
-        });
-      this.isChecked = !this.isChecked;
+    toggleMarkWatched() {
+      if (!this.isChecked) this.markWatched();
+      else this.unmarkWatched();
+    },
+    markWatched() {
+      this.$store.dispatch({
+        type: "markWatched",
+        showId: this.episode.show_id,
+        epId: this.episode.id
+      });
+      this.isChecked = true;
+    },
+    unmarkWatched() {
+       this.$store.dispatch({
+            type: "unmarkWatched",
+            showId: this.episode.show_id,
+            epId: this.episode.id
+          });
+      this.isChecked = false;
     },
     init() {
       let isWatched = this.isWatched();
