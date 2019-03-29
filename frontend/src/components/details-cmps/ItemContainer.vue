@@ -23,21 +23,29 @@
 
               <div class="shadowing">
                 <!-- icons -->
-                <div class="item-info">
-                  <div class="geners">
-                    <h1 v-for="(gener, index) in item.details.genres" :key="index">{{gener.name}}</h1>
+                <div class="geners">
+                  <div class="item-info">
+                    <h1>{{genres}}</h1>
                   </div>
+                  <div class="sub-item-info">
+                    <h1>Original Language: {{originalLanguage}}</h1>
+                    <h1>Status: {{item.details.status}}</h1>
+                    <h1>realse info</h1>
 
-                  <h1>Status: {{item.details.status}}</h1>
-                  <h1>realse info</h1>
-
-                  <h1>Original Language</h1>
+                    
+                  </div>
                 </div>
 
                 <!-- end icons -->
                 <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
-                <h1 class="title">{{item.details.title || item.details.name}} <span class="title" v-if="item.details.release_date">({{item.details.release_date}})</span> </h1>
-                <media-icons-bar class="media-icons-bar"></media-icons-bar>
+                <h1 class="title">
+                  {{item.details.title || item.details.name}}
+                  <span
+                    class="title"
+                    v-if="item.details.release_date"
+                  >({{item.details.release_date}})</span>
+                </h1>
+                <media-icons-bar :watchLinks="item.watchLinks" class="media-icons-bar"></media-icons-bar>
                 <user-control-bar class="user-control-bar"></user-control-bar>
               </div>
             </div>
@@ -112,6 +120,16 @@ export default {
     }
   },
   computed: {
+    originalLanguage(){
+      if(this.item.details.original_language === 'en') return 'English'
+      return this.item.details.original_language
+    },
+    genres() {
+      var res = "Genres: ";
+      this.item.details.genres.forEach(genre => (res += `${genre.name}, `));
+      return res.substring(0, res.length - 2);
+      console.log(res);
+    },
     isLightOrDark() {
       console.log("do we have dom colo?", this.dominantColor);
       if (UtilityService.lightOrDark(this.dominantColor) === "light")
@@ -144,9 +162,15 @@ export default {
 * {
   font-family: Arvo;
 }
-
+h1 {
+  color: white;
+}
 a {
   font: -webkit-control;
+}
+.geners {
+  grid-row: 2;
+  grid-column: 2/333;
 }
 .black-filler {
   background: black;
@@ -218,10 +242,10 @@ a {
   flex-direction: column;
 }
 .item-info {
+  margin-top: 0.2rem;
   grid-column: 2/22;
   /* margin: 2rem 0; */
-  margin-top: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   grid-row: 2;
   z-index: 1;
 }
@@ -289,6 +313,7 @@ a {
 .user-control-bar {
   z-index: 10;
   grid-column: 2;
+  margin-top: 3rem;
   grid-row: 3;
   display: -webkit-box;
   display: -ms-flexbox;

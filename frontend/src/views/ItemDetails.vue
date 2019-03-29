@@ -83,24 +83,26 @@ export default {
         externalIds,
         itemVideos,
         itemCredits,
-        itemReviews
+        itemReviews,
+        
       ] = await Promise.all([
         this.$store.dispatch("getTvShowDetails", itemId),
         this.$store.dispatch("getTvShowExternalIds", itemId),
         this.$store.dispatch("getTvShowVideos", itemId),
         this.$store.dispatch("getTvShowCredits", itemId),
-        this.$store.dispatch({
-          type: "loadReviewsByType",
-          itemType: "tv",
-          itemId: itemId
-        })
+        this.$store.dispatch({type: "loadReviewsByType",itemType: "tv",itemId: itemId}),
       ]);
+      console.log(details.name)
+      const itemWatchLinks = await this.$store.dispatch("getTvShowWatchLinksByKeyword", details.name)
+      this.item.watchLinks = itemWatchLinks.results.filter(res=>res.name == details.name)[0]
       this.item.details = details;
       this.item.seasons = details.seasons;
       this.item.externalIds = externalIds;
       this.item.videos = itemVideos;
       this.item.credits = itemCredits;
       this.item.reviews = itemReviews;
+      
+      
       this.setDominantColor();
     } else {
       const itemId = this.$route.params.itemId;

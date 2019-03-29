@@ -2,7 +2,7 @@
   <section>
     <!-- <div class="icons-container"> -->
       <!-- <div class="netflix-icon"> -->
-        <img class="netflix" src="@/imgs/logos/netflix.svg">
+        <a  v-if="netflix" :href="netflix"><img class="netflix" src="@/imgs/logos/netflix.svg"></a>
         <img  class="amazon" src="@/imgs/logos/amazon.svg">
         <!-- <img src="@/imgs/logos/amazon.eps"> -->
       <!-- </div> -->
@@ -11,7 +11,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['watchLinks'],
+  created() {
+    console.log('i got the itme!',this.watchLinks )
+  },
+  computed: {
+    netflix(){
+      // console.log(this.watchLinks.locations.filter(res=>res.display_name === 'Netflix')[0].url)
+      return this.watchLinks.locations.filter(res=>res.display_name === 'Netflix')[0].url
+    }
+  },
+};
 </script>
 
 <style scoped>
