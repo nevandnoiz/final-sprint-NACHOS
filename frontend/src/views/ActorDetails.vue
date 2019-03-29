@@ -1,5 +1,8 @@
 <template>
   <section>
+    <div class="section-div-main-container">
+
+
     <!-- <div class="nav-bar-filler"></div> -->
     <!-- <pannel-heading :title="'Header'" :dominantColor="'#2d2d2d'" class="nav-bar-filler"></pannel-heading> -->
 <!-- ['dominantColor','title'] -->
@@ -58,6 +61,8 @@
         </div>
       </div>
     </div>
+
+    </div>
   </section>
 </template>
 
@@ -100,9 +105,12 @@ body {
 section {
   background: linear-gradient(to bottom right, #eee, #fff);
 }
+.section-div-main-container {
+      padding-top: 2rem;
+}
 h1 {
   color: black;
-  font-size: 2.2rem;
+  font-size: 1.5rem
 }
 h2 {
   color: black;
@@ -152,14 +160,14 @@ p {
   grid-row: 1;
   /* grid-column: 3; */
   /* grid-row: 1; */
-  width: 49vw;
+  width: 52vw;
   z-index: 2;
   /* margin: 0 auto; */
 }
 .text-container {
       background: white;
   display: flex;
-  height: 400px;
+  height: 355px;
   padding-top: 2rem;
   padding-left: 2rem;
   flex-direction: column;
@@ -175,12 +183,15 @@ p {
   margin: 0 auto;
   gap: 0.5rem;
 }
+.personal-info-container>img {
+/* border-radius: 5px */
+}
 .nav-bar-filler {
       display: flex;
     align-items: center;
   z-index: 3;
   background: #2d2d2d;
-  height: 70px;
+  /* height: 70px; */
   position: absolute;
   top: 435px;
 
@@ -191,7 +202,7 @@ p {
     height: 100%;
        font-family: Arvo;
 
-    padding: 1rem;
+    padding:  0 1rem;
     display: flex;
     margin-left: 32rem;
     /* padding-left: 30rem; */

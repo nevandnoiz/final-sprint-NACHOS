@@ -1,6 +1,6 @@
 <template>
-  <section class="search-bar-container">
-    <b-field>
+  <section >
+    <b-field class="search-bar-container">
       <b-autocomplete
         :data="data"
         placeholder="Search"
@@ -68,6 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 .search-bar-container {
-  grid-area: 2/1/2/1;
+  width: 100%;
+  // grid-area: 2/1/2/1;
 }
 </style>
