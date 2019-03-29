@@ -4,13 +4,14 @@
 
     <div class="name-main-container">
       <b-field horizontal label="Name" type="is-danger">
-        <b-input name="name" v-model="review.author" expanded></b-input>
+        <b-input v-if="!currUser" name="name" v-model="review.author" required expanded></b-input>
+        <span v-else>{{review.author}}</span>
       </b-field>
     </div>
 
     <div class="main-text-container">
       <b-field horizontal label="Content">
-        <b-input v-model="review.content" type="textarea"></b-input>
+        <b-input v-model="review.content" required type="textarea"></b-input>
       </b-field>
       <b-field horizontal>
         <!-- Label left empty for spacing -->
@@ -43,6 +44,13 @@
 <script>
 export default {
   props: ["type", "itemId"],
+  created() {
+    let user=this.$store.getters.currUser;
+    if (user){
+      this.currUser = this.$store.getters.currUser;
+      this.review.author=`${user.name.firstName} ${user.name.lastName}`
+    }
+  },
   data() {
     return {
       review: {
@@ -51,11 +59,13 @@ export default {
         rating: 0,
         content: ""
       },
+      currUser: '',
       setReview: true
     };
   },
   methods: {
     onSendReview() {
+      if (this.review.author === "" || this.review.content === "") return;
       this.review.date = Date.now();
       this.$emit("addReview", this.review);
       this.review = {
@@ -69,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style <style lang="scss" scoped>
 .rating {
   display: flex;
   justify-content: flex-end;
@@ -82,6 +92,9 @@ export default {
 .name-main-container {
   margin-bottom: 1rem;
   grid-column: 1/3;
+  span {
+    font-weight: 500;
+  }
 }
 .form-section-review {
   width: 80%;
