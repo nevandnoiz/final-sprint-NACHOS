@@ -1,66 +1,69 @@
 <template>
-<section>
-      <div v-if="!isTrailer" class="details-sections" :style="bckImage">
-        <div :style="bckColor" class="row">
+  <section>
+    <div v-if="!isTrailer" class="details-sections" :style="bckImage">
+      <div :style="bckColor" class="row"></div>
+      <div class="item-main-container">
+        <!-- <h1>Nachos details</h1> -->
+        <div class="main-container-of-poster-info">
+          <div class="white-fill"></div>
+          <div class="item-container">
+            <div class="shadowing-container">
+              <div class="social-main-container">
+                <social-button-bar :item="item"></social-button-bar>
+              </div>
 
-        </div>
-  <div class="item-main-container">
-    <!-- <h1>Nachos details</h1> -->
-      <div class="main-container-of-poster-info">
-        <div class="white-fill"></div>
-        <div class="item-container">
-       
-     
-          <div class="shadowing-container">
-            <div class="social-main-container">
+              <div :style="{'background':''+dominantColor+''}" class="details-text">
+                <seasons-menu
+                  v-if="item.seasons"
+                  :seasons="item.seasons"
+                  :tvShowId="item.details.id"
+                ></seasons-menu>
+                <p :style="{'color':''+isLightOrDark+''}">{{item.details.overview}}</p>
+              </div>
 
-<social-button-bar :item="item"></social-button-bar>
+              <div class="shadowing">
+                <!-- icons -->
+                <div class="item-info">
+                  <div class="geners">
+                    <h1 v-for="(gener, index) in item.details.genres" :key="index">{{gener.name}}</h1>
+                  </div>
+
+                  <h1>Status: {{item.details.status}}</h1>
+                  <h1>realse info</h1>
+
+                  <h1>Original Language</h1>
+                </div>
+
+                <!-- end icons -->
+                <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
+                <h1 class="title">{{item.details.title || item.details.name}} <span class="title" v-if="item.details.release_date">({{item.details.release_date}})</span> </h1>
+                <media-icons-bar class="media-icons-bar"></media-icons-bar>
+                <user-control-bar class="user-control-bar"></user-control-bar>
+              </div>
             </div>
-            
-            <div  :style="{'background':''+dominantColor+''}" class="details-text">
 
-              <seasons-menu v-if="item.seasons" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-menu>
-              <p :style="{'color':''+isLightOrDark+''}" >{{item.details.overview}}</p>
-            </div>
-
-            <div class="shadowing">
-              <!-- icons -->
-
-              <!-- end icons -->
-              <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
-              <h1 class="title">{{item.details.title || item.details.name}}</h1>
-              <media-icons-bar class="media-icons-bar"></media-icons-bar>
-              <user-control-bar class="user-control-bar"></user-control-bar>
-            </div>
-          </div>
-
-          <div class="poster-image-container">
-            
-            <!-- <seasons-list
+            <div class="poster-image-container">
+              <!-- <seasons-list
               v-show="isSeasonsListMode"
               :seasons="item.seasons"
               :tvShowId="item.details.id"
-            ></seasons-list>-->
-                
+              ></seasons-list>-->
 
-            <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-            <!-- <div class="black-filler"></div> -->
-                      <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
+              <img class="item-poster-img" ref="itemPoster" :src="imgURL">
+              <!-- <div class="black-filler"></div> -->
+              <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
+            </div>
+
+            <!-- <div class="item-details"> -->
+
+            <!-- </div> -->
           </div>
-
-          <!-- <div class="item-details"> -->
-
-          <!-- </div> -->
+          <button v-if="isTrailer" @click="onTrailer">Trailer</button>
         </div>
-        <button v-if="isTrailer" @click="onTrailer">Trailer</button>
       </div>
     </div>
-  </div>
-  <p>
-  </p>
-  
-</section>
-
+    <p></p>
+  </section>
 </template>
 <script>
 import "@/services/AvgColorService.js";
@@ -78,43 +81,55 @@ export default {
   components: {
     PannelHeading,
     SocialButtonBar,
-    NavBar,   
+    NavBar,
     SeasonsMenu,
     UserControlBar,
     MediaIconsBar
   },
   async created() {
-    var test = await this.$store.dispatch("getTvShowWatchLinksByKeyword","Prison Break")
-    console.log(test.results[0].locations[4])
-    eventBus.$on("onSeasonsListClick",() => (this.isSeasonsListMode = !this.isSeasonsListMode));
+    console.log("item", this.item);
+    var test = await this.$store.dispatch(
+      "getTvShowWatchLinksByKeyword",
+      "Prison Break"
+    );
+    console.log(test.results[0].locations[4]);
+    eventBus.$on(
+      "onSeasonsListClick",
+      () => (this.isSeasonsListMode = !this.isSeasonsListMode)
+    );
   },
   data() {
     return {
       isSeasonsListMode: false,
-      isTrailer: false,
+      isTrailer: false
     };
   },
- props: ["item", "dominantColor"],
+  props: ["item", "dominantColor"],
   methods: {
-    listing() {
-    },
+    listing() {},
     onTrailer() {
       this.isTrailer = !this.isTrailer;
     }
   },
   computed: {
-      isLightOrDark() {
-        console.log('do we have dom colo?', this.dominantColor)
-        if(UtilityService.lightOrDark(this.dominantColor) === 'light') return 'black'
-        else return 'white'
-      },
-       bckImage() {
-         return {backgroundImage: `url(http://image.tmdb.org/t/p/w1280${this.item.details.backdrop_path})`};
+    isLightOrDark() {
+      console.log("do we have dom colo?", this.dominantColor);
+      if (UtilityService.lightOrDark(this.dominantColor) === "light")
+        return "black";
+      else return "white";
+    },
+    bckImage() {
+      return {
+        backgroundImage: `url(http://image.tmdb.org/t/p/w1280${
+          this.item.details.backdrop_path
+        })`
+      };
     },
     bckColor() {
-              // in the case of redComp, greenComp and blueComp are a vue prop or data
-              console.log(UtilityService.lightOrDark(this.dominantColor))
-      if(UtilityService.lightOrDark(this.dominantColor) === 'dark') return {background: this.dominantColor + "B3"};
+      // in the case of redComp, greenComp and blueComp are a vue prop or data
+      console.log(UtilityService.lightOrDark(this.dominantColor));
+      if (UtilityService.lightOrDark(this.dominantColor) === "dark")
+        return { background: this.dominantColor + "B3" };
     },
     imgURL() {
       return UtilityService.imgURL(this.item.details.poster_path, 500);
@@ -126,82 +141,92 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Arvo");
 
-*{
-    font-family: Arvo;
+* {
+  font-family: Arvo;
 }
 
 a {
   font: -webkit-control;
 }
 .black-filler {
-      background: black;
-      height: 73px;
-    /* z-index: 343434543; */
-    /* background: antiquewhite; */
-
+  background: black;
+  height: 73px;
+  /* z-index: 343434543; */
+  /* background: antiquewhite; */
 }
 .social-main-container {
   /* z-index: 4235345345; */
-    display: flex;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    color: white;
-    -ms-flex-order: 2;
-    order: 2;
-    -ms-flex-align: end;
-    align-items: flex-end;
-    display: flex;
-    /* z-index: 23333; */
-    -ms-flex-direction: row;
-    flex-direction: row;
-    grid-row: 1;
-    grid-column: 2;
+  display: flex;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  color: white;
+  -ms-flex-order: 2;
+  order: 2;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  display: flex;
+  /* z-index: 23333; */
+  -ms-flex-direction: row;
+  flex-direction: row;
+  grid-row: 1;
+  grid-column: 2;
 }
-.pannel-heading-epo{
-      margin-top: 1.3rem;
- grid-column: 1/8;
-    grid-row: 43;
+.pannel-heading-epo {
+  margin-top: 1.3rem;
+  grid-column: 1/8;
+  grid-row: 43;
 }
-   
-.pannel-heading>h1{
-padding: 0 0.5rem;
-    display: flex;
-    background-color: white;
-    height: 100%;
-    align-items: center;
+
+.pannel-heading > h1 {
+  padding: 0 0.5rem;
+  display: flex;
+  background-color: white;
+  height: 100%;
+  align-items: center;
 }
-    
+
 .item-main-container {
   display: flex;
-      justify-content: center;
+  justify-content: center;
 }
 .netflix-season-menu-container {
   -webkit-box-shadow: 0px 0px 12px #000000;
-    box-shadow: 0px 0px 12px #000000;
-    /* margin-top: 1rem; */
-    width: 100%;
-    grid-column: 1;
-    grid-row: 1;
-    align-self: flex-end;
-    /* position: relative; */
-    /* display: flex; */
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
+  box-shadow: 0px 0px 12px #000000;
+  /* margin-top: 1rem; */
+  width: 100%;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: flex-end;
+  /* position: relative; */
+  /* display: flex; */
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 .netflix-container {
-      box-shadow: 0px 0px 12px #000000;
-      padding-bottom: 2rem;
-    background-color: rgb(39, 36, 18);
-      /* padding: 1rem 0; */
-      /* padding-bottom: 20px; */
+  box-shadow: 0px 0px 12px #000000;
+  padding-bottom: 2rem;
+  background-color: rgb(39, 36, 18);
+  /* padding: 1rem 0; */
+  /* padding-bottom: 20px; */
   box-shadow: 0px 0px 12px #000000;
   margin-top: 1rem;
   grid-column: 1/6;
   /* position: relative; */
   display: flex;
   flex-direction: column;
+}
+.item-info {
+  grid-column: 2/22;
+  /* margin: 2rem 0; */
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  grid-row: 2;
+  z-index: 1;
+}
+.item-info > h1 {
+  color: white;
 }
 
 .title {
@@ -254,7 +279,7 @@ padding: 0 0.5rem;
 }
 .shadowing-container {
   display: grid;
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 374px 1fr;
   grid-column: 2;
   grid-row: 1;
@@ -274,31 +299,29 @@ padding: 0 0.5rem;
 }
 
 .shadowing {
-  
-    z-index: 33;
-    grid-row: 1;
-    grid-column: 1/3;
-    grid-template: repeat(10, 1fr);
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-columns: 2em 1fr 1fr;
-    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  z-index: 33;
+  grid-row: 1;
+  grid-column: 1/3;
+  grid-template: repeat(10, 1fr);
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: 2em 1fr 1fr;
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 .details-sections {
-      position: relative;
+  position: relative;
   background-repeat: no-repeat;
   background-size: 100%;
-    background-position-y: 32%;
-        height: 494px;
+  background-position-y: 32%;
+  height: 494px;
 }
 .row {
-    width: 100%;
-    top: 0;
-    position: absolute;
-    height: 100% !important;
-    /* width: 100vw; */
-    z-index: 2;
-
+  width: 100%;
+  top: 0;
+  position: absolute;
+  height: 100% !important;
+  /* width: 100vw; */
+  z-index: 2;
 }
 
 button {
@@ -318,20 +341,19 @@ i {
 }
 
 .white-fill {
-      display: none;
-    background-color: #f5f5f5;
-    grid-row: 2;
-    padding-bottom: 285px
-
+  display: none;
+  background-color: #f5f5f5;
+  grid-row: 2;
+  padding-bottom: 285px;
 }
 .item-container {
-    display: grid;
-    width: 76vw;
-    z-index: 1;
-    grid-template-columns: 400px 2fr;
-    grid-template-rows: minmax(75px, auto) 1fr;
-    margin: 120px auto;
-    border-radius: 3px;
+  display: grid;
+  width: 76vw;
+  z-index: 1;
+  grid-template-columns: 400px 2fr;
+  grid-template-rows: minmax(75px, auto) 1fr;
+  margin: 120px auto;
+  border-radius: 3px;
 }
 
 .item-poster-img {
@@ -375,13 +397,13 @@ i {
   background-color: lightslategray;
 } */
 .details-text {
-position: relative;
-      box-shadow: 0px 0px 12px #000000;
-    padding: 20px;
-    margin: 0;
-    grid-column: 1/3;
-    /* background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)); */
-    grid-row: 2;
+  position: relative;
+  box-shadow: 0px 0px 12px #000000;
+  padding: 20px;
+  margin: 0;
+  grid-column: 1/3;
+  /* background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)); */
+  grid-row: 2;
 }
 .details-text > * {
   color: white;
@@ -424,6 +446,4 @@ position: relative;
   /* padding: 50px; */
   /* background-color: lightgray; */
 }
-
-
 </style>
