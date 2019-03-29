@@ -30,7 +30,7 @@
               <!-- <pannel-heading class="pannel-heading-epo" :title="'Description'" :dominantColor="dominantColor"></pannel-heading> -->
               <h1 class="title">{{item.details.title || item.details.name}}</h1>
               <media-icons-bar class="media-icons-bar"></media-icons-bar>
-              <user-control-bar class="user-control-bar"></user-control-bar>
+              <user-control-bar :item="item.details" :itemType="itemType" class="user-control-bar"></user-control-bar>
             </div>
           </div>
 
@@ -131,7 +131,7 @@ export default {
       isTrailer: false,
     };
   },
- props: ["item", "dominantColor"],
+ props: ["item","itemType" ,"dominantColor"],
   methods: {
     listing() {
     },

@@ -10,7 +10,7 @@
         :player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
-    <item-container v-if="this.item.details" :item="item" :dominantColor="dominantColor"></item-container>
+    <item-container v-if="this.item.details" :item="item" :itemType="itemType" :dominantColor="dominantColor"></item-container>
     <div class="sub-container">
       <episodes-swiper
         v-if="itemType==='tv'"
