@@ -8,8 +8,8 @@
       :value="index"
     >
       <p>{{season.name}}</p>
-      
-      <i class="fas fa-check check-button-season-menu" @click="emitWatchedSeason"></i>
+
+      <i v-if="currUser" class="fas fa-check check-button-season-menu" @click.stop="emitWatchedSeason"></i>
     </el-option>
   </el-select>
 </template>
@@ -34,32 +34,37 @@ export default {
     onSelectSeason(index) {
       eventBus.$emit("onSeasonClick", this.seasonIdx);
     },
-    emitWatchedSeason(){
-      console.log('coming soon')
+    emitWatchedSeason() {
+      console.log("coming soon");
       // eventBus.$emit('watchedSeason')
+    }
+  },
+  computed: {
+    currUser() {
+      return this.$store.getters.currUser;
     }
   }
 };
 </script>
 <style>
 .episoide-btn-container {
-      align-items: center;
-    display: flex;
-    justify-content: space-between;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 .check-button-season-menu {
-     font-size: 10px;
-    margin: 9px 9px 9px 0;
-    background-color: white;
-    opacity: 0.5;
-    color: darkslategray;
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    justify-content: center;
-    border-radius: 50%;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
+  font-size: 10px;
+  margin: 9px 9px 9px 0;
+  background-color: white;
+  opacity: 0.5;
+  color: darkslategray;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 .check-button-season-menu:hover {
   cursor: pointer;
@@ -91,7 +96,7 @@ export default {
   position: absolute;
   z-index: 20;
   width: 200px;
-      top:186px;  
+  top: 186px;
   right: 0;
 }
 .el-input__inner {

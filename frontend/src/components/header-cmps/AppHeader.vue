@@ -26,7 +26,7 @@ export default {
       this.$store
         .dispatch("loginUser")
         .then(() => this.$store.dispatch("loadActivities"))
-        this.$router.push("/")
+        this.$router.go()
     }
   },
   computed: {

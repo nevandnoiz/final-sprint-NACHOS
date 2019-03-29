@@ -3,8 +3,8 @@
     <div class="main-youtube-container" v-if="isTrailerPlaying">
       <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
       <youtube
-      v-if="isTrailerPlaying"
-       crossorigin="anonymous"
+        v-if="isTrailerPlaying"
+        crossorigin="anonymous"
         class="youtube-container"
         :video-id="this.item.videos.results[0].key"
         :player-vars="{ autoplay: 1 }"
@@ -28,7 +28,12 @@
         <div class="reviews-section">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <div class="reviews-conatier">
-            <new-review v-for="(review, index) in item.reviews"  :reviewIdx="index" :key="index" :review="review"></new-review>
+            <new-review
+              v-for="(review, index) in item.reviews"
+              :reviewIdx="index"
+              :key="index"
+              :review="review"
+            ></new-review>
             <review-form @addReview="addReview" :itemId="item.details.id"></review-form>
           </div>
           <!-- <twitter-feed :keyword="item.details.name"></twitter-feed> -->
@@ -54,6 +59,7 @@ import NewReview from "@/components/details-cmps/NewReview.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 import TwitterFeed from "@/components/general-cmps/TwitterFeed.vue";
 import { eventBus } from "@/main.js";
+import moment from "moment";
 
 export default {
   data() {
@@ -100,6 +106,10 @@ export default {
       this.item.externalIds = externalIds;
       this.item.videos = itemVideos;
       this.item.credits = itemCredits;
+      await itemReviews.forEach(async review => {
+        if (!review.date) return (review.date = await this.genRandTimestamp());
+      });
+      itemReviews.sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
       this.item.reviews = itemReviews;
       this.setDominantColor();
     } else {
@@ -125,6 +135,10 @@ export default {
       this.item.externalIds = externalIds;
       this.item.videos = itemVideos;
       this.item.credits = itemCredits;
+      await itemReviews.forEach(async review => {
+        if (!review.date) return (review.date = await this.genRandTimestamp());
+      });
+      itemReviews.sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
       this.item.reviews = itemReviews;
       this.setDominantColor();
     }
@@ -150,6 +164,18 @@ export default {
         itemId: this.item.details.id
       });
       // eventBus.$emit('finishAddReview')
+    },
+    async genRandTimestamp() {
+      let relDate =
+        this.itemType === "movies"
+          ? this.item.details.release_date
+          : this.item.details.first_air_date;
+      let relDateTimestamp = moment(relDate).unix() * 1000;
+      let currDateTimestamp = Date.now();
+      return Math.floor(
+        Math.random() * (currDateTimestamp - relDateTimestamp + 1) +
+          relDateTimestamp
+      );
     }
   },
   components: {

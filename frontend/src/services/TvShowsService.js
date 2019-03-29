@@ -13,7 +13,7 @@ export default {
     getTvShowSeasons,
     getTvShowWatchLinksByKeyword,
     getTvShowVideos,
-    getSeasonDetails
+    getSeasonsDetails
 }
 
 async function getTopRatedShows(page = 1) {
@@ -84,7 +84,7 @@ async function getTvShowVideos(id) {
     let res = await axios.get(`http://localhost:3003/tv/videos/${id}`)
     return res.data
 }
-async function getSeasonDetails(id, seasons) {
+async function getSeasonsDetails(id, seasons) {
     let prms = []
     seasons.forEach(season=>{
         if (season.name !== "Specials")

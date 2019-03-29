@@ -60,9 +60,9 @@ export default {
       const links = await TvShowsService.getTvShowWatchLinksByKeyword(keyword)
       return links
     },
-    async getSeasonDetails(context, { id, seasons }) {
-      const seasonDetails = await TvShowsService.getSeasonDetails(id, seasons)
-      return seasonDetails
+    async getSeasonsDetails(context, { id, seasons }) {
+      const seasonsDetails = await TvShowsService.getSeasonsDetails(id, seasons)
+      return seasonsDetails
     }
   }
 }

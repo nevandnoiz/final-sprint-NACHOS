@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 export default {
+    getTopRatedMovies,
+    getPopularMovies,
     getTrendingMovies,
     getMovieDetails,
     getMovieImages,
@@ -11,10 +13,22 @@ export default {
     getMovieVideos,
 }
 
+async function getTopRatedMovies(page = 1) {
+    let res = await axios.get(`http://localhost:3003/movies/top_rated/${page}`)
+    const movies = res.data
+    return movies
+}
+
+async function getPopularMovies(page = 1) {
+    let res = await axios.get(`http://localhost:3003/movies/popular/${page}`)
+    const movies = res.data
+    return movies
+}
+
 async function getTrendingMovies(page = 1) {
-    let res = await axios.get(`http://localhost:3003/movies/${page}`)
-    const trending = res.data
-    return trending
+    let res = await axios.get(`http://localhost:3003/movies/trending/${page}`)
+    const movies = res.data
+    return movies
 }
 
 async function getMovieDetails(id) {

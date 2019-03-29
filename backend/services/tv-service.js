@@ -176,5 +176,5 @@ function getSeasonDetails(id, seasonNum) {
 }
 
 function _getRandomRating() {
-    return (Math.floor(Math.random() * (10 - 0 + 1))) / 2;
+    return (Math.floor(Math.random() * (5 - 0 + 1)));
 }

@@ -1,6 +1,14 @@
 <template>
   <div class="browse">
     <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
+    <div class="categories">
+      <a
+        v-for="(category,index) in categories"
+        :key="index"
+        :class="{'selected-category': category===currCategory }"
+        @click="changeCategory(category)"
+      >{{category}}</a>
+    </div>
     <div class="grid-container">
       <item-preview v-for="(movie, index) in popularItems" :key="index" :item="movie"></item-preview>
     </div>
@@ -14,25 +22,28 @@ import ItemPreview from "@/components/ItemPreview.vue";
 
 export default {
   created() {
-    this.loadItems();
+    this.$store.dispatch(`getTrendingMovies`);
   },
   components: {
     BackdropCmp,
     ItemPreview
   },
   data() {
-    return {};
+    return {
+      categories: ["Trending", "Top Rated", "Popular"],
+      currCategory: "Trending"
+    };
   },
   methods: {
     posterImgURL(posterPath) {
       return UtilityService.imgURL(posterPath, 300);
     },
-    loadItems() {
-      let movies = this.$store.getters.moviesToDisplay;
-      if (!movies) {
-        console.log("Loaded from api");
-        this.$store.dispatch(`loadPopularMovies`);
-      } else console.log("Loaded from store");
+    changeCategory(category) {
+      if (category === "Trending") this.$store.dispatch(`getTrendingMovies`);
+      else if (category === "Top Rated")
+        this.$store.dispatch(`getTopRatedMovies`);
+      else if (category === "Popular") this.$store.dispatch(`getPopularMovies`);
+      this.currCategory = category;
     }
   },
   computed: {
@@ -43,12 +54,12 @@ export default {
       let topFiveItems = this.popularItems.slice(0, 5);
       return topFiveItems;
     }
-  },
-  watch: {
-    "$route.params.section": function() {
-      this.loadItems();
-    }
   }
+  // watch: {
+  //   "$route.params.section": function() {
+  //     this.loadItems();
+  //   }
+  // }
 };
 </script>
 
@@ -56,15 +67,31 @@ export default {
 .browse {
   // background: #000000bf;
   display: grid;
-  grid-template: 500px 1fr/1fr;
+  grid-template: 475px 80px 1fr/1fr;
 }
 .grid-container {
-  padding: 20px;
+  padding: 0 20px;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
-  grid-area: 2/1/2/1;
+  grid-area: 3/1/3/1;
 }
-
+.categories {
+  grid-area: 2/1/2/1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  a {
+    font-size:24px;
+    font-weight: 500;
+    transition: 0.05s;
+  }
+  .selected-category {
+    color: #f57f16;
+  }
+  a:hover {
+    color: #f57f16;
+  }
+}
 </style>

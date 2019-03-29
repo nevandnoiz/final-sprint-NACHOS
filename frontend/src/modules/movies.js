@@ -2,23 +2,31 @@ import MoviesService from '../services/MoviesService';
 
 export default {
   state: {
-    popularMovies: '',
+    movies: '',
   },
   getters: {
     moviesToDisplay(state) {
-      return state.popularMovies
+      return state.movies
     },
   },
   mutations: {
-    setPopularMovies(state, { movies }) {
+    setMovies(state, { movies }) {
       movies.forEach( movie => movie.type = 'movie');
-      state.popularMovies = movies
+      state.movies = movies
     },
   },
   actions: {
-    async loadPopularMovies(context, payload) {
+    async getTopRatedMovies(context, payload) {
+      const movies = await MoviesService.getTopRatedMovies()
+      context.commit({ type: 'setMovies', movies: movies })
+    },
+    async getPopularMovies(context, payload) {
+      const movies = await MoviesService.getPopularMovies()
+      context.commit({ type: 'setMovies', movies: movies })
+    },
+    async getTrendingMovies(context, payload) {
       const movies = await MoviesService.getTrendingMovies()
-      context.commit({ type: 'setPopularMovies', movies: movies })
+      context.commit({ type: 'setMovies', movies: movies })
     },
     async getMovieDetails(context, movieId) {
       const movieDetails = await MoviesService.getMovieDetails(movieId)

@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-md-2">
               <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid">
-              <p class="text-secondary text-center">15 Minutes Ago</p>
+              <p class="text-secondary text-center">{{date}}</p>
             </div>
             <div class="col-md-10">
               <div class="card-review-header">
@@ -45,6 +45,7 @@
 
 <script>
 import { eventBus } from "@/main.js";
+import moment from 'moment'
 
 export default {
   props: ["review", "reviewIdx"],
@@ -54,6 +55,9 @@ export default {
   computed: {
     id() {
       return `review-${this.reviewIdx + 1}`;
+    },
+    date() {
+      return moment(+this.review.date).fromNow();
     }
   },
   data() {

@@ -25,7 +25,7 @@ export default {
   async created() {
     eventBus.$on("onSeasonClick", index => this.onEmit(index));
     this.seasonsDetails = await this.$store.dispatch({
-      type: "getSeasonDetails",
+      type: "getSeasonsDetails",
       id: this.tvShowId,
       seasons: this.seasons
     });
@@ -46,14 +46,6 @@ export default {
     };
   },
   methods: {
-    // toggleMarkWatched(episode) {
-    //   this.isChecked=!this.isChecked
-      // this.$store.dispatch({
-      //   type: "markWatched",
-      //   showId: episode.show_id,
-      //   epId: episode.id
-      // });
-    // },
     onEmit(index) {
       this.key+=1
       this.season = this.seasonsDetails[index].data;

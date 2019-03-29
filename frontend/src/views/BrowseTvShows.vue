@@ -1,13 +1,14 @@
 <template>
   <div class="browse">
     <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
-    <!-- <div class="categories">
+    <div class="categories">
       <a
         v-for="(category,index) in categories"
         :key="index"
+        :class="{'selected-category': category===currCategory }"
         @click="changeCategory(category)"
       >{{category}}</a>
-    </div> -->
+    </div>
     <div class="grid-container">
       <item-preview v-for="(tvShow, index) in popularItems" :key="index" :item="tvShow"></item-preview>
     </div>
@@ -29,10 +30,8 @@ export default {
   },
   data() {
     return {
-      // categories: ["Trending", "Top Rated", "Popular"],
-      currCategory: "Trending",
-      sectionKey: null,
-      SectionKey: null
+      categories: ["Trending", "Top Rated", "Popular"],
+      currCategory: "Trending"
     };
   },
   methods: {
@@ -55,12 +54,12 @@ export default {
       let topFiveItems = this.popularItems.slice(0, 5);
       return topFiveItems;
     }
-  },
-  watch: {
-    "$route.params.section": function() {
-      this.loadItems();
-    }
   }
+  // watch: {
+  //   "$route.params.section": function() {
+  //     this.loadItems();
+  //   }
+  // }
 };
 </script>
 
@@ -68,10 +67,10 @@ export default {
 .browse {
   // background: #000000bf;
   display: grid;
-  grid-template: 500px 0 1fr/1fr;
+  grid-template: 475px 80px 1fr/1fr;
 }
 .grid-container {
-  padding: 20px;
+  padding: 0 20px;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -82,5 +81,17 @@ export default {
   grid-area: 2/1/2/1;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  a {
+    font-size: 24px;
+    font-weight: 500;
+    transition: 0.05s;
+  }
+  .selected-category {
+    color: #f57f16;
+  }
+  a:hover {
+    color: #f57f16;
+  }
 }
 </style>
