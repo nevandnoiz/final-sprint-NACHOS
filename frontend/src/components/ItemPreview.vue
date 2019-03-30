@@ -7,7 +7,7 @@
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered, 'selected': isSelected}"
   >
-    <div class="item-hover-controls" v-if="currUser && isHovered">
+    <div class="item-hover-controls" v-if="isHovered && showBtns">
       <div class="hover-controls-btns">
         <el-tooltip
           class="item"
@@ -52,7 +52,7 @@
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
-  props: ["item", "selectMode"],
+  props: ["item", "selectMode", "showBtns"],
   components: {},
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
-      const detailsRoute = this.item.type === 'tv' ? 'tv' : 'movies'
+      const detailsRoute = this.item.type === "tv" ? "tv" : "movies";
       this.$router.push(`/${detailsRoute}/details/${itemId}`);
     },
     toggleIsHovered() {

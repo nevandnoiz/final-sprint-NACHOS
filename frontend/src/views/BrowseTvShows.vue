@@ -7,9 +7,14 @@
         :key="index"
         @click="changeCategory(category)"
       >{{category}}</a>
-    </div> -->
+    </div>-->
     <div class="grid-container">
-      <item-preview v-for="(tvShow, index) in popularItems" :key="index" :item="tvShow"></item-preview>
+      <item-preview
+        v-for="(tvShow, index) in popularItems"
+        :key="index"
+        :item="tvShow"
+        :showBtns="true"
+      />
     </div>
   </div>
 </template>

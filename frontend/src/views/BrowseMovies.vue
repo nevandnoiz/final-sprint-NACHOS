@@ -2,7 +2,7 @@
   <div class="browse">
     <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
     <div class="grid-container">
-      <item-preview v-for="(movie, index) in popularItems" :key="index" :item="movie"></item-preview>
+      <item-preview v-for="(movie, index) in popularItems" :key="index" :item="movie"  :showBtns="true"></item-preview>
     </div>
   </div>
 </template>
@@ -66,5 +66,4 @@ export default {
   justify-items: center;
   grid-area: 2/1/2/1;
 }
-
 </style>
