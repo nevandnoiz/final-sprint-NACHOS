@@ -74,12 +74,12 @@ export default {
       z-index: 3;
 }
 img {
-  height: 20px;
+  height: 15px;
     background: white;
     /* padding: 1rem; */
     margin: 0 4px;
     box-sizing: content-box;
-    padding: 0.5rem 1rem;
+        padding: 0.5rem 10px;
     border-radius: 5px;
 }
 </style>

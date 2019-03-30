@@ -40,6 +40,7 @@ i:hover {
   cursor: pointer;
 }
 i {
+  margin: 0 0.7rem;
   font-size: 2rem;
   color: rgba(255, 255, 255, 0.863);
 }
@@ -52,7 +53,7 @@ i {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
 }
 

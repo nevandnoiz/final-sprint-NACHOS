@@ -16,6 +16,7 @@
 
               <div :style="{'background':''+dominantColor+''}" class="details-text">
                 <seasons-menu
+                class="seasons-menu-desktop"
                   v-if="item.seasons"
                   :seasons="item.seasons"
                   :tvShowId="item.details.id"
@@ -47,7 +48,6 @@
                     v-if="item.details.release_date"
                   >({{item.details.release_date}})</span>
                 </h1>
-                <media-icons-bar :watchLinks="item.watchLinks" class="media-icons-bar"></media-icons-bar>
                 <user-control-bar class="user-control-bar"></user-control-bar>
               </div>
             </div>
@@ -60,7 +60,10 @@
               ></seasons-list>-->
 
               <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-              <div class="black-filler"></div>
+              <div class="black-filler">
+                                <media-icons-bar :watchLinks="item.watchLinks" class="media-icons-bar"></media-icons-bar>
+
+              </div>
               <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
             </div>
 
@@ -170,6 +173,9 @@ h1 {
 a {
   font: -webkit-control;
 }
+.seasons-menu-desktop {
+  display: block
+}
 .hello {
       background-image: url(http://image.tmdb.org/t/p/w1280/xVzvD5BPAU4HpleFSo8QOdHkndo.jpg);
     z-index: 1;
@@ -186,8 +192,13 @@ a {
   grid-column: 2/333;
 }
 .black-filler {
+  z-index: 2;
+      box-shadow: 0px 0px 12px #000000;
+      display: flex;
+          justify-content: center;
   background: black;
-  height: 73px;
+      /* height: 100%; */
+    min-height: 64px
   /* z-index: 343434543; */
   /* background: antiquewhite; */
 }
@@ -327,7 +338,8 @@ a {
 }
 .user-control-bar {
   z-index: 10;
-  grid-column: 2;
+  
+grid-column: 2/10;
   margin-top: 3rem;
   grid-row: 3;
   display: -webkit-box;
@@ -359,7 +371,7 @@ a {
   width: 100%;
   top: 0;
   position: absolute;
-  /* height: 100% !important; */
+  height: 494px !important;
   /* width: 100vw; */
   z-index: 2;
 }
@@ -438,9 +450,11 @@ i {
   background-color: lightslategray;
 } */
 .details-text {
+  z-index: 2;
   position: relative;
   box-shadow: 0px 0px 12px #000000;
   padding: 20px;
+      padding-bottom: 50px;
   margin: 0;
   grid-column: 1/3;
   /* background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)); */
@@ -490,6 +504,19 @@ i {
 
 
 
+@media only screen and (max-width: 1000px) {
+  
+.item-container {
+  width: 95vw;
+  /* grid-template-columns: 1fr 1fr; */
+}
+.hello {
+        background-position-y: 100%;
+
+}
+
+
+}
 
 
 
@@ -507,13 +534,29 @@ h1 {
 a {
   font: -webkit-control;
 }
+i{
+  /* font-size: 4rem */
+}
+.hello {
+  height: 1112px;
+  background-size:auto;
+      background-position-y: 0;
+}
+.seasons-menu-desktop {
+  display: none
+}
 .geners {
   grid-row: 2;
   grid-column: 2/333;
 }
+
+/* item-container > 1fr  */
 .black-filler {
   background: black;
-  height: 73px;
+      height: 100%;
+    min-height: 64px;
+      justify-content: center;
+      display: flex;
   /* z-index: 343434543; */
   /* background: antiquewhite; */
 }
@@ -621,7 +664,7 @@ a {
   justify-content: center;
 }
 .poster-image-container {
-  width: auto;
+  width: 100vw;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -655,7 +698,7 @@ a {
 }
 .user-control-bar {
   z-index: 10;
-  grid-column: 2;
+      
   margin-top: 3rem;
   grid-row: 3;
   display: -webkit-box;
@@ -674,7 +717,7 @@ a {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: 2em 1fr 1fr;
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5))
 }
 .details-sections {
   position: relative;
@@ -687,7 +730,7 @@ a {
   width: 100%;
   top: 0;
   position: absolute;
-  height: 100% !important;
+  height: 720px !important;
   /* width: 100vw; */
   z-index: 2;
 }
@@ -715,8 +758,9 @@ i {
   padding-bottom: 285px;
 }
 .item-container {
+  margin: 68px 0 auto;
   /* display: grid; */
-  width: 76vw;
+  width: 100vw;
   z-index: 1;
       /* width: 100%; */
     display: flex;
@@ -728,7 +772,8 @@ i {
 }
 
 .item-poster-img {
-      min-width: 250px;
+         height: auto;
+    width: 100vw;
   z-index: 3;
   /* border-radius: 5px; */
   /* width: 400px; */
@@ -769,9 +814,11 @@ i {
   background-color: lightslategray;
 } */
 .details-text {
+  z-index: 2;
   position: relative;
   box-shadow: 0px 0px 12px #000000;
   padding: 20px;
+      padding-bottom: 20px;
   margin: 0;
   grid-column: 1/3;
   /* background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2)); */

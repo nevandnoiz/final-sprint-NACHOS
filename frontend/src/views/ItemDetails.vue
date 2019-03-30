@@ -10,7 +10,11 @@
         :player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
-    <item-container v-if="this.item.details" :item="item" :dominantColor="dominantColor"></item-container>
+    <item-container v-if="this.item.details" :item="item" :dominantColor="dominantColor">
+      
+    </item-container>
+        <seasons-list class="mobile-season-list" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list>
+
     <div class="sub-container">
       <episodes-swiper
         v-if="itemType==='tv'"
@@ -35,17 +39,16 @@
         </div>
       </div>
     </div>
-    <!-- <seasons-list :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list> -->
   </div>
 </template>
 
 <script>
+import SeasonsList from '../components/details-cmps/SeasonsList.vue' 
 import TwitterService from "@/services/TwitterService.js";
 import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import EpisodesSwiper from "@/components/swiper-cmps/EpisodesSwiper.vue";
-// import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
@@ -164,7 +167,7 @@ export default {
     ReviewContainer,
     ReviewForm,
     NavBar
-  },
+  ,  SeasonsList},
   watch: {
     "$route.params.itemId": function() {
       this.$router.go();
@@ -174,7 +177,11 @@ export default {
 </script>
 
 <style scoped>
+.mobile-season-list {
+  display: none
+}
 .Actors {
+  /* margin-left: 1rem; */
   /* box-shadow: 0px 0px 12px #000000; */
   display: grid;
   grid-template-columns: 1fr;
@@ -184,7 +191,7 @@ export default {
   display: grid;
   gap: 2rem;
   margin-top: 2rem;
-  grid-template-columns: 210px 2fr;
+  grid-template-columns: 1fr 2fr;
   height: 800px;
 }
 .reviews-section {
@@ -215,5 +222,36 @@ export default {
   z-index: 4234234234;
   top: 1081px;
   left: 457px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .sub-container{
+    width: 95vw;
+  }
+}
+
+@media only screen and (max-width: 750px) { 
+.netflix-container {
+  display: none;
+}
+.sub-container {
+  display: flex;
+width: 100vw;
+}
+.content-info-container{
+      display: grid;
+    gap: none;
+    width: 100vw;
+    margin: 0 auto;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 2fr;
+    height: 800px;
+}
+.mobile-season-list{
+  width: 100vw;
+  margin: 0 auto;
+  display: block
+}
+
 }
 </style>

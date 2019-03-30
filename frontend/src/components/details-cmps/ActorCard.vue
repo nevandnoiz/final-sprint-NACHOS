@@ -91,6 +91,7 @@ img {
     width: 145px;
 }
 .cards-container {
+  margin-left: 1rem;
 }
 /* div {
     display: none;
