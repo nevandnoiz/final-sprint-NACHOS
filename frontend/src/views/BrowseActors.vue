@@ -65,7 +65,7 @@ export default {
 .browse {
   background: black;
   // background: #000000bf;
-  padding: 20px;
+  padding: 0 20px;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

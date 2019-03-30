@@ -78,13 +78,10 @@ export default {
   },
   async created() {
     console.log("hey");
-
-    var actor = await this.$store.dispatch("getActorDetails", "5081");
+     const actorId = this.$route.params.actorId;
+    const actor = await this.$store.dispatch("getActorDetails", actorId);
     this.actor = actor;
-    var actorMovies = await this.$store.dispatch(
-      "getActorMovieCredits",
-      "5081"
-    );
+    var actorMovies = await this.$store.dispatch("getActorMovieCredits",actorId);
     this.actorMovies = actorMovies;
     // console.log(actorMovies)
     console.log(this.actor);

@@ -31,7 +31,7 @@
             <new-review v-for="(review, index) in item.reviews"  :reviewIdx="index" :key="index" :review="review"></new-review>
             <review-form @addReview="addReview" :itemId="item.details.id"></review-form>
           </div>
-          <twitter-feed :keyword="item.details.name"></twitter-feed>
+          <!-- <twitter-feed :keyword="item.details.name"></twitter-feed> -->
         </div>
       </div>
     </div>
@@ -203,7 +203,7 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 226px auto;
+      margin: 0 auto;
 
   display: block;
   width: 76vw;

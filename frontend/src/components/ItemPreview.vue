@@ -76,7 +76,8 @@ export default {
       console.log('itemtype', this.item)
       
       let detailsRoute = this.item.type === 'tv' ? 'tv' : 'movies'
-      if(this.item.known_for) detailsRoute = 'actors'
+      // TODO REFACTOR
+      if(this.item.known_for)return this.$router.push(`actors/${itemId}`)
       this.$router.push(`/${detailsRoute}/details/${itemId}`);
     },
     toggleIsHovered() {

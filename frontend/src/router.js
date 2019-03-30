@@ -41,8 +41,7 @@ export default new Router({
       component: ItemDetails
     },
     {
-  
-      path: '/actors/details/:actorId',
+      path: '/actors/:actorId',
       name: 'actorDetails',
       component: ActorDetails
     },

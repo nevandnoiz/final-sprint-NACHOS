@@ -91,7 +91,8 @@ export default {
   position: absolute;
   z-index: 20;
   width: 200px;
-      top:186px;  
+      bottom: 0;
+      border-radius: 3px;
   right: 0;
 }
 .el-input__inner {
