@@ -14,12 +14,12 @@
     </div>
 
     <div class="btns">
-      <div class="likes">
-        <i :class="heart" @click="addLike"></i>
+      <div class="likes" @click="toggleLike">
+        <i :class="heart"></i>
         <p>{{this.item.likes}}</p>
       </div>
-      <div>
-        <button @click="focusComment">Comment</button>
+      <div @click="focusComment">
+        <button>Comment</button>
       </div>
     </div>
 
@@ -81,9 +81,14 @@ export default {
       if (ev.target.innerText.length > 0) this.showPlaceholder = false;
       else this.showPlaceholder = true;
     },
-    addLike() {
-      this.$emit("addLike", this.item);
-      this.like = true;
+    toggleLike() {
+      if (!this.like) {
+        this.$emit("addLike", this.item);
+        this.like = true;
+      } else {
+        this.$emit("removeLike", this.item);
+        this.like = false;
+      }
     },
     focusComment() {
       this.$refs.textarea.focus();
@@ -155,16 +160,36 @@ a.link:hover {
 
 .btns {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-evenly;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+
+  div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    button {
+      margin: 0;
+      border: 0;
+      background-color: inherit;
+    }
+    :focus {
+      outline: 0;
+    }
+  }
+  :hover {
+    background-color: rgb(245, 245, 245);
+  }
+  .likes {
+    border-right: 1px solid rgb(245, 245, 245);
+  }
 }
 .comments {
   margin-bottom: 25px;
-}
-.likes {
-  display: flex;
-  align-items: center;
 }
 .activity-desc {
   margin-top: 8px;

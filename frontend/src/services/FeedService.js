@@ -9,6 +9,7 @@ function getNewsByArr(items, numOfArticles = 3) {
     items.forEach(item => {
         getNewsByObj(item)
             .then(res => {
+                // console.log(res);
                 const filteredNews = filterNews(res, numOfArticles)
                 news.push(filteredNews)
             })

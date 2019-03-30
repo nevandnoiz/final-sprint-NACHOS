@@ -2,7 +2,12 @@
   <div class="browse">
     <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
     <div class="grid-container">
-      <item-preview v-for="(movie, index) in popularItems" :key="index" :item="movie"  :showBtns="true"></item-preview>
+      <item-preview
+        v-for="(movie, index) in popularItems"
+        :key="index"
+        :item="movie"
+        :showBtns="true"
+      ></item-preview>
     </div>
   </div>
 </template>

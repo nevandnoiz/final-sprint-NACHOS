@@ -4,13 +4,12 @@
       <h2 class="section-header">Choose tv shows you like</h2>
       <div v-if="items" class="selector">
         <div class="select-item" v-for="item in itemToShow" :key="item.id">
-          <div class="choose"></div>
           <item-preview
             class="select-item-poster"
             :item="item"
             :click="false"
             :selectMode="true"
-            @toggleItem="toggleItem(item.name)"
+            @toggleItem="toggleItem(item)"
           />
           <p>{{item.name}}</p>
         </div>
@@ -24,6 +23,8 @@
 <script>
 import axios from "axios";
 import itemPreview from "@/components/ItemPreview";
+import tvShowService from "@/services/TvShowsService.js";
+
 export default {
   components: { itemPreview },
   data() {
@@ -33,18 +34,17 @@ export default {
     };
   },
   created() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/popular?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=1`
-      )
-      .then(res => (this.items = res.data.results));
+    tvShowService.getTopRatedShows().then(res => (this.items = res));
   },
 
   methods: {
-    toggleItem(itemName) {
-      const itemIdx = this.likedItems.indexOf(itemName);
+    toggleItem(item) {
+      const itemIdx = this.likedItems.findIndex(
+        listItem => listItem.name === item.name
+      );
       if (itemIdx >= 0) this.likedItems.splice(itemIdx, 1);
-      else this.likedItems.push(itemName);
+      else
+        this.likedItems.push({ name: item.name, id: item.id, item_type: "tv" });
     }
   },
   computed: {
@@ -81,6 +81,6 @@ export default {
 }
 
 section {
-  margin-top: 25px
+  margin-top: 25px;
 }
 </style>

@@ -7,6 +7,7 @@ import BrowseActors from './views/BrowseActors.vue'
 import ItemDetails from './views/ItemDetails.vue'
 import ActorDetails from './views/ActorDetails.vue'
 import UserPage from './views/UserPage.vue'
+import SignUp from './views/SignUp.vue'
 
 Vue.use(Router)
 
@@ -40,15 +41,15 @@ export default new Router({
       name: 'itemDetails',
       component: ItemDetails
     },
-    // {
-    //   path: '/tv/details/:actorId',
-    //   name: 'actorDetails',
-    //   component: ActorDetails
-    // },
     {
       path: '/user/:userId',
       name: 'userPage',
       component: UserPage
+    },
+    {
+      path: '/signup',
+      name: 'signUp',
+      component: SignUp
     },
   ]
 })
