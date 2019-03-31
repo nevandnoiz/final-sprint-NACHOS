@@ -6,10 +6,21 @@ module.exports = {
     getActorShowImages,
     getActorShowExternalIds,
     getActorShowByKeyword,
-    getActorShowCredits,
+    getActorMovieCredits,
     getActorWatchLinksByKeyword,
     getActorShowVideos,
 }
+
+
+function getActorShowDetails(id) {
+    console.log(id)
+    return axios.get(`https://api.themoviedb.org/3/person/${id}?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
+        .then(res => res.data)
+        // .catch(err => {
+        //     // console.log(err)
+        // })
+}
+
 
 function getPopularActors(page = 1) {
     return axios.get(`https://api.themoviedb.org/3/person/popular?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
@@ -21,25 +32,54 @@ function getPopularActors(page = 1) {
     // return popular
 }
 
-function getActorShowDetails(id) {
-    return axios.get(`https://api.theactordb.org/3/actor/${id}?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
-        .then(res => res.data)
-        .catch(err => {
-            console.log('details')
-        })
-}
 
-function getActorShowImages(id) {
-    return axios.get(`https://api.theactordb.org/3/actor/${id}/images?api_key=fd807ad0f521ce282a03431f7288592d`)
+function getActorMovieCredits(id) {
+    return axios.get(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
         .then(res => res.data)
         .catch(err => {
             console.log(err)
         })
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getActorShowImages(id) {
+    return axios.get(`https://api.themoviedb.org/3/person/${id}?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
+        .then(res => res.data)
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Get the external ids for a tv. We currently support the following external sources. ex: facebook/instagram/imdb/twitter
 function getActorShowExternalIds(id) {
-    return axios.get(`https://api.theactordb.org/3/actor/${id}/external_ids?api_key=fd807ad0f521ce282a03431f7288592d`)
+    return axios.get(`https://api.themoviedb.org/3/actor/${id}/external_ids?api_key=fd807ad0f521ce282a03431f7288592d`)
         .then(res => res.data)
         .catch(err => {
             console.log(err)
@@ -48,20 +88,22 @@ function getActorShowExternalIds(id) {
 
 function getActorShowByKeyword(keyword) {
     keyword = keyword.replace(/\s/gm, '%20')
-    return axios.get(`https://api.theactordb.org/3/search/actor?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&query=${keyword}&page=1&include_adult=false`)
+    return axios.get(`https://api.themoviedb.org/3/search/actor?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&query=${keyword}&page=1&include_adult=false`)
         .then(res => res.data)
         .catch(err => {
             console.log(err)
         })
 }
 
-function getActorShowCredits(id) {
-    return axios.get(`https://api.theactordb.org/3/actor/${id}/credits?api_key=fd807ad0f521ce282a03431f7288592d`)
-        .then(res => res.data)
-        .catch(err => {
-            console.log(err)
-        })
-}
+
+
+
+
+
+
+
+
+
 
 function getActorWatchLinksByKeyword(keyword, region) {
     keyword = keyword.replace(/\s/gm, '+')
@@ -74,7 +116,7 @@ function getActorWatchLinksByKeyword(keyword, region) {
         })
 }
 function getActorShowVideos(id) {
-    return axios.get(`https://api.theactordb.org/3/actor/${id}/videos?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
+    return axios.get(`https://api.themoviedb.org/3/actor/${id}/videos?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US`)
         .then(res => res.data)
         .catch(err => {
             console.log(err)

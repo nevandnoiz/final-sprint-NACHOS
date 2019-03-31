@@ -65,4 +65,16 @@ i{
     padding: 0.5rem 0;
     margin: 0 0.3rem;
 }
+
+
+@media only screen and (max-width: 750px) { 
+
+
+i{
+  font-size: 2rem;
+  /* color: black !important; */
+}
+
+
+}
 </style>

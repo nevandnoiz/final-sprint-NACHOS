@@ -15,7 +15,7 @@
               <input type="text">
               <label for="email">Email</label>
               <input type="email">
-              <label for="password">password</label>
+              <label for="password">Password</label>
               <input type="password">
               <span>By clicking Join now, you agree to the Nachos User Agreement, Privacy Policy, and Cookie Policy.</span>
               <button @click="route">Join now</button>
@@ -40,11 +40,10 @@ export default {
 
 <style lang="scss" scoped>
 .bcg {
-  position: absolute;
+  // position: absolute;
   background-image: url(https://www.apple.com/v/tv/home/g/images/home/apple_tv_plus_image_04__um68d3u24tei_large.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
   height: 100vh;
   width: 100vw;
 }

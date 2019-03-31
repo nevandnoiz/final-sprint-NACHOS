@@ -33,7 +33,7 @@ export default {
   },
   async created() {
     this.seasonsDeatails = await this.$store.dispatch({
-        type: "getSeasonDetails",
+        type: "getSeasonsDetails",
         id: this.tvShowId,
         seasons: this.seasons
       });

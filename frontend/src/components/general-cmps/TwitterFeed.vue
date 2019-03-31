@@ -2,10 +2,10 @@
     <section>
         <div class="main-twitter-feed-container">
 <masonry
-  :cols="2"
+  :cols="1"
   :gutter="20"
   >
-  <Tweet v-for="(idx, index) in searchResults" :key="index" class="tweet" :id="idx" :options="{ theme: 'dark' }"/>
+  <Tweet v-for="(idx, index) in searchResults" :key="index" class="tweet" :id="idx" :options="{ theme: 'light' }"/>
 </masonry>
         </div>
 
@@ -28,7 +28,7 @@ async created() {
     const [
       searchRes,
     ] = await Promise.all([
-      this.$store.dispatch("getSeachTwitter", this.keyword + ' TV Show'),
+      this.$store.dispatch("getSeachTwitter", 'Avengers'),
     ]);
     this.searchResults = searchRes;
 

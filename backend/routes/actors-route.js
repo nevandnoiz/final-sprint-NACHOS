@@ -26,8 +26,9 @@ function addTvRoutes(app) {
             .then(links => res.send(links))
     })
     app.get('/actors/credits/:id', (req, res) => {
+        console.log('in listening')
         const actorId = req.params.id;
-        ActorsService.getActorShowCredits(actorId)
+        ActorsService.getActorMovieCredits(actorId)
             .then(credits => res.send(credits))
     })
     app.get('/actors/videos/:id', (req, res) => {

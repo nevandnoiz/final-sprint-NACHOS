@@ -1,7 +1,7 @@
 <template>
   <div class="tv-details-container" v-if="item.details && dominantColor">
     <div class="main-youtube-container" v-if="isTrailerPlaying">
-      <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
+      <div class="youtube-close-btn" @click="closeTrailer"><i class="fas fa-times-circle"></i></div>
       <youtube
         v-if="isTrailerPlaying"
         crossorigin="anonymous"
@@ -10,12 +10,11 @@
         :player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
-    <item-container
-      v-if="this.item.details"
-      :item="item"
-      :itemType="itemType"
-      :dominantColor="dominantColor"
-    ></item-container>
+    <item-container v-if="this.item.details" :item="item" :itemType="itemType" :dominantColor="dominantColor">
+      
+    </item-container>
+        <seasons-list v-if="itemType==='tv'" class="mobile-season-list" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list>
+
     <div class="sub-container">
       <episodes-swiper
         v-if="itemType==='tv'"
@@ -45,17 +44,16 @@
         </div>
       </div>
     </div>
-    <!-- <seasons-list :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list> -->
   </div>
 </template>
 
 <script>
+import SeasonsList from '../components/details-cmps/SeasonsList.vue' 
 import TwitterService from "@/services/TwitterService.js";
 import UtilityService from "@/services/UtilityService.js";
 import ItemContainer from "../components/details-cmps/ItemContainer.vue";
 import NavBar from "../components/details-cmps/NavBar.vue";
 import EpisodesSwiper from "@/components/swiper-cmps/EpisodesSwiper.vue";
-// import SeasonsList from "../components/details-cmps/SeasonsList.vue";
 import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
 import ReviewForm from "../components/details-cmps/ReviewForm.vue";
 import AvgColorService from "@/services/AvgColorService.js";
@@ -94,18 +92,18 @@ export default {
         externalIds,
         itemVideos,
         itemCredits,
-        itemReviews
+        itemReviews,
+        
       ] = await Promise.all([
         this.$store.dispatch("getTvShowDetails", itemId),
         this.$store.dispatch("getTvShowExternalIds", itemId),
         this.$store.dispatch("getTvShowVideos", itemId),
         this.$store.dispatch("getTvShowCredits", itemId),
-        this.$store.dispatch({
-          type: "loadReviewsByType",
-          itemType: "tv",
-          itemId: itemId
-        })
+        this.$store.dispatch({type: "loadReviewsByType",itemType: "tv",itemId: itemId}),
       ]);
+      console.log(details.name)
+      const itemWatchLinks = await this.$store.dispatch("getTvShowWatchLinksByKeyword", details.name)
+      this.item.watchLinks = itemWatchLinks.results.filter(res=>res.name == details.name)[0]
       this.item.details = details;
       this.item.seasons = details.seasons;
       this.item.externalIds = externalIds;
@@ -116,6 +114,8 @@ export default {
       });
       itemReviews.sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
       this.item.reviews = itemReviews;
+      
+      
       this.setDominantColor();
     } else {
       const itemId = this.$route.params.itemId;
@@ -194,7 +194,7 @@ export default {
     ReviewContainer,
     ReviewForm,
     NavBar
-  },
+  ,  SeasonsList},
   watch: {
     "$route.params.itemId": function() {
       this.$router.go();
@@ -204,18 +204,28 @@ export default {
 </script>
 
 <style scoped>
+.mobile-season-list {
+  display: none
+}
 .Actors {
+  /* margin-left: 1rem; */
   /* box-shadow: 0px 0px 12px #000000; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 24px 1fr;
 }
 .content-info-container {
-  display: grid;
-  gap: 2rem;
+  /* display: grid; */
+  /* gap: 2rem; */
+  
   margin-top: 2rem;
-  grid-template-columns: 210px 2fr;
+  /* grid-template-columns: 1fr 2fr; */
   height: 800px;
+      /* display: flex; */
+          display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .pannel-heading-epo {
@@ -230,11 +240,9 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-  margin: 226px auto;
-
-  display: block;
-  width: 76vw;
-  z-index: 3;
+     display: block;
+    width: 100vw;
+    z-index: 3;
 }
 .tweet {
   position: absolute;
@@ -242,5 +250,38 @@ export default {
   z-index: 4234234234;
   top: 1081px;
   left: 457px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .sub-container{
+    width: 95vw;
+  }
+}
+
+@media only screen and (max-width: 750px) { 
+.netflix-container {
+  display: none;
+}
+.sub-container {
+  display: flex;
+      /* margin-top: 600px; */
+width: 100vw;
+}
+.content-info-container{
+          /* display: flex; */
+    flex-direction: column;
+    /* gap: none; */
+    width: 100vw;
+    margin: 0 auto;
+    margin-top: 2rem;
+    /* grid-template-columns: 1fr 2fr; */
+    height: 800px;
+}
+.mobile-season-list{
+  width: 100vw;
+  margin: 0 auto;
+  display: block
+}
+
 }
 </style>

@@ -67,7 +67,11 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
-      const detailsRoute = this.item.type === "tv" ? "tv" : "movies";
+      console.log('itemtype', this.item)
+      
+      let detailsRoute = this.item.type === 'tv' ? 'tv' : 'movies'
+      // TODO REFACTOR
+      if(this.item.known_for)return this.$router.push(`actors/${itemId}`)
       this.$router.push(`/${detailsRoute}/details/${itemId}`);
     },
     toggleIsHovered() {

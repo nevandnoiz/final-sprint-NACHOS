@@ -42,6 +42,11 @@ export default new Router({
       component: ItemDetails
     },
     {
+      path: '/actors/:actorId',
+      name: 'actorDetails',
+      component: ActorDetails
+    },
+    {
       path: '/user/:userId',
       name: 'userPage',
       component: UserPage
