@@ -3,7 +3,17 @@ const MoviesService = require('../services/movies-service')
 function addTvRoutes(app) {
 
     // LIST
-    app.get('/movies/:page', (req, res) => {
+    app.get('/movies/top_rated/:page/', (req, res) => {
+        const page = req.params.page;
+        MoviesService.getTopRatedMovies(page)
+            .then(movies => res.send(movies))
+    })
+    app.get('/movies/popular/:page/', (req, res) => {
+        const page = req.params.page;
+        MoviesService.getPopularMovies(page)
+            .then(movies => res.send(movies))
+    })
+    app.get('/movies/trending/:page/', (req, res) => {
         const page = req.params.page;
         MoviesService.getTrendingMovies(page)
             .then(movies => res.send(movies))

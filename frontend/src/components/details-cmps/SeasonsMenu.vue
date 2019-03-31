@@ -8,16 +8,19 @@
       :value="index"
     >
       <p>{{season.name}}</p>
-      
-      <i class="fas fa-check check-button-season-menu" @click="emitWatchedSeason"></i>
+      <check-season @checkSeasonClicked="onCheckSeasonClicked" v-if="currUser" :season="season"></check-season>
     </el-option>
   </el-select>
 </template>
 
 <script>
+import CheckSeason from "@/components/details-cmps/CheckSeason.vue";
 import { eventBus } from "@/main.js";
 
 export default {
+  components: {
+    CheckSeason
+  },
   data() {
     return {
       seasonIdx: 0,
@@ -31,39 +34,48 @@ export default {
   },
   props: ["seasons", "tvShowId"],
   methods: {
-    onSelectSeason(index) {
-      eventBus.$emit("onSeasonClick", this.seasonIdx);
+    async onSelectSeason(index) {
+      await eventBus.$emit("onSeasonClick", this.seasonIdx);
     },
-    emitWatchedSeason(){
-      console.log('coming soon')
-      // eventBus.$emit('watchedSeason')
+    async onCheckSeasonClicked(index) {
+      this.seasonIdx = index;
+      await this.onSelectSeason(index);
+      eventBus.$emit("ok", index+1);
+    }
+  },
+  computed: {
+    currUser() {
+      return this.$store.getters.currUser;
     }
   }
 };
 </script>
 <style>
 .episoide-btn-container {
-      align-items: center;
-    display: flex;
-    justify-content: space-between;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
 .check-button-season-menu {
-     font-size: 10px;
-    margin: 9px 9px 9px 0;
-    background-color: white;
-    opacity: 0.5;
-    color: darkslategray;
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    justify-content: center;
-    border-radius: 50%;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
+  font-size: 10px;
+  margin: 9px 9px 9px 0;
+  background-color: white;
+  opacity: 0.5;
+  color: darkslategray;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 .check-button-season-menu:hover {
   cursor: pointer;
   opacity: 0.75;
+}
+.checked-season {
+  background-color: rgb(104, 255, 104);
 }
 .netflix-menu {
   z-index: 33773;

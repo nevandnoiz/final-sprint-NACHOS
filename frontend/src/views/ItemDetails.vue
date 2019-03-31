@@ -3,17 +3,17 @@
     <div class="main-youtube-container" v-if="isTrailerPlaying">
       <div class="youtube-close-btn" @click="closeTrailer"><i class="fas fa-times-circle"></i></div>
       <youtube
-      v-if="isTrailerPlaying"
-       crossorigin="anonymous"
+        v-if="isTrailerPlaying"
+        crossorigin="anonymous"
         class="youtube-container"
         :video-id="this.item.videos.results[0].key"
         :player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
-    <item-container v-if="this.item.details" :item="item" :dominantColor="dominantColor">
+    <item-container v-if="this.item.details" :item="item" :itemType="itemType" :dominantColor="dominantColor">
       
     </item-container>
-        <seasons-list class="mobile-season-list" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list>
+        <seasons-list v-if="itemType==='tv'" class="mobile-season-list" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list>
 
     <div class="sub-container">
       <episodes-swiper
@@ -32,7 +32,12 @@
         <div class="reviews-section">
           <pannel-heading class="pannel-heading" :title="'Reviews'" :dominantColor="dominantColor"></pannel-heading>
           <div class="reviews-conatier">
-            <new-review v-for="(review, index) in item.reviews"  :reviewIdx="index" :key="index" :review="review"></new-review>
+            <new-review
+              v-for="(review, index) in item.reviews"
+              :reviewIdx="index"
+              :key="index"
+              :review="review"
+            ></new-review>
             <review-form @addReview="addReview" :itemId="item.details.id"></review-form>
           </div>
           <!-- <twitter-feed :keyword="item.details.name"></twitter-feed> -->
@@ -57,6 +62,7 @@ import NewReview from "@/components/details-cmps/NewReview.vue";
 import PannelHeading from "@/components/general-cmps/PannelHeading.vue";
 import TwitterFeed from "@/components/general-cmps/TwitterFeed.vue";
 import { eventBus } from "@/main.js";
+import moment from "moment";
 
 export default {
   data() {
@@ -103,6 +109,10 @@ export default {
       this.item.externalIds = externalIds;
       this.item.videos = itemVideos;
       this.item.credits = itemCredits;
+      await itemReviews.forEach(async review => {
+        if (!review.date) return (review.date = await this.genRandTimestamp());
+      });
+      itemReviews.sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
       this.item.reviews = itemReviews;
       
       
@@ -130,6 +140,10 @@ export default {
       this.item.externalIds = externalIds;
       this.item.videos = itemVideos;
       this.item.credits = itemCredits;
+      await itemReviews.forEach(async review => {
+        if (!review.date) return (review.date = await this.genRandTimestamp());
+      });
+      itemReviews.sort((a, b) => parseFloat(a.date) - parseFloat(b.date));
       this.item.reviews = itemReviews;
       this.setDominantColor();
     }
@@ -155,6 +169,19 @@ export default {
         itemId: this.item.details.id
       });
       // eventBus.$emit('finishAddReview')
+    },
+    async genRandTimestamp() {
+      let relDate =
+        this.itemType === "movies"
+          ? this.item.details.release_date
+          : this.item.details.first_air_date;
+      let relDateTimestamp = moment(relDate).unix() * 1000;
+      if (relDateTimestamp < 1286698210000) relDateTimestamp = 1286698210000;
+      let currDateTimestamp = Date.now();
+      return Math.floor(
+        Math.random() * (currDateTimestamp - relDateTimestamp + 1) +
+          relDateTimestamp
+      );
     }
   },
   components: {
@@ -199,9 +226,6 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-.reviews-section {
-  /* box-shadow: 0px 0px 12px #000000; */
 }
 
 .pannel-heading-epo {

@@ -63,6 +63,15 @@ export default {
   border: 1px solid lightgray;
   border-radius: 8px;
   background-color: white;
+   @media (max-width: 1000px) {
+    width: 70vw;
+  }
+  @media (max-width: 650px) {
+    width: 80vw;
+  }
+  @media (max-width: 400px) {
+    width: 90vw;
+  }
 }
 
 .source {

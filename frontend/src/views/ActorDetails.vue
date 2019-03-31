@@ -1,5 +1,5 @@
 <template>
-  <section v-if="actor && actor.actorMovies">
+  <section v-if="actor && actorMovies">
     <div class="section-div-main-container">
 
 
@@ -15,7 +15,6 @@
 
 
     <div class="actor-detalis-main-container">
-      <h1>Hello</h1>
       <div class="biography-container">
         <div class="text-container">
           <h1>{{actor.name}}</h1>
@@ -43,7 +42,7 @@
        
           <div class="info">
             <h2>Gender</h2>
-            <p>{{actor.gender}}</p>
+            <p>{{gender}}</p>
           </div>
 
           <div class="info">
@@ -84,8 +83,11 @@ export default {
     var actorMovies = await this.$store.dispatch("getActorMovieCredits",actorId);
     this.actorMovies = actorMovies;
     // console.log(actorMovies)
-    console.log(this.actor);
-    console.log(this.actorMovies);
+  },
+  computed:{
+    gender(){
+      return (this.actor.gender===2)? 'Male':'Female'
+    }
   },
   components: {
     PannelHeading

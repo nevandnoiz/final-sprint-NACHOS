@@ -44,6 +44,8 @@ export default {
       return UtilityService.imgURL(posterPath, 1280);
     },
     nextImg() {
+      clearInterval(this.nextImgIntrvl);
+      this.nextImgIntrvl = setInterval(this.nextImg, 10000);
       this.currIdx = (this.currIdx + 1) % 5;
     },
     pushToDetails(item) {

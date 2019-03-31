@@ -13,39 +13,43 @@ export default {
     getTvShowSeasons,
     getTvShowWatchLinksByKeyword,
     getTvShowVideos,
-    getSeasonDetails
+    getSeasonsDetails
 }
 
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+? '/'
+: '//localhost:3003';
+
 async function getTopRatedShows(page = 1) {
-    let res = await axios.get(`http://localhost:3003/tv/top_rated/${page}`)
+    let res = await axios.get(`${BASE_URL}/tv/top_rated/${page}`)
     const tvShows = res.data
     return tvShows
 }
 
 async function getPopularShows(page = 1) {
-    let res = await axios.get(`http://localhost:3003/tv/popular/${page}`)
+    let res = await axios.get(`${BASE_URL}/tv/popular/${page}`)
     const tvShows = res.data
     return tvShows
 }
 
 async function getTrendingShows(page = 1) {
-    let res = await axios.get(`http://localhost:3003/tv/trending/${page}`)
+    let res = await axios.get(`${BASE_URL}/tv/trending/${page}`)
     const tvShows = res.data
     return tvShows
 }
 
 async function getTvShowDetails(id) {
-    let res = await axios.get(`http://localhost:3003/tv/details/${id}`)
+    let res = await axios.get(`${BASE_URL}/tv/details/${id}`)
     return res.data
 }
 
 async function getTvShowImages(id) {
-    let res = await axios.get(`http://localhost:3003/tv/imgs/${id}`)
+    let res = await axios.get(`${BASE_URL}/tv/imgs/${id}`)
     return res.data
 }
 
 async function getTvShowExternalIds(id) {
-    let res = await axios.get(`http://localhost:3003/tv/links/${id}`)
+    let res = await axios.get(`${BASE_URL}/tv/links/${id}`)
     return res.data
 }
 
@@ -57,18 +61,18 @@ async function getTvShowByKeyword(keyword) {
 }
 
 async function getTvShowCredits(id) {
-    let res = await axios.get(`http://localhost:3003/tv/credits/${id}`)
+    let res = await axios.get(`${BASE_URL}/tv/credits/${id}`)
     return res.data
 }
 
 async function getTvShowReviews(id) {
-    let res = await axios.get(`http://localhost:3003/tv/reviews/${id}`)
+    let res = await axios.get(`${BASE_URL}/tv/reviews/${id}`)
     console.log(res)
     return res.data
 }
 
 async function getTvShowSeasons(id) {
-    let res = await axios.get(`http://localhost:3003/seasons/credits/${id}`)
+    let res = await axios.get(`${BASE_URL}/seasons/credits/${id}`)
     return res.data
 }
 
@@ -81,14 +85,14 @@ async function getTvShowWatchLinksByKeyword(keyword, region) {
     return tvShowsLinks
 }
 async function getTvShowVideos(id) {
-    let res = await axios.get(`http://localhost:3003/tv/videos/${id}`)
+    let res = await axios.get(`${BASE_URL}/tv/videos/${id}`)
     return res.data
 }
-async function getSeasonDetails(id, seasons) {
+async function getSeasonsDetails(id, seasons) {
     let prms = []
     seasons.forEach(season=>{
         if (season.name !== "Specials")
-        prms.push(axios.get(`http://localhost:3003/tv/${id}/season/${season.season_number}`))
+        prms.push(axios.get(`${BASE_URL}/tv/${id}/season/${season.season_number}`))
     })
     let res=await axios.all(prms)
     return res

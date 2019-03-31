@@ -31,7 +31,8 @@
             </div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Reviews
+            <a class="nav-link" href="#">
+              Reviews
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -79,21 +80,15 @@ export default {};
 </script>
 
 <style scoped>
-.navbar-nav{
-    font-size: 1.3rem;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-evenly;
+.navbar-nav {
+  font-size: 1.3rem;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-evenly;
 }
 #navbarNavDropdown {
-    display: flex !important;
-    justify-content: space-between !important;
+  display: flex !important;
+  justify-content: space-between !important;
 }
-.main-navbar-container {
-    /* margin-bottom: 120px */
-}
-
-
-
 </style>
 

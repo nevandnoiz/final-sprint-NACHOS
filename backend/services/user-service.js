@@ -70,8 +70,9 @@ function markWatched(userId, showId, epId) {
                                 "watchedEpisodes.id": showId
                             },
                             {
-                                $push: { "watchedEpisodes.$.episodes": { epId } }
+                                $addToSet: { "watchedEpisodes.$.episodes": { epId } }
                             }
+
                         )
                     })
             } else {
@@ -111,7 +112,7 @@ function unmarkWatched(userId, showId, epId) {
 
 function addActivityByType(userId, activity) {
     userId = ObjectId(userId)
-    activity._id = new ObjectId()
+    activity._id = ObjectId(activity._id)
     return mongoService.connect()
         .then(db => {
             db.collection('users').updateOne(
@@ -128,10 +129,35 @@ function addActivityByType(userId, activity) {
         })
 }
 
+function updateActivity(activity) {
+    let byUserId = ObjectId(activity.byUser._id)
+    let activityId = ObjectId(activity._id)
+    return mongoService.connect()
+        .then(db => {
+            db.collection('users').updateOne(
+                {
+                    "_id": byUserId,
+                    "userActivities._id": activityId
+                },
+                { $set: { "userActivities.$": activity } }
+            )
+        })
+        .then(result => {
+            return activity;
+        })
+}
+
+function getActivitiesByFollowed(followedId) {
+    followedId = ObjectId(followedId)
+    return mongoService.connect()
+        .then(db => db.collection('users').find({ _id: followedId }).toArray())
+        .then(res => res[0].userActivities)
+}
+
 function getById(id) {
     const _id = new ObjectId(id)
     return mongoService.connect()
-        .then(db => db.collection('user').findOne({ _id }))
+        .then(db => db.collection('users').findOne({ _id }))
 }
 
 function query() {
@@ -143,7 +169,7 @@ function query() {
 function addUser({ nickname }) {
     var user = { nickname }
     return mongoService.connect()
-        .then(db => db.collection('user').insertOne(user))
+        .then(db => db.collection('users').insertOne(user))
         .then(res => {
             user._id = res.insertedId
             return user
@@ -158,6 +184,7 @@ function addUser({ nickname }) {
 module.exports = {
     query,
     getById,
+    getActivitiesByFollowed,
     addUser,
     checkLogin,
     loadFromSession,
@@ -165,5 +192,6 @@ module.exports = {
     removeFromListByType,
     markWatched,
     unmarkWatched,
-    addActivityByType
+    addActivityByType,
+    updateActivity
 }

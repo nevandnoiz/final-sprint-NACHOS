@@ -2,12 +2,12 @@
   <div
     @click="pushToDetails(item.id)"
     class="item-preview"
-    :style="{'background-image':'url(\''+img+'\')'}"
+    :style="{'background-image':'url(\''+imgURL+'\')'}"
     @mouseenter="toggleIsHovered"
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered, 'selected': isSelected}"
   >
-    <div class="item-hover-controls" v-if="currUser && isHovered">
+    <div class="item-hover-controls" v-if="isHovered && showBtns">
       <div class="hover-controls-btns">
         <el-tooltip
           class="item"
@@ -52,11 +52,10 @@
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
-  props: ["item", "selectMode"],
+  props: ["item", "selectMode", "showBtns"],
   components: {},
   data() {
     return {
-      img: null,
       isHovered: false,
       isOnWatchList: false,
       isFavorite: false,
@@ -65,11 +64,6 @@ export default {
     };
   },
   methods: {
-    imgURL() {
-      if (this.item.profile_path)
-        return UtilityService.imgURL(this.item.profile_path, 500);
-      return UtilityService.imgURL(this.item.poster_path, 500);
-    },
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
@@ -146,6 +140,11 @@ export default {
   computed: {
     currUser() {
       return this.$store.getters.currUser;
+    },
+    imgURL() {
+      if (this.item.profile_path)
+        return UtilityService.imgURL(this.item.profile_path, 500);
+      return UtilityService.imgURL(this.item.poster_path, 500);
     }
   },
   created() {
@@ -159,7 +158,6 @@ export default {
     if (isFavorite) {
       this.isFavorite = true;
     }
-    this.img = this.imgURL();
   }
 };
 </script>
@@ -178,7 +176,7 @@ export default {
     height: inherit;
     display: grid;
     grid-template: 20px 1fr 40px/1fr;
-    .hover-controls-bwtns {
+    .hover-controls-btns {
       grid-area: 1/1/1/1;
       justify-self: flex-end;
     }

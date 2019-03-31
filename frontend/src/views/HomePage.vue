@@ -2,12 +2,11 @@
   <div class="home-container">
     <watch-next v-if="user" :watchNextList="watchNextList"></watch-next>
     <backdrop-cmp v-else :topItems="headerItems"></backdrop-cmp>
-    <feed :user="user"></feed>
+    <feed v-if="user" :user="user"></feed>
   </div>
 </template>
 
 <script>
-
 import WatchNext from "@/components/home-cmps/WatchNext.vue";
 import feed from "@/components/home-cmps/Feed.vue";
 import BackdropCmp from "@/components/BackdropCmp.vue";
@@ -31,7 +30,7 @@ export default {
     user() {
       return this.$store.getters.currUser;
     },
-     trendingItems() {
+    trendingItems() {
       return this.$store.getters.trendingToDisplay;
     },
     headerItems() {
@@ -52,6 +51,6 @@ export default {
 <style lang="scss" scoped>
 .home-container {
   display: grid;
-  grid-template: 500px 1fr/1fr;
+  grid-template: 400px 1fr/1fr;
 }
 </style>

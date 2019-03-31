@@ -4,6 +4,8 @@ const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
+    getTopRatedMovies,
+    getPopularMovies,
     getTrendingMovies,
     getMovieShowDetails,
     getMovieShowImages,
@@ -16,14 +18,28 @@ module.exports = {
     getMovieShowVideos,
 }
 
+function getTopRatedMovies(page = 1) {
+    return axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
+        .then(res => res.data.results)
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+function getPopularMovies(page = 1) {
+    return axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
+        .then(res => res.data.results)
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 function getTrendingMovies(page = 1) {
     return axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=${page}`)
         .then(res => res.data.results)
         .catch(err => {
             console.log(err)
         })
-    // const popular = res.data
-    // return popular
 }
 
 function getMovieShowDetails(id) {
@@ -133,5 +149,5 @@ function getMovieShowVideos(id) {
 }
 
 function _getRandomRating() {
-    return (Math.floor(Math.random() * (10 - 0 + 1))) / 2;
+    return (Math.floor(Math.random() * (5 - 0 + 1)));
 }

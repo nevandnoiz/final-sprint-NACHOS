@@ -5,7 +5,7 @@ var axios = Axios.create({
 import util from '../services/UtilityService.js'
 
 export default {
-    getActivities,
+    getFollowedActivities,
     loginUser,
     loadUser,
     addLikeToActivity,
@@ -15,72 +15,82 @@ export default {
     addActivityByType,
     markWatched,
     unmarkWatched,
+    removeLikeToActivity
 }
+
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+    ? '/'
+    : '//localhost:3003';
 
 const users = []
 
-const activities = [
-    {
-        _id: 'abc321321',
-        timestamp: null,
-        byUser: {
-            name: {
-                firstName: 'Eyal',
-                lastName: 'wiener'
-            }, _id: 'abc123'
-        },
-        item_id: 79501,
-        item_type: 'tv',
-        itemTitle: "Doom Patrol",
-        type: 'activity',
-        activity: 'rate',
-        value: 5,
-        comments: [],
-        likes: 7
-    },
-    {
-        _id: 'abc321356',
-        timestamp: null,
-        byUser: {
-            name: {
-                firstName: 'Yaniv',
-                lastName: 'wiener'
-            }, _id: '987agv'
-        },
-        item_id: 324857,
-        item_type: 'movies',
-        itemTitle: "Spider-Man: Into the Spider-Verse",
-        type: 'activity',
-        activity: 'listAdd',
-        value: 'Favorite',
-        comments: [],
-        likes: 0
-    },
-    {
-        _id: '098765456',
-        timestamp: null,
-        byUser: {
-            name: {
-                firstName: 'Yaniv',
-                lastName: 'wiener'
-            }, _id: '987agv'
-        },
-        item_id: 1399,
-        item_type: 'tv',
-        itemTitle: "Game Of Thrones",
-        type: 'activity',
-        activity: 'listAdd',
-        value: 'watchList',
-        comments: [],
-        likes: 0
-    }
-]
+// const activities = [
+//     {
+//         _id: 'abc321321',
+//         timestamp: null,
+//         byUser: {
+//             name: {
+//                 firstName: 'Eyal',
+//                 lastName: 'wiener'
+//             }, _id: 'abc123'
+//         },
+//         item_id: 79501,
+//         item_type: 'tv',
+//         itemTitle: "Doom Patrol",
+//         type: 'activity',
+//         activity: 'rate',
+//         value: 5,
+//         comments: [],
+//         likes: 7
+//     },
+//     {
+//         _id: 'abc321356',
+//         timestamp: null,
+//         byUser: {
+//             name: {
+//                 firstName: 'Yaniv',
+//                 lastName: 'wiener'
+//             }, _id: '987agv'
+//         },
+//         item_id: 324857,
+//         item_type: 'movies',
+//         itemTitle: "Spider-Man: Into the Spider-Verse",
+//         type: 'activity',
+//         activity: 'listAdd',
+//         value: 'Favorite',
+//         comments: [],
+//         likes: 0
+//     },
+//     {
+//         _id: '098765456',
+//         timestamp: null,
+//         byUser: {
+//             name: {
+//                 firstName: 'Yaniv',
+//                 lastName: 'wiener'
+//             }, _id: '987agv'
+//         },
+//         item_id: 1399,
+//         item_type: 'tv',
+//         itemTitle: "Game Of Thrones",
+//         type: 'activity',
+//         activity: 'listAdd',
+//         value: 'watchList',
+//         comments: [],
+//         likes: 0
+//     }
+// ]
 
-
-function getActivities() {
-    return activities
+async function getFollowedActivities(userId, following) {
+    let prms = []
+    following.forEach(followed => {
+        let followedId = followed._id
+        prms.push(axios.get(`${BASE_URL}/user/${userId}/activities/${followedId}`))
+    })
+    let res = await Promise.all(prms)
+    let acitivites = res.map(activity => activity.data)
+    return acitivites.flat()
 }
-
 
 function addLikeToActivity(activity) {
     const newActivity = util.deepCopy(activity)
@@ -88,51 +98,59 @@ function addLikeToActivity(activity) {
     //TODO: replace the activty in the server for the user
     return newActivity // return the new obj from the server after update succes
 }
-
-function addToListByType(addedItem, userId, listType) {
-    return axios.post(`http://localhost:3003/user/${userId}/lists/${listType}`, addedItem)
-}
-
-function removeFromListByType(itemId, userId, listType) {
-    return axios.delete(`http://localhost:3003/user/${userId}/lists/${listType}/${itemId}`)
-}
-
-function markWatched(userId, showId, epId) {
-    return axios.post(`http://localhost:3003/user/${userId}/episodes/${showId}`, {epId})
-}
-
-function unmarkWatched(userId, showId, epId) {
-    return axios.delete(`http://localhost:3003/user/${userId}/episodes/${showId}/${epId}`)
-}
-
-function addActivityByType(user, item, itemType, activityType,value) {
-    let activity = _createActivity(user, item, itemType, activityType,value)
-    return axios.post(`http://localhost:3003/user/${user._id}/activities`, activity)
-}
-
-function addCommentToActivity(comment, activity) {
+function removeLikeToActivity(activity) {
     const newActivity = util.deepCopy(activity)
-    newActivity.comments.unshift(comment)
+    newActivity.likes--
     //TODO: replace the activty in the server for the user
     return newActivity // return the new obj from the server after update succes
 }
+
+function addToListByType(addedItem, userId, listType) {
+    return axios.post(`${BASE_URL}/user/${userId}/lists/${listType}`, addedItem)
+}
+
+function removeFromListByType(itemId, userId, listType) {
+    return axios.delete(`${BASE_URL}/user/${userId}/lists/${listType}/${itemId}`)
+}
+
+function markWatched(userId, showId, epId) {
+    return axios.post(`${BASE_URL}/user/${userId}/episodes/${showId}`, { epId })
+}
+
+function unmarkWatched(userId, showId, epId) {
+    return axios.delete(`${BASE_URL}/user/${userId}/episodes/${showId}/${epId}`)
+}
+
+function addActivityByType(user, item, itemType, activityType, value) {
+    let activity = _createActivity(user, item, itemType, activityType, value)
+    return axios.post(`${BASE_URL}/user/${user._id}/activities`, activity)
+}
+
+function addCommentToActivity(comment, activity) {
+    let userId = comment.user._id
+    let newActivity = util.deepCopy(activity)
+    newActivity.comments.push(comment)
+    return axios.put(`${BASE_URL}/user/${userId}/activities/comment`, newActivity)
+    //TODO: replace the activty in the server for the user
+    // return newActivity // return the new obj from the server after update succes
+}
 function loginUser() {
     let user = { email: 'email@wiener.tal', password: '123123' }
-    return axios.post(`http://localhost:3003/login`,
+    return axios.post(`${BASE_URL}/login`,
         user
     )
         .then(res => res.data)
 }
 
 function loadUser() {
-    return axios.get(`http://localhost:3003/login`,
+    return axios.get(`${BASE_URL}/login`,
     )
         .then(res => {
             return res.data
         })
 }
 
-function _createActivity(user, item, itemType, activityType,value) {
+function _createActivity(user, item, itemType, activityType, value) {
     return {
         timestamp: Date.now(),
         byUser: {
