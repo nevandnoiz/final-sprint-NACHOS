@@ -96,7 +96,7 @@ h2 {
   width: auto !important;
   width: auto !important;
   padding: 20px;
-  max-width: 51vw !important;
+  /* max-width: 51vw !important; */
 }
 .card-inner {
   display: none;

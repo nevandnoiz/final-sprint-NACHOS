@@ -2,7 +2,7 @@
 <section>
           <hamburger-menu class="hamburger"></hamburger-menu>
 
-  <header>
+  <header class="desktop-header">
     <div class="header-container">
 
       <div class="logo-contaier">
@@ -58,8 +58,19 @@ export default {
 
 
 <style lang="scss" scoped>
+
 .hamburger {
   display: none;
+}
+@media only screen and (max-width: 1032px) { 
+   .hamburger {
+  display: flex;
+  background: black;
+  ;
+}
+.desktop-header{
+  display: none;
+}
 }
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 *{

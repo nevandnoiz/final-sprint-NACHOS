@@ -54,6 +54,13 @@ methods: {
 </script>
 
 <style scoped>
+.navbar-toggler  {
+  height: 36px;
+  background: white !important
+}
+.dark-blue-text {
+  color: black;
+}
 nav>* {
   margin: 0 0.2rem;
 }
@@ -66,6 +73,7 @@ img {
     height: 40px;
 }
 .search-bar{
-  width:279px
+     max-width: 500px;
+    flex-grow: 1;
 }
 </style>

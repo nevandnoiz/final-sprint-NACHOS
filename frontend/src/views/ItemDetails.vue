@@ -188,11 +188,16 @@ export default {
   grid-template-rows: 24px 1fr;
 }
 .content-info-container {
-  display: grid;
-  gap: 2rem;
+  /* display: grid; */
+  /* gap: 2rem; */
   margin-top: 2rem;
-  grid-template-columns: 1fr 2fr;
+  /* grid-template-columns: 1fr 2fr; */
   height: 800px;
+      /* display: flex; */
+          display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .reviews-section {
   /* box-shadow: 0px 0px 12px #000000; */
@@ -236,10 +241,11 @@ export default {
 }
 .sub-container {
   display: flex;
+      /* margin-top: 600px; */
 width: 100vw;
 }
 .content-info-container{
-          display: flex;
+          /* display: flex; */
     flex-direction: column;
     /* gap: none; */
     width: 100vw;
