@@ -44,7 +44,8 @@ export default {
   background-image: url(https://www.apple.com/v/tv/home/g/images/home/apple_tv_plus_image_04__um68d3u24tei_large.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  background-attachment: fixed;
+  height: 88vh;
   width: 100vw;
 }
 .container {

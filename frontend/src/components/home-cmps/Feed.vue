@@ -1,9 +1,9 @@
 <template>
   <section class="feed">
     <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
-   
+
     <feed-content
-      v-if="(articles || user) && ready"
+      v-if="(articles || user)"
       :articles="articles"
       :activities="activities"
       :user="user"
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       articles: null,
-      ready: false
+      // ready: false
     };
   },
   methods: {
@@ -40,7 +40,7 @@ export default {
     addLike(item) {
       this.$store.dispatch("addLikeToActivity", item);
     },
-    removeLike(item){
+    removeLike(item) {
       this.$store.dispatch("removeLikeToActivity", item);
     },
     addComment(details) {
@@ -66,15 +66,15 @@ export default {
   watch: {
     user: function() {
       if (this.user) {
-        this.$store.dispatch("loadActivities");
+        this.$store.dispatch("getFollowedActivities");
         this.generateFeed(this.userFavoriteItems, 1);
       }
-    } 
+    }
   },
   async created() {
-    let activities = await this.$store.dispatch('getFollowedActivities')
-    this.ready = true
     if (this.user) {
+    let activities = await this.$store.dispatch("getFollowedActivities");
+    // this.ready = true;
       this.generateFeed(this.userFavoriteItems, 1);
     }
   }
@@ -82,7 +82,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .feed {
   margin-top: 100px;
   height: 400px;
