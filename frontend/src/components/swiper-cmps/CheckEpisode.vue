@@ -53,8 +53,6 @@ export default {
       }
     },
           showEpDetails(ep){
-      // console.log()
-      console.log('this is the eposide that clicked:',ep) 
     },
     isWatched() {
       if (this.$store.getters.currUser) {

@@ -2,7 +2,7 @@
   <div class="home-container">
     <watch-next v-if="user" :watchNextList="watchNextList"></watch-next>
     <backdrop-cmp v-else :topItems="headerItems"></backdrop-cmp>
-    <feed v-if="user" :user="user"></feed>
+    <feed :user="user"></feed>
   </div>
 </template>
 

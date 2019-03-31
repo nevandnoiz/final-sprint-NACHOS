@@ -24,6 +24,8 @@ props: ['dominantColor','title']
         margin: 0 auto;
     width: 76vw;
     grid-column: 1fr 1fr 1fr;
+    margin:  0 auto;
+    width: 76vw;
     height: 1.5rem;
     flex-direction: row;
     justify-content: center;

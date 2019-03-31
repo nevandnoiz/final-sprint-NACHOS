@@ -187,6 +187,7 @@ margin-top: 1.4rem;
         margin: 0 auto;
     display: -webkit-box;
     display: -ms-flexbox;
+    margin: 0 auto;
         display: flex;
     width: fit-content;
     -webkit-box-orient: horizontal;
