@@ -7,11 +7,11 @@
         <router-link to="/tv">Tv Shows</router-link>
         <router-link to="/actors">Actors</router-link>
         <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <div v-else class="center"> 
+        <div v-else class="center">
           <div class="center">
-            <a @click="showModal = !showModal">Login</a>
+            <a @click="toggleModal">Login</a>
           </div>
-          <login-modal v-if="showModal" @login="login"/>
+          <login-modal v-if="showModal" @login="login" @toggleModal="toggleModal"/>
         </div>
       </div>
     </div>
@@ -39,6 +39,9 @@ export default {
         .dispatch("loginUser")
         .then(() => this.$store.dispatch("loadActivities"));
       this.$router.push("/");
+    },
+    toggleModal() {
+      this.showModal = !this.showModal;
     }
   },
   computed: {
@@ -87,7 +90,7 @@ header {
         font-size: 24px;
         text-decoration: none;
       }
-      .center{
+      .center {
         display: flex;
         align-items: center;
         justify-content: center;

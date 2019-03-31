@@ -29,8 +29,9 @@ export default {
       this.mail = "";
       this.password = "";
     },
-    route(){
+    route() {
       this.$router.push("/signup");
+      this.$emit("toggleModal");
     }
   }
 };
@@ -45,7 +46,7 @@ export default {
   height: 240px;
   right: 40px;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 2px;
   border: 1px solid lightgray;
   box-shadow: 0 0 8px 0px #c0c4cc;
 
@@ -59,7 +60,7 @@ export default {
     input {
       height: 35px;
       width: 250px;
-      border-radius: 5px;
+      border-radius: 2px;
       border: 1px solid lightgray;
       outline: 0;
       padding-left: 8px;
@@ -76,7 +77,7 @@ export default {
       height: 35px;
       border: 0;
       color: white;
-      border-radius: 5px;
+      border-radius: 2px;
       background-color: #ffc108;
       font-weight: 500;
       margin: 0;
@@ -90,7 +91,7 @@ export default {
     }
     p {
       color: gray;
-      font-weight: 500
+      font-weight: 500;
     }
     p:hover {
       color: rgb(246, 194, 68);

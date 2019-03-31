@@ -12,7 +12,7 @@
             <input type="text">
             <label for="last-name">Last name</label>
             <input type="text">
-            <label for="email">Last name</label>
+            <label for="email">Email</label>
             <input type="email">
             <label for="password">password</label>
             <input type="password">
@@ -33,9 +33,10 @@ export default {};
 <style lang="scss" scoped>
 .bcg {
   position: absolute;
-  background: url(https://www.apple.com/v/tv/home/g/images/home/apple_tv_plus_image_04__um68d3u24tei_large.jpg);
+  background-image: url(https://www.apple.com/v/tv/home/g/images/home/apple_tv_plus_image_04__um68d3u24tei_large.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
   width: 100vw;
 }
@@ -106,7 +107,7 @@ export default {};
         margin: 0;
         outline: 0;
         transition-duration: 165ms;
-        transition-timing-function: cubic-bezier(0, 0, 0.2, 1)
+        transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
       }
       button:hover {
         background-color: #e4ae0d;

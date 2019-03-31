@@ -15,7 +15,9 @@
         </div>
       </div>
     </section>
-    <button v-if="likedItems.length > 2" @click="$emit('generateFeed', likedItems)">go</button>
+    <div class="container">
+      <button v-if="likedItems.length > 2" @click="$emit('generateFeed', likedItems)">Start exploring!</button>
+    </div>
   </div>
 </template>
 
@@ -80,6 +82,27 @@ export default {
   font-family: sans-serif;
 }
 
+.container {
+  display: flex;
+  button {
+    height: 40px;
+    width: 200px;
+    border: 0;
+    color: white;
+    font-size: 25px;
+    border-radius: 2px;
+    background-color: #ffc108;
+    font-weight: 500;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    outline: 0;
+    transition-duration: 165ms;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  button:hover {
+    background-color: #e4ae0d;
+  }
+}
 section {
   margin-top: 25px;
 }
