@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-header></app-header>
+    <app-header class="header"></app-header>
    
     <div class="routes-container">
       <router-view/>
@@ -30,6 +30,10 @@ export default {
 
 
 <style lang="scss">
+@media only screen and (max-width: 750px) {  
+.header{}
+
+}
 #app {
   display: grid;
   grid-template: 65px 40px 1fr/1fr;

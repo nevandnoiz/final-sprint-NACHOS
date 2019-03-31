@@ -9,15 +9,15 @@
         @typing="getAsyncData"
         @select="pushToDetails"
       >
-        <template slot-scope="props">
-          <div class="media">
+        <template class="info" slot-scope="props">
+          <div class="media info">
             <div class="media-left">
               <img width="32" :src="`https://image.tmdb.org/t/p/w500/${props.option.poster_path}`">
             </div>
             <div class="media-content">
               {{ props.option.title ||props.option.name }}
               <br>
-              <small>
+              <small class="info">
                 Released at {{ props.option.release_date }},
                 rated
                 <b>{{ props.option.vote_average }}</b>
@@ -66,9 +66,24 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .search-bar-container {
   width: 100%;
   // grid-area: 2/1/2/1;
+}
+
+.info {
+  padding: 0
+}
+
+// a{ 
+//   padding: 0
+// }
+.media-content{
+      font-size: 12px;
+    font-weight: 700;
+}
+.dropdown-item{
+padding: 0 !important
 }
 </style>

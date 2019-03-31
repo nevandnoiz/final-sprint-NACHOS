@@ -1,5 +1,7 @@
 <template>
 <section>
+          <hamburger-menu class="hamburger"></hamburger-menu>
+
   <header>
     <div class="header-container">
 
@@ -13,7 +15,6 @@
         <router-link to="/tv">TV SHOWS</router-link>
         <router-link to="/actors">ACTORS</router-link>
         </div>
-        
         <search-bar class="search-bar"></search-bar>
        
       </div>
@@ -28,13 +29,14 @@
 </template>
 
 <script>
+import HamburgerMenu from './HamburgerMenu.vue' 
     
  
 import searchBar from "@/components/header-cmps/SearchBar1.vue";
 export default {
   components: {
     searchBar
-  },
+  ,  HamburgerMenu},
   methods: {
     pushToHome() {
       this.$router.push("/");
@@ -56,6 +58,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.hamburger {
+  display: none;
+}
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 *{
   font-family: 'Montserrat', sans-serif;
@@ -68,7 +73,7 @@ section {
       box-shadow: 0px 0px 5px #000000;
   background: black;
     top: 0;
-    height: 105px;
+    // height: 105px;
     width: 100vw;
     /* z-index: 2131123123123124234234234; */
         z-index: 333333333;
@@ -131,15 +136,16 @@ position: fixed;
     display: -ms-flexbox;
     display: flex;
     margin: 0 auto;
-    width: 76vw;
+    width: 100vw;
     grid-area: 1/1/1/1;
   .header-container {
         /* width: 475px; */
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
+    background: black;
     display: -webkit-box;
-    
+        justify-content: center;
     display: -ms-flexbox;
     -webkit-box-align: center;
     -ms-flex-align: center;

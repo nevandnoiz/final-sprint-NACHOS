@@ -1,7 +1,7 @@
 <template>
   <div class="tv-details-container" v-if="item.details && dominantColor">
     <div class="main-youtube-container" v-if="isTrailerPlaying">
-      <button class="youtube-close-btn" @click="closeTrailer">TO CLOSE</button>
+      <div class="youtube-close-btn" @click="closeTrailer"><i class="fas fa-times-circle"></i></div>
       <youtube
       v-if="isTrailerPlaying"
        crossorigin="anonymous"

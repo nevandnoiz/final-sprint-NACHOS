@@ -402,7 +402,7 @@ i {
   display: grid;
   width: 76vw;
   z-index: 1;
-  grid-template-columns: 1fr 2fr;
+  /* grid-template-columns: 1fr 2fr; */
   grid-template-rows: minmax(75px, auto) 1fr;
      margin: 120px auto 0;
   border-radius: 3px;
