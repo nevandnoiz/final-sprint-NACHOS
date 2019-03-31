@@ -2,7 +2,7 @@
   <section class="feed">
     <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
     <feed-content
-      v-if="articles || user"
+      v-if="(articles || user) && ready"
       :articles="articles"
       :activities="activities"
       @addLike="addLike"
@@ -27,7 +27,8 @@ export default {
   },
   data() {
     return {
-      articles: null
+      articles: null,
+      ready: false
     };
   },
   methods: {
@@ -68,7 +69,9 @@ export default {
       }
     }
   },
-  created() {
+  async created() {
+    let activities = await this.$store.dispatch('getFollowedActivities')
+    this.ready = true
     if (this.user) {
       this.generateFeed(this.userFavoriteItems, 1);
     }

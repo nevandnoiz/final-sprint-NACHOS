@@ -78,7 +78,7 @@ function addRoutes(app) {
         const showId = req.params.showId
         const epId = req.body.epId
         // console.log('mark',userId,showId,epId)
-        userService.markWatched(userId,showId,epId)
+        userService.markWatched(userId, showId, epId)
             .then(() => {
                 res.send('OK')
             })
@@ -89,9 +89,19 @@ function addRoutes(app) {
         const showId = req.params.showId
         const epId = req.params.epId
         // console.log('unmark',userId,showId,epId)
-        userService.unmarkWatched(userId,showId,epId)
+        userService.unmarkWatched(userId, showId, epId)
             .then(() => {
                 res.send('OK')
+            })
+    })
+
+    app.get('/user/:userId/activities/:followedId', (req, res) => {
+        const userId = req.params.userId
+        const followedId = req.params.followedId
+        // console.log(userId,followedId)
+        userService.getActivitiesByFollowed(followedId)
+            .then(activities => {
+                res.send(activities)
             })
     })
 
@@ -104,10 +114,20 @@ function addRoutes(app) {
             })
     })
 
-    app.put('/user/:userId/activities/:', (req, res) => {
+    app.put('/user/:userId/activities/comment', (req, res) => {
         const userId = req.params.userId
         const activity = req.body
-        userService.addActivityByType(userId, activity)
+        // console.log(userId, activity.byUser._id)
+        userService.updateActivity(activity)
+            .then(activity => {
+                res.send(activity)
+            })
+    })
+
+    app.put('/user/:userId/activities/like', (req, res) => {
+        // const userId = req.params.userId
+        const activity = req.body
+        userService.addActivityByType(activity)
             .then(activity => {
                 res.json(activity)
             })
