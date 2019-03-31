@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     login() {
-      this.$emit("login", { mail: this.mail, password: this.password });
       this.$router.push("/");
-      this.mail = "";
+      this.$emit("login", { mail: this.mail, password: this.password });
       this.password = "";
+      this.mail = "";
     },
     route() {
       this.$router.push("/signup");

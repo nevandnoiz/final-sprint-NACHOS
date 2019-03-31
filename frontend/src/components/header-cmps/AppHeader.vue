@@ -37,8 +37,8 @@ export default {
       // console.log(params);
       this.$store
         .dispatch("loginUser")
-        .then(() => this.$store.dispatch("loadActivities"))
-        this.$router.go()
+        .then(() => this.$store.dispatch("loadActivities"));
+      this.$router.go();
     },
     toggleModal() {
       this.showModal = !this.showModal;
