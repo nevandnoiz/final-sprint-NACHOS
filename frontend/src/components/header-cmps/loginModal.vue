@@ -41,8 +41,9 @@ export default {
 
 <style lang="scss" scoped>
 .login-modal {
+  
   position: absolute;
-  top: 65px;
+  top: 104px;
   width: 300px;
   height: 240px;
   right: 40px;
