@@ -50,7 +50,6 @@ export default {
 }
 .container {
   top: 200px;
-position: fixed;
   .sign-up {
     width: 400px;
     margin: 0 auto;
