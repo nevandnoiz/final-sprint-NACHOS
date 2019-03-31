@@ -5,7 +5,12 @@
         <i class="fas fa-arrow-left"></i>
       </div>-->
 
-      <div class="card-container" v-for="(actor, index) in item.cast" :key="index" v-if="actor.profile_path">
+      <div
+        class="card-container"
+        v-for="(actor, index) in item.cast"
+        :key="index"
+        v-if="actor.profile_path"
+      >
         <img :src="'http://image.tmdb.org/t/p/w300'+actor.profile_path">
         <h1>{{actor.name}}</h1>
         <p>{{actor.character}}</p>
@@ -22,20 +27,16 @@
 import UtilityService from "@/services/UtilityService.js";
 export default {
   props: ["item"],
-  created() {
-  },
+  created() {},
   data() {
     return {};
   },
   methods: {},
-  computed: {
-
-  }
+  computed: {}
 };
 </script>
 
 <style scoped>
-
 h1 {
   margin-top: 0.5rem;
   font-weight: 700;
@@ -59,39 +60,108 @@ p {
   justify-content: center;
   height: 995px;
   display: flex;
-  direction:rtl;
+  direction: rtl;
   overflow: scroll;
   /* grid-template-columns: 50px 1fr 50px; */
 }
 .card-container {
-      display: flex;
-    flex-direction: column;
- margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  /* background: white; */
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  /* padding: 1rem; */
+  /* width: 224px; */
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* width: auto; */
+  /* -webkit-box-shadow: 0px 0px 4px #000000; */
+  /* box-shadow: 0px 0px 4px #000000; */
+}
+img {
+  width: 145px;
+}
+.cards-container {
+  margin-left: 1rem;
+}
+
+@media only screen and (max-width: 750px) {
+  .main-container{
+margin-top: 1.4rem;
+    /* grid-row: 2; */
+    /* -webkit-box-pack: center; */
+    -ms-flex-pack: center;
+    justify-content: center;
+    /* height: 995px; */
+    /* display: -webkit-box; */
+    /* width: 4000px; */
+    /* display: -ms-flexbox; */
+    height: auto;
+    display: block;
+    /* display: flex; */
+    direction: rtl;
+    overflow: scroll;
+    /* grid-template-columns: 50px 1fr 50px; */
+  }
+  .cards-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+    width: fit-content;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    /* flex-direction: row; */
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+  }
+  .card-container {
+    display: flex;
+    /* -webkit-box-orient: vertical; */
+    /* -webkit-box-direction: normal; */
+    -ms-flex-direction: column;
+    /* flex-direction: column; */
+    margin: 2rem 0;
     /* background: white; */
     border-radius: 3px;
-       padding: 0.5rem 0;
+    padding: 0.5rem 0;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
     /* padding: 1rem; */
     /* width: 224px; */
-   
-    flex-direction: column;
-
+    /* flex-direction: column; */
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
-
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+        /* height: 217px; */
+            width: 200px
+    /* width: 159px; */
     /* width: auto; */
     /* -webkit-box-shadow: 0px 0px 4px #000000; */
     /* box-shadow: 0px 0px 4px #000000; */
-}
-img {
-    width: 145px;
-}
-.cards-container {
-  margin-left: 1rem;
+  }
+  img {
+    height: 217px;
+    width: auto;
+        overflow: scroll;
+  }
 }
 /* div {
     display: none;

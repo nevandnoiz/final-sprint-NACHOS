@@ -1,6 +1,6 @@
 <template>
   <section v-if="season" class="slider-main-container">
-    <carousel :paginationEnabled="false" :navigationEnabled="true" :per-page="5">
+    <carousel :paginationEnabled="false" :navigationEnabled="true" :centerMode="true" :perPageCustom="[[1800,8],[1550,6],[300,5]]">
       <slide
         class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
@@ -8,7 +8,7 @@
         :key="index"
       >
         <!-- <div class="color-fill" :style="{'background':''+dominantColor+'66'}"></div> -->
-    <check-episode :key="key" v-if="currUser" :episode="eposide"></check-episode>
+    <check-episode  :key="key" v-if="currUser" :episode="eposide"></check-episode>
         <h1>{{eposide.episode_number}}</h1>
         <p>{{eposide.name}}</p>
       </slide>
@@ -46,6 +46,7 @@ export default {
     };
   },
   methods: {
+    
     // toggleMarkWatched(episode) {
     //   this.isChecked=!this.isChecked
       // this.$store.dispatch({

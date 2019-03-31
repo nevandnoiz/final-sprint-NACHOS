@@ -1,5 +1,5 @@
 <template>
-  <div class="check-container">
+  <div class="check-container" @click="showEpDetails(episode)">
     <i class="fas fa-check" :class="{'checked': isChecked}" @click="toggleMarkWatched(episode)"></i>
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
     };
   },
   methods: {
+      showEpDetails(ep){
+      // console.log()
+      console.log('this is the eposide that clicked:',ep) 
+      
+    },
     toggleMarkWatched(episode) {
       if (!this.isChecked)
         this.$store.dispatch({

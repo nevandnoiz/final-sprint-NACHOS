@@ -239,12 +239,13 @@ export default {
 width: 100vw;
 }
 .content-info-container{
-      display: grid;
-    gap: none;
+          display: flex;
+    flex-direction: column;
+    /* gap: none; */
     width: 100vw;
     margin: 0 auto;
     margin-top: 2rem;
-    grid-template-columns: 1fr 2fr;
+    /* grid-template-columns: 1fr 2fr; */
     height: 800px;
 }
 .mobile-season-list{

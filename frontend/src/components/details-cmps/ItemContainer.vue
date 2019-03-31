@@ -105,7 +105,7 @@ export default {
       "getTvShowWatchLinksByKeyword",
       "Prison Break"
     );
-    console.log(test.results[0].locations[4]);
+    // console.log(test.results[0].locations[4]);
     eventBus.$on(
       "onSeasonsListClick",
       () => (this.isSeasonsListMode = !this.isSeasonsListMode)

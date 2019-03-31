@@ -31,7 +31,7 @@ export default {
   props: ["watchLinks"],
   created() {
     console.log(
-      typeof this.watchLinks.locations.filter(res => res.name === "Netflix")
+      // typeof this.watchLinks.locations.filter(res => res.name === "Netflix")
     );
     console.log("i got the itme!", this.watchLinks);
   },
