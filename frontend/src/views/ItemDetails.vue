@@ -190,6 +190,7 @@ export default {
 .content-info-container {
   /* display: grid; */
   /* gap: 2rem; */
+  
   margin-top: 2rem;
   /* grid-template-columns: 1fr 2fr; */
   height: 800px;
@@ -215,11 +216,9 @@ export default {
   flex-direction: column;
 }
 .sub-container {
-      margin: 0 auto;
-
-  display: block;
-  width: 76vw;
-  z-index: 3;
+     display: block;
+    width: 100vw;
+    z-index: 3;
 }
 .tweet {
   position: absolute;

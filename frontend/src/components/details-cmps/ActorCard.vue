@@ -60,7 +60,7 @@ p {
   justify-content: center;
   height: 995px;
   display: flex;
-  direction: rtl;
+  direction: ltr;
   overflow: scroll;
   /* grid-template-columns: 50px 1fr 50px; */
 }
@@ -156,7 +156,7 @@ img{
     height: auto;
     display: block;
     /* display: flex; */
-    direction: rtl;
+   direction: ltr;
     overflow: scroll;
     /* grid-template-columns: 50px 1fr 50px; */
 }
@@ -175,9 +175,9 @@ margin-top: 1.4rem;
     /* width: 4000px; */
     /* display: -ms-flexbox; */
     height: auto;
-    display: block;
+    display: flex;
     /* display: flex; */
-    direction: rtl;
+ direction: ltr;
     overflow: scroll;
     /* grid-template-columns: 50px 1fr 50px; */
   }

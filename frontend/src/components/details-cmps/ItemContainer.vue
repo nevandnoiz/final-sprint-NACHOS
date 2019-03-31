@@ -253,17 +253,11 @@ a {
   flex-direction: column;
 }
 .netflix-container {
-  box-shadow: 0px 0px 12px #000000;
-  padding-bottom: 2rem;
-  background-color: rgb(39, 36, 18);
-  /* padding: 1rem 0; */
-  /* padding-bottom: 20px; */
-  box-shadow: 0px 0px 12px #000000;
-  margin-top: 1rem;
-  grid-column: 1/6;
-  /* position: relative; */
-  display: flex;
-  flex-direction: column;
+ -webkit-box-shadow: 0px 0px 12px #000000;
+    box-shadow: 0px 0px 12px #000000;
+    /* padding-bottom: 1.5rem; */
+    margin: 0 auto;
+    width: 76vw;
 }
 .item-info {
   margin-top: 0.2rem;
@@ -758,7 +752,7 @@ i {
   padding-bottom: 285px;
 }
 .item-container {
-  margin: 68px 0 auto;
+      margin: 0 0 auto;
   /* display: grid; */
   width: 100vw;
   z-index: 1;
