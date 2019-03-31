@@ -15,7 +15,7 @@
               <input type="text">
               <label for="email">Email</label>
               <input type="email">
-              <label for="password">password</label>
+              <label for="password">Password</label>
               <input type="password">
               <span>By clicking Join now, you agree to the Nachos User Agreement, Privacy Policy, and Cookie Policy.</span>
               <button @click="route">Join now</button>
