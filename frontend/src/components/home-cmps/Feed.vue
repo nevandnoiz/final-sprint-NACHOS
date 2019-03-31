@@ -13,7 +13,7 @@
     />
   </section>
 </template>
-
+ 
 
 <script>
 import selectDefualt from "@/components/home-cmps/selectDefualt";
@@ -72,9 +72,9 @@ export default {
     } 
   },
   async created() {
+    if (this.user) {
     let activities = await this.$store.dispatch('getFollowedActivities')
     this.ready = true
-    if (this.user) {
       this.generateFeed(this.userFavoriteItems, 1);
     }
   }

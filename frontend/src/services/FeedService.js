@@ -13,7 +13,7 @@ function getNewsByArr(items, numOfArticles = 3) {
                 const filteredNews = filterNews(res, numOfArticles)
                 news.push(filteredNews)
             })
-    })
+    })    
     return news;
 }
 
