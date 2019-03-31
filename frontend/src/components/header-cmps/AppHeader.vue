@@ -20,7 +20,7 @@
       </div>
       <div class="login">
  <h3 class="username" v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <a v-else @click="login">LOGIN</a>
+        <a class="username" v-else @click="login">LOGIN</a>
       </div>
       
     </div>

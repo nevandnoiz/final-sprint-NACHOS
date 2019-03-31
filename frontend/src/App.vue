@@ -34,8 +34,8 @@ export default {
 
 
 #app {
-  // display: grid;
-  // grid-template: 65px 40px 1fr/1fr;
+  display: grid;
+  grid-template: 65px 40px 1fr/1fr;
 }
 .routes-container {
   // background: black;

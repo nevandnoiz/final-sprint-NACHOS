@@ -101,10 +101,7 @@ export default {
   },
   async created() {
     console.log("item", this.item);
-    var test = await this.$store.dispatch(
-      "getTvShowWatchLinksByKeyword",
-      "Prison Break"
-    );
+    // var test = await this.$store.dispatch("getTvShowWatchLinksByKeyword","Prison Break");
     // console.log(test.results[0].locations[4]);
     eventBus.$on(
       "onSeasonsListClick",

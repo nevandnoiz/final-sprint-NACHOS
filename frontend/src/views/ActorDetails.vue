@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="actor && actor.actorMovies">
     <div class="section-div-main-container">
 
 
