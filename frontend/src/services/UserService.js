@@ -17,6 +17,10 @@ export default {
     unmarkWatched,
 }
 
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+? '/'
+: '//localhost:3003';
+
 const users = []
 
 const activities = [
@@ -90,24 +94,24 @@ function addLikeToActivity(activity) {
 }
 
 function addToListByType(addedItem, userId, listType) {
-    return axios.post(`http://localhost:3003/user/${userId}/lists/${listType}`, addedItem)
+    return axios.post(`${BASE_URL}/user/${userId}/lists/${listType}`, addedItem)
 }
 
 function removeFromListByType(itemId, userId, listType) {
-    return axios.delete(`http://localhost:3003/user/${userId}/lists/${listType}/${itemId}`)
+    return axios.delete(`${BASE_URL}/user/${userId}/lists/${listType}/${itemId}`)
 }
 
 function markWatched(userId, showId, epId) {
-    return axios.post(`http://localhost:3003/user/${userId}/episodes/${showId}`, {epId})
+    return axios.post(`${BASE_URL}/user/${userId}/episodes/${showId}`, {epId})
 }
 
 function unmarkWatched(userId, showId, epId) {
-    return axios.delete(`http://localhost:3003/user/${userId}/episodes/${showId}/${epId}`)
+    return axios.delete(`${BASE_URL}/user/${userId}/episodes/${showId}/${epId}`)
 }
 
 function addActivityByType(user, item, itemType, activityType,value) {
     let activity = _createActivity(user, item, itemType, activityType,value)
-    return axios.post(`http://localhost:3003/user/${user._id}/activities`, activity)
+    return axios.post(`${BASE_URL}/user/${user._id}/activities`, activity)
 }
 
 function addCommentToActivity(comment, activity) {
@@ -118,14 +122,14 @@ function addCommentToActivity(comment, activity) {
 }
 function loginUser() {
     let user = { email: 'email@wiener.tal', password: '123123' }
-    return axios.post(`http://localhost:3003/login`,
+    return axios.post(`${BASE_URL}/login`,
         user
     )
         .then(res => res.data)
 }
 
 function loadUser() {
-    return axios.get(`http://localhost:3003/login`,
+    return axios.get(`${BASE_URL}/login`,
     )
         .then(res => {
             return res.data

@@ -28,7 +28,7 @@ function addRoutes(app) {
             })
     })
 
-    app.post('/singup', (req, res) => {
+    app.post('/signup', (req, res) => {
         const nickname = req.body.nickname
         userService.addUser({ nickname })
             .then(user => res.json(user))

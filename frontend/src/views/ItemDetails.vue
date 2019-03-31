@@ -10,7 +10,12 @@
         :player-vars="{ autoplay: 1 }"
       ></youtube>
     </div>
-    <item-container v-if="this.item.details" :item="item" :itemType="itemType" :dominantColor="dominantColor"></item-container>
+    <item-container
+      v-if="this.item.details"
+      :item="item"
+      :itemType="itemType"
+      :dominantColor="dominantColor"
+    ></item-container>
     <div class="sub-container">
       <episodes-swiper
         v-if="itemType==='tv'"
@@ -171,6 +176,7 @@ export default {
           ? this.item.details.release_date
           : this.item.details.first_air_date;
       let relDateTimestamp = moment(relDate).unix() * 1000;
+      if (relDateTimestamp < 1286698210000) relDateTimestamp = 1286698210000;
       let currDateTimestamp = Date.now();
       return Math.floor(
         Math.random() * (currDateTimestamp - relDateTimestamp + 1) +

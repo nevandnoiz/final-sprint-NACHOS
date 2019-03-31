@@ -39,13 +39,11 @@ export default {
   },
   created() {
     let isOnWatchList = this.isItemInList("watchList");
-    console.log("watch true");
     if (isOnWatchList) {
       this.isOnWatchList = true;
     }
     let isFavorite = this.isItemInList("favorites");
     if (isFavorite) {
-      console.log("favorite true");
       this.isFavorite = true;
     }
   },

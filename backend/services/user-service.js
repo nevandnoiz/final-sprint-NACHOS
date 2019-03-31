@@ -144,7 +144,7 @@ function query() {
 function addUser({ nickname }) {
     var user = { nickname }
     return mongoService.connect()
-        .then(db => db.collection('user').insertOne(user))
+        .then(db => db.collection('users').insertOne(user))
         .then(res => {
             user._id = res.insertedId
             return user

@@ -11,24 +11,28 @@ export default {
     getActorVideos,
 }
 
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+? '/actors'
+: '//localhost:3003/actors';
+
 async function getPopularActors(page = 1) {
-    let res = await axios.get(`http://localhost:3003/actors/${page}`)
+    let res = await axios.get(`${BASE_URL}/${page}`)
     const popular = res.data
     return popular
 }
 
 async function getActorDetails(id) {
-    let res = await axios.get(`http://localhost:3003/actors/details/${id}`)
+    let res = await axios.get(`${BASE_URL}/details/${id}`)
     return res.data
 }
 
 async function getActorImages(id) {
-    let res = await axios.get(`http://localhost:3003/actors/imgs/${id}`)
+    let res = await axios.get(`${BASE_URL}/imgs/${id}`)
     return res.data
 }
 
 async function getActorExternalIds(id) {
-    let res = await axios.get(`http://localhost:3003/actors/links/${id}`)
+    let res = await axios.get(`${BASE_URL}/links/${id}`)
     return res.data
 }
 
@@ -40,7 +44,7 @@ async function getActorsByKeyword(keyword) {
 }
 
 async function getActorCredits(id) {
-    let res = await axios.get(`http://localhost:3003/actors/credits/${id}`)
+    let res = await axios.get(`${BASE_URL}/credits/${id}`)
     return res.data
 }
 
@@ -54,6 +58,6 @@ async function getActorWatchLinksByKeyword(keyword, region) {
 }
 
 async function getActorVideos(id) {
-    let res = await axios.get(`http://localhost:3003/actors/videos/${id}`)
+    let res = await axios.get(`${BASE_URL}/videos/${id}`)
     return res.data
 }

@@ -21,6 +21,7 @@ app.use(cors({
   credentials: true // enable set cookie
 }));
 app.use(bodyParser.json())
+app.use(express.static('public'))
 app.use(cookieParser());
 app.use(session({
   secret: 'puki muki',

@@ -2,12 +2,12 @@
   <div class="browse">
     <backdrop-cmp :topItems="topFiveItems"></backdrop-cmp>
     <div class="categories">
-      <a
-        v-for="(category,index) in categories"
-        :key="index"
-        :class="{'selected-category': category===currCategory }"
-        @click="changeCategory(category)"
-      >{{category}}</a>
+      <div class="category" v-for="(category,index) in categories" :key="index">
+        <a
+          :class="{'selected-category': category===currCategory }"
+          @click="changeCategory(category)"
+        >{{category}}</a>
+      </div>
     </div>
     <div class="grid-container">
       <item-preview v-for="(tvShow, index) in popularItems" :key="index" :item="tvShow"></item-preview>
@@ -79,10 +79,20 @@ export default {
 }
 .categories {
   grid-area: 2/1/2/1;
-  display: flex;
+  display: grid;
+  grid-template:1fr/1fr 1fr 1fr;
   justify-content: space-evenly;
   align-items: center;
-  a {
+  .category {
+    border-right:3px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .category:last-child {
+    border:none;
+  }
+  a,span {
     font-size: 24px;
     font-weight: 500;
     transition: 0.05s;

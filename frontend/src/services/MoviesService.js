@@ -13,36 +13,40 @@ export default {
     getMovieVideos,
 }
 
+const BASE_URL = (process.env.NODE_ENV !== 'development')
+? '/movies'
+: '//localhost:3003/movies';
+
 async function getTopRatedMovies(page = 1) {
-    let res = await axios.get(`http://localhost:3003/movies/top_rated/${page}`)
+    let res = await axios.get(`${BASE_URL}/top_rated/${page}`)
     const movies = res.data
     return movies
 }
 
 async function getPopularMovies(page = 1) {
-    let res = await axios.get(`http://localhost:3003/movies/popular/${page}`)
+    let res = await axios.get(`${BASE_URL}/popular/${page}`)
     const movies = res.data
     return movies
 }
 
 async function getTrendingMovies(page = 1) {
-    let res = await axios.get(`http://localhost:3003/movies/trending/${page}`)
+    let res = await axios.get(`${BASE_URL}/trending/${page}`)
     const movies = res.data
     return movies
 }
 
 async function getMovieDetails(id) {
-    let res = await axios.get(`http://localhost:3003/movies/details/${id}`)
+    let res = await axios.get(`${BASE_URL}/details/${id}`)
     return res.data
 }
 
 async function getMovieImages(id) {
-    let res = await axios.get(`http://localhost:3003/movies/imgs/${id}`)
+    let res = await axios.get(`${BASE_URL}/imgs/${id}`)
     return res.data
 }
 
 async function getMovieExternalIds(id) {
-    let res = await axios.get(`http://localhost:3003/movies/links/${id}`)
+    let res = await axios.get(`${BASE_URL}/links/${id}`)
     return res.data
 }
 
@@ -54,7 +58,7 @@ async function getMoviesByKeyword(keyword) {
 }
 
 async function getMovieCredits(id) {
-    let res = await axios.get(`http://localhost:3003/movies/credits/${id}`)
+    let res = await axios.get(`${BASE_URL}/credits/${id}`)
     return res.data
 }
 
@@ -68,6 +72,6 @@ async function getMovieWatchLinksByKeyword(keyword, region) {
 }
 
 async function getMovieVideos(id) {
-    let res = await axios.get(`http://localhost:3003/movies/videos/${id}`)
+    let res = await axios.get(`${BASE_URL}/videos/${id}`)
     return res.data
 }
