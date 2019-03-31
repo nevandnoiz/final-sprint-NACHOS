@@ -44,11 +44,6 @@ export default {
             showId: this.episode.show_id,
             epId: this.episode.id
           });
-                showEpDetails(ep){
-      // console.log()
-      console.log('this is the eposide that clicked:',ep) 
-      
-    },
       this.isChecked = false;
     },
     init() {
@@ -56,6 +51,10 @@ export default {
       if (isWatched) {
         this.isChecked = true;
       }
+    },
+          showEpDetails(ep){
+      // console.log()
+      console.log('this is the eposide that clicked:',ep) 
     },
     isWatched() {
       if (this.$store.getters.currUser) {

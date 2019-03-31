@@ -14,21 +14,20 @@
 <router-link to="/movies">MOVIES</router-link>
         <router-link to="/tv">TV SHOWS</router-link>
         <router-link to="/actors">ACTORS</router-link>
-        <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <div v-else class="center">
-          <div class="center">
-            <a @click="toggleModal">Login</a>
-          </div>
-          <login-modal v-if="showModal" @login="login" @toggleModal="toggleModal"/>
         </div>
         <search-bar class="search-bar"></search-bar>
        
       </div>
       <div class="login">
- <h3 class="username" v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <a v-else @click="login">LOGIN</a>
+<h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
+        <div v-else class="center">
+          <div class="center">
+            <a @click="toggleModal">LOGIN</a>
+          </div>
+          <login-modal v-if="showModal" @login="login" @toggleModal="toggleModal"/>
       </div>
       
+    </div>
     </div>
   </header>
   </section>
@@ -47,7 +46,7 @@ export default {
     };
   },
   components: {
-    loginModal
+    loginModal,
     searchBar,
      HamburgerMenu
      },
