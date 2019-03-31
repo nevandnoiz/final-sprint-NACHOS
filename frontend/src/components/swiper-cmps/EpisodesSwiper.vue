@@ -1,6 +1,6 @@
 <template>
   <section v-if="season" class="slider-main-container">
-    <carousel :paginationEnabled="false" :navigationEnabled="true" :per-page="5" :initialSlide="0">
+    <carousel :paginationEnabled="false" :navigationEnabled="true" :centerMode="true" :perPageCustom="[[1800,8],[1550,6],[300,5]]">
       <slide
         class="slider-card"
         :style="{'background-image':'url(\''+imgURL(eposide.still_path)+'\')'}"
@@ -116,6 +116,8 @@ p {
 
 .slider-main-container {
   z-index: 3423423423;
+      width: 76vw;
+    margin: 0 auto;
 }
 .swiper-container {
   width: 600px;

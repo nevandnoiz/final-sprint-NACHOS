@@ -81,6 +81,7 @@ export default {
 </script>
 
 <style scoped>
+
 h2 {
   font-weight: 700;
 }
@@ -100,10 +101,17 @@ h2 {
   width: auto !important;
   width: auto !important;
   padding: 20px;
-  max-width: 51vw !important;
+  /* max-width: 51vw !important; */
 }
 .card-inner {
   display: none;
   margin-left: 4rem;
 }
+@media only screen and (max-width: 767px) { 
+.img-fluid{
+  width: 20% !important;
+}
+}
+
+
 </style>

@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <search-bar></search-bar>
+    <app-header class="header"></app-header>
+   
     <div class="routes-container">
       <router-view/>
     </div>
-  <footer></footer>
+  <!-- <footer></footer> -->
   </div>
 
 </template>
 
 <script>
-import searchBar from "@/components/header-cmps/SearchBar1.vue";
+
 import AppHeader from "./components/header-cmps/AppHeader";
 import buefy from "./buefy.css";
 import reset from "./reset.css";
@@ -20,7 +20,7 @@ import global from "./global.css";
 export default {
   components: {
     AppHeader,
-    searchBar
+
   },
   created(){
     this.$store.dispatch('loadUser')
@@ -30,9 +30,12 @@ export default {
 
 
 <style lang="scss">
+
+
+
 #app {
-  display: grid;
-  grid-template: 65px 40px 1fr/1fr;
+  // display: grid;
+  // grid-template: 65px 40px 1fr/1fr;
 }
 .routes-container {
   // background: black;

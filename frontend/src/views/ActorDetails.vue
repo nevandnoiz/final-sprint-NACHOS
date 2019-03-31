@@ -1,163 +1,209 @@
 <template>
-  <div class="tv-details-container" v-if="tvShow.details && dominantColor">
-    <item-container v-if="this.tvShow.details" :item="tvShow" :dominantColor="dominantColor"></item-container>
-    <div class="sub-container">
-      <!-- <netflix-slide-main
-        :seasons="tvShow.seasons"
-        :tvShowId="tvShow.details.id"
-        class="netflix-container"
-      ></netflix-slide-main> -->
-      <nav-bar class="nav-bar"></nav-bar>
-      <actor-card :item="tvShow.credits"></actor-card>
+  <section>
+    <div class="section-div-main-container">
+
+
+    <!-- <div class="nav-bar-filler"></div> -->
+    <!-- <pannel-heading :title="'Header'" :dominantColor="'#2d2d2d'" class="nav-bar-filler"></pannel-heading> -->
+<!-- ['dominantColor','title'] -->
+<div class="nav-bar-filler">
+<h1>Known for</h1>
+</div>
+
+
+
+
+
+    <div class="actor-detalis-main-container">
+      <h1>Hello</h1>
+      <div class="biography-container">
+        <div class="text-container">
+          <h1>{{actor.name}}</h1>
+          <div class="bio">
+            <h2>Biography</h2>
+            <p>{{actor.biography}}</p>
+          </div>
+        </div>
+
+        <div class="actors-movies-container">
+          <div v-for="(movie, index) in actorMovies.cast" :key="index" class="movie-img-container">
+            <img :src="`http://image.tmdb.org/t/p/w300${movie.poster_path}`">
+          </div>
+        </div>
+      </div>
+
+      <div class="personal-info-container">
+        <img :src="`http://image.tmdb.org/t/p/w300${actor.profile_path}`">
+        <div v-if="actor" class="personal-info">
+          <h1>Personal Info</h1>
+          <div class="info">
+   <h3>Known for:</h3>
+          <p>{{actor.known_for_department}}</p>
+          </div>
+       
+          <div class="info">
+            <h2>Gender</h2>
+            <p>{{actor.gender}}</p>
+          </div>
+
+          <div class="info">
+            <h2>Birthday</h2>
+            <p>{{actor.birthday}}</p>
+          </div>
+          <div class="info">
+            <h2>Place of Birth</h2>
+            <p>{{actor.place_of_birth}}</p>
+          </div>
+          <div class="info">
+            <h2 v-if="actor.homepage">Official Site</h2>
+            <p v-if="actor.homepage">{{actor.homepage}}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- <review-container
-    <seasons-list :seasons="tvShow.seasons" :tvShowId="tvShow.details.id"></seasons-list>
-    <review-container
-      v-for="(review, index) in tvShow.reviews.results"
-      :key="index"
-      :review="review" item.details.id item.seasons
-    ></review-container>-->
-    <!-- <review-form></review-form> -->
-
-    <!-- <i class="fab fa-facebook"></i> -->
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
+import PannelHeading from "@/components/general-cmps/PannelHeading.vue"
 import UtilityService from "@/services/UtilityService.js";
-import ItemContainer from "../components/details-cmps/ItemContainer.vue";
-import NavBar from "../components/details-cmps/NavBar.vue";
-// import SeasonsList from "../components/details-cmps/SeasonsList.vue";
-// import NetflixSlideMain from "@/components/details-cmps/NetflixSlideMain.vue";
-import ReviewContainer from "../components/details-cmps/ReviewContainer.vue";
-import ReviewForm from "../components/details-cmps/ReviewForm.vue";
-import AvgColorService from "@/services/AvgColorService.js";
-import ActorCard from "@/components/details-cmps/ActorCard.vue";
-
 export default {
   data() {
     return {
-      dominantColor: null,
-      tvShow: {
-        seasons: null,
-        details: null,
-        videos: null,
-        credits: null,
-        reviews: null,
-        externalIds: null
-      }
+      actor: null,
+      actorMovies: null
     };
   },
-
   async created() {
-    this.setReviews();
-    const tvShowId = this.$route.params.tvShowId;
-    const [
-      details,
-      externalIds,
-      tvShowCredits,
-      tvShowVideos
-    ] = await Promise.all([
-      this.$store.dispatch("getTvShowDetails", tvShowId),
-      this.$store.dispatch("getTvShowExternalIds", tvShowId),
-      this.$store.dispatch("getTvShowCredits", tvShowId),
-      this.$store.dispatch("getTvShowVideos", tvShowId)
-    ]);
-    this.tvShow.details = details;
-    this.tvShow.seasons = details.seasons;
-    this.tvShow.externalIds = externalIds;
-    this.tvShow.credits = tvShowCredits;
-    this.setDominantColor();
-  },
-  destroyed() {
-    domcolor = null;
-    this.$store.commit("setSelectedItem", null);
-  },
-  methods: {
-    async setDominantColor() {
-      this.dominantColor = await AvgColorService.domColor(
-        `http://image.tmdb.org/t/p/w92${this.tvShow.details.poster_path}`
-      );
-    },
-    setReviews() {
-      this.tvShow.reviews = {
-        id: 297761,
-        page: 1,
-        results: [
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          },
-          {
-            id: "57a814dc9251415cfb00309a",
-            author: "NeoBrowser",
-            score: "8",
-            content:
-              "Brooking no argument, history should quickly regard Peter Jackson’s The Fellowship Of The Ring as the first instalment of the best fantasy epic in motion picture history. This statement is worthy of investigation for several reasons.\r\n\r\nFellowship is indeed merely an opening salvo, and even after three hours in the dark you will likely exit the cinema.",
-            url: "https://www.themoviedb.org/review/57a814dc9251415cfb00309a"
-          }
-        ]
-      };
-    }
+    console.log("hey");
+     const actorId = this.$route.params.actorId;
+    const actor = await this.$store.dispatch("getActorDetails", actorId);
+    this.actor = actor;
+    var actorMovies = await this.$store.dispatch("getActorMovieCredits",actorId);
+    this.actorMovies = actorMovies;
+    // console.log(actorMovies)
+    console.log(this.actor);
+    console.log(this.actorMovies);
   },
   components: {
-    ActorCard,
-    ItemContainer,
-    // SeasonsList,
-    // NetflixSlideMain,
-    ReviewContainer,
-    ReviewForm,
-    NavBar
-  },
-  watch: {
-    "$route.params.tvShowId": function() {
-      this.getTvShowDetails();
-    }
+    PannelHeading
   }
 };
 </script>
 
 <style scoped>
-.tv-details-container {
+@import url("https://fonts.googleapis.com/css?family=Arvo");
+
+body {
+  background: #e4e4e4;
+}
+section {
+  background: linear-gradient(to bottom right, #eee, #fff);
+}
+.section-div-main-container {
+      padding-top: 2rem;
+}
+h1 {
+  color: black;
+  font-size: 1.5rem
+}
+h2 {
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+p {
+  color: black;
+  font-size: 1.2rem;
+}
+.info {
+  margin: 1.7rem 0
+}
+.personal-info {
+  
+      margin-top: 2rem;
+   padding-right: 2rem;
+}
+.personal-info-container {
+  grid-column: 1;
+  z-index: 3;
+  grid-row: 1;
+}
+.actor-detalis-main-container {
+  grid-template-columns: 300px 1fr;
+  /* background: */
+  z-index: 2;
+  display: grid;
+  width: 75vw;
+  margin: 0 auto;
+  /* display: grid; */
+  /* grid-template-columns: 15vw 1fr 1fr 15vw; */
+  /* grid-template-rows: 700px 1fr 1fr; */
+}
+.bio {
+  padding-top: 3rem;
   display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 180px;
+}
+.biography-container {
+  flex-direction: column;
+  /* padding-left: 2rem; */
+  display: flex;
+  grid-column: 2;
+  grid-row: 1;
+  /* grid-column: 3; */
+  /* grid-row: 1; */
+  width: 52vw;
+  z-index: 2;
+  /* margin: 0 auto; */
+}
+.text-container {
+      background: white;
+  display: flex;
+  height: 355px;
+  padding-top: 2rem;
+  padding-left: 2rem;
   flex-direction: column;
 }
-.sub-container{
-      margin: 226px auto;
-      z-index: 3;
-    display: block;
-       width: 76vw;
-
+.actors-movies-container {
+  display: grid;
+  /* grid-row: 2; */
+  /* grid-column: 1/333; */
+      padding: 2rem;
+    background: white;
+  grid-template-columns: repeat(4, 1fr);
+  /* width: 50vw; */
+  margin: 0 auto;
+  gap: 0.5rem;
 }
-@media only screen and (max-width: 850px) {
+.personal-info-container>img {
+/* border-radius: 5px */
+}
+.nav-bar-filler {
+      display: flex;
+    align-items: center;
+  z-index: 3;
+  background: #2d2d2d;
+  /* height: 70px; */
+  position: absolute;
+  top: 435px;
+
+  width: 100vw;
+}
+
+.nav-bar-filler>h1 {
+    height: 100%;
+       font-family: Arvo;
+
+    padding:  0 1rem;
+    display: flex;
+    margin-left: 32rem;
+    /* padding-left: 30rem; */
+    background-color: white;
+    align-items: center;
 }
 </style>

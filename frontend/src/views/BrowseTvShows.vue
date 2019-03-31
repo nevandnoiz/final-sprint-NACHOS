@@ -70,6 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 .browse {
+   background: black;
   // background: #000000bf;
   display: grid;
   grid-template: 475px 60px 1fr/1fr;

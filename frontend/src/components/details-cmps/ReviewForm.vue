@@ -121,4 +121,10 @@ button {
   height: 30px;
   margin: 15px 0;
 }
+
+@media only screen and (max-width: 750px) {
+.form-section-review{
+      margin: 2rem auto;
+}
+}
 </style>
