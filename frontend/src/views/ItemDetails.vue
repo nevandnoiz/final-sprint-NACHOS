@@ -13,7 +13,7 @@
     <item-container v-if="this.item.details" :item="item" :itemType="itemType" :dominantColor="dominantColor">
       
     </item-container>
-        <seasons-list class="mobile-season-list" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list>
+        <seasons-list v-if="itemType==='tv'" class="mobile-season-list" :seasons="item.seasons" :tvShowId="item.details.id"></seasons-list>
 
     <div class="sub-container">
       <episodes-swiper

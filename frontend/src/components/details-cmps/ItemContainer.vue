@@ -61,7 +61,7 @@
 
               <img class="item-poster-img" ref="itemPoster" :src="imgURL">
               <div class="black-filler">
-                                <media-icons-bar :watchLinks="item.watchLinks" class="media-icons-bar"></media-icons-bar>
+                                <media-icons-bar v-if="itemType==='tv'" :watchLinks="item.watchLinks" class="media-icons-bar"></media-icons-bar>
 
               </div>
               <!-- <netflix-season-menu  class="netflix-season-menu-container"></netflix-season-menu> -->
@@ -184,7 +184,8 @@ a {
     position: absolute;
     top: 0;
         background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
+    /* background-size: 100%; */
     background-position-y: 32%;
 }
 .geners {

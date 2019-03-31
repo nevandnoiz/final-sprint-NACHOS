@@ -33,7 +33,6 @@ export default {
     console.log(
       // typeof this.watchLinks.locations.filter(res => res.name === "Netflix")
     );
-    console.log("i got the itme!", this.watchLinks);
   },
   computed: {
     netflix() {

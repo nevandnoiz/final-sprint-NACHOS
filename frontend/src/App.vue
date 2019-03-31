@@ -34,8 +34,8 @@ export default {
 
 
 #app {
-  // display: grid;
-  // grid-template: 65px 40px 1fr/1fr;
+  display: grid;
+  grid-template: 105px 1fr/1fr;
 }
 .routes-container {
   // background: black;
@@ -44,6 +44,13 @@ export default {
 
 footer{
   height: 200px;
+}
+
+@media only screen and (max-width: 1032px) { 
+#app {
+  display: grid;
+  grid-template: 60px 1fr/1fr;
+}
 }
 
 </style>

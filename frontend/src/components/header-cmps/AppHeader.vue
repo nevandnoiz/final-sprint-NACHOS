@@ -19,10 +19,10 @@
        
       </div>
       <div class="login">
-<h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
+<h3 class="username" v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
         <div v-else class="center">
           <div class="center">
-            <a @click="toggleModal">LOGIN</a>
+            <a class="username" @click="toggleModal">LOGIN</a>
           </div>
           <login-modal v-if="showModal" @login="login" @toggleModal="toggleModal"/>
       </div>
