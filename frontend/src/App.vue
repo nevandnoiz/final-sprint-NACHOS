@@ -39,7 +39,7 @@ export default {
 }
 .routes-container {
   // background: black;
-  grid-area: 3/1/3/1;
+  grid-area: 2/1/2/1;
 }
 
 footer{
