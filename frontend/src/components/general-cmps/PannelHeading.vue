@@ -21,11 +21,24 @@ props: ['dominantColor','title']
 
 .main-pannel-heading-container {
     display: flex;
+        margin: 0 auto;
+    width: 76vw;
     grid-column: 1fr 1fr 1fr;
     height: 1.5rem;
     flex-direction: row;
     justify-content: center;
 }
+@media only screen and (max-width: 1000px) { 
+
+    .main-pannel-heading-container {
+
+width: 100%;
+
+     }
+
+
+}
+
 .start{
 /* background-color: red; */
     -webkit-box-flex: 1;
