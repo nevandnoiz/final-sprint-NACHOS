@@ -104,6 +104,15 @@ function addRoutes(app) {
             })
     })
 
+    app.put('/user/:userId/activities/:', (req, res) => {
+        const userId = req.params.userId
+        const activity = req.body
+        userService.addActivityByType(userId, activity)
+            .then(activity => {
+                res.json(activity)
+            })
+    })
+
 }
 
 

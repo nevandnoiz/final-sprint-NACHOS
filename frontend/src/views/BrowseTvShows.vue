@@ -67,7 +67,7 @@ export default {
 .browse {
   // background: #000000bf;
   display: grid;
-  grid-template: 475px 80px 1fr/1fr;
+  grid-template: 475px 60px 1fr/1fr;
 }
 .grid-container {
   padding: 0 20px;
@@ -79,21 +79,24 @@ export default {
 }
 .categories {
   grid-area: 2/1/2/1;
+  width: 600px;
   display: grid;
-  grid-template:1fr/1fr 1fr 1fr;
+  grid-template: 1fr/1fr 1fr 1fr;
+  justify-self: center;
   justify-content: space-evenly;
   align-items: center;
   .category {
-    border-right:3px solid black;
+    border-right: 3px solid black;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
   }
   .category:last-child {
-    border:none;
+    border: none;
   }
-  a,span {
-    font-size: 24px;
+  a,
+  span {
+    font-size: 20px;
     font-weight: 500;
     transition: 0.05s;
   }
