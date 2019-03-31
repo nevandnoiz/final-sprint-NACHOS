@@ -7,7 +7,7 @@
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered, 'selected': isSelected}"
   >
-    <div class="item-hover-controls" v-if="currUser && isHovered">
+    <div class="item-hover-controls" v-if="isHovered && showBtns">
       <div class="hover-controls-btns">
         <el-tooltip
           class="item"
@@ -52,7 +52,7 @@
 import UtilityService from "@/services/UtilityService.js";
 
 export default {
-  props: ["item", "selectMode"],
+  props: ["item", "selectMode", "showBtns"],
   components: {},
   data() {
     return {

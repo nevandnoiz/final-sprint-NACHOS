@@ -104,6 +104,10 @@ export default {
       const newActivity = await UserServies.addLikeToActivity(activity)
       context.commit({ type: 'updateActivity', newActivity })
     },
+    async removeLikeToActivity(context, activity) {
+      const newActivity = await UserServies.removeLikeToActivity(activity)
+      context.commit({ type: 'updateActivity', newActivity })
+    },
 
     async addCommentToActivity(context, { comment, activity }) {
       const commentObj = {

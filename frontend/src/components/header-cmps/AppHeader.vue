@@ -7,26 +7,41 @@
         <router-link to="/tv">Tv Shows</router-link>
         <router-link to="/actors">Actors</router-link>
         <h3 v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
-        <a v-else @click="login">Login</a>
+        <div v-else class="center">
+          <div class="center">
+            <a @click="toggleModal">Login</a>
+          </div>
+          <login-modal v-if="showModal" @login="login" @toggleModal="toggleModal"/>
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import loginModal from "@/components/header-cmps/loginModal";
 export default {
+  data() {
+    return {
+      showModal: false
+    };
+  },
   components: {
-    // searchBar
+    loginModal
   },
   methods: {
     pushToHome() {
       this.$router.push("/");
     },
-    login() {
+    login(params) {
+      // console.log(params);
       this.$store
         .dispatch("loginUser")
         .then(() => this.$store.dispatch("loadActivities"))
         this.$router.go()
+    },
+    toggleModal() {
+      this.showModal = !this.showModal;
     }
   },
   computed: {
@@ -74,6 +89,11 @@ header {
         margin: 10px;
         font-size: 24px;
         text-decoration: none;
+      }
+      .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

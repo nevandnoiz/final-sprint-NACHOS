@@ -10,7 +10,12 @@
       </div>
     </div>
     <div class="grid-container">
-      <item-preview v-for="(movie, index) in popularItems" :key="index" :item="movie"></item-preview>
+      <item-preview
+        v-for="(movie, index) in popularItems"
+        :key="index"
+        :item="movie"
+        :showBtns="true"
+      ></item-preview>
     </div>
   </div>
 </template>

@@ -217,9 +217,6 @@ export default {
   grid-template-columns: 210px 2fr;
   height: 800px;
 }
-.reviews-section {
-  /* box-shadow: 0px 0px 12px #000000; */
-}
 
 .pannel-heading-epo {
   margin-top: 1.3rem;

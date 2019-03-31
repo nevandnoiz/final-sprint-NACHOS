@@ -4,19 +4,20 @@
       <h2 class="section-header">Choose tv shows you like</h2>
       <div v-if="items" class="selector">
         <div class="select-item" v-for="item in itemToShow" :key="item.id">
-          <div class="choose"></div>
           <item-preview
             class="select-item-poster"
             :item="item"
             :click="false"
             :selectMode="true"
-            @toggleItem="toggleItem(item.name)"
+            @toggleItem="toggleItem(item)"
           />
           <p>{{item.name}}</p>
         </div>
       </div>
     </section>
-    <button v-if="likedItems.length > 2" @click="$emit('generateFeed', likedItems)">go</button>
+    <div class="container">
+      <button v-if="likedItems.length > 2" @click="$emit('generateFeed', likedItems)">Start exploring!</button>
+    </div>
   </div>
 </template>
 
@@ -24,6 +25,8 @@
 <script>
 import axios from "axios";
 import itemPreview from "@/components/ItemPreview";
+import tvShowService from "@/services/TvShowsService.js";
+
 export default {
   components: { itemPreview },
   data() {
@@ -33,18 +36,17 @@ export default {
     };
   },
   created() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/tv/popular?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=1`
-      )
-      .then(res => (this.items = res.data.results));
+    tvShowService.getTopRatedShows().then(res => (this.items = res));
   },
 
   methods: {
-    toggleItem(itemName) {
-      const itemIdx = this.likedItems.indexOf(itemName);
+    toggleItem(item) {
+      const itemIdx = this.likedItems.findIndex(
+        listItem => listItem.name === item.name
+      );
       if (itemIdx >= 0) this.likedItems.splice(itemIdx, 1);
-      else this.likedItems.push(itemName);
+      else
+        this.likedItems.push({ name: item.name, id: item.id, item_type: "tv" });
     }
   },
   computed: {
@@ -80,7 +82,28 @@ export default {
   font-family: sans-serif;
 }
 
+.container {
+  display: flex;
+  button {
+    height: 40px;
+    width: 200px;
+    border: 0;
+    color: white;
+    font-size: 25px;
+    border-radius: 2px;
+    background-color: #ffc108;
+    font-weight: 500;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    outline: 0;
+    transition-duration: 165ms;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+  button:hover {
+    background-color: #e4ae0d;
+  }
+}
 section {
-  margin-top: 25px
+  margin-top: 25px;
 }
 </style>

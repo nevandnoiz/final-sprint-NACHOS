@@ -15,6 +15,7 @@ export default {
     addActivityByType,
     markWatched,
     unmarkWatched,
+    removeLikeToActivity
 }
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')
@@ -89,6 +90,12 @@ function getActivities() {
 function addLikeToActivity(activity) {
     const newActivity = util.deepCopy(activity)
     newActivity.likes++
+    //TODO: replace the activty in the server for the user
+    return newActivity // return the new obj from the server after update succes
+}
+function removeLikeToActivity(activity) {
+    const newActivity = util.deepCopy(activity)
+    newActivity.likes--
     //TODO: replace the activty in the server for the user
     return newActivity // return the new obj from the server after update succes
 }
