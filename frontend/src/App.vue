@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="nachos-app">
     <app-header></app-header>
     <search-bar></search-bar>
     <div class="routes-container">
