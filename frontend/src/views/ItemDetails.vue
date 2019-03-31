@@ -216,6 +216,7 @@ export default {
 }
 .content-info-container {
   /* display: grid; */
+  width: 100vw;
   /* gap: 2rem; */
   
   margin-top: 2rem;

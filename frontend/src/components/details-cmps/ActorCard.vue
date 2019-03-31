@@ -93,6 +93,7 @@ img {
 }
 .cards-container {
   margin-left: 1rem;
+  margin: 0 auto;
 }
 
 @media only screen and (max-width: 2000px) { 
@@ -130,6 +131,7 @@ img{
 }
 .cards-container{
   display: -webkit-box;
+  margin: 0 auto;
     display: -ms-flexbox;
     display: flex;
     width: -webkit-fit-content;
@@ -184,6 +186,7 @@ margin-top: 1.4rem;
   .cards-container {
     display: -webkit-box;
     display: -ms-flexbox;
+    margin: 0 auto;
         display: flex;
     width: fit-content;
     -webkit-box-orient: horizontal;

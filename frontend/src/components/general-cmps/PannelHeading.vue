@@ -22,9 +22,15 @@ props: ['dominantColor','title']
 .main-pannel-heading-container {
     display: flex;
     grid-column: 1fr 1fr 1fr;
+    margin:  0 auto;
+    width: 76vw;
     height: 1.5rem;
     flex-direction: row;
     justify-content: center;
+}
+
+@media only screen and(max-width: 1000px) {
+    width: 100%
 }
 .start{
 /* background-color: red; */
