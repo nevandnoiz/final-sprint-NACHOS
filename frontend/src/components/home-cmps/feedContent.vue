@@ -1,5 +1,6 @@
 <template>
   <section class="feedContent">
+ <promotion v-if="!user"/>
     <component
       v-for="(item, idx) in feedItems"
       :key="idx"
@@ -16,10 +17,12 @@
 import util from "@/services/UtilityService.js";
 import FeedArticle from "@/components/home-cmps/FeedArticle";
 import activity from "@/components/home-cmps/FeedActivity";
+import promotion from "@/components/home-cmps/promotion"
 export default {
   components: {
     FeedArticle,
-    activity
+    activity,
+    promotion
   },
   props: {
     articles: {
@@ -29,6 +32,10 @@ export default {
     activities: {
       type: Array,
       default: () => []
+      }
+    ,
+    user:{
+      type: Object
     }
   },
   computed: {

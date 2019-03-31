@@ -51,6 +51,6 @@ export default {
 <style lang="scss" scoped>
 .home-container {
   display: grid;
-  grid-template: 500px 1fr/1fr;
+  grid-template: 400px 1fr/1fr;
 }
 </style>

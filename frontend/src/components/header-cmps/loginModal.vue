@@ -26,6 +26,7 @@ export default {
   methods: {
     login() {
       this.$emit("login", { mail: this.mail, password: this.password });
+      this.$router.push("/");
       this.mail = "";
       this.password = "";
     },

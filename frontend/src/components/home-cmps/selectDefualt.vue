@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="select-defualt">
     <section>
       <h2 class="section-header">Choose tv shows you like</h2>
       <div v-if="items" class="selector">
@@ -16,7 +16,9 @@
       </div>
     </section>
     <div class="container">
-      <button v-if="likedItems.length > 2" @click="$emit('generateFeed', likedItems)">Start exploring!</button>
+      <button
+        v-if="likedItems.length > 2"
+        @click="$emit('generateFeed', likedItems)">Start exploring!</button>
     </div>
   </div>
 </template>
@@ -64,12 +66,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 .selector {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   .select-item {
     margin: 10px;
+    p {
+      text-overflow: ellipsis;
+      width: 130px;
+      text-align: center;
+    }
   }
   .select-item-poster {
     width: 130px;
@@ -85,6 +94,7 @@ export default {
 .container {
   display: flex;
   button {
+    font-weight: 200;
     height: 40px;
     width: 200px;
     border: 0;
@@ -92,7 +102,6 @@ export default {
     font-size: 25px;
     border-radius: 2px;
     background-color: #ffc108;
-    font-weight: 500;
     margin: 0 auto;
     margin-bottom: 20px;
     outline: 0;

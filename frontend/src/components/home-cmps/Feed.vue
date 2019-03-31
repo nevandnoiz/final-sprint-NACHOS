@@ -1,10 +1,12 @@
 <template>
   <section class="feed">
     <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
+   
     <feed-content
       v-if="(articles || user) && ready"
       :articles="articles"
       :activities="activities"
+      :user="user"
       @addLike="addLike"
       @removeLike="removeLike"
       @addComment="addComment"
@@ -67,7 +69,7 @@ export default {
         this.$store.dispatch("loadActivities");
         this.generateFeed(this.userFavoriteItems, 1);
       }
-    }
+    } 
   },
   async created() {
     let activities = await this.$store.dispatch('getFollowedActivities')
@@ -80,7 +82,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .feed {
+  margin-top: 100px;
   height: 400px;
   display: flex;
   justify-content: center;
