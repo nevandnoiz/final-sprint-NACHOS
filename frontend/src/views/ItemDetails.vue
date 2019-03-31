@@ -256,6 +256,9 @@ export default {
   .sub-container{
     width: 95vw;
   }
+  .content-info-container{
+    width: 100vw;
+  }
 }
 
 @media only screen and (max-width: 750px) { 
