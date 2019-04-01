@@ -63,7 +63,6 @@ export default {
     },
     async signOut() {
       let signOut = await this.$store.dispatch("signOut");
-      console.log("comp");
       this.$router.push("/");
     },
     toggleModal() {
