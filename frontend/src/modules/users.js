@@ -4,8 +4,10 @@ export default {
   state: {
     currUser: null,
     activities: null,
+    doneLoadingUser: false
   },
   getters: {
+    doneLoadingUser: state => state.doneLoadingUser,
     activities: state => state.activities,
     currUser: state => state.currUser,
     currUserId: state => state.currUser._id,
@@ -26,6 +28,9 @@ export default {
     },
     setUser(state, user) {
       state.currUser = user
+    },
+    setDoneLoadingUser(state) {
+      state.doneLoadingUser = true
     },
     updateActivity(state, { newActivity }) {
       const idx = state.activities.findIndex(activity => activity._id === newActivity._id)

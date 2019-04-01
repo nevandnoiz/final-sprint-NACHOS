@@ -1,5 +1,5 @@
 <template>
-  <section v-if="ready">
+  <section v-if="doneLoadingUser">
     <hamburger-menu class="hamburger"></hamburger-menu>
 
     <header class="desktop-header">
@@ -42,8 +42,7 @@ import searchBar from "@/components/header-cmps/SearchBar1.vue";
 export default {
   data() {
     return {
-      showModal: false,
-      ready: false
+      showModal: false
     };
   },
   components: {
@@ -73,11 +72,14 @@ export default {
   },
   async created() {
     await this.$store.dispatch("loadUser");
-    this.ready = true;
+    this.$store.commit("setDoneLoadingUser");
   },
   computed: {
     user() {
       return this.$store.getters.currUser;
+    },
+    doneLoadingUser() {
+      return this.$store.getters.doneLoadingUser;
     }
   }
 };

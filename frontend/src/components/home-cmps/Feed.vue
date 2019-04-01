@@ -1,5 +1,5 @@
 <template>
-  <section class="feed">
+  <section class="feed" v-if="doneLoadingUser">
     <select-defualt v-if="!user && !articles" @generateFeed="generateFeed"/>
 
     <feed-content
@@ -26,14 +26,14 @@ export default {
   },
   data() {
     return {
-      articles: null,
+      articles: null
       // ready: false
     };
   },
   methods: {
     generateFeed(items, numOfArticles) {
       this.articles = FeedService.getNewsByArr(items, numOfArticles);
-    },
+    }
   },
   computed: {
     activities() {
@@ -49,6 +49,9 @@ export default {
         });
         return favoriteItems;
       }
+    },
+    doneLoadingUser() {
+      return this.$store.getters.doneLoadingUser;
     }
   },
   watch: {
@@ -61,8 +64,8 @@ export default {
   },
   async created() {
     if (this.user) {
-    let activities = await this.$store.dispatch("getFollowedActivities");
-    // this.ready = true;
+      let activities = await this.$store.dispatch("getFollowedActivities");
+      // this.ready = true;
       this.generateFeed(this.userFavoriteItems, 1);
     }
   }
