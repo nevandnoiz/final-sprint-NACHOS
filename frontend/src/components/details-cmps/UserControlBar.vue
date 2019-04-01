@@ -68,7 +68,7 @@ export default {
           item: this.item,
           itemType: this.itemType,
           activityType: "add to list",
-          value: "watchList"
+          value: "Watch List"
         });
       } else
         this.$store.dispatch({
@@ -90,7 +90,7 @@ export default {
           item: this.item,
           itemType: this.itemType,
           activityType: "add to list",
-          value: "favorites"
+          value: "Favorites"
         });
       } else {
         this.$store.dispatch({

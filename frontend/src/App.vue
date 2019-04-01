@@ -22,9 +22,6 @@ export default {
     AppHeader,
 
   },
-  created(){
-    this.$store.dispatch('loadUser')
-  }
 };
 </script>
 

@@ -1,13 +1,25 @@
 <template>
-  <div class="login-modal center-column">
+  <div class="login-modal center-column" :class="{'wrong-credent': wrongCredent }">
     <div class="content">
       <h1>Login</h1>
       <div class="inputs center-column">
-        <input type="text" name id placeholder="Email" v-model="mail">
-        <input type="password" placeholder="Password" v-model="password">
+        <input
+          type="text"
+          name
+          id
+          placeholder="Email"
+          v-model="loginDetails.email"
+          @keyup.enter="login"
+        >
+        <input
+          @keyup.enter="login"
+          type="password"
+          placeholder="Password"
+          v-model="loginDetails.password"
+        >
       </div>
       <div class="login center-column">
-        <button @click="login">Login</button>
+        <button :class="{'wrong-credent': wrongCredent }" @click="login" @keyup.enter="login">Login</button>
         <p @click="route">or Sign up</p>
       </div>
     </div>
@@ -19,16 +31,23 @@
 export default {
   data() {
     return {
-      mail: "",
-      password: ""
+      loginDetails: {
+        email: "",
+        password: ""
+      },
+      wrongCredent: false
     };
   },
   methods: {
-    login() {
-      this.$emit("login", { mail: this.mail, password: this.password });
-      this.$router.push("/");
-      this.mail = "";
-      this.password = "";
+    async login() {
+      let login = await this.$store.dispatch("loginUser", this.loginDetails);
+      if (login._id) {
+        this.mail = "";
+        this.password = "";
+      } else {
+        this.wrongCredent = true;
+        setTimeout(() => (this.wrongCredent = false), 800);
+      }
     },
     route() {
       this.$router.push("/signup");
@@ -41,7 +60,6 @@ export default {
 
 <style lang="scss" scoped>
 .login-modal {
-  
   position: absolute;
   top: 104px;
   width: 300px;
@@ -51,6 +69,7 @@ export default {
   border-radius: 2px;
   border: 1px solid lightgray;
   box-shadow: 0 0 8px 0px #c0c4cc;
+  transition: 0.3s;
 
   .content {
     h1 {
@@ -84,6 +103,7 @@ export default {
       font-weight: 500;
       margin: 0;
       margin-bottom: 5px;
+      transition: 0.3s;
     }
     button:focus {
       outline: 0;
@@ -100,6 +120,11 @@ export default {
       cursor: pointer;
     }
   }
+}
+
+.wrong-credent {
+  box-shadow: 1px 1px 5px rgba(246, 71, 71, 1) !important;
+  border: 1px solid red !important;
 }
 
 .center-column {

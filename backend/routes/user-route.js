@@ -34,6 +34,11 @@ function addRoutes(app) {
             .then(user => res.json(user))
     })
 
+    app.post('/signout', (req, res) => {
+        req.session.destroy();
+        res.send('OK')
+    })
+
     app.get('/login', (req, res) => {
         if (req.session.userEmail) {
             userService.loadFromSession(req.session.userEmail)
@@ -51,6 +56,7 @@ function addRoutes(app) {
                 req.session.userEmail = user.email
                 res.json(user)
             })
+            .catch(err => res.send(err))
     })
 
     app.post('/user/:userId/lists/:listType', (req, res) => {
@@ -115,9 +121,8 @@ function addRoutes(app) {
     })
 
     app.put('/user/:userId/activities/comment', (req, res) => {
-        const userId = req.params.userId
         const activity = req.body
-        // console.log(userId, activity.byUser._id)
+        // console.log(activity)
         userService.updateActivity(activity)
             .then(activity => {
                 res.send(activity)
@@ -125,9 +130,9 @@ function addRoutes(app) {
     })
 
     app.put('/user/:userId/activities/like', (req, res) => {
-        // const userId = req.params.userId
         const activity = req.body
-        userService.addActivityByType(activity)
+        // console.log(activity)
+        userService.updateActivity(activity)
             .then(activity => {
                 res.json(activity)
             })

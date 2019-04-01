@@ -6,9 +6,6 @@
       :key="idx"
       :is="item.type"
       :item="item"
-      @addLike="$emit('addLike', item)"
-      @removeLike="$emit('removeLike', item)"
-      @addComment="$emit('addComment', $event)"
     />
   </section>
 </template>

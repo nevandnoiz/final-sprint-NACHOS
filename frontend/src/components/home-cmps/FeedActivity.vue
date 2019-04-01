@@ -73,7 +73,7 @@ export default {
     addComment(ev) {
       const txt = ev.target.innerText;
       if (txt === "") return;
-      this.$emit("addComment", { comment: txt, activity: this.item });
+      this.$store.dispatch({type:"addCommentToActivity", comment: txt,activity :this.item});
       ev.target.innerText = "";
       this.showPlaceholder = true;
     },
@@ -83,10 +83,10 @@ export default {
     },
     toggleLike() {
       if (!this.like) {
-        this.$emit("addLike", this.item);
+        this.$store.dispatch({type:"toggleLikeActivity", activity :this.item, diff: 1});
         this.like = true;
       } else {
-        this.$emit("removeLike", this.item);
+           this.$store.dispatch({type:"toggleLikeActivity", activity :this.item, diff: -1});
         this.like = false;
       }
     },
@@ -103,7 +103,7 @@ export default {
     type: function() {
       const activity = this.item.activity;
       if (activity === "rate") return "rated";
-      else if (activity === "listAdd") return "added";
+      else if (activity === "add to list") return "added";
     },
     itemName: function() {
       return this.item.itemTitle;
@@ -111,7 +111,7 @@ export default {
     action: function() {
       const activity = this.item.activity;
       if (activity === "rate") return `with ${this.item.value} stars.`;
-      else if (activity === "listAdd") return `to his ${this.item.value} list.`;
+      else if (activity === "add to list") return `to his ${this.item.value} list.`;
     },
     img: function() {
       if (this.imgs) {
@@ -126,6 +126,7 @@ export default {
     }
   },
   created() {
+    if (this.item.likes)
     if (this.item.item_type === "tv") {
       tvService
         .getTvShowImages(this.item.item_id)

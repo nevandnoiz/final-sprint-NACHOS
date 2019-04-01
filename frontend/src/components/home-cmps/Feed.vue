@@ -7,9 +7,6 @@
       :articles="articles"
       :activities="activities"
       :user="user"
-      @addLike="addLike"
-      @removeLike="removeLike"
-      @addComment="addComment"
     />
   </section>
 </template>
@@ -37,15 +34,6 @@ export default {
     generateFeed(items, numOfArticles) {
       this.articles = FeedService.getNewsByArr(items, numOfArticles);
     },
-    addLike(item) {
-      this.$store.dispatch("addLikeToActivity", item);
-    },
-    removeLike(item) {
-      this.$store.dispatch("removeLikeToActivity", item);
-    },
-    addComment(details) {
-      this.$store.dispatch("addCommentToActivity", details);
-    }
   },
   computed: {
     activities() {

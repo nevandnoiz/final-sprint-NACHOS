@@ -6,6 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 function checkLogin({ email, password }) {
     return mongoService.connect()
         .then(db => db.collection('users').findOne({ email, password }))
+        // .catch(err=>'not found')
 }
 
 function loadFromSession(email) {
@@ -131,13 +132,13 @@ function addActivityByType(userId, activity) {
 
 function updateActivity(activity) {
     let byUserId = ObjectId(activity.byUser._id)
-    let activityId = ObjectId(activity._id)
+    activity._id = ObjectId(activity._id)
     return mongoService.connect()
         .then(db => {
-            db.collection('users').updateOne(
+            return db.collection('users').updateOne(
                 {
                     "_id": byUserId,
-                    "userActivities._id": activityId
+                    "userActivities._id": activity._id
                 },
                 { $set: { "userActivities.$": activity } }
             )

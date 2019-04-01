@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="ready">
     <hamburger-menu class="hamburger"></hamburger-menu>
 
     <header class="desktop-header">
@@ -17,7 +17,11 @@
           <search-bar class="search-bar"></search-bar>
         </div>
         <div class="login">
-          <h3 class="username" v-if="user">{{user.name.firstName}} {{user.name.lastName}}</h3>
+          <h3
+            class="username"
+            v-if="user"
+            @click="signOut"
+          >{{user.name.firstName}} {{user.name.lastName}}</h3>
           <div v-else class="center">
             <div class="center">
               <a class="username" @click="toggleModal">LOGIN</a>
@@ -38,7 +42,8 @@ import searchBar from "@/components/header-cmps/SearchBar1.vue";
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      ready: false
     };
   },
   components: {
@@ -57,9 +62,18 @@ export default {
         .then(() => this.$store.dispatch("loadActivities"));
       this.$router.go();
     },
+    async signOut() {
+      let signOut = await this.$store.dispatch("signOut");
+      console.log("comp");
+      this.$router.push("/");
+    },
     toggleModal() {
       this.showModal = !this.showModal;
     }
+  },
+  async created() {
+    await this.$store.dispatch("loadUser");
+    this.ready = true;
   },
   computed: {
     user() {
