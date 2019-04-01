@@ -74,7 +74,7 @@ export default {
 
 <style scoped>
 i {
-  font-size: 42px;
+  font-size: 17px;
   margin: 9px 9px 9px 0;
   background-color: white;
   opacity: 0.5;
@@ -91,20 +91,20 @@ i:hover {
   opacity: 0.75;
 }
 .check-container {
-  position: absolute;
-  /* margin: 50%; */
-  top: 0;
-  /* left: 0; */
-  /* right: 0; */
-  margin: auto 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  /* flex-grow: unset; */
-  bottom: 0;
+    position: absolute;
+    right: 0;
+    margin: auto 0;
+ 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: auto;
 }
 .checked {
-  background-color: rgb(104, 255, 104);
+  background-color: rgb(0, 197, 35);
+     opacity: 0.8
 }
 </style>

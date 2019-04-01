@@ -117,6 +117,7 @@ function addRoutes(app) {
     app.put('/user/:userId/activities/comment', (req, res) => {
         const userId = req.params.userId
         const activity = req.body
+        console.log(activity)
         // console.log(userId, activity.byUser._id)
         userService.updateActivity(activity)
             .then(activity => {
