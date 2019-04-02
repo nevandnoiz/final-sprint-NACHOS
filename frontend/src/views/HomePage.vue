@@ -21,7 +21,7 @@ export default {
     return {};
   },
   async created() {
-    this.$store.dispatch(`loadTrendingAll`);
+    this.$store.dispatch(`getTrendingMovies`);
   },
   computed: {
     activities() {
@@ -31,7 +31,7 @@ export default {
       return this.$store.getters.currUser;
     },
     trendingItems() {
-      return this.$store.getters.trendingToDisplay;
+      return this.$store.getters.moviesToDisplay;
     },
     headerItems() {
       let topFiveItems = this.trendingItems.slice(0, 5);

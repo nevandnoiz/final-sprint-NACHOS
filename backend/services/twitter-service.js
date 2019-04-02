@@ -1,5 +1,5 @@
 const Twit = require('twit-promise')
-const config = require('config')
+const config = require('../config')
 const T = new Twit(config)
 module.exports = {
     searchByKeyword,

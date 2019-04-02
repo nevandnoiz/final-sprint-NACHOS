@@ -68,7 +68,7 @@ export default {
           item: this.item,
           itemType: this.itemType,
           activityType: "add to list",
-          value: "Watch List"
+          value: "Watch"
         });
       } else
         this.$store.dispatch({

@@ -34,13 +34,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/all', (req, res) => {
-  return axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=fd807ad0f521ce282a03431f7288592d&language=en-US&page=1`)
-  .then(trending => res.send(trending.data))
-  .catch(err => {
-      console.log('details')
-  })
-})
 
 // Add routes here. ex: 'addMoviesRoute(app)'
 addMoviesRoute(app)

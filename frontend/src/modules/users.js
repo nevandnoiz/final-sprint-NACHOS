@@ -23,7 +23,7 @@ export default {
     },
   },
   mutations: {
-    setActivities(state, { activities }) {
+    setActivities(state, activities) {
       state.activities = activities
     },
     setUser(state, user) {
@@ -66,13 +66,13 @@ export default {
   actions: {
     async loadActivities(context, payload) {
       const activities = await UserServies.getActivities()
-      context.commit({ type: 'setActivities', activities })
+      context.commit('setActivities', activities)
     },
     async getFollowedActivities(context, payload) {
       let userId = context.getters.currUserId
       let following = context.getters.currUserFollowing
       const activities = await UserServies.getFollowedActivities(userId, following)
-      context.commit({ type: 'setActivities', activities })
+      context.commit('setActivities', activities)
     },
     async loadUser(context, payload) {
       const user = await UserServies.loadUser()
@@ -85,6 +85,7 @@ export default {
     },
     async signOut(context) {
       const user = await UserServies.signOut()
+      context.commit('setActivities', null)
       return context.commit('setUser', null)
     },
     async addToListByType(context, { addedItem, listType }) {
