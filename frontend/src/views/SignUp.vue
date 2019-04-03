@@ -3,22 +3,22 @@
     <div class="page-container">
       <div class="bcg">
         <div class="container">
-          <div class="sign-up">
+          <div class="sign-up" @keyup.enter="signUp">
             <div class="head">
               <h4>There`s always something to watch</h4>
               <p>Join us now - it's free.</p>
             </div>
             <section class="form">
               <label for="first-name">First name</label>
-              <input type="text">
+              <input type="text" v-model="signUpDetails.firstName" required>
               <label for="last-name">Last name</label>
-              <input type="text">
+              <input type="text" v-model="signUpDetails.lastName" required>
               <label for="email">Email</label>
-              <input type="email">
+              <input type="email" v-model="signUpDetails.email" required>
               <label for="password">Password</label>
-              <input type="password">
+              <input type="password" v-model="signUpDetails.password" required>
               <span>By clicking Join now, you agree to the Nachos User Agreement, Privacy Policy, and Cookie Policy.</span>
-              <button @click="route">Join now</button>
+              <button @click="signUp">Join now</button>
             </section>
           </div>
         </div>
@@ -29,9 +29,31 @@
 
 
 <script>
+import { eventBus } from "@/main.js";
+
 export default {
+  data() {
+    return {
+      signUpDetails: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
+      }
+    };
+  },
   methods: {
-    route() {
+    async signUp() {
+      if (
+        this.signUpDetails.firstName === "" ||
+        this.signUpDetails.lastName === "" ||
+        this.signUpDetails.email === "" ||
+        this.signUpDetails.password === ""
+      ) {
+        return;
+      }
+      let signUp = await this.$store.dispatch("createUser", this.signUpDetails);
+      setTimeout(() => eventBus.$emit("signed"), 900);
       this.$router.push("/");
     }
   }

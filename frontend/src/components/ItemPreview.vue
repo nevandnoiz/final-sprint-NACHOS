@@ -7,7 +7,7 @@
     @mouseleave="toggleIsHovered"
     :class="{'hover-buttons': isHovered, 'selected': isSelected}"
   >
-    <div class="item-hover-controls" v-if="isHovered && showBtns">
+    <div class="item-hover-controls" v-if="isHovered && showBtns && currUser">
       <div class="hover-controls-btns">
         <el-tooltip
           class="item"
@@ -43,7 +43,6 @@
           ></i>
         </el-tooltip>
       </div>
-      <a href="#">Play Trailer</a>
     </div>
   </div>
 </template>

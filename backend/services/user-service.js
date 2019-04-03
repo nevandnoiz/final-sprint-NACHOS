@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 function checkLogin({ email, password }) {
     return mongoService.connect()
         .then(db => db.collection('users').findOne({ email, password }))
-        // .catch(err=>'not found')
+    // .catch(err=>'not found')
 }
 
 function loadFromSession(email) {
@@ -167,14 +167,10 @@ function query() {
 }
 
 // todo  - add user only if nickname is not taken
-function addUser({ nickname }) {
-    var user = { nickname }
+function createUser(user) {
+    user._id = new ObjectId()
     return mongoService.connect()
         .then(db => db.collection('users').insertOne(user))
-        .then(res => {
-            user._id = res.insertedId
-            return user
-        })
 }
 
 
@@ -186,7 +182,7 @@ module.exports = {
     query,
     getById,
     getActivitiesByFollowed,
-    addUser,
+    createUser,
     checkLogin,
     loadFromSession,
     addToListByType,

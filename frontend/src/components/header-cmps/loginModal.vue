@@ -44,14 +44,16 @@ export default {
       if (login._id) {
         this.mail = "";
         this.password = "";
+        this.$emit('logged-in')
+        this.$router.go()
       } else {
         this.wrongCredent = true;
         setTimeout(() => (this.wrongCredent = false), 800);
       }
     },
     route() {
-      this.$router.push("/signup");
-      this.$emit("toggleModal");
+      this.$emit("toggleModal")
+      this.$router.push("/signup")
     }
   }
 };
@@ -61,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 .login-modal {
   position: absolute;
-  top: 104px;
+  top: 72px;
   width: 300px;
   height: 240px;
   right: 40px;

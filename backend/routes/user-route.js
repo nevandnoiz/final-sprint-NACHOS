@@ -29,9 +29,9 @@ function addRoutes(app) {
     })
 
     app.post('/signup', (req, res) => {
-        const nickname = req.body.nickname
-        userService.addUser({ nickname })
-            .then(user => res.json(user))
+        const user = req.body
+        userService.createUser(user)
+            .then(user => res.send('successful'))
     })
 
     app.post('/signout', (req, res) => {

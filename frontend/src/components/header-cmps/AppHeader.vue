@@ -26,7 +26,11 @@
             <div class="center">
               <a class="username" @click="toggleModal">LOGIN</a>
             </div>
-            <login-modal v-if="showModal" @login="login" @toggleModal="toggleModal"/>
+            <login-modal
+              v-if="showModal"
+              @logged-in="showModal=!showModal"
+              @toggleModal="toggleModal"
+            />
           </div>
         </div>
       </div>
@@ -37,8 +41,9 @@
 <script>
 import loginModal from "@/components/header-cmps/loginModal";
 import HamburgerMenu from "./HamburgerMenu.vue";
-
 import searchBar from "@/components/header-cmps/SearchBar1.vue";
+import { eventBus } from "@/main.js";
+
 export default {
   data() {
     return {
@@ -70,6 +75,7 @@ export default {
     }
   },
   async created() {
+    eventBus.$on("signed", this.toggleModal);
     await this.$store.dispatch("loadUser");
     this.$store.commit("setDoneLoadingUser");
   },

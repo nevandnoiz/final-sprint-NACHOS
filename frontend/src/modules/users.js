@@ -83,6 +83,10 @@ export default {
       if (user._id) context.commit('setUser', user)
       return user
     },
+    async createUser(context, signUpDetails) {
+      const signUp = await UserServies.createUser(signUpDetails)
+      return signUp
+    },
     async signOut(context) {
       const user = await UserServies.signOut()
       context.commit('setActivities', null)

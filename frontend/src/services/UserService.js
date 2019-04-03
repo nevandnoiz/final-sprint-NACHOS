@@ -8,6 +8,7 @@ export default {
     getFollowedActivities,
     loginUser,
     loadUser,
+    createUser,
     addCommentToActivity,
     toggleLikeActivity,
     addToListByType,
@@ -122,22 +123,30 @@ function addCommentToActivity(comment, activity) {
     // return newActivity // return the new obj from the server after update succes
 }
 
-function toggleLikeActivity(activity,diff,userId) {
+function toggleLikeActivity(activity, diff, userId) {
     let newActivity = util.deepCopy(activity)
-    newActivity.likes+=diff
+    newActivity.likes += diff
     return axios.put(`${BASE_URL}/user/${userId}/activities/like`, newActivity)
 }
 
 function loginUser(loginDetails) {
     return axios.post(`${BASE_URL}/login`,
-    loginDetails
+        loginDetails
     )
         .then(res => res.data)
-        .catch(err=>err)
+        .catch(err => err)
 }
 
 function loadUser() {
     return axios.get(`${BASE_URL}/login`)
+        .then(res => {
+            return res.data
+        })
+}
+
+function createUser(signUpDetails) {
+    let user = _createUserObject(signUpDetails)
+    return axios.post(`${BASE_URL}/signup`, user)
         .then(res => {
             return res.data
         })
@@ -165,5 +174,40 @@ function _createActivity(user, item, itemType, activityType, value) {
         value: value,
         comments: [],
         likes: 0
+    }
+}
+
+function _createUserObject({ firstName, lastName, email, password }) {
+    return {
+        password: password,
+        name: {
+            "firstName": firstName,
+            "lastName": lastName
+        },
+        email: email,
+        img: null,
+        following: [
+
+        ],
+        lists: [
+            {
+                "name": "favorites",
+                "items": [
+
+                ]
+            },
+            {
+                "name": "watchList",
+                "items": [
+
+                ]
+            }
+        ],
+        watchedEpisodes: [
+
+        ],
+        userActivities: [
+
+        ]
     }
 }
