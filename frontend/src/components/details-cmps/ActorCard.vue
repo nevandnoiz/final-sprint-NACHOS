@@ -100,21 +100,12 @@ img {
 @media only screen and (max-width: 750px) {
   .main-container {
     margin-top: 1.4rem;
-    /* grid-row: 2; */
-    /* -webkit-box-pack: center; */
     -ms-flex-pack: center;
     justify-content: center;
-    /* height: 995px; */
-    /* display: -webkit-box; */
-    /* width: 4000px; */
-
-    /* display: -ms-flexbox; */
     height: auto;
     display: flex;
-    /* display: flex; */
     direction: ltr;
     overflow: scroll;
-    /* grid-template-columns: 50px 1fr 50px; */
   }
   .cards-container {
     margin: 0 auto;
