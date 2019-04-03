@@ -150,7 +150,7 @@ section {
   display: flex;
   align-items: center;
   margin: 10px;
-  font-size: 22px;
+  font-size: 20px;
   text-decoration: none;
   -webkit-transition: 0.175s;
   transition: 0.175s;
@@ -160,7 +160,7 @@ section {
 }
 header {
   position: fixed;
-  height: 105px;
+  height: 72px;
   top: 0;
   left: 0;
   right: 0;
@@ -189,7 +189,7 @@ header {
     // justify-content: space-between;
     display: flex;
     img {
-      height: 60px;
+      height: 50px;
       cursor: pointer;
     }
     .links-section {
@@ -205,7 +205,7 @@ header {
       a {
         color: white;
         margin: 10px;
-        font-size: 22px;
+        font-size: 20px;
         text-decoration: none;
         transition: 0.175s;
       }

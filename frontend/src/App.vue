@@ -32,7 +32,7 @@ export default {
 
 #app {
   display: grid;
-  grid-template: 105px 1fr/1fr;
+  grid-template: 72px 1fr/1fr;
 }
 .routes-container {
   // background: black;
