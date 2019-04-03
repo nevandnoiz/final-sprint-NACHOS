@@ -1,5 +1,5 @@
 <template>
-  <section >
+  <section>
     <b-field class="search-bar-container">
       <b-autocomplete
         :data="data"
@@ -59,31 +59,32 @@ export default {
       this.isFetching = false;
     },
     pushToDetails(item) {
-      if (item.media_type === 'tv') return this.$router.push(`/tv/details/${item.id}`);
+      if (item.media_type === "tv")
+        return this.$router.push(`/tv/details/${item.id}`);
       else return this.$router.push(`/movies/details/${item.id}`);
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-bar-container {
   width: 100%;
   // grid-area: 2/1/2/1;
 }
 
 .info {
-  padding: 0
+  padding: 0;
 }
 
-// a{ 
+// a{
 //   padding: 0
 // }
-.media-content{
-      font-size: 12px;
-    font-weight: 700;
+.media-content {
+  font-size: 12px;
+  font-weight: 700;
 }
-.dropdown-item{
-padding: 0 !important
+.dropdown-item {
+  padding: 0 !important;
 }
 </style>

@@ -58,116 +58,48 @@ p {
   margin-top: 1.4rem;
   grid-row: 2;
   justify-content: center;
-  height: 995px;
   display: flex;
+  width: 76vw;
+  margin: 0 auto;
   direction: ltr;
   overflow: scroll;
-  /* grid-template-columns: 50px 1fr 50px; */
+  height: auto;
+  display: block;
 }
 .card-container {
-  display: flex;
+  box-sizing: content-box;
   flex-direction: column;
+  display: flex;
   margin: 2rem 0;
-  /* background: white; */
   border-radius: 3px;
   padding: 0.5rem 0;
-  -webkit-box-sizing: content-box;
   box-sizing: content-box;
-  /* padding: 1rem; */
-  /* width: 224px; */
-
-  flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  /* width: auto; */
-  /* -webkit-box-shadow: 0px 0px 4px #000000; */
-  /* box-shadow: 0px 0px 4px #000000; */
+  width: 200px;
 }
 img {
-  width: 145px;
+  height: 217px;
+  width: auto;
+  overflow: scroll;
 }
 .cards-container {
-  margin-left: 1rem;
-      margin: 0 auto;
-}
-
-@media only screen and (max-width: 2000px) { 
-img{
-      height: 217px;
-    width: auto;
-    overflow: scroll;
-}
-.card-container{
   display: flex;
-    /* -webkit-box-orient: vertical; */
-    /* -webkit-box-direction: normal; */
-    -ms-flex-direction: column;
-    /* flex-direction: column; */
-    margin: 2rem 0;
-    /* background: white; */
-    border-radius: 3px;
-    padding: 0.5rem 0;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-    /* padding: 1rem; */
-    /* width: 224px; */
-    /* flex-direction: column; */
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    /* height: 217px; */
-    width: 200px /* width: 159px; */ /* width: auto; */ /* -webkit-box-shadow: 0px 0px 4px #000000; */ /* box-shadow: 0px 0px 4px #000000; */;
-}
-.cards-container{
-  display: -webkit-box;
-      margin: 0 auto;
-    display: -ms-flexbox;
-    display: flex;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    /* flex-direction: row; */
-    -webkit-box-align: baseline;
-    -ms-flex-align: baseline;
-    align-items: baseline;
-}
-.main-container{
-      margin-top: 1.4rem;
-    /* grid-row: 2; */
-    /* -webkit-box-pack: center; */
-    -ms-flex-pack: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    /* height: 995px; */
-    /* display: -webkit-box; */
-    /* width: 4000px; */
-    height: auto;
-    display: block;
-    /* display: flex; */
-   direction: ltr;
-    overflow: scroll;
-    /* grid-template-columns: 50px 1fr 50px; */
+  width: fit-content;
+  align-items: baseline;
+  margin-left: 1rem;
+  margin: 0 auto;
 }
 
+@media only screen and (max-width: 1000px) {
+  .main-container {
+    width: 100vw;
+  }
 }
-
 @media only screen and (max-width: 750px) {
-  .main-container{
-margin-top: 1.4rem;
+  .main-container {
+    margin-top: 1.4rem;
     /* grid-row: 2; */
     /* -webkit-box-pack: center; */
     -ms-flex-pack: center;
@@ -175,20 +107,21 @@ margin-top: 1.4rem;
     /* height: 995px; */
     /* display: -webkit-box; */
     /* width: 4000px; */
+
     /* display: -ms-flexbox; */
     height: auto;
     display: flex;
     /* display: flex; */
- direction: ltr;
+    direction: ltr;
     overflow: scroll;
     /* grid-template-columns: 50px 1fr 50px; */
   }
   .cards-container {
-        margin: 0 auto;
+    margin: 0 auto;
     display: -webkit-box;
     display: -ms-flexbox;
     margin: 0 auto;
-        display: flex;
+    display: flex;
     width: fit-content;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -222,8 +155,8 @@ margin-top: 1.4rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-        /* height: 217px; */
-            width: 200px
+    /* height: 217px; */
+    width: 200px;
     /* width: 159px; */
     /* width: auto; */
     /* -webkit-box-shadow: 0px 0px 4px #000000; */
@@ -232,7 +165,7 @@ margin-top: 1.4rem;
   img {
     height: 217px;
     width: auto;
-        overflow: scroll;
+    overflow: scroll;
   }
 }
 /* div {
