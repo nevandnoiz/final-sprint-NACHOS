@@ -1,12 +1,14 @@
 <template>
+    <!-- :style="{'background-image':'url(\''+imgURL+'\')'}" -->
+
   <div
     @click="pushToDetails(item.id)"
     class="item-preview"
-    :style="{'background-image':'url(\''+imgURL+'\')'}"
     @mouseenter="toggleIsHovered"
     @mouseleave="toggleIsHovered"
-    :class="{'hover-buttons': isHovered, 'selected': isSelected}"
+   
   >
+  <img :src="imgURL"  :class="{'hover-buttons': isHovered, 'selected': isSelected}">
     <div class="item-hover-controls" v-if="isHovered && showBtns && currUser">
       <div class="hover-controls-btns">
         <el-tooltip
@@ -163,8 +165,8 @@ export default {
 
 <style lang="scss" scoped>
 .item-preview {
-  width: 200px;
-  height: 300px;
+  // width: 200px;
+  // height: 300px;
   background-size: cover;
   cursor: pointer;
   transition: 0.5s;
@@ -211,5 +213,12 @@ export default {
 }
 .hover-buttons {
   box-shadow: inset 0 0 90px #000000;
+}
+@media only screen and (max-width: 570px) {  
+.item-preview { 
+  // width: 150px;
+}
+
+
 }
 </style>

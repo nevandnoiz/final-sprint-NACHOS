@@ -76,16 +76,19 @@ export default {
   grid-template: 475px 60px 1fr/1fr;
 }
 .grid-container {
-  padding: 0 20px;
+  padding: 0 10px;
   display: grid;
   grid-gap: 20px;
+  width: 100vw;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  justify-items: center;
+  // justify-items: center;
+  justify-content: center;
   grid-area: 3/1/3/1;
 }
 .categories {
   grid-area: 2/1/2/1;
-  width: 600px;
+  max-width: 600px;
+  width: 100vw;
   display: grid;
   grid-template: 1fr/1fr 1fr 1fr;
   justify-self: center;
@@ -114,6 +117,12 @@ export default {
   }
   a:hover {
     color: #f57f16;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .grid-container {
+   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 </style>

@@ -54,9 +54,17 @@ methods: {
 </script>
 
 <style scoped>
+.nav-item>a{
+  color: #f57f16;
+}
+.fa-bars{
+  color: white;
+}
 .navbar-toggler  {
   height: 36px;
-  background: white !important
+      outline: none;
+  padding: 0;
+  font-size: 31px;
 }
 .dark-blue-text {
   color: black;
