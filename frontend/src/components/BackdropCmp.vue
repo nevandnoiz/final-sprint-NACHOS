@@ -56,6 +56,7 @@ export default {
   computed: {},
   created() {
     this.itemTypeRoute = this.$route.path;
+    if (this.itemTypeRoute) this.itemTypeRoute = "/movies";
     this.nextImgIntrvl = setInterval(this.nextImg, 10000);
   },
   destroyed() {
