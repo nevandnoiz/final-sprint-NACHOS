@@ -12,6 +12,13 @@ iframe{
     height: 100vh;
 }
 
+.is-horizontal{
+    display: grid !important;
+    grid-template-columns: 84px 1fr;
+    grid-column: 200px 1fr;
+}
+
+
 .youtube-close-btn:hover{
     cursor: pointer;
 }
