@@ -72,10 +72,14 @@ export default {
     },
     toggleModal() {
       this.showModal = !this.showModal;
+    },
+    joinUs() {
+      setTimeout(() => (this.showModal = true), 400);
     }
   },
   async created() {
     eventBus.$on("signed", this.toggleModal);
+    eventBus.$on("joinUs", this.joinUs);
     await this.$store.dispatch("loadUser");
     this.$store.commit("setDoneLoadingUser");
   },
@@ -98,7 +102,7 @@ export default {
 @media only screen and (max-width: 1032px) {
   .hamburger {
     display: flex;
-    background: black;
+    background: #171717;
   }
   .desktop-header {
     display: none;
@@ -183,7 +187,7 @@ header {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    background: black;
+    background: #171717;
     display: -webkit-box;
     justify-content: center;
     display: -ms-flexbox;

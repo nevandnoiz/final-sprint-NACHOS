@@ -25,6 +25,10 @@ iframe{
     right: 1rem;
     position: fixed;
 }
+.field-label{
+    text-align:left;
+    flex-grow:unset;
+}
 
 
 

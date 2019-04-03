@@ -14,7 +14,6 @@
         <b-input v-model="review.content" required type="textarea"></b-input>
       </b-field>
       <b-field horizontal>
-        <!-- Label left empty for spacing -->
         <p class="control">
           <button @click="onSendReview()" class="button is-primary">Send message</button>
         </p>
@@ -45,10 +44,10 @@
 export default {
   props: ["type", "itemId"],
   created() {
-    let user=this.$store.getters.currUser;
-    if (user){
+    let user = this.$store.getters.currUser;
+    if (user) {
       this.currUser = this.$store.getters.currUser;
-      this.review.author=`${user.name.firstName} ${user.name.lastName}`
+      this.review.author = `${user.name.firstName} ${user.name.lastName}`;
     }
   },
   data() {
@@ -59,7 +58,7 @@ export default {
         rating: 0,
         content: ""
       },
-      currUser: '',
+      currUser: "",
       setReview: true
     };
   },
@@ -97,18 +96,17 @@ export default {
   }
 }
 .form-section-review {
-  width: 80%;
+  width: 70%;
   margin: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
 }
 .field.is-horizontal {
   grid-column: 1/2;
 }
 .el-rate__icon {
   font-size: 1.3rem;
-}
-.name-rating-container {
 }
 .review-form-container {
   margin: 120px auto;
@@ -117,14 +115,26 @@ export default {
   background-color: lightgray;
   padding: 25px;
 }
-button {
-  height: 30px;
-  margin: 15px 0;
+.control {
+  button {
+    background-color: #f57f16;
+    height: 30px;
+    margin: 15px 0;
+  }
+  button:hover {
+    background-color: #ff963a;
+    height: 30px;
+    margin: 15px 0;
+  }
+  button:active {
+    background-color: #f57f16;
+    height: 30px;
+    margin: 15px 0;
+  }
 }
-
 @media only screen and (max-width: 750px) {
-.form-section-review{
-      margin: 2rem auto;
-}
+  .form-section-review {
+    margin: 2rem auto;
+  }
 }
 </style>

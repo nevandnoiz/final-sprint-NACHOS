@@ -2,7 +2,7 @@
   <section>
     <div class="control-bar">
       <i @click="playTrailer" class="far fa-play-circle"></i>
-      <div class="user-control-btns" v-if="currUser">
+      <div class="user-control-btns">
         <el-tooltip class="item" effect="dark" content="Watch List" placement="bottom">
           <i
             @click="toggleWatchList"
@@ -57,6 +57,7 @@ export default {
       eventBus.$emit("playTrailer");
     },
     async toggleWatchList() {
+      if (!this.currUser) return eventBus.$emit("joinUs");
       if (!this.isOnWatchList) {
         await this.$store.dispatch({
           type: "addToListByType",
@@ -79,6 +80,7 @@ export default {
       this.isOnWatchList = !this.isOnWatchList;
     },
     async toggleFavorite() {
+      if (!this.currUser) return eventBus.$emit("joinUs");
       if (!this.isFavorite) {
         await this.$store.dispatch({
           type: "addToListByType",

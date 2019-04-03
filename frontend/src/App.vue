@@ -35,7 +35,6 @@ export default {
   grid-template: 72px 1fr/1fr;
 }
 .routes-container {
-  // background: black;
   grid-area: 2/1/2/1;
 }
 

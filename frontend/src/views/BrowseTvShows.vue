@@ -70,7 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 .browse {
-   background: black;
+  background: #171717;
   // background: #000000bf;
   display: grid;
   grid-template: 475px 60px 1fr/1fr;
@@ -105,6 +105,9 @@ export default {
     font-size: 20px;
     font-weight: 500;
     transition: 0.05s;
+  }
+  a {
+    color: #8f8f8f;
   }
   .selected-category {
     color: #f57f16;

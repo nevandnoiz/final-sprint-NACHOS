@@ -63,7 +63,7 @@ export default {
 
 <style lang="scss" scoped>
 .browse {
-  background: black;
+  background: #171717;
   // background: #000000bf;
   padding: 0 20px;
   display: grid;
