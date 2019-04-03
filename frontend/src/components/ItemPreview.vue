@@ -1,14 +1,13 @@
 <template>
-    <!-- :style="{'background-image':'url(\''+imgURL+'\')'}" -->
+  <!-- :style="{'background-image':'url(\''+imgURL+'\')'}" -->
 
   <div
     @click="pushToDetails(item.id)"
     class="item-preview"
     @mouseenter="toggleIsHovered"
     @mouseleave="toggleIsHovered"
-   
   >
-  <img :src="imgURL"  :class="{'hover-buttons': isHovered, 'selected': isSelected}">
+    <img :src="imgURL" :class="{'hover-buttons': isHovered, 'selected': isSelected}">
     <div class="item-hover-controls" v-if="isHovered && showBtns && currUser">
       <div class="hover-controls-btns">
         <el-tooltip
@@ -68,11 +67,11 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
-      console.log('itemtype', this.item)
-      
-      let detailsRoute = this.item.type === 'tv' ? 'tv' : 'movies'
+      console.log("itemtype", this.item);
+
+      let detailsRoute = this.item.type === "tv" ? "tv" : "movies";
       // TODO REFACTOR
-      if(this.item.known_for)return this.$router.push(`actors/${itemId}`)
+      if (this.item.known_for) return this.$router.push(`actors/${itemId}`);
       this.$router.push(`/${detailsRoute}/details/${itemId}`);
     },
     toggleIsHovered() {
@@ -214,11 +213,9 @@ export default {
 .hover-buttons {
   box-shadow: inset 0 0 90px #000000;
 }
-@media only screen and (max-width: 570px) {  
-.item-preview { 
-  // width: 150px;
-}
-
-
+@media only screen and (max-width: 570px) {
+  .item-preview {
+    // width: 150px;
+  }
 }
 </style>
