@@ -122,7 +122,7 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
 @media only screen and (max-width: 570px) {  
 .grid-container {
-grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 }
 </style>
