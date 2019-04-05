@@ -85,7 +85,7 @@ export default {
       top: 70%;
       left: 3%;
       text-overflow: ellipsis;
-      overflow:hidden;
+      overflow: hidden;
       white-space: nowrap;
       text-shadow: 3px 3px 6px black;
     }
@@ -134,27 +134,26 @@ export default {
   transform: translateX(-100%);
 }
 
-@media only screen and (max-width: 700px) {  
-.backdrop-container {
-  .backdrop-carousel-img {
-    h1 {
-      font-size: 32px;
-       top:85%;
+@media only screen and (max-width: 700px) {
+  .backdrop-container {
+    .backdrop-carousel-img {
+      h1 {
+        font-size: 32px;
+        top: 85%;
+      }
     }
   }
 }
-}
-@media only screen and (max-width: 520px) {  
-.backdrop-num-btns{
-display: none;
-}
-.backdrop-container {
-  .backdrop-carousel-img {
-    h1 {
-      font-size: 32px;
+@media only screen and (max-width: 570px) {
+  .backdrop-num-btns {
+    display: none;
+  }
+  .backdrop-container {
+    .backdrop-carousel-img {
+      h1 {
+        top: 5%;
+      }
     }
   }
 }
-}
-
 </style>

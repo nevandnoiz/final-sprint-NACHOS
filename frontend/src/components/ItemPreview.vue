@@ -164,6 +164,7 @@ export default {
     top: 0;
     height: 100%;
     width: 100%;
+    transition: 0.3s;
     &.selected {
       box-shadow: inset 0 0 20px 20px #ffc107;
     }
