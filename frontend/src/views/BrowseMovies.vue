@@ -80,15 +80,15 @@ export default {
   display: grid;
   grid-gap: 20px;
   width: 100vw;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   // justify-items: center;
   justify-content: center;
   grid-area: 3/1/3/1;
 }
 .categories {
   grid-area: 2/1/2/1;
-    max-width: 600px;
-    width:100vw;
+  max-width: 600px;
+  width: 100vw;
   display: grid;
   grid-template: 1fr/1fr 1fr 1fr;
   justify-self: center;
@@ -120,9 +120,9 @@ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
-@media only screen and (max-width: 570px) {  
-.grid-container {
-grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
+@media only screen and (max-width: 570px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 </style>

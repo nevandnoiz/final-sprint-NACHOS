@@ -1,14 +1,10 @@
 <template>
   <!-- :style="{'background-image':'url(\''+imgURL+'\')'}" -->
 
-  <div
-    @click="pushToDetails(item.id)"
-    class="item-preview"
-    @mouseenter="toggleIsHovered"
-    @mouseleave="toggleIsHovered"
-  >
-    <img :src="imgURL" :class="{'hover-buttons': isHovered, 'selected': isSelected}">
-    <div class="item-hover-controls" v-if="isHovered && showBtns && currUser">
+  <div @click="pushToDetails(item.id)" class="item-preview">
+    <img :src="imgURL">
+    <div class="inset-shadow-filler" :class="{'hover-buttons': isHovered, 'selected': isSelected}"></div>
+    <div class="item-hover-controls" v-if="showBtns && currUser">
       <div class="hover-controls-btns">
         <el-tooltip
           class="item"
@@ -56,7 +52,6 @@ export default {
   components: {},
   data() {
     return {
-      isHovered: false,
       isOnWatchList: false,
       isFavorite: false,
       isSelected: false,
@@ -73,9 +68,6 @@ export default {
       // TODO REFACTOR
       if (this.item.known_for) return this.$router.push(`actors/${itemId}`);
       this.$router.push(`/${detailsRoute}/details/${itemId}`);
-    },
-    toggleIsHovered() {
-      this.isHovered = !this.isHovered;
     },
     async toggleWatchList() {
       if (!this.isOnWatchList) {
@@ -164,18 +156,26 @@ export default {
 
 <style lang="scss" scoped>
 .item-preview {
-  // width: 200px;
-  // height: 300px;
+  position: relative;
   background-size: cover;
   cursor: pointer;
-  transition: 0.5s;
-  &.selected {
-    box-shadow: inset 0 0 20px 20px #ffc107;
+  .inset-shadow-filler {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: 0.3s;
+    &.selected {
+      box-shadow: inset 0 0 20px 20px #ffc107;
+    }
   }
   .item-hover-controls {
     height: inherit;
-    display: grid;
+    display: none;
     grid-template: 20px 1fr 40px/1fr;
+    position: absolute;
+    top: 0;
+    right: 0;
     .hover-controls-btns {
       grid-area: 1/1/1/1;
       justify-self: flex-end;
@@ -210,12 +210,27 @@ export default {
     }
   }
 }
+.inset-shadow-filler:hover {
+  box-shadow: inset 0 0 90px #000000;
+}
+.item-preview:hover > .item-hover-controls {
+  display: grid;
+}
 .hover-buttons {
   box-shadow: inset 0 0 90px #000000;
 }
 @media only screen and (max-width: 570px) {
   .item-preview {
-    // width: 150px;
+    .item-hover-controls {
+      display: grid;
+    }
+    .item-hover-controls {
+      i {
+        font-size: 28px;
+        margin: 9px 9px 9px 0;
+        padding: 10px;
+      }
+    }
   }
 }
 </style>
