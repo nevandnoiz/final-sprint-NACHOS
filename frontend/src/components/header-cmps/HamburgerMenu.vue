@@ -5,7 +5,6 @@
       <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
     </div>
 
-    <search-bar1 class="search-bar"></search-bar1>
     <button
       class="navbar-toggler toggler-example"
       type="button"
@@ -29,20 +28,19 @@
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <router-link to="/actors">ACTORS</router-link>
+          <search-bar1 class="search-bar"></search-bar1>
         </li>
-        <li class="nav-item">
-          <router-link to="/movies">MOVIES</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/tv">TV SHOWS</router-link>
-        </li>
-        <li class="nav-item">
-         <router-link to="/login">LOGIN</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/signup">SIGNUP</router-link>
-        </li>
+        <div class="links-hamburger-inside">
+          <li class="nav-item active">
+            <router-link to="/actors">ACTORS</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/movies">MOVIES</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/tv">TV SHOWS</router-link>
+          </li>
+        </div>
       </ul>
       <!-- Links -->
     </div>
@@ -53,8 +51,6 @@
 
 <script>
 import SearchBar1 from "./SearchBar1.vue";
-import { eventBus } from "@/main.js";
-
 export default {
   components: {
     SearchBar1
@@ -62,15 +58,15 @@ export default {
   methods: {
     pushToHome() {
       this.$router.push("/");
-    },
-    toggleModal() {
-      eventBus.emit("signed");
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
+.links-hamburger-inside {
+  margin-top: 0.6rem;
+}
 .nav-item > a {
   color: #f57f16;
 }

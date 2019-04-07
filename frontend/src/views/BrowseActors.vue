@@ -72,7 +72,8 @@ export default {
   justify-items: center;
   grid-area: 2/1/2/1;
   div{
-      border:0.5px solid darkslategray;
+    color: white;
+      // border:0.5px solid darkslategray;
   }
 }
 h2 {

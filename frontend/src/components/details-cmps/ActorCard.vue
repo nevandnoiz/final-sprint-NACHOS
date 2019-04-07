@@ -55,30 +55,44 @@ p {
   padding-bottom: 0.2rem;
 }
 .main-container {
-  margin-top: 1.4rem;
-  grid-row: 2;
-  justify-content: center;
-  display: flex;
-  width: 76vw;
-  margin: 0 auto;
-  direction: ltr;
-  overflow: scroll;
-  height: auto;
-  display: block;
+    margin-top: 1.4rem;
+    grid-row: 2;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 76vw;
+    margin: 0 auto;
+    direction: ltr;
+    overflow: scroll;
+    height: auto;
+    display: block;
 }
 .card-container {
   box-sizing: content-box;
   flex-direction: column;
   display: flex;
-  margin: 2rem 0;
+      width: fit-content;
+  margin-top: 2rem;
   border-radius: 3px;
   padding: 0.5rem 0;
   box-sizing: content-box;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   display: flex;
-  width: 200px;
+  width: 170px;
 }
+.card-container>p,h1 {
+    overflow: hidden;
+    /* width: -webkit-fill-available; */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 97%;
+    display: block;
+}
+
 img {
   height: 217px;
   width: auto;
@@ -86,8 +100,10 @@ img {
 }
 .cards-container {
   display: flex;
+  
+      align-items: flex-start;
   width: fit-content;
-  align-items: baseline;
+  /* align-items: baseline; */
   margin-left: 1rem;
   margin: 0 auto;
 }
@@ -99,13 +115,19 @@ img {
 }
 @media only screen and (max-width: 750px) {
   .main-container {
-    margin-top: 1.4rem;
+      margin-top: 1.4rem;
+    grid-row: 2;
+    -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    height: auto;
-    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    width: 95vw;
+    margin: 0 auto;
     direction: ltr;
     overflow: scroll;
+    height: auto;
+    display: block;
   }
   .cards-container {
     margin: 0 auto;
@@ -124,34 +146,13 @@ img {
   }
   .card-container {
     display: flex;
-    /* -webkit-box-orient: vertical; */
-    /* -webkit-box-direction: normal; */
-    -ms-flex-direction: column;
-    /* flex-direction: column; */
     margin: 2rem 0;
-    /* background: white; */
     border-radius: 3px;
     padding: 0.5rem 0;
-    -webkit-box-sizing: content-box;
     box-sizing: content-box;
-    /* padding: 1rem; */
-    /* width: 224px; */
-    /* flex-direction: column; */
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    /* height: 217px; */
-    width: 200px;
-    /* width: 159px; */
-    /* width: auto; */
-    /* -webkit-box-shadow: 0px 0px 4px #000000; */
-    /* box-shadow: 0px 0px 4px #000000; */
+    width: 150px;
   }
   img {
     height: 217px;
