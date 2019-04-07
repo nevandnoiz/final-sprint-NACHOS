@@ -100,7 +100,7 @@ export default {
   margin: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
+      margin: 2rem auto;
 }
 .field.is-horizontal {
   grid-column: 1/2;
@@ -115,20 +115,18 @@ export default {
   background-color: lightgray;
   padding: 25px;
 }
+
 .control {
   button {
     background-color: #f57f16;
-    height: 30px;
     margin: 15px 0;
   }
   button:hover {
     background-color: #ff963a;
-    height: 30px;
     margin: 15px 0;
   }
   button:active {
     background-color: #f57f16;
-    height: 30px;
     margin: 15px 0;
   }
 }
@@ -138,3 +136,4 @@ export default {
   }
 }
 </style>
+

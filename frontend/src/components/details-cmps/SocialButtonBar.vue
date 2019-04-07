@@ -55,6 +55,7 @@ props:['item']
 .icons-container {
       width: 100%;
     display: flex;
+        margin-right: 1rem;
     justify-content: flex-end;
     z-index: 35;
      /* background: black; */
