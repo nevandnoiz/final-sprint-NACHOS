@@ -3,7 +3,7 @@
 
   <div @click="pushToDetails(item.id)" class="item-preview">
     <img :src="imgURL">
-    <div class="inset-shadow-filler" :class="{'selected': isSelected}"></div>
+    <div class="inset-shadow-filler" :class="{'hover-buttons': isHovered, 'selected': isSelected}"></div>
     <div class="item-hover-controls" v-if="showBtns && currUser">
       <div class="hover-controls-btns">
         <el-tooltip
@@ -63,6 +63,7 @@ export default {
     pushToDetails(itemId) {
       if (this.selectMode) return this.toggleisSelected();
       this.$store.commit("setSelectedItem", this.item);
+      console.log("itemtype", this.item);
 
       let detailsRoute = this.item.type === "tv" ? "tv" : "movies";
       // TODO REFACTOR

@@ -24,23 +24,24 @@
     <!-- Collapse button -->
 
     <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <search-bar1 class="search-bar"></search-bar1>
+          <router-link to="/actors">ACTORS</router-link>
         </li>
-        <div class="links-hamburger-inside">
-          <li class="nav-item active">
-            <router-link to="/actors">ACTORS</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/movies">MOVIES</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/tv">TV SHOWS</router-link>
-          </li>
-        </div>
+        <li class="nav-item">
+          <router-link to="/movies">MOVIES</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/tv">TV SHOWS</router-link>
+        </li>
+        <li class="nav-item">
+         <router-link to="/login">LOGIN</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/signup">SIGNUP</router-link>
+        </li>
       </ul>
       <!-- Links -->
     </div>
