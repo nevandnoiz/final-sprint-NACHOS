@@ -58,9 +58,8 @@
               :seasons="item.seasons"
               :tvShowId="item.details.id"
               ></seasons-list>-->
-
               <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-              <div class="black-filler">
+              <div class="black-filler" :class="{'no-filler': isMovie}">
                 <media-icons-bar
                   v-if="itemType==='tv'"
                   :watchLinks="item.watchLinks"
@@ -122,6 +121,10 @@ export default {
     }
   },
   computed: {
+    isMovie() {
+      if (this.itemType === "movies") return true;
+      else return false;
+    },
     originalLanguage() {
       if (this.item.details.original_language === "en") return "English";
       return this.item.details.original_language;
@@ -133,6 +136,7 @@ export default {
       console.log(res);
     },
     isLightOrDark() {
+      console.log("do we have dom colo?", this.dominantColor);
       if (UtilityService.lightOrDark(this.dominantColor) === "light")
         return "black";
       else return "white";
@@ -146,6 +150,7 @@ export default {
     },
     bckColor() {
       // in the case of redComp, greenComp and blueComp are a vue prop or data
+      console.log(UtilityService.lightOrDark(this.dominantColor));
       if (UtilityService.lightOrDark(this.dominantColor) === "dark")
         return { background: this.dominantColor + "B3" };
     },
@@ -779,6 +784,9 @@ i {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+  }
+  .no-filler {
+    display: none;
   }
 }
 </style>

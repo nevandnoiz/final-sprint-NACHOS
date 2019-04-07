@@ -116,7 +116,7 @@ p {
 
 .slider-main-container {
   z-index: 3423423423;
-      width: 76vw;
+      /* width: 76vw; */
     margin: 0 auto;
 }
 .swiper-container {

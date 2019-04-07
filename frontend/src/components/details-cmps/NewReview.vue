@@ -26,7 +26,6 @@
 
               <!-- <p>
         	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>    	            
-
               </p>-->
               <div class="clearfix"></div>
               <p>{{review.content}}</p>
@@ -34,7 +33,7 @@
                 <a class="float-right btn text-white btn-danger">
                   <i class="fa fa-heart"></i> Like
                 </a>
-              </p> -->
+              </p>-->
             </div>
           </div>
         </div>
@@ -45,8 +44,7 @@
 
 <script>
 import { eventBus } from "@/main.js";
-import moment from 'moment'
-
+import moment from "moment";
 export default {
   props: ["review", "reviewIdx"],
   created() {
@@ -73,7 +71,6 @@ export default {
       let ref = `review-${this.reviewIdx + 1}`;
       let element = this.$refs[ref];
       let top = element.offsetTop;
-
       window.scrollTo(0, top);
     }
   }
@@ -81,7 +78,6 @@ export default {
 </script>
 
 <style scoped>
-
 h2 {
   font-weight: 700;
 }
@@ -98,20 +94,17 @@ h2 {
   display: flex;
 }
 .new-review-container {
-  width: auto !important;
-  width: auto !important;
-  padding: 20px;
+  max-width: 100%;
+  padding: 20px 0;
   /* max-width: 51vw !important; */
 }
 .card-inner {
   display: none;
   margin-left: 4rem;
 }
-@media only screen and (max-width: 767px) { 
-.img-fluid{
-  width: 20% !important;
+@media only screen and (max-width: 767px) {
+  .img-fluid {
+    width: 20% !important;
+  }
 }
-}
-
-
 </style>

@@ -100,14 +100,12 @@ export default {
   margin: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
+      margin: 2rem auto;
 }
 .field.is-horizontal {
   grid-column: 1/2;
 }
-.el-rate__icon {
-  font-size: 1.3rem;
-}
+
 .review-form-container {
   margin: 120px auto;
   width: 60%;
@@ -115,26 +113,26 @@ export default {
   background-color: lightgray;
   padding: 25px;
 }
+
 .control {
   button {
     background-color: #f57f16;
-    height: 30px;
     margin: 15px 0;
   }
   button:hover {
     background-color: #ff963a;
-    height: 30px;
     margin: 15px 0;
   }
   button:active {
     background-color: #f57f16;
-    height: 30px;
     margin: 15px 0;
   }
 }
 @media only screen and (max-width: 750px) {
   .form-section-review {
+        width: 95vw;
     margin: 2rem auto;
   }
 }
 </style>
+

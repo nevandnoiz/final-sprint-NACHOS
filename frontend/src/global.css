@@ -1,4 +1,4 @@
-iframe{
+iframe {
     width: 100vw;
     z-index: 44;
     right: 0;
@@ -12,16 +12,26 @@ iframe{
     height: 100vh;
 }
 
-.is-horizontal{
+.el-rate__icon {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.el-rate {
+    height: auto;
+    line-height: auto;
+}
+
+.is-horizontal {
     display: grid !important;
     grid-template-columns: 84px 1fr;
     grid-column: 200px 1fr;
 }
 
-
-.youtube-close-btn:hover{
+.youtube-close-btn:hover {
     cursor: pointer;
 }
+
 .youtube-close-btn {
     z-index: 201222;
     margin: 0 auto;
@@ -32,14 +42,18 @@ iframe{
     right: 1rem;
     position: fixed;
 }
-.field-label{
-    text-align:left;
-    flex-grow:unset;
+
+.field-label {
+    text-align: left;
+    flex-grow: unset;
 }
-
-
-
 
 .body {
     background: black
+}
+
+@media only screen and (max-width: 750px) {
+    .is-horizontal {
+        grid-template-columns: unset;
+    }
 }

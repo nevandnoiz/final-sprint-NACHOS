@@ -4,9 +4,8 @@
     <div class="logo-contaier">
       <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
     </div>
-
-    <search-bar1 class="search-bar"></search-bar1>
     <button
+      ref="hamburger"
       class="navbar-toggler toggler-example"
       type="button"
       data-toggle="collapse"
@@ -25,24 +24,29 @@
     <!-- Collapse button -->
 
     <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+    <div v-if="isExpanded" class="collapse navbar-collapse" id="navbarSupportedContent1">
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <router-link to="/actors">ACTORS</router-link>
+        <li>
+          <search-bar1 class="search-bar"></search-bar1>
         </li>
-        <li class="nav-item">
-          <router-link to="/movies">MOVIES</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/tv">TV SHOWS</router-link>
-        </li>
-        <li class="nav-item">
-         <router-link to="/login">LOGIN</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/signup">SIGNUP</router-link>
-        </li>
+        <div class="links-hamburger-inside">
+          <li class="nav-item active">
+            <router-link to="/actors">ACTORS</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/movies">MOVIES</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/tv">TV SHOWS</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/login">LOGIN</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/signup">SIGNUP</router-link>
+          </li>
+        </div>
       </ul>
       <!-- Links -->
     </div>
@@ -59,6 +63,11 @@ export default {
   components: {
     SearchBar1
   },
+  data() {
+    return {
+      isExpanded: true
+    };
+  },
   methods: {
     pushToHome() {
       this.$router.push("/");
@@ -66,11 +75,43 @@ export default {
     toggleModal() {
       eventBus.emit("signed");
     }
+  },
+  created() {
+    const fnmap = {
+      toggle: "toggle",
+      show: "add",
+      hide: "remove"
+    };
+    let selector = this.$refs.hamburger;
+    const collapse = (selector, cmd) => {
+      const targets = Array.from(document.querySelector(selector));
+      targets.forEach(target => {
+        target.classList[fnmap[cmd]]("show");
+      });
+    };
+  },
+  watch: {
+    $route(to, from) {
+      this.isExpanded = false;
+      setTimeout(() => (this.isExpanded = true), 300);
+    }
   }
 };
 </script>
 
 <style scoped>
+.links-hamburger-inside {
+  /* margin-top: 0.6rem; */
+}
+.nav-item {
+  border-bottom: 1px solid #f57f16;
+  padding: 0.3rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+}
 .nav-item > a {
   color: #f57f16;
 }
