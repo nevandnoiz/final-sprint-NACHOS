@@ -141,7 +141,9 @@ p {
   margin: 1.7rem 0;
 }
 .movie-img-container>img{
-  border-radius: 8px
+  border-radius: 8px;
+
+    height: 195px;
 }
 .personal-info {
   /* margin-top: 2rem; */
@@ -193,6 +195,10 @@ p {
   padding-left: 2rem;
   flex-direction: column;
 }
+.movie-img-container>h4 {
+  color: black;
+  font-weight: 700;
+}
 .actors-movies-container {
   display: grid;
   /* grid-row: 2; */
@@ -232,11 +238,11 @@ p {
 }
 @media only screen and (max-width: 1100px) {
 .actor-detalis-main-container{
-  width: 95vw;
+  /* width: 95vw; */
 }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 786px) {
   .actor-detalis-main-container {
     /* grid-template-columns: 35vw 1fr; */
     width: 100vw;
