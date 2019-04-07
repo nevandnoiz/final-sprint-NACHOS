@@ -58,8 +58,9 @@
               :seasons="item.seasons"
               :tvShowId="item.details.id"
               ></seasons-list>-->
+
               <img class="item-poster-img" ref="itemPoster" :src="imgURL">
-              <div class="black-filler" :class="{'no-filler': isMovie}">
+              <div class="black-filler">
                 <media-icons-bar
                   v-if="itemType==='tv'"
                   :watchLinks="item.watchLinks"
@@ -121,10 +122,6 @@ export default {
     }
   },
   computed: {
-    isMovie() {
-      if (this.itemType === "movies") return true;
-      else return false;
-    },
     originalLanguage() {
       if (this.item.details.original_language === "en") return "English";
       return this.item.details.original_language;
@@ -784,9 +781,6 @@ i {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-  }
-  .no-filler {
-    display: none;
   }
 }
 </style>

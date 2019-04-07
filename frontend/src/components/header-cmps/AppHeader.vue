@@ -102,7 +102,6 @@ export default {
 @media only screen and (max-width: 1032px) {
   .hamburger {
     display: flex;
-        justify-content: space-between;
     background: #171717;
   }
   .desktop-header {

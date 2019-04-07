@@ -5,6 +5,7 @@
       <img @click="pushToHome" src="@/imgs/Nachos-icon.svg" alt="App-Logo">
     </div>
 
+    <search-bar1 class="search-bar"></search-bar1>
     <button
       class="navbar-toggler toggler-example"
       type="button"
@@ -52,6 +53,8 @@
 
 <script>
 import SearchBar1 from "./SearchBar1.vue";
+import { eventBus } from "@/main.js";
+
 export default {
   components: {
     SearchBar1
@@ -59,15 +62,15 @@ export default {
   methods: {
     pushToHome() {
       this.$router.push("/");
+    },
+    toggleModal() {
+      eventBus.emit("signed");
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
-.links-hamburger-inside {
-  margin-top: 0.6rem;
-}
 .nav-item > a {
   color: #f57f16;
 }
