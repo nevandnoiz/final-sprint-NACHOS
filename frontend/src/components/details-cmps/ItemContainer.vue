@@ -7,7 +7,7 @@
         <div class="main-container-of-poster-info">
           <div class="white-fill"></div>
           <div class="item-container">
-            <div class="shadowing-container">
+            <div class="  -container">
               <div class="social-main-container">
                 <social-button-bar :item="item"></social-button-bar>
               </div>
