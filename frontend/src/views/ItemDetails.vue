@@ -101,7 +101,6 @@ export default {
         this.$store.dispatch("getTvShowCredits", itemId),
         this.$store.dispatch({type: "loadReviewsByType",itemType: "tv",itemId: itemId}),
       ]);
-      console.log(details.name)
       const itemWatchLinks = await this.$store.dispatch("getTvShowWatchLinksByKeyword", details.name)
       this.item.watchLinks = itemWatchLinks.results.filter(res=>res.name == details.name)[0]
       this.item.details = details;

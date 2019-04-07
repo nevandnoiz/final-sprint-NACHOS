@@ -36,7 +36,7 @@ export default {
       let actors = this.$store.getters.actorsToDisplay;
       if (!actors) {
         this.$store.dispatch(`loadPopularActors`);
-      } else console.log("Loaded from store");
+      } else return
     },
     knownFor(actor) {
       let str = "";

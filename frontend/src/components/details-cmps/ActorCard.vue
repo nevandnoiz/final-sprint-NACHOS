@@ -8,6 +8,7 @@
       <div
         class="card-container"
         v-for="(actor, index) in item.cast"
+        @click="goToActor(actor.id)"
         :key="index"
         v-if="actor.profile_path"
       >
@@ -31,7 +32,12 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    goToActor(id) {
+      this.$router.push(`/actors/${id}`);
+      // this.$router.go();
+    }
+  },
   computed: {}
 };
 </script>
@@ -55,26 +61,27 @@ p {
   padding-bottom: 0.2rem;
 }
 .main-container {
-    margin-top: 1.4rem;
-    grid-row: 2;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 76vw;
-    margin: 0 auto;
-    direction: ltr;
-    overflow: scroll;
-    height: auto;
-    display: block;
+  margin-top: 1.4rem;
+  grid-row: 2;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 76vw;
+  margin: 0 auto;
+  direction: ltr;
+  overflow: scroll;
+  height: auto;
+  display: block;
 }
 .card-container {
+  cursor: pointer;
   box-sizing: content-box;
   flex-direction: column;
   display: flex;
-      width: fit-content;
+  width: fit-content;
   margin-top: 2rem;
   border-radius: 3px;
   padding: 0.5rem 0;
@@ -84,13 +91,14 @@ p {
   display: flex;
   width: 170px;
 }
-.card-container>p,h1 {
-    overflow: hidden;
-    /* width: -webkit-fill-available; */
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 97%;
-    display: block;
+.card-container > p,
+h1 {
+  overflow: hidden;
+  /* width: -webkit-fill-available; */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 97%;
+  display: block;
 }
 img {
   height: 217px;
@@ -99,8 +107,8 @@ img {
 }
 .cards-container {
   display: flex;
-  
-      align-items: flex-start;
+
+  align-items: flex-start;
   width: fit-content;
   /* align-items: baseline; */
   margin-left: 1rem;
@@ -113,7 +121,7 @@ img {
 }
 @media only screen and (max-width: 750px) {
   .main-container {
-      margin-top: 1.4rem;
+    margin-top: 1.4rem;
     grid-row: 2;
     -webkit-box-pack: center;
     -ms-flex-pack: center;

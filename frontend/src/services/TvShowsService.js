@@ -67,7 +67,6 @@ async function getTvShowCredits(id) {
 
 async function getTvShowReviews(id) {
     let res = await axios.get(`${BASE_URL}/tv/reviews/${id}`)
-    console.log(res)
     return res.data
 }
 
