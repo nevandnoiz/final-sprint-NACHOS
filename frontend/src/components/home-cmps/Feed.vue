@@ -66,7 +66,7 @@ export default {
     if (this.user) {
       let activities = await this.$store.dispatch("getFollowedActivities");
       // this.ready = true;
-      this.generateFeed(this.userFavoriteItems, 1);
+      await this.generateFeed(this.userFavoriteItems, 1);
     }
   }
 };

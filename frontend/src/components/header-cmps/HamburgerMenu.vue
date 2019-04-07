@@ -25,7 +25,7 @@
     <!-- Collapse button -->
 
     <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
