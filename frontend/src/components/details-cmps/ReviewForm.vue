@@ -105,9 +105,7 @@ export default {
 .field.is-horizontal {
   grid-column: 1/2;
 }
-.el-rate__icon {
-  font-size: 1.3rem;
-}
+
 .review-form-container {
   margin: 120px auto;
   width: 60%;
@@ -132,6 +130,7 @@ export default {
 }
 @media only screen and (max-width: 750px) {
   .form-section-review {
+        width: 95vw;
     margin: 2rem auto;
   }
 }

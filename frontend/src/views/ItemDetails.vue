@@ -216,7 +216,7 @@ export default {
 }
 .content-info-container {
   /* display: grid; */
-  width: 100vw;
+  /* width: 100vw; */
   /* gap: 2rem; */
   
   margin-top: 2rem;
@@ -242,7 +242,8 @@ export default {
 }
 .sub-container {
      display: block;
-    width: 100vw;
+     width: 76vw;
+    margin: 0 auto;
     z-index: 3;
 }
 .tweet {
@@ -255,10 +256,11 @@ export default {
 
 @media only screen and (max-width: 1000px) {
   .sub-container{
-    width: 95vw;
+       width: 95vw;
+    margin: 0 auto
   }
   .content-info-container{
-    width: 100vw;
+    /* width: 100vw; */
   }
 }
 
@@ -275,7 +277,7 @@ width: 100vw;
           /* display: flex; */
     flex-direction: column;
     /* gap: none; */
-    width: 100vw;
+    /* width: 100vw; */
     margin: 0 auto;
     margin-top: 2rem;
     /* grid-template-columns: 1fr 2fr; */

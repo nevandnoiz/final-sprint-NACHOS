@@ -34,7 +34,7 @@
                 <a class="float-right btn text-white btn-danger">
                   <i class="fa fa-heart"></i> Like
                 </a>
-              </p> -->
+              </p>-->
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
 
 <script>
 import { eventBus } from "@/main.js";
-import moment from 'moment'
+import moment from "moment";
 
 export default {
   props: ["review", "reviewIdx"],
@@ -81,7 +81,6 @@ export default {
 </script>
 
 <style scoped>
-
 h2 {
   font-weight: 700;
 }
@@ -98,20 +97,17 @@ h2 {
   display: flex;
 }
 .new-review-container {
-  width: auto !important;
-  width: auto !important;
-  padding: 20px;
+  max-width: 100%;
+  padding: 20px 0;
   /* max-width: 51vw !important; */
 }
 .card-inner {
   display: none;
   margin-left: 4rem;
 }
-@media only screen and (max-width: 767px) { 
-.img-fluid{
-  width: 20% !important;
+@media only screen and (max-width: 767px) {
+  .img-fluid {
+    width: 20% !important;
+  }
 }
-}
-
-
 </style>

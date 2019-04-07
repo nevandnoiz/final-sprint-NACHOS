@@ -9,8 +9,8 @@ import ActorDetails from './views/ActorDetails.vue'
 import UserPage from './views/UserPage.vue'
 import SignUp from './views/SignUp.vue'
 
-Vue.use(Router)
 
+Vue.use(Router)
 export default new Router({
   scrollBehavior() {
     return { x: 0, y: 0 };
