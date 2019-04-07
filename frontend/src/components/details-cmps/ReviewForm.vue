@@ -115,15 +115,14 @@ export default {
   background-color: lightgray;
   padding: 25px;
 }
+
 .control {
   button {
     background-color: #f57f16;
-    height: 30px;
     margin: 15px 0;
   }
   button:hover {
     background-color: #ff963a;
-    height: 30px;
     margin: 15px 0;
   }
   button:active {
