@@ -56,7 +56,9 @@
               :key="index"
               class="movie-img-container"
             >
+              
               <img :src="`http://image.tmdb.org/t/p/w300${movie.poster_path}`">
+              <h4>{{movie.original_title}}</h4>
             </div>
           </div>
         </div>
@@ -86,6 +88,7 @@ export default {
     );
     this.actorMovies = actorMovies;
     // console.log(actorMovies)
+    console.log( this.actorMovies.cast)
   },
   computed: {
     gender() {
@@ -136,6 +139,9 @@ p {
 }
 .info {
   margin: 1.7rem 0;
+}
+.movie-img-container>img{
+  border-radius: 8px
 }
 .personal-info {
   /* margin-top: 2rem; */
@@ -196,7 +202,7 @@ p {
   grid-template-columns: repeat(4, 1fr);
   /* width: 50vw; */
   margin: 2rem auto;
-  gap: 0.5rem;
+  gap: 2rem;
 }
 .personal-info-container > img {
   /* border-radius: 5px */
