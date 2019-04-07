@@ -133,7 +133,6 @@ export default {
       console.log(res);
     },
     isLightOrDark() {
-      console.log("do we have dom colo?", this.dominantColor);
       if (UtilityService.lightOrDark(this.dominantColor) === "light")
         return "black";
       else return "white";
@@ -147,7 +146,6 @@ export default {
     },
     bckColor() {
       // in the case of redComp, greenComp and blueComp are a vue prop or data
-      console.log(UtilityService.lightOrDark(this.dominantColor));
       if (UtilityService.lightOrDark(this.dominantColor) === "dark")
         return { background: this.dominantColor + "B3" };
     },

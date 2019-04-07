@@ -73,7 +73,11 @@ export default {
     addComment(ev) {
       const txt = ev.target.innerText;
       if (txt === "") return;
-      this.$store.dispatch({type:"addCommentToActivity", comment: txt,activity :this.item});
+      this.$store.dispatch({
+        type: "addCommentToActivity",
+        comment: txt,
+        activity: this.item
+      });
       ev.target.innerText = "";
       this.showPlaceholder = true;
     },
@@ -83,10 +87,18 @@ export default {
     },
     toggleLike() {
       if (!this.like) {
-        this.$store.dispatch({type:"toggleLikeActivity", activity :this.item, diff: 1});
+        this.$store.dispatch({
+          type: "toggleLikeActivity",
+          activity: this.item,
+          diff: 1
+        });
         this.like = true;
       } else {
-           this.$store.dispatch({type:"toggleLikeActivity", activity :this.item, diff: -1});
+        this.$store.dispatch({
+          type: "toggleLikeActivity",
+          activity: this.item,
+          diff: -1
+        });
         this.like = false;
       }
     },
@@ -111,7 +123,8 @@ export default {
     action: function() {
       const activity = this.item.activity;
       if (activity === "rate") return `with ${this.item.value} stars.`;
-      else if (activity === "add to list") return `to his ${this.item.value} list.`;
+      else if (activity === "add to list")
+        return `to his ${this.item.value} list.`;
     },
     img: function() {
       if (this.imgs) {
@@ -126,7 +139,6 @@ export default {
     }
   },
   created() {
-    if (this.item.likes)
     if (this.item.item_type === "tv") {
       tvService
         .getTvShowImages(this.item.item_id)
@@ -136,6 +148,7 @@ export default {
         .getMovieImages(this.item.item_id)
         .then(res => (this.imgs = res));
     }
+    if (this.item.likes > 0) this.like = true;
   }
 };
 </script>
