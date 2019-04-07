@@ -7,7 +7,7 @@
         <div class="main-container-of-poster-info">
           <div class="white-fill"></div>
           <div class="item-container">
-            <div class="  -container">
+            <div class="shadowing-container">
               <div class="social-main-container">
                 <social-button-bar :item="item"></social-button-bar>
               </div>
@@ -394,8 +394,8 @@ i {
   display: grid;
   width: 76vw;
   z-index: 1;
-  grid-template-columns: 1fr 2fr;
-  /* grid-template-rows: minmax(75px, auto) 1fr; */
+  /* grid-template-columns: 1fr 2fr; */
+  grid-template-rows: minmax(75px, auto) 1fr;
   margin: 120px auto 0;
   border-radius: 3px;
 }

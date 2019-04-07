@@ -8,7 +8,6 @@ import ItemDetails from './views/ItemDetails.vue'
 import ActorDetails from './views/ActorDetails.vue'
 import UserPage from './views/UserPage.vue'
 import SignUp from './views/SignUp.vue'
-import Login from './views/Login.vue'
 
 Vue.use(Router)
 
@@ -56,11 +55,6 @@ export default new Router({
       path: '/signup',
       name: 'signUp',
       component: SignUp
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
     },
   ]
 })
