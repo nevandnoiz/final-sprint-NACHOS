@@ -139,8 +139,7 @@ p {
   margin: 1.7rem 0;
 }
 .movie-img-container{
-    display: grid;
-    justify-items: center;
+    text-align: center;
 }
 
 .movie-img-container>img{
